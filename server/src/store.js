@@ -24,7 +24,8 @@ function closure(name) {
   const result = {};
   function find(name) {
     if (!_.has(result, name) && _.has(registry, name)) {
-      result[`${name}.js`] = preprocess(registry[name]);
+      const data = result[`${name}.js`] = preprocess(registry[name]);
+      console.log(data);
       _.forEach(registry[name].dependencies, find);
     }
   }
@@ -33,7 +34,9 @@ function closure(name) {
 }
 
 function list() {
-  return _.keys(registry);
+  return _.keys(registry).concat([
+    'react-dom',
+  ]);
 }
 
 module.exports = {

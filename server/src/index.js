@@ -3,7 +3,6 @@ const proxy = require('express-http-proxy');
 const registry = require('./registry');
 const build = require('./build');
 const preview = require('./preview');
-require('./mock');
 
 const app = express();
 

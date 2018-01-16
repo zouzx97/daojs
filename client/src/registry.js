@@ -10,6 +10,10 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+function camel2pascal(str) {
+  return str.split('-').map(capitalize).join('');
+}
+
 class Registry extends Component {
   constructor(props) {
     super(props);
@@ -71,7 +75,7 @@ class Registry extends Component {
           onClick={() => {
             this.setState(_.defaults({
               dependencies: this.state.dependencies.concat([
-                { variable: capitalize(entries[0]), entry: entries[0] },
+                { variable: camel2pascal(entries[0]), entry: entries[0] },
               ]),
             }, this.state));
           }}
@@ -96,7 +100,7 @@ class Registry extends Component {
         {
           <Form layout="inline">
             <Form.Item label="Dependencies">
-              { dependencies.length === 0 ? addDeps : null}
+              { dependencies.length === 0 && entries.length > 0 ? addDeps : null}
             </Form.Item>
           </Form>
         }
