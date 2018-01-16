@@ -2,6 +2,8 @@ const express = require('express');
 const registry = require('./registry');
 const build = require('./build');
 const preview = require('./preview');
+require('./mock');
+
 const app = express();
 
 app.set('view engine', 'pug');
