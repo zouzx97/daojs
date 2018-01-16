@@ -1,7 +1,7 @@
 const mockEntry = `
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './app.js';
+import App from './app.js';
 
 ReactDOM.render(
   <App/>,
@@ -12,7 +12,7 @@ ReactDOM.render(
 const mockDep = `
 import React from 'react';
 
-export function App() {
+export default function App() {
   return <div>Hello world!</div>;
 }
 `;
