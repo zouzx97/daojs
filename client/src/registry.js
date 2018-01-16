@@ -5,6 +5,8 @@ import { post } from 'axios';
 import _ from 'lodash';
 import Promise from 'bluebird';
 
+import SERVICE_URL from './constants';
+
 const { TextArea } = Input;
 
 class Registry extends Component {
@@ -31,7 +33,7 @@ class Registry extends Component {
     this.setState({ config: e.target.value });
   }
   submit() {
-    const url = 'http://localhost:3000/component';
+    const url = `${SERVICE_URL}/component`;
     const formData = new FormData();
     let config = {};
     try {
