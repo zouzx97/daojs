@@ -1,13 +1,9 @@
 const express = require('express');
-const registry = require('./registry/index');
+const registry = require('./registry');
+const build = require('./build');
 const app = express();
 
-app.get('/', function(req, res){
-  res.send('hello world!');
-});
-
-app.route('/registry/:componentname/:version')
-.get(registry.get)
-.post(registry.post);
+app.use('/registry', registry);
+app.use('/build', build);
 
 app.listen(3000);
