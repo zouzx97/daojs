@@ -32,7 +32,12 @@ function closure(name) {
   return result;
 }
 
+function list() {
+  return _.keys(registry);
+}
+
 module.exports = {
   add,
+  list,
   closure,
 };

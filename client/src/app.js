@@ -1,4 +1,6 @@
+import _ from 'lodash';
 import React from 'react';
+import axios from 'axios';
 
 import Registry from './registry';
 import { SERVICE_URL } from './constants';
@@ -6,7 +8,31 @@ import { SERVICE_URL } from './constants';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      entries: [],
+    };
+    this.loadEntryList();
+  }
+
+  loadEntryList() {
+    axios.get(`${SERVICE_URL}/registry`)
+      .then(({ data }) => this.setState(_.defaults({
+        entries: data,
+      }, this.state)));
+  }
+
+  submit({ name, content, dependencies }) {
+    const url = `${SERVICE_URL}/registry/${name}`;
+    axios
+      .post(url, { content, dependencies }, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .then(() => {
+        this.loadEntryList();
+        this.setState(_.defaults({
+          entry: name,
+        }, this.state));
+      });
   }
 
   render() {
@@ -25,7 +51,10 @@ export default class App extends React.Component {
         <div
           style={{ flexBasis: 0, flexGrow: 1 }}
         >
-          <Registry />
+          <Registry
+            entries={this.state.entries}
+            onSubmit={options => this.submit(options)}
+          />
         </div>
         <div style={{ flexBasis: 5 }} />
         <iframe
