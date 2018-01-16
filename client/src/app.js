@@ -5,6 +5,11 @@ import axios from 'axios';
 import Registry from './registry';
 import { SERVICE_URL } from './constants';
 
+const salt = (() => {
+  let count = 0;
+  return () => count ++; // eslint-disable-line
+})();
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +42,7 @@ export default class App extends React.Component {
 
   render() {
     const { entry } = this.state;
-    const src = entry ? `${SERVICE_URL}/preview/${entry}` : 'about:blank';
+    const src = entry ? `${SERVICE_URL}/preview/${entry}?salt=${salt()}` : 'about:blank';
     return (
       <div
         style={{
