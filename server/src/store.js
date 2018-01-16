@@ -24,7 +24,7 @@ function closure(name) {
   const result = {};
   function find(name) {
     if (!_.has(result, name) && _.has(registry, name)) {
-      result[name] = preprocess(registry[name]);
+      result[`${name}.js`] = preprocess(registry[name]);
       _.forEach(registry[name].dependencies, find);
     }
   }

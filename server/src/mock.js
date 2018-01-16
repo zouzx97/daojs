@@ -13,15 +13,15 @@ ReactDOM.render(
 );
 `;
 
-add('app.js', {
+add('app', {
   dependencies: {},
   content: CONTENT_APP,
 });
 
-add('index.js', {
+add('index', {
   dependencies: {
     ReactDOM: 'react-dom',
-    App: 'app.js',
+    App: 'app',
   },
   content: CONTENT_INDEX,
 });
