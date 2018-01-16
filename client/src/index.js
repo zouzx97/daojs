@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { DatePicker } from 'antd';
+import 'antd/dist/antd.css';
+import Registry from './registry';
 
-ReactDOM.render(<DatePicker />, document.getElementById('container'));
+ReactDOM.render(<Registry />, document.getElementById('container'));
