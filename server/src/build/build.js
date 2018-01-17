@@ -32,7 +32,20 @@ function build(entry, files) {
           loader: 'babel-loader',
           options: {
             presets: ['env', 'react'],
+            plugins: [
+              [
+                "import",
+                {
+                  "libraryName": "antd",
+                  "libraryDirectory": "es",
+                  "style": "css",
+                },
+              ],
+            ],
           },
+        }, {
+          test: /\.css/,
+          loader: ['style-loader', 'css-loader'],
         }],
       },
     });
