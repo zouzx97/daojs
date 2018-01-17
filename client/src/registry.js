@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Button, Input, Select } from 'antd';
-import { post } from 'axios';
 import _ from 'lodash';
-import Promise from 'bluebird';
-
-import SERVICE_URL from './constants';
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -22,44 +18,6 @@ class Registry extends Component {
       dependencies: [],
       content: '',
     };
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.onFileChange = this.onFileChange.bind(this);
-    this.onConfigChange = this.onConfigChange.bind(this);
-  }
-  onFormSubmit(e) {
-    e.preventDefault(); // Stop form submit
-    this.submit().then((response) => {
-      console.log(response.data);  // eslint-disable-line
-    });
-  }
-  onFileChange(e) {
-    this.setState({ file: e.target.files[0] });
-  }
-  onConfigChange(e) {
-    this.setState({ config: e.target.value });
-  }
-  submit() {
-    const url = `${SERVICE_URL}/component`;
-    const formData = new FormData();
-    let config = {};
-    try {
-      config = JSON.parse(this.state.config);
-    } catch (e) {
-      console.error('config is not json');  //eslint-disable-line
-    }
-    if (_.isEmpty(config)) {
-      return new Promise((resolve, reject) => {
-        reject(new Error('invalid config'));
-      });
-    }
-    formData.append('uploadFile', this.state.file);
-    formData.append('config', config);
-    const requestHeader = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-    return post(url, formData, requestHeader);
   }
 
   render() {
@@ -153,7 +111,7 @@ class Registry extends Component {
             </Form>
           ))
         }
-        <Form layout="vertial">
+        <Form layout="vertical">
           <Form.Item label="Content">
             <Input.TextArea
               value={this.state.content}
