@@ -1,4 +1,6 @@
+// import StartEndDateForm from 'start-end-date-form';
+
 ReactDom.render(
-  <App/>,
+  <StartEndDateForm/>,
   document.getElementById('container')
 );

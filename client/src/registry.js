@@ -176,7 +176,7 @@ class Registry extends Component {
                     content,
                     dependencies: _.reduce(deps, (memo, { variable, entry }) => (
                       variable && entry ? _.assign(memo, {
-                        [variable]: entry,
+                        [entry]: variable,
                       }) : memo
                     ), {}),
                   });
