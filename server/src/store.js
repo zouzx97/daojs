@@ -36,6 +36,7 @@ function closure(name) {
 function list() {
   return _.keys(registry).concat([
     'react-dom',
+    'react',
   ]);
 }
 
