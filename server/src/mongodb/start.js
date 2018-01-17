@@ -5,11 +5,14 @@ const config = require('./config');
 
 function start() {
     if(!fs.existsSync(config.dbPath)) {
-        fs.mkdirSync(config.dbPath);
+        execSync(`mkdir ${config.dbPath}`);
+        console.log(`mkdir ${config.dbPath} for mongoDB`);
     }
     try {
         execSync('netstat -ano|findstr "27017"');
+        console.log('mongoDB has started ^_^');
     } catch(e) {
+        console.log('start mongoDB --- [DO NOT CLOSE IT] ');
         exec(`mongod --dbpath=${config.dbPath}`);
     }
 }

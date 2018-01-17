@@ -1,8 +1,6 @@
 const _ = require('lodash');
 const { create, get, list } = require('./mongodb/client');
 
-const registry = {};
-
 function add(name, {
   dependencies,
   content,
@@ -16,23 +14,24 @@ function add(name, {
   });
 }
 
-function preprocess({ content, dependencies: deps }) {
-  const imports = _.map(_.defaults({
-    react: 'React',
-  }, deps), (variable, d) => {
-    const dep = _.has(registry, d) ? `./${d}` : d;
-    return `import ${variable} from '${dep}';`;
-  }).join('\n');
-
-  return `${imports}\n${content}`;
-}
-
 function closure(name) {
   const result = {};
+  let existComponents = [];
 
+  function preprocess({ content, dependencies: deps }) {
+    const imports = _.map(_.defaults({
+      react: 'React',
+    }, deps), (variable, d) => {
+      const dep = _.includes(existComponents, d) ? `./${d}` : d;
+      return `import ${variable} from '${dep}';`;
+    }).join('\n');
+  
+    return `${imports}\n${content}`;
+  }
+  
   function find(name) {
-    return get({name}).then(results => {  //will add version in closure
-      const component = _.last(results);
+    return get({name}).then(rets => {  //will add version in closure
+      const component = _.last(rets);
       if (!_.has(result, name) && component) {
         const data = result[`${name}.js`] = preprocess(component);
         console.log(data);
@@ -41,8 +40,11 @@ function closure(name) {
       }
     });
   }
-  return find(name).then(() => result);
 
+  return list().then(rets => {
+    existComponents = rets;
+    return find(name).then(() => result);
+  });
 }
 
 function listKeys() {

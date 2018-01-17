@@ -38,6 +38,7 @@ function get({
                 .catch((e) => {
                     console.error(e);
                     db.close();
+                    return [];
                 });
         });
 }
@@ -56,6 +57,7 @@ function list() {
                 .catch((e) => {
                     console.error(e);
                     db.close();
+                    return [];
                 });
         }); 
 }
