@@ -13,7 +13,6 @@ module.exports = function service({
       component,
       version,
       subversion,
-      output,
     } = req.params;
 
     registry.source({
@@ -22,10 +21,11 @@ module.exports = function service({
       version,
       subversion,
     })
-      .then(({ source, type }) => (builders[type] || _.property('source'))({ source, output }))
+      .then(({ source, type }) => (builders[type] || _.property('source'))(_.defaults({
+        source,
+      }, req.params)))
       .then((data) => {
         res.set('Content-Type', 'text/javascript');
-        console.log(data);
         res.send(data);
       })
       .catch(err => res.status(500).send(err.toString()));
