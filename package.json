@@ -10,5 +10,13 @@
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "fs-extra": "^5.0.0",
+    "lodash": "^4.17.4"
+  },
+  "scripts": {
+    "start": "forever start -w test-service/index.js"
   }
 }

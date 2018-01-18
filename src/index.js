@@ -1,1 +1,4 @@
-export default '@daojs/builder';
+const service = require('./service');
+
+module.exports = { service };
+
