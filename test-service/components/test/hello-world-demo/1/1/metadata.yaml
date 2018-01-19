@@ -3,4 +3,5 @@
   dependencies:
     cdnjs/react-dom@16: ReactDOM
     cdnjs/react@16: React
+    daojs/style-loader@1: loadStyle
     test/hello-world@1: HelloWorld
