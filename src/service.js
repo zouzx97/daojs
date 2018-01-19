@@ -7,7 +7,7 @@ module.exports = function service({
 }) {
   const router = express.Router();
 
-  return router.get('/debug/:scope/:component/:version/:subversion', (req, res) => {
+  return router.get('/debug/:scope/:component/:version/:subversion/index.js', (req, res) => {
     Promise
       .all([
         registry.metadata(req.params),

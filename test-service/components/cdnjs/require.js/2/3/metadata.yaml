@@ -1,0 +1,6 @@
+---
+  type: cdn
+  urls:
+    debug: https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.js
+    release: https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js
+

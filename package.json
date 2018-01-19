@@ -15,10 +15,12 @@
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "bluebird": "^3.5.1",
     "express": "^4.16.2",
     "fs-extra": "^5.0.0",
     "js-yaml": "^3.10.0",
     "lodash": "^4.17.4",
+    "pug": "^2.0.0-rc.4",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5"
   },

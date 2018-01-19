@@ -1,0 +1,7 @@
+---
+  type: cdn
+  name: react-dom
+  urls:
+    debug: https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.2.0/umd/react-dom.development.js
+    release: https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.2.0/umd/react-dom.production.min.js
+
