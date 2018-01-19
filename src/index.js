@@ -1,8 +1,12 @@
 const service = require('./service');
-const { babelBuilder } = require('./builders');
+const {
+  babelBuilder,
+  cdnBuilder,
+} = require('./builders');
 
 module.exports = {
   service,
   babelBuilder,
+  cdnBuilder,
 };
 

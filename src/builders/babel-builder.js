@@ -11,12 +11,12 @@ module.exports = function babelBuilder(options = {
   presets: ['env', 'react'],
   plugins: ['transform-es2015-modules-amd'],
 }) {
-  return ({
+  return (source, {
     scope,
     component,
     version,
     output,
-    source,
+  }, {
     dependencies,
   }) => Promise.resolve({ source, dependencies })
     .then(preprocess)

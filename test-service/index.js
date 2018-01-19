@@ -1,7 +1,11 @@
 const path = require('path');
 const express = require('express');
 
-const { service, babelBuilder } = require('../src');
+const {
+  service,
+  babelBuilder,
+  cdnBuilder,
+} = require('../src');
 const LocalRegistry = require('./local-registry');
 
 const app = express();
@@ -11,6 +15,7 @@ app.use('/build', service({
   }),
   builders: {
     babel: babelBuilder(),
+    cdn: cdnBuilder(),
   },
 }));
 
