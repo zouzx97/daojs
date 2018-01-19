@@ -7,7 +7,7 @@ module.exports = function service({
 }) {
   const router = express.Router();
 
-  return router.get('/:scope/:component/:version/:subversion/:output', (req, res) => {
+  return router.get('/debug/:scope/:component/:version/:subversion', (req, res) => {
     const {
       scope,
       component,
@@ -21,8 +21,10 @@ module.exports = function service({
       version,
       subversion,
     })
-      .then(({ source, type }) => (builders[type] || _.property('source'))(_.defaults({
+      .then(({ source, type, dependencies }) => (builders[type] || _.property('source'))(_.defaults({
         source,
+        dependencies,
+        output: 'debug',
       }, req.params)))
       .then((data) => {
         res.set('Content-Type', 'text/javascript');

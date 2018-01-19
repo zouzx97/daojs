@@ -14,15 +14,14 @@ app.use('/build', service({
   },
 }));
 
-app.get('/ui/:scope/:component/:version/:subversion/:output', (req, res) => {
+app.get('/ui/:scope/:component/:version/:subversion', (req, res) => {
   const {
     scope,
     component,
     version,
     subversion,
-    output,
   } = req.params;
-  const url = ['/build', scope, component, version, subversion, output].join('/');
+  const url = ['/build/debug', scope, component, version, subversion].join('/');
   res.send(`<html><body><script src="${url}"></script></body> </html>`);
 });
 
