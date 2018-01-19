@@ -12,7 +12,7 @@ window.requireJsConfig = function (mapping) {
   }
 
   window.require = {
-    baseUrl: '/build/debug/',
+    baseUrl: '/build/release/',
     waitSeconds: 30,
     paths: paths,
     map: { '*': map },

@@ -7,24 +7,46 @@ module.exports = function service({
 }) {
   const router = express.Router();
 
-  return router.get('/debug/:scope/:component/:version/:subversion/index.js', (req, res) => {
-    Promise
-      .all([
-        registry.metadata(req.params),
-        registry.source(req.params),
-      ])
-      .then(([metadata, source]) => {
-        const { type } = metadata;
-        const builder = builders[type] || _.identity;
+  return router
+    .get('/debug/:scope/:component/:version/:subversion/index.js', (req, res) => {
+      Promise
+        .all([
+          registry.metadata(req.params),
+          registry.source(req.params),
+        ])
+        .then(([metadata, source]) => {
+          const { type } = metadata;
+          const builder = builders[type] || _.identity;
 
-        return builder(source, _.defaults({
-          output: 'debug',
-        }, req.params), metadata);
-      })
-      .then((code) => {
-        res.set('Content-Type', 'text/javascript');
-        res.send(code);
-      })
-      .catch(err => res.status(500).send(err.stack));
-  });
+          return builder(source, _.defaults({
+            output: 'debug',
+          }, req.params), metadata);
+        })
+        .then((code) => {
+          res.set('Content-Type', 'text/javascript');
+          res.send(code);
+        })
+        .catch(err => res.status(500).send(err.stack));
+    })
+    .get('/release/:scope/:component/:version/:subversion/index.js', (req, res) => {
+      Promise
+        .all([
+          registry.metadata(req.params),
+          registry.source(req.params),
+        ])
+        .then(([metadata, source]) => {
+          const { type } = metadata;
+          const builder = builders[type] || _.identity;
+
+          return builder(source, _.defaults({
+            output: 'release',
+          }, req.params), metadata);
+        })
+        .then((code) => {
+          res.set('Content-Type', 'text/javascript');
+          res.send(code);
+        })
+        .catch(err => res.status(500).send(err.stack));
+    });
+
 };
