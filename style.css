@@ -1,0 +1,124 @@
+@font-face {
+  font-family: NotoSansHans-Regular;
+  src: url("assets/font/NotoSansHans-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: NotoSansHans-Bold;
+  src: url("assets/font/NotoSansHans-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: NotoSansHans-Medium;
+  src: url("assets/font/NotoSansHans-Medium.otf") format("opentype");
+}
+
+body {
+  background-color: #f5f5f5;
+  background-image: url("assets/image/landing.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.navbar {
+  height: 80px;
+  padding-left: 150px;
+  padding-right: 100px;
+}
+
+.nav-item {
+  font-family: 'NotoSansHans-Regular';
+  font-size: 18px;
+  line-height: 18px;
+  color: #ffffff;
+  margin-right: 50px;
+}
+
+.main-title {
+  font-family: 'NotoSansHans-Bold';
+  font-size: 110px;
+  line-height: 120px;
+  color: #ffffff;
+  padding: 150px;
+  width: 1005px;
+  margin-bottom: 150px;
+}
+
+.main-title .sub-title {
+  margin-top: 30px;
+  font-family: "NotoSansHans-Regular";
+  font-size: 32px;
+  line-height: 40px;
+  color: #ffffff;
+}
+
+.section-card {
+  margin: 0 100px;
+  background-color: #ffffff;
+  padding: 50px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+
+.section-card > .card-title {
+  font-family: "NotoSansHans-Medium";
+  font-size: 36px;
+  line-height: 36px;
+  color: #888888;
+  margin-bottom: 100px;
+}
+
+.section-card + .section-card {
+  margin-top: 30px;
+}
+
+.solution {
+  padding: 50px;
+
+  padding-bottom: 150px;
+}
+
+.solution-content {
+  padding-left: 100px;
+}
+
+.solution-title {
+  margin-bottom: 20px;
+  font-family: "NotoSansHans-Medium";
+  font-size: 48px;
+  line-height: 48px;
+  color: #111111;
+}
+
+.solution-detail {
+  font-family: "NotoSansHans-Medium";
+  font-size: 24px;
+  line-height: 30px;
+  color: #888888;
+}
+
+.case-card-body {
+  padding: 50px 50px 80px 50px;
+}
+.case-title {
+  font-family: 'NotoSansHans-Medium';
+  font-size: 36px;
+  line-height: 40px;
+  color: #111111;
+  padding-bottom: 30px;
+}
+
+.case-text {
+  font-family: 'NotoSansHans-Regular';
+  font-size: 24px;
+  line-height: 30px;
+  color: #888888;
+}
+
+.case-card-deck {
+  margin-top: 16px;
+}
+
+.card-deck.case-card-deck .card + .card {
+  margin-left: 1px;
+}
