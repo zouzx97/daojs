@@ -79,7 +79,8 @@
   }
 
   .section-card {
-    margin: 0 100px;
+    margin: 0 auto;
+    width: 1242px;
     background-color: #ffffff;
     padding: 50px;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
@@ -192,7 +193,7 @@
 
   .form-joinus input {
     height: 62px;
-    width: 562px;
+    width: 560px;
     padding-left: 16px;
     margin-bottom: 32px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -321,7 +322,8 @@
   }
 
   .section-card {
-    margin: 0 50px;
+    margin: 0 auto;
+    width: 670px;
     background-color: #ffffff;
     padding: 50px;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
@@ -551,7 +553,8 @@
   }
 
   .section-card {
-    margin: 0 16px;
+    margin: 0 auto;
+    width: 290px;
     background-color: #ffffff;
     padding: 16px;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
