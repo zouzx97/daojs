@@ -27,6 +27,10 @@
     padding-right: 100px;
   }
 
+  .navbar-toggler {
+    display: none;
+  }
+
   #msft-logo {
     height: 40px;
   }
@@ -265,6 +269,10 @@
     padding-right: 0;
   }
 
+  .navbar-toggler {
+    display: none;
+  }
+
   #msft-logo {
     height: 40px;
   }
@@ -489,12 +497,12 @@
     padding-right: 20px;
   }
 
-  .navbar-nav {
+  .nabbar-nav-no-mobile {
     display: none;
   }
 
   #msft-logo {
-    height: 40px;
+    height: 25px;
   }
 
   .nav-item {
