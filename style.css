@@ -1,4 +1,4 @@
-@media (min-width: 1366px) {
+@media (min-width: 1400px) {
   @font-face {
     font-family: NotoSansHans-Regular;
     src: url("assets/font/NotoSansHans-Regular.otf") format("opentype");
@@ -45,9 +45,11 @@
   }
 
   .main-title-container {
-    background-image: url("assets/image/Landing.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
+    background: url("assets/image/Landing.png") center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     padding: 150px 150px 300px 150px;
   }
 
@@ -139,7 +141,7 @@
     font-size: 36px;
     line-height: 40px;
     color: #111111;
-    padding-bottom: 30px;
+    margin-bottom: 30px;
   }
 
   .case-text {
@@ -234,7 +236,7 @@
   }
 }
 
-@media (max-width: 1366px) and (min-width: 450px) {
+@media (max-width: 1400px) and (min-width: 600px) {
   @font-face {
     font-family: NotoSansHans-Regular;
     src: url("assets/font/NotoSansHans-Regular.otf") format("opentype");
@@ -259,8 +261,8 @@
 
   .navbar {
     height: 80px;
-    padding-left: 150px;
-    padding-right: 100px;
+    padding-left: 50px;
+    padding-right: 0;
   }
 
   #msft-logo {
@@ -281,35 +283,37 @@
   }
 
   .main-title-container {
-    background-image: url("assets/image/Landing.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    padding: 150px 150px 300px 150px;
+    background: url("assets/image/Landing.png") center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 150px 150px 200px 100px;
   }
 
   .main-title {
     font-family: 'NotoSansHans-Bold';
-    font-size: 110px;
-    line-height: 120px;
+    font-size: 80px;
+    line-height: 90px;
     color: #ffffff;
-    width: 705px;
+    width: 570px;
   }
 
   #solutions {
-    margin-top: -150px;
+    margin-top: -100px;
     padding-bottom: 100px;
   }
 
   .main-title .sub-title {
     margin-top: 30px;
     font-family: "NotoSansHans-Regular";
-    font-size: 32px;
-    line-height: 40px;
+    font-size: 24px;
+    line-height: 30px;
     color: #ffffff;
   }
 
   .section-card {
-    margin: 0 100px;
+    margin: 0 50px;
     background-color: #ffffff;
     padding: 50px;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
@@ -318,8 +322,8 @@
 
   .section-card > .card-title {
     font-family: "NotoSansHans-Medium";
-    font-size: 36px;
-    line-height: 36px;
+    font-size: 24px;
+    line-height: 24px;
     color: #888888;
     margin-bottom: 50px;
   }
@@ -331,34 +335,35 @@
   .solution {
     text-align: center;
     width: 100%;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
   }
 
   .solution-icon {
-    display: inline-block;
+    margin: 0 auto;
     vertical-align: bottom;
+    width: 214px;
+    height: 200px;
   }
 
   .solution-content {
-    display: inline-block;
-    padding-left: 100px;
     text-align: left;
   }
 
   .solution-title {
-    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
     font-family: "NotoSansHans-Medium";
-    font-size: 48px;
-    line-height: 48px;
+    font-size: 36px;
+    line-height: 36px;
     color: #111111;
   }
 
   .solution-detail {
     font-family: "NotoSansHans-Regular";
-    font-size: 24px;
-    line-height: 30px;
+    font-size: 18px;
+    line-height: 24px;
     color: #888888;
-    width: 640px;
   }
 
   .card {
@@ -370,44 +375,35 @@
   }
   .case-title {
     font-family: 'NotoSansHans-Medium';
-    font-size: 36px;
-    line-height: 40px;
+    font-size: 24px;
+    line-height: 24px;
     color: #111111;
-    padding-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .case-text {
     font-family: 'NotoSansHans-Regular';
-    font-size: 24px;
-    line-height: 30px;
+    font-size: 18px;
+    line-height: 24px;
     color: #888888;
   }
 
-  .card-1 {
-    width: 1140px;
+  .card {
+    width: 568px;
     margin-bottom: 16px;
-  }
-
-  .card-2, .card-3 {
-    width: 560px;
-    display: inline-block;
-  }
-
-  .card-3 {
-    margin-left: 16px;
   }
 
   .card-img-1 {
     background-image: url('assets/image/企业运营.png');
     background-size: 100%;
     background-repeat: no-repeat;
-    height: 400px;
+    height: 300px;
   }
 
   .card-img-2, .card-img-3 {
     background-size: 100%;
     background-repeat: no-repeat;
-    height: 350px;
+    height: 300px;
   }
 
   .card-img-2 {
@@ -419,56 +415,52 @@
   }
 
   .form-joinus input {
-    height: 62px;
-    width: 562px;
+    height: 50px;
+    width: 500px;
     padding-left: 16px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
     background-color: #f5f5f5;
   }
 
-  .form-joinus input + input {
-    margin-left: 16px;
-  }
-
   ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     font-family: "NotoSansHans-Regular";
-    font-size: 24px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 18px;
     color: #cccccc;
   }
   ::-moz-placeholder { /* Firefox 19+ */
     font-family: "NotoSansHans-Regular";
-    font-size: 24px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 18px;
     color: #cccccc;
   }
   :-ms-input-placeholder { /* IE 10+ */
     font-family: "NotoSansHans-Regular";
-    font-size: 24px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 18px;
     color: #cccccc;
   }
   :-moz-placeholder { /* Firefox 18- */
     font-family: "NotoSansHans-Regular";
-    font-size: 24px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 18px;
     color: #cccccc;
   }
 
   .form-joinus button {
     font-family: "NotoSansHans-Medium";
-    font-size: 24px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 18px;
     color: #ffffff;
     padding-left: 32px;
     padding-right: 32px;
-    height: 62px;
+    height: 50px;
     background-color: #0272c6;
   }
 }
 
-@media ( max-width: 450px) {
+@media ( max-width: 600px) {
   @font-face {
     font-family: NotoSansHans-Regular;
     src: url("assets/font/NotoSansHans-Regular.otf") format("opentype");
@@ -497,6 +489,10 @@
     padding-right: 20px;
   }
 
+  .navbar-nav {
+    display: none;
+  }
+
   #msft-logo {
     height: 40px;
   }
@@ -515,9 +511,11 @@
   }
 
   .main-title-container {
-    background-image: url("assets/image/Landing.png");
-    background-size: auto 100%;
-    background-repeat: no-repeat;
+    background: url("assets/image/Landing.png") center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     padding-top: 30px;
     padding-left: 32px;
     padding-bottom: 84px;
