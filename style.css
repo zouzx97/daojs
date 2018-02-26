@@ -1,19 +1,22 @@
+@font-face {
+  font-family: NotoSansHans-Regular;
+  src: url("assets/font/NotoSansHans-Regular.eot") format('embedded-opentype'),
+    url("assets/font/NotoSansHans-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: NotoSansHans-Bold;
+  src: url("assets/font/NotoSansHans-Bold.eot") format('embedded-opentype'),
+    url("assets/font/NotoSansHans-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: NotoSansHans-Medium;
+  src: url("assets/font/NotoSansHans-Medium.eot") format('embedded-opentype'),
+    url("assets/font/NotoSansHans-Medium.otf") format("opentype");
+}
+
 @media (min-width: 1400px) {
-  @font-face {
-    font-family: NotoSansHans-Regular;
-    src: url("assets/font/NotoSansHans-Regular.otf") format("opentype");
-  }
-
-  @font-face {
-    font-family: NotoSansHans-Bold;
-    src: url("assets/font/NotoSansHans-Bold.otf") format("opentype");
-  }
-
-  @font-face {
-    font-family: NotoSansHans-Medium;
-    src: url("assets/font/NotoSansHans-Medium.otf") format("opentype");
-  }
-
   body {
     background-color: #f5f5f5;
     margin:0px;
@@ -49,7 +52,7 @@
   }
 
   .main-title-container {
-    background: url("assets/image/Landing.png") center center fixed;
+    background: url("assets/image/Landing.png") center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -242,21 +245,6 @@
 }
 
 @media (max-width: 1400px) and (min-width: 600px) {
-  @font-face {
-    font-family: NotoSansHans-Regular;
-    src: url("assets/font/NotoSansHans-Regular.otf") format("opentype");
-  }
-
-  @font-face {
-    font-family: NotoSansHans-Bold;
-    src: url("assets/font/NotoSansHans-Bold.otf") format("opentype");
-  }
-
-  @font-face {
-    font-family: NotoSansHans-Medium;
-    src: url("assets/font/NotoSansHans-Medium.otf") format("opentype");
-  }
-
   body {
     background-color: f5f5f5;
     margin:0px;
@@ -292,7 +280,7 @@
   }
 
   .main-title-container {
-    background: url("assets/image/Landing.png") center center fixed;
+    background: url("assets/image/Landing.png") center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -471,21 +459,6 @@
 }
 
 @media ( max-width: 600px) {
-  @font-face {
-    font-family: NotoSansHans-Regular;
-    src: url("assets/font/NotoSansHans-Regular.otf") format("opentype");
-  }
-
-  @font-face {
-    font-family: NotoSansHans-Bold;
-    src: url("assets/font/NotoSansHans-Bold.otf") format("opentype");
-  }
-
-  @font-face {
-    font-family: NotoSansHans-Medium;
-    src: url("assets/font/NotoSansHans-Medium.otf") format("opentype");
-  }
-
   body {
     background-color: f5f5f5;
     margin:0px;
@@ -521,7 +494,7 @@
   }
 
   .main-title-container {
-    background: url("assets/image/Landing.png") center center fixed;
+    background: url("assets/image/Landing375.png") center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
