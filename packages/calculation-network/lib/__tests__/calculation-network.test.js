@@ -19,6 +19,24 @@ describe('CalculationNetwork', () => {
       })).not.toThrow();
     });
 
+    it('should call onUpdate on initial parameters', () => {
+      const onUpdate = jest.fn();
+      const cn = new CalculationNetwork({
+        parameters: { foo: 1, bar: 2 },
+        cells: {
+          tic: {
+            dependencies: ['foo', 'bar'],
+            factory: (foo, bar) => foo + bar,
+          },
+        },
+        onUpdate,
+      });
+
+      expect(onUpdate).toHaveBeenCalledTimes(2);
+      expect(onUpdate).toHaveBeenCalledWith(cn, 'foo', 1);
+      expect(onUpdate).toHaveBeenCalledWith(cn, 'bar', 2);
+    });
+
     it('should check for invalid dependencies', () => {
       expect(() => new CalculationNetwork({
         parameters: { foo: 1, bar: 2 },
@@ -86,16 +104,18 @@ describe('CalculationNetwork', () => {
     });
 
     it('should invoke the onUpdate callback', async () => {
+      onUpdate.mockClear();
+
       await cn.get('toe');
       expect(onUpdate).toHaveBeenCalledTimes(1);
-      expect(onUpdate).toHaveBeenCalledWith('toe', 2);
+      expect(onUpdate).toHaveBeenCalledWith(cn, 'toe', 2);
 
       onUpdate.mockClear();
 
       await cn.get('tac');
       expect(onUpdate).toHaveBeenCalledTimes(2);
-      expect(onUpdate).toHaveBeenCalledWith('tic', 3);
-      expect(onUpdate).toHaveBeenCalledWith('tac', 4);
+      expect(onUpdate).toHaveBeenCalledWith(cn, 'tic', 3);
+      expect(onUpdate).toHaveBeenCalledWith(cn, 'tac', 4);
     });
 
     it('should check for invalid keys', async () => {
@@ -149,15 +169,17 @@ describe('CalculationNetwork', () => {
     });
 
     it('should call the onInvalidate/onUpdate on the parameters', () => {
+      onUpdate.mockClear();
+
       cn.set({ foo: 2, bar: 3 });
 
       expect(onInvalidate).toHaveBeenCalledTimes(2);
-      expect(onInvalidate).toHaveBeenCalledWith('foo');
-      expect(onInvalidate).toHaveBeenCalledWith('bar');
+      expect(onInvalidate).toHaveBeenCalledWith(cn, 'foo');
+      expect(onInvalidate).toHaveBeenCalledWith(cn, 'bar');
 
       expect(onUpdate).toHaveBeenCalledTimes(2);
-      expect(onUpdate).toHaveBeenCalledWith('foo', 2);
-      expect(onUpdate).toHaveBeenCalledWith('bar', 3);
+      expect(onUpdate).toHaveBeenCalledWith(cn, 'foo', 2);
+      expect(onUpdate).toHaveBeenCalledWith(cn, 'bar', 3);
     });
 
     it('should call onInvalidate but not onUpdate on the dependents', async () => {
@@ -167,13 +189,13 @@ describe('CalculationNetwork', () => {
 
       cn.set({ foo: 2 });
       expect(onInvalidate).toHaveBeenCalledTimes(4);
-      expect(onInvalidate).toHaveBeenCalledWith('foo');
-      expect(onInvalidate).toHaveBeenCalledWith('tic');
-      expect(onInvalidate).toHaveBeenCalledWith('tac');
-      expect(onInvalidate).toHaveBeenCalledWith('toe');
+      expect(onInvalidate).toHaveBeenCalledWith(cn, 'foo');
+      expect(onInvalidate).toHaveBeenCalledWith(cn, 'tic');
+      expect(onInvalidate).toHaveBeenCalledWith(cn, 'tac');
+      expect(onInvalidate).toHaveBeenCalledWith(cn, 'toe');
 
       expect(onUpdate).toHaveBeenCalledTimes(1);
-      expect(onUpdate).toHaveBeenCalledWith('foo', 2);
+      expect(onUpdate).toHaveBeenCalledWith(cn, 'foo', 2);
     });
 
     it('should check for invalid key', () => {
