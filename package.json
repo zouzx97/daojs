@@ -13,9 +13,9 @@
   "keywords": [""],
   "devDependencies": {
     "coveralls": "^2.13.1",
-    "eslint": "^4.1.0",
-    "eslint-config-prettier": "^2.4.0",
-    "eslint-config-xo": "^0.18.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-prettier": "^2.2.0",
     "fs-extra": "^5.0.0",
     "husky": "^0.14.3",
@@ -35,21 +35,14 @@
     "*.json": ["prettier --write", "git add"]
   },
   "eslintConfig": {
-    "extends": ["xo", "prettier"],
+    "extends": "airbnb-base",
     "env": {
       "jest": true,
       "node": true
     },
     "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "singleQuote": true,
-          "printWidth": 90
-        }
-      ]
-    },
-    "plugins": ["prettier"]
+      "no-param-reassign": ["error", { "props": false }]
+    }
   },
   "repository": "https://github.com/wewei/calculation-network",
   "jest": {
@@ -57,6 +50,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^3.5.1"
+    "bluebird": "^3.5.1",
+    "lodash": "^4.17.5"
   }
 }
