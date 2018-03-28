@@ -1,2 +1,2 @@
-# calculation-object
-Calculation object
+# calculation-network
+Calculation network
