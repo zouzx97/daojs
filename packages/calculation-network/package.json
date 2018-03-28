@@ -1,8 +1,8 @@
 {
-  "name": "calculation-object",
+  "name": "calculation-network",
   "version": "0.0.0",
   "description": "Calculation object",
-  "homepage": "https://github.com/wewei/calculation-object",
+  "homepage": "https://github.com/wewei/calculation-network",
   "author": {
     "name": "Wei Wei",
     "email": "shazhouke@gmail.com",
@@ -22,8 +22,7 @@
     "jest": "^22.0.6",
     "lint-staged": "^4.2.1",
     "nsp": "^2.6.3",
-    "prettier": "^1.7.0",
-    "yamljs": "^0.3.0"
+    "prettier": "^1.7.0"
   },
   "scripts": {
     "prepublish": "nsp check",
@@ -52,7 +51,7 @@
     },
     "plugins": ["prettier"]
   },
-  "repository": "https://github.com/wewei/calculation-object",
+  "repository": "https://github.com/wewei/calculation-network",
   "jest": {
     "testEnvironment": "node"
   },
