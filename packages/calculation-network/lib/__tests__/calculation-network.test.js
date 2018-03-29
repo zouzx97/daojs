@@ -1,5 +1,5 @@
 const Promise = require('bluebird');
-const CalculationNetwork = require('../index.js');
+const CalculationNetwork = require('../calculation-network.js');
 
 describe('CalculationNetwork', () => {
   describe('#constructor()', () => {
