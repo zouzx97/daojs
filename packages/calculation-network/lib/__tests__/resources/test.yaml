@@ -4,6 +4,7 @@ foo:
   @args:
     - 1
     - 2
+    - @proc: sum
 bar: 2
 tic:
   @proc: sum
