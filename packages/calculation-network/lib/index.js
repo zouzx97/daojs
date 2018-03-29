@@ -17,12 +17,20 @@ function checkDAG(dependencies) {
   }
 }
 
+function notify(cn, action, ...args) {
+  _.forEach(cn.observers, (observer) => {
+    if (_.isFunction(observer[action])) {
+      observer[action](cn, ...args);
+    }
+  });
+}
+
 function invalidate(cn, keys, invalidated = {}) {
   _.forEach(keys, (key) => {
     if (_.has(cn.cache, key)) {
       delete cn.cache[key];
       invalidated[key] = true;
-      cn.onInvalidate(cn, key);
+      notify(cn, 'onInvalidate', key);
       invalidate(cn, cn.dependent[key] || [], invalidated);
     }
   });
@@ -34,11 +42,8 @@ class CalculationNetwork {
   constructor({
     parameters,
     cells,
-    onInvalidate = _.noop,
-    onUpdate = _.noop,
   }) {
-    this.onInvalidate = onInvalidate;
-    this.onUpdate = onUpdate;
+    this.observers = [];
 
     this.dependencies = {};
     this.dependent = {};
@@ -67,7 +72,6 @@ class CalculationNetwork {
 
     this.parameters = _.clone(parameters);
     this.cache = _.mapValues(parameters, Promise.resolve);
-    _.forEach(parameters, (value, key) => this.onUpdate(this, key, value));
   }
 
   set(updates) {
@@ -82,7 +86,7 @@ class CalculationNetwork {
 
     _.extend(this.parameters, changes);
     _.extend(this.cache, _.mapValues(changes, Promise.resolve));
-    _.forEach(changes, (value, key) => this.onUpdate(this, key, value));
+    _.forEach(changes, (value, key) => notify(this, 'onUpdate', key, value));
 
     return _.keys(invalidated);
   }
@@ -99,9 +103,21 @@ class CalculationNetwork {
       this.cache[key] = Promise
         .all(_.map(deps, dep => this.get(dep)))
         .then(args => factory(...args))
-        .tap(value => this.onUpdate(this, key, value));
+        .tap(value => notify(this, 'onUpdate', key, value));
     }
     return this.cache[key];
+  }
+
+  addObserver(observer) {
+    if (!_.includes(this.observers, observer)) {
+      this.observers.push(observer);
+    }
+    return this;
+  }
+
+  removeObserver(observer) {
+    _.remove(this.observers, o => o === observer);
+    return this;
   }
 }
 
