@@ -20,7 +20,8 @@ tac:
     - @ref: tic
     - 1
 toe:
-  @proc: sum
-  @args:
-    - @ref: foo
-    - 1
+  value:
+    @proc: sum
+    @args:
+      - @ref: foo
+      - 1
