@@ -17,10 +17,11 @@ describe('Loader', () => {
   });
 
   describe('#load()', () => {
+    const loader = new Loader({
+      sum: (...args) => Promise.delay(0, _.sum(...args)),
+    });
+
     it('should load the CalculationNetwork correctly', async () => {
-      const loader = new Loader({
-        sum: (...args) => Promise.delay(0, _.sum(...args)),
-      });
       const json = yaml.load(path.join(__dirname, 'resources/test.yaml'));
       const cn = await loader.load(json);
 
@@ -30,7 +31,7 @@ describe('Loader', () => {
         cn.get('tic'),
         cn.get('tac'),
         cn.get('toe'),
-      ])).resolves.toEqual([3, 2, 9, 10, 4]);
+      ])).resolves.toEqual([3, 2, 9, 10, { value: 4 }]);
 
       expect(cn.set({ bar: 3 })).toEqual(['bar', 'tic', 'tac']);
       await expect(Promise.all([
@@ -39,7 +40,12 @@ describe('Loader', () => {
         cn.get('tic'),
         cn.get('tac'),
         cn.get('toe'),
-      ])).resolves.toEqual([3, 3, 10, 11, 4]);
+      ])).resolves.toEqual([3, 3, 10, 11, { value: 4 }]);
+    });
+
+    it('should check for invalid procedures', () => {
+      const json = yaml.load(path.join(__dirname, 'resources/boom.yaml'));
+      expect(() => loader.load(json)).toThrow('Invalid procedure "boom"');
     });
   });
 });

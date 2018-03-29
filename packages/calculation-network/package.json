@@ -52,7 +52,8 @@
   },
   "repository": "https://github.com/wewei/calculation-network",
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "collectCoverage": true
   },
   "license": "MIT",
   "dependencies": {

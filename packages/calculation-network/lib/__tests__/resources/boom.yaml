@@ -1,0 +1,10 @@
+---
+foo:
+  @proc: sum
+  @args:
+    - 1
+    - @proc: boom
+      @args:
+        - 2
+        - 3
+    

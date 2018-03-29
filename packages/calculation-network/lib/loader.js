@@ -2,17 +2,21 @@ const _ = require('lodash');
 const Promise = require('bluebird');
 const CalculationNetwork = require('./calculation-network');
 
-function findDependencies(obj, deps = {}) {
+function preprocess(obj, procs, deps = {}) {
   if (_.isArray(obj)) {
-    _.forEach(obj, elem => findDependencies(elem, deps));
+    _.forEach(obj, elem => preprocess(elem, procs, deps));
   }
   if (_.isObject(obj)) {
     const ref = obj['@ref'];
+    const proc = obj['@proc'];
 
     if (_.isString(ref)) {
       deps[ref] = true;
     } else {
-      _.forEach(obj, elem => findDependencies(elem, deps));
+      if (_.isString(proc) && !_.isFunction(procs[proc])) {
+        throw new Error(`Invalid procedure "${proc}"`);
+      }
+      _.forEach(obj, elem => preprocess(elem, procs, deps));
     }
   }
   return _.keys(deps);
@@ -32,10 +36,7 @@ function evaluate(obj, procs, context = {}) {
     const proc = obj['@proc'];
 
     if (_.isString(proc)) {
-      if (_.isFunction(procs[proc])) {
-        return evaluate(obj['@args'] || [], procs, context).then(procs[proc]);
-      }
-      throw new Error(`Unknown procedure "${proc}"`);
+      return evaluate(obj['@args'] || [], procs, context).then(procs[proc]);
     }
 
     return Promise.props(_.mapValues(obj, elem => evaluate(elem, procs, context)));
@@ -54,7 +55,7 @@ class Loader {
   }
 
   load(json) {
-    const dependencies = _.mapValues(json, value => findDependencies(value));
+    const dependencies = _.mapValues(json, value => preprocess(value, this.procs));
     const params = _.chain(dependencies)
       .pickBy(deps => _.isEmpty(deps))
       .mapValues((deps, key) => evaluate(json[key], this.procs))
