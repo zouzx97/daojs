@@ -1,0 +1,24 @@
+{
+  "name": "@wewei/worker-rpc",
+  "version": "1.0.0",
+  "description": "Web worker remote procedure call",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wewei/worker-rpc.git"
+  },
+  "keywords": [
+    "Web",
+    "Worker",
+    "RPC"
+  ],
+  "author": "wewei",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wewei/worker-rpc/issues"
+  },
+  "homepage": "https://github.com/wewei/worker-rpc#readme"
+}
