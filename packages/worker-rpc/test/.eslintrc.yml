@@ -2,6 +2,7 @@
 extends: airbnb-base
 env:
   mocha: true
+  browser: true
 rules:
   no-unused-expressions: 0
 plugins:
