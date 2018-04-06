@@ -14,8 +14,8 @@ module.exports = config => config.set({
 
   // list of files / patterns to load in the browser
   files: [
-    { pattern: 'test/**/*-test.js', watched: false },
-    { pattern: 'test/**/test-worker.js', watched: true, included: false },
+    { pattern: 'test/*.test.js', watched: false },
+    { pattern: 'test/workers/*.js', watched: true, included: false },
   ],
 
 
@@ -27,8 +27,8 @@ module.exports = config => config.set({
   // preprocess matching files before serving them to the browser
   // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
   preprocessors: {
-    'test/**/*-test.js': ['webpack', 'sourcemap'],
-    'test/**/test-worker.js': ['webpack', 'sourcemap'],
+    'test/*.test.js': ['webpack', 'sourcemap'],
+    'test/workers/*.js': ['webpack', 'sourcemap'],
   },
 
 
