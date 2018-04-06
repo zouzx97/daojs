@@ -1,5 +1,3 @@
-/* eslint-env worker */
+import registerProcedure from '../../src/server';
 
-onmessage = (message) => {
-  postMessage(message.data);
-};
+registerProcedure({ echo: text => text });

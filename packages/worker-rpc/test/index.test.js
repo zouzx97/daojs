@@ -1,15 +1,11 @@
 import { expect } from 'chai';
 import wu from './worker-utility';
+import createClient from '../src/client';
 
 describe('fake test', () => {
   it('should fail', async () => {
-    expect(await new Promise((resolve, reject) => {
-      const worker = new Worker(wu.workerURL('echo.js'));
+    const client = await createClient(wu.workerURL('echo.js'));
 
-      worker.onmessage = message => resolve(message.data);
-      worker.onerror = reject;
-
-      worker.postMessage('Hello');
-    })).to.equal('Hello');
+    expect(client.echo).is.a('function');
   });
 });
