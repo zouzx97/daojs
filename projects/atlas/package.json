@@ -30,6 +30,8 @@
     "@daojs/calculation-network": "^1.0.0",
     "antd": "^3.3.0",
     "axios": "^0.18.0",
+    "babel-plugin-dynamic-import-webpack": "^1.0.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bluebird": "^3.5.1",

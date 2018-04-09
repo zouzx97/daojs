@@ -1,9 +1,29 @@
 import React, { PureComponent } from 'react';
 import _ from 'lodash';
-import PropTypes, { any } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Spin } from 'antd';
+import ComponentRegistry from './component-registry';
 
 export default class Cell extends PureComponent {
+  state = {
+    Control: _.constant(null),
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const Control = ComponentRegistry.get(nextProps.type);
+    if (Promise.resolve(Control) === Control) { // Get an async compoennt
+      Control.then((AsyncControl) => {
+        this.setState({
+          Control: AsyncControl,
+        });
+      });
+    } else { // Get a sync component
+      this.setState({
+        Control,
+      });
+    }
+  }
+
   updateData = (value) => {
     this.props.update(this.props.output, value);
   }
@@ -13,16 +33,12 @@ export default class Cell extends PureComponent {
       input,
       output,
       type,
-      componentRegistry,
       data,
       ...otherProps
     } = this.props;
-
-    const Control = _.isObject(componentRegistry) ? componentRegistry[type] : null;
-
-    if (!Control) {
-      return null;
-    }
+    const {
+      Control,
+    } = this.state;
 
     if (!input && !output) {
       return <Control {...otherProps} />;
@@ -44,7 +60,6 @@ Cell.propTypes = {
   input: PropTypes.string,
   output: PropTypes.string,
   type: PropTypes.string.isRequired,
-  componentRegistry: PropTypes.oneOfType([PropTypes.func, PropTypes.objectOf(any)]).isRequired,
   id: PropTypes.string.isRequired,
   isUpdating: PropTypes.bool,
   data: PropTypes.oneOfType([
