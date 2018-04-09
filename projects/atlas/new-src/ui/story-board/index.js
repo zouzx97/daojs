@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { Map } from 'immutable';
 import PropTypes from 'prop-types';
 import client from '../../rpc-client/index';
-import components from '../components';
 import Layout from '../layout';
 
 function extractInputs(nodes) {
@@ -66,7 +65,6 @@ export default class StoryBoard extends React.Component {
 
   render() {
     return (<Layout
-      componentRegistry={components}
       layout={this.props.layout}
       data={this.state.data}
       isUpdating={this.state.updating}

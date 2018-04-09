@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes, { any } from 'prop-types';
 import { Map } from 'immutable';
 import _ from 'lodash';
-import components from '../components';
-
-const { Cell } = components;
+import Cell from '../components/cell';
 
 export default class Layout extends React.PureComponent {
   renderItem(config) {
@@ -24,7 +22,6 @@ export default class Layout extends React.PureComponent {
           input={input}
           output={output}
           type={type}
-          componentRegistry={this.props.componentRegistry}
           data={this.props.data.get(input)}
           isUpdating={this.props.isUpdating.get(input)}
           update={this.props.update}
@@ -42,7 +39,6 @@ export default class Layout extends React.PureComponent {
 }
 
 Layout.propTypes = {
-  componentRegistry: PropTypes.oneOfType([PropTypes.func, PropTypes.objectOf(any)]).isRequired,
   layout: PropTypes.objectOf(any).isRequired,
   data: PropTypes.instanceOf(Map).isRequired,
   isUpdating: PropTypes.instanceOf(Map).isRequired,
