@@ -4,22 +4,50 @@ import PropTypes from 'prop-types';
 import { Spin } from 'antd';
 import ComponentRegistry from './component-registry';
 
+
 export default class Cell extends PureComponent {
+  constructor(props) {
+    super();
+    this.updateControl(props.type, true);
+  }
+
   state = {
     Control: _.constant(null),
   }
 
   componentWillReceiveProps(nextProps) {
-    const Control = ComponentRegistry.get(nextProps.type);
-    if (Promise.resolve(Control) === Control) { // Get an async compoennt
-      Control.then((AsyncControl) => {
+    if (nextProps.type !== this.props.type) {
+      this.updateControl(nextProps.type);
+    }
+  }
+
+  componentWillUnmount() {
+    // Cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
+    if (this.controlPromise) {
+      this.controlPromise.cancel();
+    }
+  }
+
+  updateControl(type, isCtor = false) {
+    const controlPromise = ComponentRegistry.get(type);
+    if (controlPromise.isFulfilled()) {
+      // No need to wait for next tick
+      const Control = controlPromise.value();
+      if (isCtor) {
+        this.state = _.defaults({
+          Control,
+        }, this.state);
+      } else {
         this.setState({
-          Control: AsyncControl,
+          Control,
         });
-      });
-    } else { // Get a sync component
-      this.setState({
-        Control,
+      }
+    } else {
+      this.controlPromise = controlPromise;
+      controlPromise.then((Control) => {
+        this.setState({
+          Control,
+        });
       });
     }
   }

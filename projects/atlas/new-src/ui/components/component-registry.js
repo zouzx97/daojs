@@ -1,8 +1,13 @@
 /* eslint-disable lodash/prefer-lodash-method */
 import _ from 'lodash';
 import { List } from 'immutable';
+import Promise from 'bluebird';
 import PlainData from './plain-data';
 import SectionContainer from './section-container';
+
+Promise.config({
+  cancellation: true,
+});
 
 class Comp {
   constructor(definition) {
@@ -35,7 +40,7 @@ class ComponentRegistry {
     if (!component) {
       return _.constant(null);
     }
-    return component.get();
+    return Promise.resolve(component.get());
   }
 }
 
