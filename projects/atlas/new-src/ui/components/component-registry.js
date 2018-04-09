@@ -11,9 +11,17 @@ class Comp {
   }
 }
 
-export class SyncComp extends Comp {}
+export class SyncComp extends Comp {
+  get() {
+    return this.value;
+  }
+}
 
-export class AsyncComp extends Comp {}
+export class AsyncComp extends Comp {
+  get() {
+    return this.value();
+  }
+}
 
 class ComponentRegistry {
   registry = List([
@@ -27,9 +35,7 @@ class ComponentRegistry {
     if (!component) {
       return _.constant(null);
     }
-    return component instanceof SyncComp ?
-      component.value :
-      component.value();
+    return component.get();
   }
 }
 
