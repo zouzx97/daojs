@@ -24,6 +24,9 @@ class ComponentRegistry {
 
   get = (name) => {
     const component = this.registry.find(comp => comp.name === name);
+    if (!component) {
+      return _.constant(null);
+    }
     return component instanceof SyncComp ?
       component.value :
       component.value();
