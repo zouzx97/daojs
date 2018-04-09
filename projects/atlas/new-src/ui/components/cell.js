@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Spin } from 'antd';
-import ComponentRegistry from './component-registry';
-
+import componentRegistry from './index';
 
 export default class Cell extends PureComponent {
   constructor(props) {
@@ -29,7 +28,7 @@ export default class Cell extends PureComponent {
   }
 
   updateControl(type, isCtor = false) {
-    const controlPromise = ComponentRegistry.get(type);
+    const controlPromise = componentRegistry.get(type);
     if (controlPromise.isFulfilled()) {
       // No need to wait for next tick
       const Control = controlPromise.value();
