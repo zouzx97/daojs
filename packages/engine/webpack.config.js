@@ -8,6 +8,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'engine.js',
     publicPath: '/dist/',
+    libraryTarget: 'amd',
+    library: 'engine',
   },
   module: {
     rules: [
@@ -17,5 +19,13 @@ module.exports = {
         use: 'babel-loader',
       }
     ],
+  },
+  externals: {
+    lodash: {
+      commonjs: 'lodash',
+      commonjs2: 'lodash',
+      amd: 'lodash',
+      root: '_',
+    },
   },
 };
