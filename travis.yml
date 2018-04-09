@@ -9,4 +9,5 @@ install:
   - npm install lerna -g
 
 script:
+  - lerna bootstrap
   - lerna run test
