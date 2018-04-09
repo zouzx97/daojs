@@ -1,7 +1,7 @@
 {
   "name": "@daojs/engine",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "dist/engine.js",
   "author": "Yucong Jin",
   "license": "MIT",
   "private": false,
@@ -15,8 +15,12 @@
     "uuid": "^3.2.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "eslint": "^4.19.1",
     "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-lodash-fp": "^2.1.3"
+    "eslint-plugin-lodash-fp": "^2.1.3",
+    "webpack": "^4.5.0"
   }
 }
