@@ -57,4 +57,5 @@ rules:
   fp/no-valueof-field: error
 
 plugins:
-  - lodash
+  - fp
+  - "lodash-fp"
