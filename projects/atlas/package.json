@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@daojs/calculation-network": "^1.0.0",
+    "@daojs/engine": "^0.0.1",
     "antd": "^3.3.0",
     "axios": "^0.18.0",
     "babel-plugin-dynamic-import-webpack": "^1.0.2",
