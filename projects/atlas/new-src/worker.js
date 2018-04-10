@@ -1,7 +1,4 @@
-import { createEngine } from '@daojs/engine';
+import { fuel } from '@daojs/engine';
 import story from './story.yaml';
 
-createEngine()
-  .registerProcedures({})
-  .loadStory(story)
-  .start();
+fuel({ story }).start();

@@ -16,22 +16,14 @@ function registerServer(contextNetwork) {
   };
 }
 
-export function createEngine() {
-  return {
-    registerProcedures(procedures) {
-      return {
-        loadStory(story) {
-          const contextNetwork = new Loader({
-            ...procedures,
-            ...coreProcedures,
-          }).load(story);
+export function fuel({ procedures = {}, story = {} }) {
+  const contextNetwork = new Loader({
+    ...procedures,
+    ...coreProcedures,
+  }).load(story);
 
-          return {
-            start: registerServer(contextNetwork),
-          };
-        },
-      };
-    },
+  return {
+    start: registerServer(contextNetwork),
   };
 }
 
