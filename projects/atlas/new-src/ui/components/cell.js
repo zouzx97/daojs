@@ -5,17 +5,30 @@ import { Spin } from 'antd';
 import componentRegistry from './index';
 
 export default class Cell extends PureComponent {
-  constructor(props) {
-    super();
-    this.state = {
-      Control: _.constant(null),
-    };
-    this.updateControl(props.type, true);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.type !== prevState.type) {
+      return {
+        type: nextProps.type,
+      };
+    }
+    // null indicates that the new props do not require any state updates
+    return null;
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.type !== this.props.type) {
-      this.updateControl(nextProps.type);
+  constructor({
+    type,
+  } = {}) {
+    super();
+    this.state = {
+      type,
+      Control: _.constant(null),
+    };
+    this.updateControl(true);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.type !== this.state.type) {
+      this.updateControl();
     }
   }
 
@@ -26,8 +39,8 @@ export default class Cell extends PureComponent {
     }
   }
 
-  updateControl(type, isCtor = false) {
-    const controlPromise = componentRegistry.get(type);
+  updateControl(isCtor = false) {
+    const controlPromise = componentRegistry.get(this.state.type);
     if (controlPromise.isFulfilled()) {
       // No need to wait for next tick
       const Control = controlPromise.value();
@@ -41,6 +54,7 @@ export default class Cell extends PureComponent {
         });
       }
     } else {
+      // Keep the promise in case it needs to be canceled
       this.controlPromise = controlPromise;
       controlPromise.then((Control) => {
         this.setState({
