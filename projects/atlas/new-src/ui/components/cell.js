@@ -5,31 +5,20 @@ import { Spin } from 'antd';
 import componentRegistry from './index';
 
 export default class Cell extends PureComponent {
-  // Would get console warning due to https://github.com/gaearon/react-hot-loader/issues/918
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.type !== prevState.type) {
-      return {
-        type: nextProps.type,
-      };
-    }
-    // null indicates that the new props do not require any state updates
-    return null;
-  }
-
-  constructor({
-    type,
-  } = {}) {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      type,
       Control: _.constant(null),
     };
-    this.updateControl(true);
+    this.controlPromise = componentRegistry.get(this.props.type);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.type !== this.state.type) {
-      this.updateControl();
+  componentDidMount() {
+    if (this.controlPromise) {
+      this.controlPromise.then((Control) => {
+        this.setState({ Control });
+        this.controlPromise = null;
+      });
     }
   }
 
@@ -37,31 +26,6 @@ export default class Cell extends PureComponent {
     // Cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
     if (this.controlPromise) {
       this.controlPromise.cancel();
-    }
-  }
-
-  updateControl(isCtor = false) {
-    const controlPromise = componentRegistry.get(this.state.type);
-    if (controlPromise.isFulfilled()) {
-      // No need to wait for next tick
-      const Control = controlPromise.value();
-      if (isCtor) {
-        this.state = _.defaults({
-          Control,
-        }, this.state);
-      } else {
-        this.setState({
-          Control,
-        });
-      }
-    } else {
-      // Keep the promise in case it needs to be canceled
-      this.controlPromise = controlPromise;
-      controlPromise.then((Control) => {
-        this.setState({
-          Control,
-        });
-      });
     }
   }
 
