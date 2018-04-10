@@ -19,7 +19,7 @@ class AsyncStrategy extends Strategy {
 }
 
 
-export default class AsyncRegistry {
+export default class Registry {
   defaultStrategy = new Strategy()
   defaultAsyncStrategy = new AsyncStrategy()
 

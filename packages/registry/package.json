@@ -1,5 +1,5 @@
 {
-  "name": "@daojs/async-registry",
+  "name": "@daojs/registry",
   "version": "0.0.1",
   "description": "",
   "main": "src/index.js",
