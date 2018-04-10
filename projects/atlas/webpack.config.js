@@ -38,6 +38,11 @@ module.exports = {
         use: 'babel-loader',
       },
       {
+        test: /\.js$/,
+        use: 'source-map-loader',
+        enforce: 'pre',
+      },
+      {
         test: /\.md$/,
         use: 'text-loader',
       },

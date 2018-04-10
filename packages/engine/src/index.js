@@ -12,7 +12,7 @@ function registerServer(contextNetwork) {
       return (await contextNetwork).get(key);
     }
 
-    register({ get, set });
+    return register({ get, set });
   };
 }
 
