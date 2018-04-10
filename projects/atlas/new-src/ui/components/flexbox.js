@@ -5,12 +5,15 @@ import _ from 'lodash';
 
 export default class FlexBox extends PureComponent {
   render() {
-    const { direction } = this.props.style;
-    if (direction === 'vertical') {
+    const { flexDirection } = this.props.layout;
+    if (flexDirection === 'vertical') {
       return (
         <Grid fluid>
           {_.map(this.props.children, child =>
-            (<Row key={child.key} {...getRowProps(child.props.layout)}><Col>{child}</Col></Row>))}
+            (
+              <Row key={child.key} {...getRowProps(child.props.layout)}>
+                <Col {...getColumnProps(child.props.layout)}>{child}</Col>
+              </Row>))}
         </Grid>
       );
     }
@@ -28,10 +31,10 @@ export default class FlexBox extends PureComponent {
 
 FlexBox.propTypes = {
   children: PropTypes.arrayOf(any),
-  style: PropTypes.objectOf(any),
+  layout: PropTypes.objectOf(any),
 };
 
 FlexBox.defaultProps = {
   children: [],
-  style: {},
+  layout: {},
 };

@@ -26,6 +26,7 @@ export default class Layout extends React.PureComponent {
           data={this.props.data.get(input)}
           isUpdating={this.props.isUpdating.get(input)}
           update={this.props.update}
+          layout={layout}
           {...otherProps}
         >
           {_.map(items, item => this.renderItem(item))}
