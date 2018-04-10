@@ -2,25 +2,30 @@ import React, { PureComponent } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Spin } from 'antd';
-import ComponentRegistry from './component-registry';
+import componentRegistry from './index';
 
 export default class Cell extends PureComponent {
-  state = {
-    Control: _.constant(null),
+  constructor(props) {
+    super(props);
+    this.state = {
+      Control: _.constant(null),
+    };
+    this.controlPromise = componentRegistry.get(this.props.type);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const Control = ComponentRegistry.get(nextProps.type);
-    if (Promise.resolve(Control) === Control) { // Get an async compoennt
-      Control.then((AsyncControl) => {
-        this.setState({
-          Control: AsyncControl,
-        });
+  componentDidMount() {
+    if (this.controlPromise) {
+      this.controlPromise.then((Control) => {
+        this.setState({ Control });
+        this.controlPromise = null;
       });
-    } else { // Get a sync component
-      this.setState({
-        Control,
-      });
+    }
+  }
+
+  componentWillUnmount() {
+    // Cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
+    if (this.controlPromise) {
+      this.controlPromise.cancel();
     }
   }
 
