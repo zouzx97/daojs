@@ -1,6 +1,6 @@
-import { Loader } from 'calculation-network';
+import { Loader } from '@daojs/calculation-network';
 import * as procedures from './procedures';
-import story from './story.yaml';
+import story from './story.json';
 
 const contextNetwork = new Loader({
   ...procedures,
