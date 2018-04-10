@@ -1,25 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
+  ComponentRegistry,
   StoryBoard,
-  DaoJSApp,
 } from '@daojs/ui';
-import builtinComponents from '@daojs/builtin-components';
-import AsyncRegister from '@daojs/async-register';
-import stories from './stories';
 import components from './components';
+import story from './stories/dummy.yaml';
 
-// ReactDOM.render(document.getElementById('container'), (
-//   <DaoJSApp
-//     components = {new AsyncRegister().register(builtinComponents).register(components)}
-//     stroies = {new AsyncRegister().register(stories)}
-//   />
-// ));
-//
+ComponentRegistry.register(components);
 
-ReactDOM.render(document.getElementById('container'), (
-  <Dashboard
-    components = {new AsyncRegister().register(builtinComponents).register(components)}
-    story = {stories.defaultStory}
-  />
-));
+ReactDOM.render(
+  document.getElementById('container'),
+  <Dashboard story={story} />,
+);

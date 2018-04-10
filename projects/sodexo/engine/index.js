@@ -1,4 +1,5 @@
-import engine from '@daojs/engine';
+import DaoJSEngine, { ProcedureRegistry } from '@daojs/engine';
 import procedures from './procedures';
 
-engine.register(procedures);
+ProcedureRegistry.register(procedures);
+DaoJSEngine.start();
