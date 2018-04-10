@@ -4,6 +4,7 @@ import { Map } from 'immutable';
 import PropTypes from 'prop-types';
 import client from '../../rpc-client/index';
 import Layout from '../layout';
+import story from './story.yaml';
 
 function extractInputs(nodes) {
   return _.reduce(nodes, (memo, { input, items }) => {
@@ -13,6 +14,8 @@ function extractInputs(nodes) {
     return [...memo, ...extractInputs(items)];
   }, []);
 }
+
+client.call('setup', { story });
 
 export default class StoryBoard extends React.Component {
   constructor(props) {
