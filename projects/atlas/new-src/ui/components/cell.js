@@ -5,6 +5,7 @@ import { Spin } from 'antd';
 import componentRegistry from './index';
 
 export default class Cell extends PureComponent {
+  // Would get console warning due to https://github.com/gaearon/react-hot-loader/issues/918
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.type !== prevState.type) {
       return {
