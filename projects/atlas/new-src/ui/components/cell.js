@@ -7,11 +7,10 @@ import componentRegistry from './index';
 export default class Cell extends PureComponent {
   constructor(props) {
     super();
+    this.state = {
+      Control: _.constant(null),
+    };
     this.updateControl(props.type, true);
-  }
-
-  state = {
-    Control: _.constant(null),
   }
 
   componentWillReceiveProps(nextProps) {

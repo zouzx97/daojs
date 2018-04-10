@@ -2,10 +2,6 @@ import _ from 'lodash';
 import { List, Map } from 'immutable';
 import Promise from 'bluebird';
 
-Promise.config({
-  cancellation: true,
-});
-
 class Strategy {
   registry = Map()
 
@@ -24,9 +20,12 @@ class AsyncStrategy extends Strategy {
 
 
 export default class AsyncRegistry {
+  defaultStrategy = new Strategy()
+  defaultAsyncStrategy = new AsyncStrategy()
+
   strategies = List([
-    new Strategy(),
-    new AsyncStrategy(),
+    this.defaultStrategy,
+    this.defaultAsyncStrategy,
   ])
 
   get = name => Promise.reduce(
@@ -41,12 +40,12 @@ export default class AsyncRegistry {
   }
 
   register = (definitions = {}) => {
-    this.strategies.get(0).register(definitions);
+    this.defaultStrategy.register(definitions);
     return this;
   }
 
   registerAsync = (definitions = {}) => {
-    this.strategies.get(1).register(definitions);
+    this.defaultAsyncStrategy.register(definitions);
     return this;
   }
 }
