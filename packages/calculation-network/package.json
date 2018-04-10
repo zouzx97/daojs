@@ -8,9 +8,13 @@
     "email": "shazhouke@gmail.com",
     "url": "https://github.com/wewei"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "main": "lib/index.js",
-  "keywords": [""],
+  "keywords": [
+    ""
+  ],
   "devDependencies": {
     "coveralls": "^2.13.1",
     "eslint": "^4.19.1",
@@ -23,6 +27,7 @@
     "lint-staged": "^4.2.1",
     "nsp": "^2.6.3",
     "prettier": "^1.7.0",
+    "source-map-loader": "^0.2.3",
     "yamljs": "^0.3.0"
   },
   "scripts": {
@@ -32,8 +37,14 @@
     "test": "jest"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"],
-    "*.json": ["prettier --write", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "extends": "airbnb-base",
