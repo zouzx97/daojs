@@ -10,13 +10,14 @@ export default class Layout extends React.PureComponent {
       key = config,
       input = _.isString(config) ? config : undefined,
       output,
-      type = config,
-      props = {},
+      type = _.isString(config) ? config : 'Flexbox',
       items = [],
+      layout = {},
+      ...otherProps
     } = config;
 
     return (
-      <div key={key}>
+      <div key={key} layout={layout}>
         <Cell
           id={key}
           input={input}
@@ -25,7 +26,8 @@ export default class Layout extends React.PureComponent {
           data={this.props.data.get(input)}
           isUpdating={this.props.isUpdating.get(input)}
           update={this.props.update}
-          {...props}
+          layout={layout}
+          {...otherProps}
         >
           {_.map(items, item => this.renderItem(item))}
         </Cell>
@@ -33,8 +35,7 @@ export default class Layout extends React.PureComponent {
     );
   }
   render() {
-    const { layout } = this.props;
-    return this.renderItem(layout);
+    return this.renderItem(this.props.layout);
   }
 }
 

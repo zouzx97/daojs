@@ -1,4 +1,32 @@
+import { Loader } from '@daojs/calculation-network';
 import register from './rpc-server';
-import * as dagQL from './dag-ql';
+import * as coreProcedures from './procedures';
 
-register(dagQL);
+let contextNetwork = null;
+
+function setup({ procedures = {}, story = {} }) {
+  contextNetwork = new Loader({
+    ...procedures,
+    ...coreProcedures,
+  }).load(story);
+}
+
+async function set(key, value) {
+  return (await contextNetwork).set({ [key]: value });
+}
+
+async function get(key) {
+  return (await contextNetwork).get(key);
+}
+
+function teardown() {
+  contextNetwork = null;
+}
+
+register({
+  get,
+  set,
+  setup,
+  teardown,
+});
+
