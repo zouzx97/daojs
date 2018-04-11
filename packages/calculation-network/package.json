@@ -68,6 +68,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@daojs/registry": "^0.0.1",
     "bluebird": "^3.5.1",
     "lodash": "^4.17.5"
   }
