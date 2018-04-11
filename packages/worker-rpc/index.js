@@ -1,47 +1,64 @@
-class Agent {
-  constructor({ postMessage }) {
+class EventAgent {
+  constructor(postMessage) {
     this.postMessage = postMessage;
-    this.calls = {};
-    this.procedures = {};
-    this.idNext = 0;
+    this.observers = {};
   }
 
-  handleMessage(data) {
-    const { type } = data;
-    const handlerName = `on${type}`;
+  on(type, callback) {
+    if (!this.observers[type]) {
+      this.observers[type] = new Set();
+    }
+    this.observers[type].add(callback);
+  }
 
-    if (typeof this[handlerName] === 'function') {
-      this[handlerName](data);
+  off(type, callback) {
+    this.observers[type].delete(callback);
+    if (this.observers[type].size === 0) {
+      delete this.observers[type];
     }
   }
 
-  onAck() { /* TODO: handle ack */ } // eslint-disable-line
-
-  onSuccess({ id, payload }) {
-    this.calls[id].resolve(payload);
-    delete this.calls[id];
-  }
-
-  onError({ id, payload }) {
-    this.calls[id].reject(new Error(payload));
-    delete this.calls[id];
-  }
-
-  onCall({ id, payload }) {
-    const { name, args } = payload;
+  trigger(type, payload) {
     const { postMessage } = this;
+    postMessage({ type, payload });
+  }
 
-    postMessage({ id, type: 'Ack' });
-    Promise
-      .resolve(this.procedures[name])
-      .then((procedure) => {
-        if (typeof procedure === 'function') {
-          return procedure(...args);
-        }
-        throw new Error(`Procedure "${name}" is not defined`);
-      })
-      .then(value => postMessage({ id, type: 'Success', payload: value }))
-      .catch(({ message }) => postMessage({ id, type: 'Error', payload: message }));
+  handleMessage(data) {
+    const { type, payload } = data;
+    (this.observers[type] || []).forEach(callback => callback(payload));
+  }
+}
+
+class RpcAgent extends EventAgent {
+  constructor(postMessage) {
+    super(postMessage);
+
+    this.calls = {};
+    this.procedures = {};
+    this.idNext = 0;
+
+    this.on('rpc-ack', () => {});
+    this.on('rpc-success', ({ id, value }) => {
+      this.calls[id].resolve(value);
+      delete this.calls[id];
+    });
+    this.on('rpc-error', ({ id, message }) => {
+      this.calls[id].reject(new Error(message));
+      delete this.calls[id];
+    });
+    this.on('rpc-call', ({ id, name, args }) => {
+      this.trigger('rpc-ack', { id });
+      Promise
+        .resolve(this.procedures[name])
+        .then((procedure) => {
+          if (typeof procedure === 'function') {
+            return procedure(...args);
+          }
+          throw new Error(`Procedure "${name}" is not defined`);
+        })
+        .then(value => this.trigger('rpc-success', { id, value }))
+        .catch(({ message }) => this.trigger('rpc-error', { id, message }));
+    });
   }
 
   register(procedures) {
@@ -49,30 +66,25 @@ class Agent {
   }
 
   call(name, ...args) {
-    const { postMessage } = this;
-
     return new Promise((resolve, reject) => {
-      const payload = { name, args };
       const id = this.idNext;
 
       this.idNext += 1;
       this.calls[id] = { resolve, reject };
-      postMessage({ type: 'Call', id, payload });
+      this.trigger('rpc-call', { id, name, args });
     });
   }
 }
 
-export const master = new Agent({ postMessage });
-
-onmessage = ({ data }) => master.handleMessage(data);
-
-export class WorkerAgent extends Agent {
+export class WorkerAgent extends RpcAgent {
   constructor(url) {
     const worker = new Worker(url);
 
-    super({
-      postMessage: worker.postMessage.bind(worker),
-    });
+    super(worker.postMessage.bind(worker));
     worker.onmessage = ({ data }) => this.handleMessage(data);
   }
 }
+
+export const master = new RpcAgent(postMessage);
+
+onmessage = ({ data }) => master.handleMessage(data);
