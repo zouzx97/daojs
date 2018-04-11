@@ -4,6 +4,17 @@ data:
     - 独立用户数
     - 利润
     - 交易笔数
+  _c_metricsDictionary:
+    利润:
+      revenue: sum
+    独立用户数:
+      customerId: count
+    交易笔数:
+      transactionId: count
+  _c_groupByDictionary:
+    餐厅名称: Branch
+    餐卡类别: cardType
+    菜品类别: SKU
   _c_metricReverseDictionary:
     revenue: 利润
     customerId: 独立用户数
@@ -12,7 +23,7 @@ data:
     日: day
     月: month
     周: week
-    
+
   _measureUser: null
   _time:
     start: '2018-01-01'
@@ -20,15 +31,21 @@ data:
   _time_start:
     $proc: property
     $args:
-      - 
-        $ref: _time
+      - $ref: _time
       - start
   _time_end:
     $proc: property
     $args:
-      - 
-        $ref: _time
+      - $ref: _time
       - end
+  _t_filter_timestamp:
+    timestamp:
+      type: time-range
+      from:
+        $ref: _time_start
+      end:
+        $ref: _time_end
+
   _measureCustomer: null
   _granularityCustomer: null
   _measureFavor: null
@@ -38,18 +55,24 @@ data:
 
   measureUser:
     defaultValue: 独立用户数
-    enums: 
+    enums:
       $ref: _c_metricEnum
-      
+
   bestUser:
     department: STC
     discipline: SDE
-    
+
+  _t_filter_timestamp_and_bestUser:
+    $proc: merge
+    $args:
+      - $ref: _t_filter_timestamp
+      - $ref: bestUser
+
   measureCustomer:
     defaultValue: 独立用户数
-    enums: 
+    enums:
       $ref: _c_metricEnum
-      
+
   bestCustomerQuery:
     time:
       $ref: _time
@@ -57,7 +80,7 @@ data:
       $ref: _measureCustomer
     bestUser:
       $ref: bestUser
-      
+
   mapCustomerMetric:
     $proc: property
     $args:
@@ -68,23 +91,17 @@ data:
           customerId: count
         交易笔数:
           transactionId: count
-      -
-        $ref: _measureCustomer
+      - $ref: _measureCustomer
 
   fetchCustomerTSAD:
     $proc: query
     $args:
       - Transaction
-      - 
-        aggregation: 
+      -
+        aggregation:
           $ref: mapCustomerMetric
         filter:
-          timestamp: 
-            type: time-range
-            from: 
-              $ref: _time_start
-            end:
-              $ref: _time_end
+          $ref: _t_filter_timestamp
         groupBy:
           timestamp: day
 
@@ -92,72 +109,57 @@ data:
     source:
       $proc: property
       $args:
-        -
-          $ref: fetchCustomerTSAD
+        - $ref: fetchCustomerTSAD
         - data
     axisDimensions:
       - timestamp
     metricDimensions:
       $proc: keys
       $args:
-        -
-          $ref: mapCustomerMetric
+        - $ref: mapCustomerMetric
     title:
       $proc: concat
       $args:
-        -
-          $ref: _measureCustomer
+        - $ref: _measureCustomer
         - 的变化趋势
     key2name:
       $ref: _c_metricReverseDictionary
 
   granularityCustomer:
     defaultValue: 独立用户数
-    enums: 
+    enums:
       - 日
       - 周
       - 月
-    
+
   fetchCustomerExpencePerUserBucket:
     $proc: query2
     $args:
-      - 
+      -
         $proc: query2
         $args:
-          - 
+          -
             $proc: query
             $args:
               - Transaction
               -
-                aggregation: 
+                aggregation:
                   revenue: sum
                 filter:
-                  $proc: merge
-                  $args:
-                    - 
-                      timestamp:
-                        type: time-range
-                        from: 
-                          $ref: _time_start
-                        end:
-                          $ref: _time_end
-                    - 
-                      $ref: bestUser
+                  $ref: _t_filter_timestamp_and_bestUser
                 groupBy:
-                  timestamp: 
+                  timestamp:
                     $proc: property
-                    $args: 
-                      - 
-                        $ref: _c_string2GranularityMap
-                      - 
-                        $ref: _granularityCustomer
+                    $args:
+                      - $ref: _c_string2GranularityMap
+                      - $ref: _granularityCustomer
                   customerId: value
           -
-            aggregation: 
+            aggregation:
               revenue: average
             groupBy:
               customerId: value
-      - 
+      -
         aggregation:
           customerId: count
         groupBy:
@@ -188,49 +190,331 @@ data:
         $args:
           - Transaction
           -
-            aggregation: 
+            aggregation:
               revenue: sum
             filter:
-              $proc: merge
-              $args:
-                - 
-                  timestamp:
-                    type: time-range
-                    from: 
-                      $ref: _time_start
-                    end:
-                      $ref: _time_end
-                -
-                  $ref: bestUser
+              $ref: _t_filter_timestamp_and_bestUser
             groupBy:
               customerId: value
-      - 
+      -
         aggregation:
           revenue: average
         groupBy:
           customerId: value
         orderBy:
-          -
-            -revenue
+          - -revenue
         top: 10
 
   customerExpensePerUserRank:
     source:
       $ref: fetchCustomerExpensePerUserRank
     axisDimensions:
-      -
-        customerId
+      - customerId
     metricDimensions:
-      -
-        revenue
+      - revenue
     key2name:
       $ref: _c_metricReverseDictionary
+
+  measureFavor:
+    defaultValue: 独立用户数
+    enums:
+      $ref: _c_metricEnum
+
+  dimensionFavor:
+    defaultValue: 餐厅名称
+    enums:
+      - 餐厅名称
+      - 餐卡类别
+      - 菜品类别
+
+  fetchFavorBestCustomerReduce:
+    $proc: query
+    $args:
+      - Transaction
+      -
+        aggregation:
+          $proc: property
+          $args:
+            - $ref: _c_metricsDictionary
+            - $ref: _measureFavor
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          $proc: fromPairs
+          $args:
+            -
+              -
+                $proc: property
+                $args:
+                  - $ref: _c_groupByDictionary
+                  - $ref: dimensionFavor
+              - value
+  fetchFavorBestCustomerTrend:
+    $proc: query
+    $args:
+      - Transaction
+      -
+        aggregation:
+          $proc: property
+          $args:
+            - $ref: _c_metricsDictionary
+            - $ref: _measureFavor
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          $proc: fromPairs
+          $args:
+            -
+              - timestamp
+              - day
+            -
+              -
+                $proc: property
+                $args:
+                  - $ref: _c_groupByDictionary
+                  - $ref: dimensionFavor
+              - value
+  favorBestCustomerTrend:
+    # const dimensionKey = _.keys(dimensionsDictionary[dimension])[0];
+    # const measureKey = _.keys(metricsDictionary[measure])[0];
+
+    # const dataAggregated = _.chain(rawData)
+    #   .groupBy(_.property('timestamp'))
+    #   .mapValues(val => _.reduce(val, (memo, cur) => ({
+    #     [cur[dimensionKey]]: cur[measureKey], ...memo,
+    #   }), {}))
+    #   .value();
+
+    # const series = _.uniq(_.reduce(dataAggregated, (memo, cur) => [
+    #   ..._.keys(cur), ...memo], []));
+
+    # const source = _.map(dataAggregated, (val, key) => ({
+    #   timestamp: key,
+    #   ..._.zipObject(series, _.map(series, s => val[s] || 0)),
+    # }));
+    source:
+      $ref: fetchFavorBestCustomerTrend
+    axisDimensions:
+      - timestamp
+    key2name:
+      $ref: _c_metricReverseDictionary
+
+  # Section 4
+  fetchUsageMealCardReduce:
+    $proc: query
+    $args:
+      - Transaction
+      -
+        aggregation:
+          customerId: count
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          cardType: value
+
+  usageMealCardReduce:
+    title:
+      $proc: concat
+      $args:
+        - 共有
+        -
+          $proc: sum
+          $args:
+            -
+              $proc: map
+              $args:
+                - $ref: fetchUsageMealCardReduce
+                - customerId
+        - 人充值
+    source:
+      $ref: fetchUsageMealCardReduce
+    axisDimensions:
+      - cardType
+    metricDimensions:
+      - customerId
+
+  fetchUsageMealCardBucketCRAP:
+    $proc: query2
+    $args:
+      -
+        $proc: query
+        $args:
+          - Recharge
+          -
+            aggregation:
+              rechargeAmount: sum
+            filter:
+              $ref: _t_filter_timestamp_and_bestUser
+            groupBy:
+              customerId: value
+      -
+        aggregation:
+          customerId: count
+        groupBy:
+          rechargeAmount:
+            type: bin
+            step: 200
+  usageMealCardBucketCRAP:
+    source:
+      $ref: fetchUsageMealCardBucketCRAP
+    axisDimensions:
+      - rechargeAmount
+    metricDimensions:
+      - customerId
+    key2name: _c_metricReverseDictionary
+  usageMealCardQuery:
+    time:
+      $ref: _time
+    bestUser:
+      $ref: bestUser
+    measure: CardBalance
+  usageMealCardBucketCB:
+    time:
+      $ref: _time
+    bestUser:
+      $ref: bestUser
+    measure: CardBlance
+  _t_fetchTraffic_aggregation:
+    $proc: property
+    $args:
+      - $ref: _c_metricsDictionary
+      - $ref: _measureActiveness
+  fetchTraffic:
+    $proc: query2
+    $args:
+      -
+        $proc: query
+        $args:
+          - Transaction
+          -
+            aggregation:
+              $ref: _t_fetchTraffic_aggregation
+            filter:
+              $ref: _t_filter_timestamp_and_bestUser
+            groupBy:
+              timestamp:
+                type: time-bin
+                step: PT10M
+      -
+        aggregation:
+          $proc: fromPairs
+          $args:
+            -
+              $proc: property
+              $args:
+                -
+                  $proc: keys
+                  $args:
+                    - $ref: _t_fetchTraffic_aggregation
+                - 0
+            - average
+        groupBy:
+          timestamp:
+            type: time-phase
+            step: P1D
+  measureActiveness:
+    defaultValue: 独立用户数
+    enums:
+      $ref: _c_metricEnum
+  activenessTraffic:
+    # // sort the data to know start & end
+    # const sorted = _.sortBy(rawData, 'timestamp');
+
+    # const first = sorted[0].timestamp;
+    # const end = _.last(sorted).timestamp;
+
+    # const keyed = _.keyBy(sorted, 'timestamp');
+
+    # const measureKey = _.keys(metricsDictionary[measure])[0];
+
+    # // fill 0 data in
+    # const source = _.map(_.range(first, end + 1, 10 * 60 * 1000), time => ({
+    #   timestamp: (new Date(time)).toLocaleTimeString({}, { hour: '2-digit', minute: '2-digit', hour12: false }),
+    #   [measureKey]: keyed[time] ? keyed[time][measureKey] : 0,
+    # }));
+    source:
+      $ref: fetchTraffic
+    axisDimensions:
+      - timestamp
+    key2name: _c_metricReverseDictionary
+
+  # growth
+  measureGrowth:
+    defaultValue: 独立用户数
+    enums:
+      $ref: _c_metricEnum
+  fetchTrendForGrowth:
+    $proc: query
+    $args:
+      - Transaction
+      -
+        aggregation:
+          $proc: property
+          $args:
+            - $ref: _c_metricsDictionary
+            - $ref: _measureGrowth
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          timestamp: day
+  _t_fetchTrendForGrowth_dependent_args:
+    - $ref: fetchTrendForGrowth
+    -
+      measureKey:
+        $proc: property
+        $args:
+          -
+            $proc: keys
+            $args:
+              -
+                $proc: property
+                $args:
+                  - $ref: _c_metricsDictionary
+                  - $ref: measureGrowth
+          - 0
+      timestampKey: timestamp
+
+  fetchCumulativeTrend:
+    $proc: cumulative
+    $args:
+      $ref: _t_fetchTrendForGrowth_dependent_args
+  fetchGrowthRateTrend:
+    $proc: growthRate
+    $args:
+      $ref: _t_fetchTrendForGrowth_dependent_args
+
+  growthAbilityCumulative:
+    # const measureKey = _.keys(metricsDictionary[measure])[0];
+
+    # const source = _.map(rawData, ({ timestamp, value }) => ({
+    #   timestamp,
+    #   [measureKey]: value,
+    # }));
+    title: 累计的变化趋势
+    source:
+      $ref: fetchCumulativeTrend
+    axisDimensions:
+      - timestamp
+    key2name: _c_metricReverseDictionary
+  growthAbilityGrowthRate:
+    # const measureKey = _.keys(metricsDictionary[measure])[0];
+
+    # const source = _.map(rawData, ({ timestamp, value }) => ({
+    #   timestamp,
+    #   [measureKey]: value,
+    # }));
+    title: 增长率的变化趋势
+    source:
+      $ref: fetchGrowthRateTrend
+    axisDimensions:
+      - timestamp
+    key2name: _c_metricReverseDictionary
 
 layout:
   key: 05f542f1-b844-4c90-b417-7b00887505cb
   type: SectionContainer
   items:
-    - 
+    -
       key: 0e3a3cc8-b7bd-4de7-a314-b387068b7e31
       type: TimeRange
       output: _time
@@ -242,7 +526,7 @@ layout:
       props:
         title: Best User
       items:
-        - 
+        -
           key: ff55dbec-03da-4abd-97f3-5696bae23002
           input: measureUser
           output: _measureUser
@@ -268,7 +552,7 @@ layout:
           type: SingleSelector
           props:
             label: Measure
-        - 
+        -
           key: 6f294d7b-1424-4269-8ab2-ce3ce8f524bc
           input: bestCustomerQuery
           type: PlainData

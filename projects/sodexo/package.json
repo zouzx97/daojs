@@ -4,7 +4,8 @@
   "description": "Project for Sodexo",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "dev": "webpack-dev-server"
   },
   "author": "",
   "license": "MIT",
