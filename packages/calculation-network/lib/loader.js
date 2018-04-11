@@ -7,8 +7,8 @@ function preprocess(obj, procs, deps = {}) {
     _.forEach(obj, elem => preprocess(elem, procs, deps));
   }
   if (_.isObject(obj)) {
-    const ref = obj['@ref'];
-    const proc = obj['@proc'];
+    const ref = obj.$ref;
+    const proc = obj.$proc;
 
     if (_.isString(ref)) {
       deps[ref] = true;
@@ -27,16 +27,16 @@ function evaluate(obj, procs, context = {}) {
     return Promise.all(_.map(obj, elem => evaluate(elem, procs, context)));
   }
   if (_.isObject(obj)) {
-    const ref = obj['@ref'];
+    const ref = obj.$ref;
 
     if (_.isString(ref)) {
       return context[ref];
     }
 
-    const proc = obj['@proc'];
+    const proc = obj.$proc;
 
     if (_.isString(proc)) {
-      return evaluate(obj['@args'] || [], procs, context).then(procs[proc]);
+      return evaluate(obj.$args || [], procs, context).then(procs[proc]);
     }
 
     return Promise.props(_.mapValues(obj, elem => evaluate(elem, procs, context)));

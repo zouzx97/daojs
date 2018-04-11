@@ -1,10 +1,9 @@
 ---
 foo:
-  @proc: sum
-  @args:
+  $proc: sum
+  $args:
     - 1
-    - @proc: boom
-      @args:
+    - $proc: boom
+      $args:
         - 2
         - 3
-    
