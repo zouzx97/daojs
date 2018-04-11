@@ -1,7 +1,7 @@
 {
   "name": "@daojs/engine",
   "version": "0.0.1",
-  "main": "dist/engine.js",
+  "main": "src/index.js",
   "author": "Yucong Jin",
   "license": "MIT",
   "private": false,
