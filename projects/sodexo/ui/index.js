@@ -22,6 +22,7 @@ ReactDOM.render(
       name: '智能运营助手',
       stories: AIOperations,
     }]}
+    componentRegistry={ComponentRegistry}
   />,
   document.getElementById('container'),
 );

@@ -3,7 +3,7 @@ import PropTypes, { any } from 'prop-types';
 import { Map } from 'immutable';
 import config2Cell from '../utils/config-to-cell';
 
-export default class Layout extends React.PureComponent {
+export default class LayoutDefault extends React.PureComponent {
   getChildContext() {
     return {
       read: key => this.props.data.get(key),
@@ -17,7 +17,7 @@ export default class Layout extends React.PureComponent {
   }
 }
 
-Layout.propTypes = {
+LayoutDefault.propTypes = {
   layout: PropTypes.objectOf(any).isRequired,
   data: PropTypes.instanceOf(Map).isRequired,
   isUpdating: PropTypes.instanceOf(Map).isRequired,
