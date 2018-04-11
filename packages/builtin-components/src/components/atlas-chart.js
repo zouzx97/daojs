@@ -5,13 +5,17 @@ import ReactEcharts from 'echarts-for-react';
 
 export default class AtlasChart extends React.Component {
   static propTypes = {
-    value: PropTypes.objectOf(PropTypes.any).isRequired,
+    source: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+    axisDimensions: PropTypes.arrayOf(PropTypes.string),
+    metricDimensions: PropTypes.arrayOf(PropTypes.string),
     title: PropTypes.string,
     getOption: PropTypes.func.isRequired,
     onEvents: PropTypes.objectOf(PropTypes.any),
   }
 
   static defaultProps = {
+    axisDimensions: [],
+    metricDimensions: [],
     title: null,
     onEvents: {},
   }
@@ -22,7 +26,7 @@ export default class AtlasChart extends React.Component {
       axisDimensions,
       metricDimensions,
       title,
-    } = this.props.value;
+    } = this.props;
     if (_.isNil(source)) {
       throw new Error('Chart source is nil');
     }
@@ -55,7 +59,7 @@ export default class AtlasChart extends React.Component {
       metricDimensions;
 
     const titleOption = {
-      text: title || this.props.title,
+      text: title,
     };
 
     const option = {

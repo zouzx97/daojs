@@ -1,15 +1,11 @@
-import Bar from './components/bar';
+
 import Compare from './components/compare';
 import TimeSeries from './components/time-series';
 import FormInput from './components/form-input';
 import FormField from './components/form-field';
 import Heatmap from './components/heatmap';
-import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
-import SingleSelector from './components/single-selector';
 import Cell from './components/cell';
-import TimeRange from './components/time-range';
-import PlainData from './components/plain-data';
 import SectionContainer from './components/section-container';
 import Donut from './components/donut';
 import StackBar from './components/stack-bar';
@@ -21,21 +17,22 @@ import LineBarChart from './components/line-bar';
 import Markdown from './components/markdown';
 import CellTest from './components/cell-test';
 
+import Bar from './components/bar';
+import HorizontalBar from './components/horizontal-bar';
+import RadioGroup from './components/radio-group';
+import Select from './components/select';
+import SingleSelector from './components/single-selector';
 import TextBlock from './components/text-block';
+import TimeRange from './components/time-range';
 
 export default {
-  Bar,
   Compare,
   TimeSeries,
   FormInput,
   FormField,
   Heatmap,
-  HorizontalBar,
   Cell,
   MultiSelector,
-  SingleSelector,
-  TimeRange,
-  PlainData,
   SectionContainer,
   Donut,
   LineWithDataZoom,
@@ -48,4 +45,10 @@ export default {
   CellTest,
 
   TextBlock,
+  Select,
+  RadioGroup,
+  SingleSelector,
+  TimeRange,
+  Bar,
+  HorizontalBar,
 };
