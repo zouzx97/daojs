@@ -1,3 +1,3 @@
-import registerProcedure from '../../server';
+import { master } from '../..';
 
-registerProcedure({ echo: text => text });
+master.register({ echo: text => text });
