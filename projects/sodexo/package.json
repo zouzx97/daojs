@@ -4,7 +4,8 @@
   "description": "Project for Sodexo",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "dev": "webpack-dev-server"
   },
   "author": "",
   "license": "MIT",
@@ -32,7 +33,7 @@
   },
   "dependencies": {
     "@daojs/engine": "^0.0.1",
-    "@daojs/ui": "^0.0.1",
+    "@daojs/ui": "^0.0.2",
     "react": "^16.3.1",
     "react-dom": "^16.3.1"
   }

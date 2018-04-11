@@ -237,7 +237,7 @@ ansi-styles@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-1.0.0.tgz#cb102df1c56f5123eab8b67cd7b98027a0279178"
 
-antd@^3.3.0:
+antd@*, antd@^3.3.0, antd@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/antd/-/antd-3.4.1.tgz#9f93c712e14d692a3db70fa3f254c79874cd3822"
   dependencies:
@@ -7821,7 +7821,7 @@ react-slick@~0.22.3:
     json2mq "^0.2.0"
     resize-observer-polyfill "^1.5.0"
 
-react@^16.3.1:
+react@*, react@^16.3.1:
   version "16.3.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.3.1.tgz#4a2da433d471251c69b6033ada30e2ed1202cfd8"
   dependencies:
