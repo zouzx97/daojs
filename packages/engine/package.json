@@ -10,7 +10,8 @@
     "lint": "eslint ./src/*.js"
   },
   "dependencies": {
-    "@daojs/calculation-network": "^1.0.0",
+    "@daojs/calculation-network": "^0.0.1",
+    "@daojs/registry": "^0.0.1",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "uuid": "^3.2.1"

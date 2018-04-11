@@ -61,4 +61,7 @@ typings/
 # dotenv environment variables file
 .env
 
+# DaoJS specific
 dist/
+.DS_Store
+

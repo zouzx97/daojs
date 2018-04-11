@@ -1,14 +1,15 @@
 import { Loader } from '@daojs/calculation-network';
+import Registry from '@daojs/registry';
 import register from './rpc-server';
 import * as coreProcedures from './procedures';
 
+const ProcedureRegistry = new Registry()
+  .register(coreProcedures);
+
 let contextNetwork = null;
 
-function setup({ procedures = {}, story = {} }) {
-  contextNetwork = new Loader({
-    ...procedures,
-    ...coreProcedures,
-  }).load(story);
+function setup(story = {}) {
+  contextNetwork = new Loader(ProcedureRegistry).load(story);
 }
 
 async function set(key, value) {
@@ -29,4 +30,3 @@ register({
   setup,
   teardown,
 });
-

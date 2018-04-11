@@ -15,7 +15,7 @@ function extractInputs(nodes) {
   }, []);
 }
 
-client.call('setup', { story });
+client.call('setup', story);
 
 export default class StoryBoard extends React.Component {
   constructor(props) {

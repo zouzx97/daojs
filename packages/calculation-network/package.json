@@ -1,6 +1,6 @@
 {
   "name": "@daojs/calculation-network",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Calculation object",
   "homepage": "https://github.com/wewei/calculation-network",
   "author": {
@@ -9,13 +9,18 @@
     "url": "https://github.com/wewei"
   },
   "files": [
-    "lib"
+    "src"
   ],
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "keywords": [
     ""
   ],
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "coveralls": "^2.13.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -64,10 +69,14 @@
   "repository": "https://github.com/wewei/calculation-network",
   "jest": {
     "testEnvironment": "node",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
   },
   "license": "MIT",
   "dependencies": {
+    "@daojs/registry": "^0.0.1",
     "bluebird": "^3.5.1",
     "lodash": "^4.17.5"
   }

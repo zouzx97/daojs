@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@daojs/registry": "^0.0.1",
-    "@daojs/calculation-network": "^1.0.0",
+    "@daojs/calculation-network": "^0.0.1",
     "@daojs/engine": "^0.0.1",
     "antd": "^3.3.0",
     "axios": "^0.18.0",

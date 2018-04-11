@@ -9,6 +9,7 @@ module.exports = {
       'react-hot-loader/patch',
     ],
     worker: [
+      'babel-polyfill',
       './new-src/worker.js',
     ],
   },
