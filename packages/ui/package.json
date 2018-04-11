@@ -1,6 +1,6 @@
 {
   "name": "@daojs/ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "DaoJS UI",
   "main": "src/index.js",
   "scripts": {
@@ -11,7 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "react": "*",
-    "react-dom": "*",
-    "antd": "*"
+    "antd": "*",
+    "@daojs/builtin-components": "*",
+    "@daojs/registry": "*"
   }
 }
