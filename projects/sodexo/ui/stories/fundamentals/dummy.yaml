@@ -1,0 +1,51 @@
+---
+name: '基础分析'
+
+# Data flow diagram
+data:
+  title: PowerAI
+
+  number: 0
+  newNumber:
+    $proc: sum
+    $args:
+      - $ref: num
+      - 1
+
+  selectorValue: 午餐
+  selectorOptions:
+    $proc: fetchOptions
+    $args:
+      - metrics: 'Revenue'
+        dimension: 'Period'
+
+  selector:
+    defaultValue:
+      $ref: selectorValue
+    options:
+      $ref: selectorOptions
+
+  selection:
+    $ref: selectorValue
+
+# Dashboard Layout
+layout:
+  key: cee4bb00-dd8d-492d-b8a2-2511577187b9
+  type: SectionContainer,
+  items:
+    - key: d0e84a79-970d-446c-96b1-062f3c75be5c
+      type: TextBlock
+      input: title
+    - key: 32c58c85-a40e-4441-9081-2a15268fc67b
+      type: TextBlock
+      input: number
+    - key: fa7dc449-0bd7-47da-ae41-3682624e400c
+      type: TextBlock
+      input: newNumber
+    - key: f6a7b9de-80b6-42e8-bd6a-f3632a0fa94e
+      type: SingleSelector
+      input: selector
+      output: selectorValue
+    - key: 88e4382a-27df-4fa0-bcfe-b7950f86783c
+      type: TextBlock
+      input: selection
