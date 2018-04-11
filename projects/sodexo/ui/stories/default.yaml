@@ -41,8 +41,10 @@ data:
   _t_filter_timestamp:
     timestamp:
       type: time-range
-      from: $ref: _time_start
-      end: $ref: _time_end
+      from:
+        $ref: _time_start
+      end:
+        $ref: _time_end
 
   _measureCustomer: null
   _granularityCustomer: null
@@ -109,7 +111,8 @@ data:
       $args:
         - $ref: fetchCustomerTSAD
         - data
-    axisDimensions: - timestamp
+    axisDimensions:
+      - timestamp
     metricDimensions:
       $proc: keys
       $args:
