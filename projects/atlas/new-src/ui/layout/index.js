@@ -1,41 +1,19 @@
 import React from 'react';
 import PropTypes, { any } from 'prop-types';
 import { Map } from 'immutable';
-import _ from 'lodash';
-import Cell from '../components/cell';
+import config2Cell from '../utils/config-to-cell';
 
 export default class Layout extends React.PureComponent {
-  renderItem(config) {
-    const {
-      key = config,
-      input = _.isString(config) ? config : undefined,
-      output,
-      type = _.isString(config) ? config : 'Flexbox',
-      items = [],
-      layout = {},
-      ...otherProps
-    } = config;
-
-    return (
-      <div key={key} layout={layout}>
-        <Cell
-          id={key}
-          input={input}
-          output={output}
-          type={type}
-          data={this.props.data.get(input)}
-          isUpdating={this.props.isUpdating.get(input)}
-          update={this.props.update}
-          layout={layout}
-          {...otherProps}
-        >
-          {_.map(items, item => this.renderItem(item))}
-        </Cell>
-      </div>
-    );
+  getChildContext() {
+    return {
+      read: key => this.props.data.get(key),
+      isUpdating: key => this.props.isUpdating.get(key),
+      update: this.props.update,
+    };
   }
+
   render() {
-    return this.renderItem(this.props.layout);
+    return config2Cell(this.props.layout);
   }
 }
 

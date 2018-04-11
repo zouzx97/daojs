@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import _ from 'lodash';
+import { Map } from 'immutable';
 import PropTypes from 'prop-types';
 import { Spin } from 'antd';
 import componentRegistry from './index';
@@ -30,7 +31,7 @@ export default class Cell extends PureComponent {
   }
 
   updateData = (value) => {
-    this.props.update(this.props.output, value);
+    this.update(this.props.output, value);
   }
 
   render() {
@@ -38,7 +39,6 @@ export default class Cell extends PureComponent {
       input,
       output,
       type,
-      data,
       ...otherProps
     } = this.props;
     const {
@@ -50,9 +50,9 @@ export default class Cell extends PureComponent {
     }
 
     return (
-      <Spin spinning={this.props.isUpdating}>
+      <Spin spinning={this.isUpdating.get(input)}>
         <Control
-          value={this.props.data}
+          value={this.data.get(input)}
           {...otherProps}
           update={this.updateData}
         />
@@ -66,21 +66,15 @@ Cell.propTypes = {
   output: PropTypes.string,
   type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  isUpdating: PropTypes.bool,
-  data: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.objectOf(PropTypes.any),
-    PropTypes.arrayOf(PropTypes.any),
-  ]),
-  update: PropTypes.func,
 };
 
 Cell.defaultProps = {
   input: undefined,
   output: undefined,
-  data: undefined,
-  isUpdating: false,
-  update: _.noop,
 };
 
+Cell.contextTypes = {
+  data: PropTypes.instanceOf(Map).isRequired,
+  isUpdating: PropTypes.instanceOf(Map).isRequired,
+  update: PropTypes.func.isRequired,
+};

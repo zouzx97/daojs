@@ -245,7 +245,7 @@ data:
 
 layout:
   key: 05f542f1-b844-4c90-b417-7b00887505cb
-  type: SectionContainer
+  type: AdjustableContainer
   childItems:
     -
       key: 0e3a3cc8-b7bd-4de7-a314-b387068b7e31
