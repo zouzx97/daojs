@@ -52,10 +52,10 @@ export default class SodexoLayout extends React.Component {
         <Layout>
           <Sider>
             <Menu theme="dark" defaultSelectedKeys={['dashboard']} mode="inline" onSelect={({ key }) => { this.setState({ selected: key }); }}>
-              { categories.map(category => (
+              { _.map(categories, category => (
                 <SubMenu key={category.name} title={<span><Icon type="mail" /><span>{category.name}</span></span>}>
-                  { _.map(category.stories, (story, storyName) => (
-                    <Menu.Item key={storyName}>{storyName}</Menu.Item>
+                  { _.map(category.stories, story => (
+                    <Menu.Item key={story.name}>{story.name}</Menu.Item>
                   ))}
                 </SubMenu>
               )) }
