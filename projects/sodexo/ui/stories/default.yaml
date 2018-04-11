@@ -1,0 +1,307 @@
+---
+data:
+  _c_metricEnum:
+    - 独立用户数
+    - 利润
+    - 交易笔数
+  _c_metricReverseDictionary:
+    revenue: 利润
+    customerId: 独立用户数
+    transactionId: 交易笔数
+  _c_string2GranularityMap:
+    日: day
+    月: month
+    周: week
+    
+  _measureUser: null
+  _time:
+    start: '2018-01-01'
+    end: '2018-02-01'
+  _time_start:
+    $proc: property
+    $args:
+      - 
+        $ref: _time
+      - start
+  _time_end:
+    $proc: property
+    $args:
+      - 
+        $ref: _time
+      - end
+  _measureCustomer: null
+  _granularityCustomer: null
+  _measureFavor: null
+  _dimensionFavor: null
+  _measureActiveness: null
+  _measureGrowth: null
+
+  measureUser:
+    defaultValue: 独立用户数
+    enums: 
+      $ref: _c_metricEnum
+      
+  bestUser:
+    department: STC
+    discipline: SDE
+    
+  measureCustomer:
+    defaultValue: 独立用户数
+    enums: 
+      $ref: _c_metricEnum
+      
+  bestCustomerQuery:
+    time:
+      $ref: _time
+    measure:
+      $ref: _measureCustomer
+    bestUser:
+      $ref: bestUser
+      
+  mapCustomerMetric:
+    $proc: property
+    $args:
+      -
+        利润:
+          revenue: sum
+        独立用户数:
+          customerId: count
+        交易笔数:
+          transactionId: count
+      -
+        $ref: _measureCustomer
+
+  fetchCustomerTSAD:
+    $proc: query
+    $args:
+      - Transaction
+      - 
+        aggregation: 
+          $ref: mapCustomerMetric
+        filter:
+          timestamp: 
+            type: time-range
+            from: 
+              $ref: _time_start
+            end:
+              $ref: _time_end
+        groupBy:
+          timestamp: day
+
+  bestCustomerTSAD:
+    source:
+      $proc: property
+      $args:
+        -
+          $ref: fetchCustomerTSAD
+        - data
+    axisDimensions:
+      - timestamp
+    metricDimensions:
+      $proc: keys
+      $args:
+        -
+          $ref: mapCustomerMetric
+    title:
+      $proc: concat
+      $args:
+        -
+          $ref: _measureCustomer
+        - 的变化趋势
+    key2name:
+      $ref: _c_metricReverseDictionary
+
+  granularityCustomer:
+    defaultValue: 独立用户数
+    enums: 
+      - 日
+      - 周
+      - 月
+    
+  fetchCustomerExpencePerUserBucket:
+    $proc: query2
+    $args:
+      - 
+        $proc: query2
+        $args:
+          - 
+            $proc: query
+            $args:
+              - Transaction
+              -
+                aggregation: 
+                  revenue: sum
+                filter:
+                  $proc: merge
+                  $args:
+                    - 
+                      timestamp:
+                        type: time-range
+                        from: 
+                          $ref: _time_start
+                        end:
+                          $ref: _time_end
+                    - 
+                      $ref: bestUser
+                groupBy:
+                  timestamp: 
+                    $proc: property
+                    $args: 
+                      - 
+                        $ref: _c_string2GranularityMap
+                      - 
+                        $ref: _granularityCustomer
+                  customerId: value
+          -
+            aggregation: 
+              revenue: average
+            groupBy:
+              customerId: value
+      - 
+        aggregation:
+          customerId: count
+        groupBy:
+          revenue:
+            type: bin
+            step: 10
+
+  customerExpensePerUserBucket:
+    source:
+          # let's do this in chart
+          #const data = _.map(rawData, d => ({
+          #  销售额: `${d.revenue} ~ ${d.revenue + 10}`,
+          #  用户数: d.customerId,
+          #}));
+      $ref: fetchCustomerExpencePerUserBucket
+    axisDimensions:
+      - 销售额
+    metricDimensions:
+      - 用户数
+    key2name:
+      $ref: _c_metricReverseDictionary
+
+  fetchCustomerExpensePerUserRank:
+    $proc: query2
+    $args:
+      -
+        $proc: query
+        $args:
+          - Transaction
+          -
+            aggregation: 
+              revenue: sum
+            filter:
+              $proc: merge
+              $args:
+                - 
+                  timestamp:
+                    type: time-range
+                    from: 
+                      $ref: _time_start
+                    end:
+                      $ref: _time_end
+                -
+                  $ref: bestUser
+            groupBy:
+              customerId: value
+      - 
+        aggregation:
+          revenue: average
+        groupBy:
+          customerId: value
+        orderBy:
+          -
+            -revenue
+        top: 10
+
+  customerExpensePerUserRank:
+    source:
+      $ref: fetchCustomerExpensePerUserRank
+    axisDimensions:
+      -
+        customerId
+    metricDimensions:
+      -
+        revenue
+    key2name:
+      $ref: _c_metricReverseDictionary
+
+layout:
+  key: 05f542f1-b844-4c90-b417-7b00887505cb
+  type: SectionContainer
+  items:
+    - 
+      key: 0e3a3cc8-b7bd-4de7-a314-b387068b7e31
+      type: TimeRange
+      output: _time
+      props:
+        label: Time Range
+    -
+      key: 77ba05fe-4450-4892-a0f3-67e3d1035e93
+      type: SectionCard
+      props:
+        title: Best User
+      items:
+        - 
+          key: ff55dbec-03da-4abd-97f3-5696bae23002
+          input: measureUser
+          output: _measureUser
+          type: SingleSelector
+          props:
+            label: Measure
+        -
+          key: ad787eb2-5197-4b5a-8c7a-0f33b498788e
+          input: bestUser
+          type: PlainData
+          props:
+            title: Best User SectionCard
+    -
+      key: f5406497-f36a-4b7e-b39e-c959428c437c
+      type: SectionCard
+      props:
+        title: Best Customer Overview
+      items:
+        -
+          key: 55692da5-aa05-4f75-8487-b76f332e1d85
+          input: measureCustomer
+          output: _measureCustomer
+          type: SingleSelector
+          props:
+            label: Measure
+        - 
+          key: 6f294d7b-1424-4269-8ab2-ce3ce8f524bc
+          input: bestCustomerQuery
+          type: PlainData
+          props:
+            title: Best Customer Query
+        -
+          key: f707cdf5-849e-4136-a707-00404967b693
+          input: bestCustomerTSAD
+          type: LineWithDataZoom
+          props:
+            title: Best Customer TSAD
+    -
+      key: 26006b89-6fc5-4457-ab35-bd56b95eb30c
+      type: SectionCard
+      props:
+        title: Best Customer Overview
+      items:
+        -
+          key: dd687e91-cdd3-405e-a83c-e7390980f299
+          input: granularityCustomer
+          output: _granularityCustomer
+          type: SingleSelector
+          props:
+            label: Granularity
+        -
+          key: 6c267f36-cfea-4352-b5c2-0400ab23c8c3
+          input: customerExpensePerUserBucket
+          type: Bar
+          props:
+            title: Best Customer Expense Per User Bucket
+        -
+          key: 39725a3a-d91f-4991-81b7-5d3c9d93d8f8
+          input: customerExpensePerUserRank
+          type: HorizontalBar
+          props:
+            title: Best Customer Expense Per User TSAD

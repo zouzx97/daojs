@@ -3,11 +3,6 @@
 extends:
   - airbnb
   - "plugin:react/recommended"
-  - "plugin:lodash/canonical"
-
-globals:
-  onmessage: true
-  postMessage: true
 
 env:
   es6: true
@@ -15,5 +10,5 @@ env:
 parser: babel-eslint
 
 rules:
-  import/prefer-default-export: off
+  linebreak-style: off
   no-var: error
