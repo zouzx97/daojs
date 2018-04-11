@@ -12,7 +12,6 @@ import {
 
 ComponentRegistry.register(components);
 ReactDOM.render(
-  document.getElementById('container'),
   <DaoFrame
     title="索迪斯大数据平台"
     logo="/img/sodex.png"
@@ -24,4 +23,5 @@ ReactDOM.render(
       stories: AIOperations,
     }]}
   />,
+  document.getElementById('container'),
 );

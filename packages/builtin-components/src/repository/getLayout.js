@@ -45,7 +45,7 @@ const layoutStore = (() => {
   } catch (err) {
     storage = {};
   }
-  return _.defaults(storage, mockLayout);
+  return storage;
 })();
 
 export function getLayout({
