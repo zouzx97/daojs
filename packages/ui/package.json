@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@daojs/builtin-components": "*",
-    "@daojs/registry": "*"
+    "@daojs/builtin-components": "^0.0.1",
+    "@daojs/registry": "^0.0.1"
   }
 }
