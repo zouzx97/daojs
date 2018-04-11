@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import Promise from 'bluebird';
-import mockLayout from '../mock/layout';
+// import mockLayout from '../mock/layout';
 // import { GraphQLClient } from 'graphql-request';
 
 // const client = new GraphQLClient('/graphql');
