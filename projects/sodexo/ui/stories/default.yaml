@@ -4,6 +4,17 @@ data:
     - 独立用户数
     - 利润
     - 交易笔数
+  _c_metricsDictionary:
+    利润:
+      revenue: sum
+    独立用户数:
+      customerId: count
+    交易笔数: 
+      transactionId: count
+  _c_groupByDictionary:
+    餐厅名称: Branch
+    餐卡类别: cardType
+    菜品类别: SKU
   _c_metricReverseDictionary:
     revenue: 利润
     customerId: 独立用户数
@@ -29,6 +40,14 @@ data:
       - 
         $ref: _time
       - end
+  _t_filter_timestamp:
+    timestamp:
+      type: time-range
+      from:
+        $ref: _time_start
+      end:
+        $ref: _time_end
+
   _measureCustomer: null
   _granularityCustomer: null
   _measureFavor: null
@@ -44,12 +63,20 @@ data:
   bestUser:
     department: STC
     discipline: SDE
-    
+  
+  _t_filter_timestamp_and_bestUser:
+    $proc: merge
+    $args:
+      - 
+        $ref: _t_filter_timestamp
+      - 
+        $ref: bestUser
+
   measureCustomer:
     defaultValue: 独立用户数
     enums: 
       $ref: _c_metricEnum
-      
+
   bestCustomerQuery:
     time:
       $ref: _time
@@ -79,12 +106,7 @@ data:
         aggregation: 
           $ref: mapCustomerMetric
         filter:
-          timestamp: 
-            type: time-range
-            from: 
-              $ref: _time_start
-            end:
-              $ref: _time_end
+          $ref: _t_filter_timestamp
         groupBy:
           timestamp: day
 
@@ -132,17 +154,7 @@ data:
                 aggregation: 
                   revenue: sum
                 filter:
-                  $proc: merge
-                  $args:
-                    - 
-                      timestamp:
-                        type: time-range
-                        from: 
-                          $ref: _time_start
-                        end:
-                          $ref: _time_end
-                    - 
-                      $ref: bestUser
+                  $ref: _t_filter_timestamp_and_bestUser
                 groupBy:
                   timestamp: 
                     $proc: property
@@ -191,17 +203,7 @@ data:
             aggregation: 
               revenue: sum
             filter:
-              $proc: merge
-              $args:
-                - 
-                  timestamp:
-                    type: time-range
-                    from: 
-                      $ref: _time_start
-                    end:
-                      $ref: _time_end
-                -
-                  $ref: bestUser
+              $ref: _t_filter_timestamp_and_bestUser
             groupBy:
               customerId: value
       - 
@@ -210,8 +212,7 @@ data:
         groupBy:
           customerId: value
         orderBy:
-          -
-            -revenue
+          - -revenue
         top: 10
 
   customerExpensePerUserRank:
@@ -225,6 +226,87 @@ data:
         revenue
     key2name:
       $ref: _c_metricReverseDictionary
+
+  measureFavor:
+    defaultValue: 独立用户数
+    enums: 
+      $ref: _c_metricEnum
+
+  dimensionFavor:
+    defaultValue: 餐厅名称
+    enums: 
+      - 餐厅名称
+      - 餐卡类别
+      - 菜品类别
+
+  fetchFavorBestCustomerReduce:
+    $proc: query
+    $args:
+      - Transaction
+      -
+        aggregation:
+          $proc: property
+          $args:
+            - $ref: _c_metricsDictionary
+            - $ref: measureFavor
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          $proc: fromPairs
+          $args:
+            - 
+              - 
+                $proc: property
+                $args:
+                  - $ref: _c_groupByDictionary
+                  - $ref: dimensionFavor
+              - value
+  fetchFavorBestCustomerTrend:
+    $proc: query
+    $args:
+      - Transaction
+      - 
+        aggregation:
+          $proc: property
+          $args:
+            - $ref: _c_metricsDictionary
+            - $ref: measureFavor
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          $proc: fromPairs
+          $args:
+            - 
+              - timestamp
+              - day
+            -
+              - 
+                $proc: property
+                $args:
+                  - $ref: _c_groupByDictionary
+                  - $ref: dimensionFavor
+              - value
+  favorBestCustomerTrend:
+    # const dimensionKey = _.keys(dimensionsDictionary[dimension])[0];
+    # const measureKey = _.keys(metricsDictionary[measure])[0];
+
+    # const dataAggregated = _.chain(rawData)
+    #   .groupBy(_.property('timestamp'))
+    #   .mapValues(val => _.reduce(val, (memo, cur) => ({
+    #     [cur[dimensionKey]]: cur[measureKey], ...memo,
+    #   }), {}))
+    #   .value();
+
+    # const series = _.uniq(_.reduce(dataAggregated, (memo, cur) => [
+    #   ..._.keys(cur), ...memo], []));
+
+    # const source = _.map(dataAggregated, (val, key) => ({
+    #   timestamp: key,
+    #   ..._.zipObject(series, _.map(series, s => val[s] || 0)),
+    # }));
+    source: $ref: fetchFavorBestCustomerTrend
+    axisDimensions: - timestamp
+    key2name: $ref: _c_metricReverseDictionary
 
 layout:
   key: 05f542f1-b844-4c90-b417-7b00887505cb
