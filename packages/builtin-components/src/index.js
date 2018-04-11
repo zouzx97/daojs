@@ -24,6 +24,7 @@ import CardContainer from './components/card-container';
 import FlexBoxContainer from './components/flexbox-container';
 import AdjustableContainer from './components/adjustable-container';
 import LayoutDefault from './components/layout-default';
+import TextBlock from './components/text-block';
 
 export default {
   Bar,
@@ -52,4 +53,5 @@ export default {
   FlexBoxContainer,
   AdjustableContainer,
   LayoutDefault,
+  TextBlock,
 };

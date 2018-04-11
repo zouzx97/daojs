@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { Map } from 'immutable';
 import PropTypes from 'prop-types';
-import client from '../../rpc-client/index';
+import createClient from '@daojs/worker-rpc/client';
 import Layout from '../layout';
 import story from './story.yaml';
 
@@ -15,7 +15,9 @@ function extractInputs(nodes) {
   }, []);
 }
 
-client.call('setup', { story });
+const p$client = createClient('dist/worker.js');
+
+p$client.then(client => client.setup(story));
 
 export default class StoryBoard extends React.Component {
   constructor(props) {
@@ -37,9 +39,11 @@ export default class StoryBoard extends React.Component {
     return extractInputs(_.isArray(layout) ? layout : [layout]);
   }
 
-  fetchData = (inputs) => {
+  fetchData = async (inputs) => {
+    const client = await p$client;
+
     _.forEach(inputs, async (input) => {
-      const value = await client.call('get', input);
+      const value = await client.get(input);
 
       this.setState(({
         data,
@@ -52,7 +56,8 @@ export default class StoryBoard extends React.Component {
   }
 
   update = async (key, value) => {
-    const invalidateKeys = await client.call('set', key, value);
+    const client = await p$client;
+    const invalidateKeys = await client.set(key, value);
     const invalidateNodes = _.intersection(invalidateKeys, this.inputNodes);
 
     this.setState(({
