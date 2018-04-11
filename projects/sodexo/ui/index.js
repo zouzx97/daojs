@@ -12,10 +12,9 @@ import {
 
 ComponentRegistry.register(components);
 ReactDOM.render(
-  document.getElementById('container'),
   <DaoFrame
     title="索迪斯大数据平台"
-    logo="/img/sodex.png"
+    logo="/img/sodexo.png"
     categories={[{
       name: '基础面板',
       stories: Fundamentals,
@@ -24,4 +23,5 @@ ReactDOM.render(
       stories: AIOperations,
     }]}
   />,
+  document.getElementById('container'),
 );

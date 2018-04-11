@@ -9,6 +9,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "antd": "*",
+    "lodash": "*",
+    "react": "*",
     "@daojs/builtin-components": "*",
     "@daojs/registry": "*"
   }
