@@ -21,6 +21,8 @@ import LineBarChart from './components/line-bar';
 import Markdown from './components/markdown';
 import CellTest from './components/cell-test';
 
+import TextBlock from './components/text-block';
+
 export default {
   Bar,
   Compare,
@@ -44,4 +46,6 @@ export default {
   LineBarChart,
   Markdown,
   CellTest,
+
+  TextBlock,
 };
