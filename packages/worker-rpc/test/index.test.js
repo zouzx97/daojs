@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { workerURL } from './worker-utility';
-import createClient from '../src/client';
+import createClient from '../client';
 
 describe('Echo server', () => {
   const url = workerURL('echo.js');

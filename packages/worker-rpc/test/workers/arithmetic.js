@@ -1,4 +1,4 @@
-import registerProcedure from '../../src/server';
+import registerProcedure from '../../server';
 
 function string2array(str, seg = 1) {
   const arr = [];

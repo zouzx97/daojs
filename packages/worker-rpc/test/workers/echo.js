@@ -1,3 +1,3 @@
-import registerProcedure from '../../src/server';
+import registerProcedure from '../../server';
 
 registerProcedure({ echo: text => text });
