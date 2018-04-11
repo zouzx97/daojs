@@ -16,7 +16,8 @@ export default class TimeRangePicker extends PureComponent {
   }
 
   render() {
-    const { start, end } = this.props.value;
+    const { start, end } = this.props;
+
     return (
       <div>
         {this.props.label}
@@ -32,11 +33,10 @@ export default class TimeRangePicker extends PureComponent {
 TimeRangePicker.propTypes = {
   value: PropTypes.objectOf(PropTypes.any),
   label: PropTypes.string,
-  update: PropTypes.func,
+  update: PropTypes.func.isRequired,
 };
 
 TimeRangePicker.defaultProps = {
-  label: '',
-  update: _.noop,
+  label: null,
   value: {},
 };
