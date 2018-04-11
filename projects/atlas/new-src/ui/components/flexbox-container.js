@@ -9,7 +9,7 @@ export default class FlexBoxContainer extends PureComponent {
       <div
         style={{
           display: 'flex',
-          ...this.props.styles,
+          ...this.props.style,
         }}
       >
         {_.map(this.props.childItems, item => config2Cell(item))}
@@ -20,10 +20,10 @@ export default class FlexBoxContainer extends PureComponent {
 
 FlexBoxContainer.propTypes = {
   childItems: PropTypes.arrayOf(any),
-  styles: PropTypes.objectOf(any),
+  style: PropTypes.objectOf(any),
 };
 
 FlexBoxContainer.defaultProps = {
   childItems: [],
-  styles: {},
+  style: {},
 };

@@ -526,7 +526,7 @@ layout:
         label: Time Range
     -
       key: 77ba05fe-4450-4892-a0f3-67e3d1035e93
-      type: SectionCard
+      type: CardContainer
       props:
         title: Best User
       childItems:
@@ -541,7 +541,7 @@ layout:
           type: PlainData
     -
       key: f5406497-f36a-4b7e-b39e-c959428c437c
-      type: SectionCard
+      type: CardContainer
       props:
         title: Best Customer Overview
       actions:
@@ -561,7 +561,7 @@ layout:
           type: LineWithDataZoom
     -
       key: 26006b89-6fc5-4457-ab35-bd56b95eb30c
-      type: SectionCard
+      type: CardContainer
       props:
         title: Best Customer Overview
       actions:
@@ -581,7 +581,7 @@ layout:
           type: HorizontalBar
     -
       key: dd687e91-cdd3-405e-a83c-e7390980f2129
-      type: SectionCard
+      type: CardContainer
       props:
         title: 偏好分析
       actions:
