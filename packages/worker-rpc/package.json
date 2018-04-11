@@ -1,8 +1,8 @@
 {
-  "name": "@wewei/worker-rpc",
-  "version": "1.0.0",
+  "name": "@daojs/worker-rpc",
+  "version": "0.0.1",
   "description": "Web worker remote procedure call",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -37,5 +37,8 @@
     "karma-webpack": "^3.0.0",
     "mocha": "^5.0.5",
     "webpack": "^4.5.0"
+  },
+  "scripts": {
+    "test": "karma start --single-run"
   }
 }
