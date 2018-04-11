@@ -14,7 +14,7 @@ ComponentRegistry.register(components);
 ReactDOM.render(
   <DaoFrame
     title="索迪斯大数据平台"
-    logo="/img/sodexo.png"
+    logo="img/sodexo.png"
     categories={[{
       name: '基础面板',
       stories: Fundamentals,
