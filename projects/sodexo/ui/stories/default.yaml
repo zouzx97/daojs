@@ -246,7 +246,7 @@ data:
 layout:
   key: 05f542f1-b844-4c90-b417-7b00887505cb
   type: SectionContainer
-  children:
+  childItems:
     -
       key: 0e3a3cc8-b7bd-4de7-a314-b387068b7e31
       type: TimeRange
@@ -258,7 +258,7 @@ layout:
       type: SectionCard
       props:
         title: Best User
-      children:
+      childItems:
         -
           key: ff55dbec-03da-4abd-97f3-5696bae23002
           input: measureUser
@@ -279,7 +279,7 @@ layout:
           input: measureCustomer
           output: _measureCustomer
           type: SingleSelector
-      children:
+      childItems:
         -
           key: 6f294d7b-1424-4269-8ab2-ce3ce8f524bc
           input: bestCustomerQuery
@@ -299,7 +299,7 @@ layout:
           input: granularityCustomer
           output: _granularityCustomer
           type: SingleSelector
-      children:
+      childItems:
         -
           key: 6c267f36-cfea-4352-b5c2-0400ab23c8c3
           input: customerExpensePerUserBucket
@@ -324,6 +324,6 @@ layout:
           input: dimensionFavor
           output: _dimensionFavor
           type: SingleSelector
-      children:
+      childItems:
         - favorBestCustomerReduce
         - favorBestCustomerTrend
