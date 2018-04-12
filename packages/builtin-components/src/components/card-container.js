@@ -8,7 +8,7 @@ export default class CardContainer extends PureComponent {
   render() {
     const {
       actions,
-      childItems,
+      items,
     } = this.props;
     const extras = _.map(actions, action => config2Cell(action));
     return (
@@ -39,7 +39,7 @@ export default class CardContainer extends PureComponent {
               flex: 1,
             }}
           >
-            {_.map(childItems, item => config2Cell(item))}
+            {_.map(items, item => config2Cell(item))}
           </div>
         </Card>
       </div>
@@ -49,7 +49,10 @@ export default class CardContainer extends PureComponent {
 
 CardContainer.propTypes = {
   actions: PropTypes.arrayOf(any),
-  childItems: PropTypes.node,
+  items: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.objectOf(any),
+    PropTypes.string,
+  ])),
   title: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.objectOf(any),
@@ -57,7 +60,7 @@ CardContainer.propTypes = {
 
 CardContainer.defaultProps = {
   actions: [],
-  childItems: [],
+  items: [],
   title: '',
   className: '',
   style: {},

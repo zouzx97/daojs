@@ -12,18 +12,21 @@ export default class FlexBoxContainer extends PureComponent {
           ...this.props.style,
         }}
       >
-        {_.map(this.props.childItems, item => config2Cell(item))}
+        {_.map(this.props.items, item => config2Cell(item))}
       </div>
     );
   }
 }
 
 FlexBoxContainer.propTypes = {
-  childItems: PropTypes.arrayOf(any),
+  items: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.objectOf(any),
+    PropTypes.string,
+  ])),
   style: PropTypes.objectOf(any),
 };
 
 FlexBoxContainer.defaultProps = {
-  childItems: [],
+  items: [],
   style: {},
 };

@@ -1,7 +1,7 @@
 export default {
   key: '10000',
   type: 'AdjustableContainer',
-  childItems: [{
+  items: [{
     key: 'bar',
     input: 'bar',
     type: 'PlainData',
@@ -21,10 +21,10 @@ export default {
   }, {
     key: 'combinedSectionV',
     type: 'CardContainer',
-    childItems: [{
+    items: [{
       key: 'testflexbox',
       type: 'FlexBoxContainer',
-      childItems: [{
+      items: [{
         key: 'bar',
         input: 'bar',
         type: 'PlainData',
@@ -50,7 +50,7 @@ export default {
   }, {
     key: 'combinedSectionH',
     type: 'CardContainer',
-    childItems: [{
+    items: [{
       key: 'bar',
       input: 'bar',
       type: 'PlainData',
