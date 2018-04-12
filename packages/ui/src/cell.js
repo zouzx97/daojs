@@ -45,7 +45,7 @@ export default class Cell extends PureComponent {
   }
 
   invalidate = () => {
-    this.setState(() => ({ data: null, isLoadingData: true }));
+    this.setState(() => ({ isLoadingData: true }));
     this.loadData();
   }
 
