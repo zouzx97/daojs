@@ -302,8 +302,8 @@ data:
     # const series = _.uniq(_.reduce(dataAggregated, (memo, cur) => [
     #   ..._.keys(cur), ...memo], []));
 
-    # const source = _.map(dataAggregated, (val, key) => ({
-    #   timestamp: key,
+    # const source = _.map(dataAggregated, (val, id) => ({
+    #   timestamp: id,
     #   ..._.zipObject(series, _.map(series, s => val[s] || 0)),
     # }));
     source:
@@ -525,83 +525,83 @@ data:
     key2name: _c_metricReverseDictionary
 
 layout:
-  key: 05f542f1-b844-4c90-b417-7b00887505cb
+  id: 05f542f1-b844-4c90-b417-7b00887505cb
   type: AdjustableContainer
   childItems:
     -
-      key: 0e3a3cc8-b7bd-4de7-a314-b387068b7e31
+      id: 0e3a3cc8-b7bd-4de7-a314-b387068b7e31
       type: TimeRange
       output: _time
       props:
         label: Time Range
     -
-      key: 77ba05fe-4450-4892-a0f3-67e3d1035e93
+      id: 77ba05fe-4450-4892-a0f3-67e3d1035e93
       type: CardContainer
       props:
         title: Best User
       childItems:
         -
-          key: ff55dbec-03da-4abd-97f3-5696bae23002
+          id: ff55dbec-03da-4abd-97f3-5696bae23002
           input: measureUser
           output: _measureUser
           type: SingleSelector
         -
-          key: ad787eb2-5197-4b5a-8c7a-0f33b498788e
+          id: ad787eb2-5197-4b5a-8c7a-0f33b498788e
           input: _t_bestUser_text
           type: TextBlock
     -
-      key: f5406497-f36a-4b7e-b39e-c959428c437c
+      id: f5406497-f36a-4b7e-b39e-c959428c437c
       type: CardContainer
       props:
         title: Best Customer Overview
       actions:
         -
-          key: 55692da5-aa05-4f75-8487-b76f332e1d85
+          id: 55692da5-aa05-4f75-8487-b76f332e1d85
           input: measureCustomer
           output: _measureCustomer
           type: SingleSelector
       childItems:
         -
-          key: 6f294d7b-1424-4269-8ab2-ce3ce8f524bc
+          id: 6f294d7b-1424-4269-8ab2-ce3ce8f524bc
           input: _t_bestCustomerQuery_text
           type: TextBlock
         -
-          key: f707cdf5-849e-4136-a707-00404967b693
+          id: f707cdf5-849e-4136-a707-00404967b693
           input: bestCustomerTSAD
           type: LineWithDataZoom
     -
-      key: 26006b89-6fc5-4457-ab35-bd56b95eb30c
+      id: 26006b89-6fc5-4457-ab35-bd56b95eb30c
       type: CardContainer
       props:
         title: Best Customer Overview
       actions:
         -
-          key: dd687e91-cdd3-405e-a83c-e7390980f299
+          id: dd687e91-cdd3-405e-a83c-e7390980f299
           input: granularityCustomer
           output: _granularityCustomer
           type: SingleSelector
       childItems:
         -
-          key: 6c267f36-cfea-4352-b5c2-0400ab23c8c3
+          id: 6c267f36-cfea-4352-b5c2-0400ab23c8c3
           input: customerExpensePerUserBucket
           type: Bar
         -
-          key: 39725a3a-d91f-4991-81b7-5d3c9d93d8f8
+          id: 39725a3a-d91f-4991-81b7-5d3c9d93d8f8
           input: customerExpensePerUserRank
           type: HorizontalBar
     -
-      key: dd687e91-cdd3-405e-a83c-e7390980f2129
+      id: dd687e91-cdd3-405e-a83c-e7390980f2129
       type: CardContainer
       props:
         title: 偏好分析
       actions:
         -
-          key: dd687e91-cdd3-405e-a83c-e7390980f211
+          id: dd687e91-cdd3-405e-a83c-e7390980f211
           input: measureCustomer
           output: _measureFavor
           type: SingleSelector
         -
-          key: dd687e91-cdd3-405e-a83c-e73909823s21
+          id: dd687e91-cdd3-405e-a83c-e73909823s21
           input: dimensionFavor
           output: _dimensionFavor
           type: SingleSelector
