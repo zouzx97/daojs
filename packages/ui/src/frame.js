@@ -17,7 +17,7 @@ export default class SodexoLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: 'dashboard',
+      selected: this.props.defaultStory,
     };
     this.stories = _.reduce(
       this.props.categories,

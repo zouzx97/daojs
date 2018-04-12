@@ -1,6 +1,13 @@
 ---
 name: '计算'
 data:
-
+  a: 1
+  b: 2
+  sum:
+    $proc: 'sum'
+    $args:
+      - $ref: a
+      - $ref: b
 layout:
-  type: 
+  id: 175adc1c-b185-489a-b20b-facd86250468
+  type: FlexboxContainer
