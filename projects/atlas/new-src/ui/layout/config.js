@@ -4,11 +4,11 @@ export default {
   items: [{
     key: 'bar',
     input: 'bar',
-    type: 'PlainData',
+    type: 'TextBlock',
   }, {
     key: 'test',
     input: 'test',
-    type: 'PlainData',
+    type: 'TextBlock',
   }, {
     key: 'selector',
     input: 'selector',
@@ -17,7 +17,7 @@ export default {
   }, {
     key: 'test1',
     input: 'test1',
-    type: 'PlainData',
+    type: 'TextBlock',
   }, {
     key: 'combinedSectionV',
     type: 'CardContainer',
@@ -27,7 +27,7 @@ export default {
       items: [{
         key: 'bar',
         input: 'bar',
-        type: 'PlainData',
+        type: 'TextBlock',
         style: {
           xs: 6,
           lg: 6,
@@ -35,7 +35,7 @@ export default {
       }, {
         key: 'test',
         input: 'test',
-        type: 'PlainData',
+        type: 'TextBlock',
       }, {
         key: 'selector',
         input: 'selector',
@@ -44,16 +44,24 @@ export default {
       }, {
         key: 'test1',
         input: 'test1',
-        type: 'PlainData',
+        type: 'TextBlock',
       }],
     }],
   }, {
     key: 'combinedSectionH',
     type: 'CardContainer',
+    actions: [
+      {
+        key: 'selector',
+        input: 'selector',
+        output: 'selectedSelector',
+        type: 'SingleSelector',
+      },
+    ],
     items: [{
       key: 'bar',
       input: 'bar',
-      type: 'PlainData',
+      type: 'TextBlock',
       style: {
         xs: 12,
         lg: 12,
@@ -61,7 +69,7 @@ export default {
     }, {
       key: 'test',
       input: 'test',
-      type: 'PlainData',
+      type: 'TextBlock',
     }, {
       key: 'selector',
       input: 'selector',
@@ -70,7 +78,7 @@ export default {
     }, {
       key: 'test1',
       input: 'test1',
-      type: 'PlainData',
+      type: 'TextBlock',
     }],
   }],
 };
