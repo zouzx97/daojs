@@ -515,7 +515,7 @@ data:
 
 layout:
   id: 05f542f1-b844-4c90-b417-7b00887505cb
-  type: AdjustableContainer
+  type: FlexboxContainer
   props:
     items:
       -

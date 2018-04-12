@@ -21,17 +21,28 @@ layout:
   id: 175adc1c-b185-489a-b20b-facd86250468
   type: FlexboxContainer
   props:
-    direction: 'vertical'
+    direction: 'horizontal'
     align: 'center' #start, end, center
     items:
-      - id: ddbd6cbe-0f7b-43d6-a1b3-6ffdc3dda101
-        type: FormInput
-        output: a
-        input: ui_a
+      - id: 437b4f68-7505-4749-9663-63d39ec03cf3
+        type: CardContainer
+        props:
+          width: 500px
+          height: 500px
+          items:
+            - id: ddbd6cbe-0f7b-43d6-a1b3-6ffdc3dda101
+              type: FormInput
+              output: a
+              input: ui_a
+              width: 200px
       - id: 223a6d8c-7ee7-4dd6-9aea-62e7175c4b7c
         type: FormInput
         output: b
         input: ui_b
+        props:
+          width: 200px
       - id: a8c5e778-87d1-4c81-8ecf-821a15d16e4c
         type: FormInput
         input: ui_sum
+        props:
+          width: 300px

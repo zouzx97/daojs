@@ -31,7 +31,14 @@ export default class FlexboxContainer extends PureComponent {
         }}
       >
         <StoryboardContext.Consumer>
-          { ({ agent }) => _.map(this.props.items, item => <Cell key={item.id} agent={agent} {...item} />) }
+          { ({ agent }) => _.map(this.props.items, (item) => {
+            const {
+              id,
+              props = {},
+            } = item;
+            const { width, height } = props;
+            return (<div style={{ width, height }} key={id}><Cell agent={agent} {...item} /></div>);
+          })}
         </StoryboardContext.Consumer>
       </div>
     );

@@ -88,7 +88,13 @@ export default class AdjustableContainer extends Component {
             onDragStop={args => this.saveLayout(args)}
             onResizeStop={args => this.saveLayout(args)}
           >
-            {_.map(this.props.items, item => <Cell key={item.id} agent={agent} {...item} />) }
+            { _.map(this.props.items, (item) => {
+                const {
+                  id,
+                } = item;
+                return <div key={id}><Cell agent={agent} {...item} /></div>;
+              })
+            }
           </ResponsiveReactGridLayout>) }
       </StoryboardContext.Consumer>
     );

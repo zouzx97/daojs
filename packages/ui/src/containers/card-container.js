@@ -19,44 +19,47 @@ export default class CardContainer extends PureComponent {
         onMouseUp={(e) => { e.stopPropagation(); }}
       >
         <StoryboardContext.Consumer>
-          { ({ agent }) => _.map(actions, action => <Cell agent={agent} {...action} />) }
+          { ({ agent }) => _.map(actions, action => <div key={action.id} style={action.style}><Cell agent={agent} {...action} /></div>) }
         </StoryboardContext.Consumer>
       </span>
     );
     return (
-      <div
-        {...this.props}
+      <Card
+        title={this.props.title}
+        extra={extras}
+        style={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          cursor: 'move',
+        }}
+        bodyStyle={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
       >
-        <Card
-          title={this.props.title}
-          extra={extras}
+        <div
+          role="presentation"
+          onMouseDown={(e) => { e.stopPropagation(); }}
+          onMouseUp={(e) => { e.stopPropagation(); }}
           style={{
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            cursor: 'move',
-          }}
-          bodyStyle={{
+            cursor: 'initial',
             flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
           }}
         >
-          <div
-            role="presentation"
-            onMouseDown={(e) => { e.stopPropagation(); }}
-            onMouseUp={(e) => { e.stopPropagation(); }}
-            style={{
-              cursor: 'initial',
-              flex: 1,
-            }}
-          >
-            <StoryboardContext.Consumer>
-              { ({ agent }) => _.map(items, item => <Cell key={item.id} agent={agent} {...item} />) }
-            </StoryboardContext.Consumer>
-          </div>
-        </Card>
-      </div>
+          <StoryboardContext.Consumer>
+            { ({ agent }) => _.map(items, (item) => {
+              const {
+                id,
+                style,
+              } = item;
+              return <div key={id} style={style}><Cell agent={agent} {...item} /></div>;
+              })
+            }
+          </StoryboardContext.Consumer>
+        </div>
+      </Card>
     );
   }
 }
