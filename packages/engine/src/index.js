@@ -1,6 +1,6 @@
 import { Loader } from '@daojs/calculation-network';
 import Registry from '@daojs/registry';
-import register from './rpc-server';
+import registerProcedures from '@daojs/worker-rpc/server';
 import * as coreProcedures from './procedures';
 
 const ProcedureRegistry = new Registry()
@@ -24,7 +24,7 @@ function teardown() {
   contextNetwork = null;
 }
 
-register({
+registerProcedures({
   get,
   set,
   setup,

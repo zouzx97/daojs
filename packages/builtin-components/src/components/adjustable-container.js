@@ -4,14 +4,15 @@ import _ from 'lodash';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import { getLayout, setLayout } from '../../repository';
+import { getLayout, setLayout } from '../repository';
+import config2Cell from '../utils/config-to-cell';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const rowHeight = 30; // px
 const marginX = 10; // px
 const marginY = 10; // px
 
-export default class SectionContainer extends Component {
+export default class AdjustableContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -23,11 +24,12 @@ export default class SectionContainer extends Component {
   }
 
   componentDidMount() {
-    const children = _.isArray(this.props.children) ? this.props.children : [this.props.children];
+    const childItems = _.isArray(this.props.childItems) ?
+      this.props.childItems : [this.props.childItems];
 
     getLayout({
       storyId: this.props.id,
-      sectionIds: _.map(children, 'key'),
+      sectionIds: _.map(childItems, 'key'),
     }).then((layout) => {
       this.setState({ layout });
     });
@@ -58,20 +60,20 @@ export default class SectionContainer extends Component {
         onDragStop={args => this.saveLayout(args)}
         onResizeStop={args => this.saveLayout(args)}
       >
-        {this.props.children}
+        {_.map(this.props.childItems, item => config2Cell(item))}
       </ResponsiveReactGridLayout>
     );
   }
 }
 
-SectionContainer.propTypes = {
+AdjustableContainer.propTypes = {
   id: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([
+  childItems: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element,
   ]),
 };
 
-SectionContainer.defaultProps = {
-  children: [],
+AdjustableContainer.defaultProps = {
+  childItems: [],
 };
