@@ -18,7 +18,7 @@ const storageKey = 'dao-layout';
 const layoutStore = (() => {
   let storage;
   try {
-    storage = JSON.parse(localStorage.getItem(storageKey));
+    storage = JSON.parse(localStorage.getItem(storageKey)) || {};
   } catch (err) {
     storage = {};
   }
@@ -87,7 +87,7 @@ export default class AdjustableContainer extends Component {
         onResizeStop={args => this.saveLayout(args)}
       >
         <StoryboardContext.Consumer>
-          { ({ agent }) => _.map(this.props.items, item => <Cell agent={agent} {...item} />) }
+          { ({ agent }) => _.map(this.props.items, item => <Cell key={item.id} agent={agent} {...item} />) }
         </StoryboardContext.Consumer>
       </ResponsiveReactGridLayout>
     );

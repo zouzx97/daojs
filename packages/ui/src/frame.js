@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import 'antd/dist/antd.css';
+import StoryBoard from './storyboard';
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu, ItemGroup: MenuItemGroup } = Menu;
@@ -26,6 +27,8 @@ export default class SodexoLayout extends React.Component {
       categories,
       componentRegistry,
     } = this.props;
+
+    const story = categories[0].stories[0];
 
     return (
       <Layout>
@@ -64,7 +67,9 @@ export default class SodexoLayout extends React.Component {
             </Menu>
           </Sider>
           <Layout style={{ backgroundColor: 'rgb(240, 242, 245)' }}>
-            <Content style={contentStyle} />
+            <Content style={contentStyle}>
+              <StoryBoard story={story} />
+            </Content>
           </Layout>
         </Layout>
       </Layout>
