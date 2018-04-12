@@ -4,13 +4,14 @@ import {
   DaoFrame,
   ComponentRegistry,
 } from '@daojs/ui';
+import * as botanaComponents from '@daojs/botana-components';
 import components from './components';
 import {
   Fundamentals,
   AIOperations,
 } from './stories/index';
 
-ComponentRegistry.register(components);
+ComponentRegistry.register(botanaComponents).register(components);
 ReactDOM.render(
   <DaoFrame
     title="索迪斯大数据平台"
