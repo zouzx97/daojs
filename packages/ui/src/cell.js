@@ -71,7 +71,7 @@ export default class Cell extends PureComponent {
 
   updateData = (value) => {
     if (this.props.output) {
-      this.props.agent.set(this.props.output, value);
+      this.props.agent.call('set', this.props.output, value);
     }
   }
 

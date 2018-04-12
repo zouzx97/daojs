@@ -3,11 +3,20 @@ name: '计算'
 data:
   a: 1
   b: 2
+  ui_a:
+    value:
+      $ref: a
+  ui_b:
+    value:
+      $ref: b
   sum:
     $proc: 'sum'
     $args:
       - $ref: a
       - $ref: b
+  ui_sum:
+    value:
+      $ref: sum
 layout:
   id: 175adc1c-b185-489a-b20b-facd86250468
   type: FlexboxContainer
@@ -16,9 +25,11 @@ layout:
       - id: ddbd6cbe-0f7b-43d6-a1b3-6ffdc3dda101
         type: FormInput
         output: a
+        input: ui_a
       - id: 223a6d8c-7ee7-4dd6-9aea-62e7175c4b7c
         type: FormInput
         output: b
+        input: ui_b
       - id: a8c5e778-87d1-4c81-8ecf-821a15d16e4c
         type: FormInput
-        input: sum
+        input: ui_sum
