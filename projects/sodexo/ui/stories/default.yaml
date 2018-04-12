@@ -11,6 +11,10 @@ data:
       customerId: count
     交易笔数:
       transactionId: count
+  _c_metricNameDictionary:
+    利润: revenue
+    独立用户数: customerId
+    交易笔数: transactionId
   _c_groupByDictionary:
     餐厅名称: Branch
     餐卡类别: cardType
@@ -176,14 +180,18 @@ data:
   customerExpensePerUserBucket:
     title: Best Customer Expense Per User Bucket
     source:
+          # let's do this in chart
+          #const data = _.map(rawData, d => ({
+          #  销售额: `${d.revenue} ~ ${d.revenue + 10}`,
+          #  用户数: d.customerId,
+          #}));
       $ref: fetchCustomerExpencePerUserBucket
     axisDimensions:
-      - revenue
+      - 销售额
     metricDimensions:
-      - customerId
+      - 用户数
     key2name:
       $ref: _c_metricReverseDictionary
-    binStep: 10
 
   fetchCustomerExpensePerUserRank:
     $proc: query2
@@ -421,25 +429,16 @@ data:
     enums:
       $ref: _c_metricEnum
   activenessTraffic:
-    # // sort the data to know start & end
-    # const sorted = _.sortBy(rawData, 'timestamp');
-
-    # const first = sorted[0].timestamp;
-    # const end = _.last(sorted).timestamp;
-
-    # const keyed = _.keyBy(sorted, 'timestamp');
-
-    # const measureKey = _.keys(metricsDictionary[measure])[0];
-
-    # // fill 0 data in
-    # const source = _.map(_.range(first, end + 1, 10 * 60 * 1000), time => ({
-    #   timestamp: (new Date(time)).toLocaleTimeString({}, { hour: '2-digit', minute: '2-digit', hour12: false }),
-    #   [measureKey]: keyed[time] ? keyed[time][measureKey] : 0,
-    # }));
     source:
       $ref: fetchTraffic
     axisDimensions:
       - timestamp
+    metricDimensions:
+      -
+        $proc: property
+        $args:
+          - $ref: _c_metricNameDictionary
+          - $ref: _measureActiveness
     key2name: _c_metricReverseDictionary
 
   # growth
@@ -574,7 +573,7 @@ layout:
         -
           id: 6c267f36-cfea-4352-b5c2-0400ab23c8c3
           input: customerExpensePerUserBucket
-          type: Bucket
+          type: Bar
         -
           id: 39725a3a-d91f-4991-81b7-5d3c9d93d8f8
           input: customerExpensePerUserRank
