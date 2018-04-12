@@ -61,12 +61,6 @@ data:
   bestUser:
     department: STC
     discipline: SDE
-  _t_bestUser_text:
-    text:
-      $proc: template
-      $args:
-        - Best user is {{discipline}} from department {{department}}
-        - $ref: bestUser
 
   _t_filter_timestamp_and_bestUser:
     $proc: merge
