@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    "react-hot-loader/babel",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "syntax-dynamic-import",
+    "dynamic-import-webpack"
+  ],
+  "presets": ["react", "env"]
+}
