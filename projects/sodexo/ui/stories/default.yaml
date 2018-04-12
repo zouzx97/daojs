@@ -176,18 +176,14 @@ data:
   customerExpensePerUserBucket:
     title: Best Customer Expense Per User Bucket
     source:
-          # let's do this in chart
-          #const data = _.map(rawData, d => ({
-          #  销售额: `${d.revenue} ~ ${d.revenue + 10}`,
-          #  用户数: d.customerId,
-          #}));
       $ref: fetchCustomerExpencePerUserBucket
     axisDimensions:
-      - 销售额
+      - revenue
     metricDimensions:
-      - 用户数
+      - customerId
     key2name:
       $ref: _c_metricReverseDictionary
+    binStep: 10
 
   fetchCustomerExpensePerUserRank:
     $proc: query2
@@ -578,7 +574,7 @@ layout:
         -
           id: 6c267f36-cfea-4352-b5c2-0400ab23c8c3
           input: customerExpensePerUserBucket
-          type: Bar
+          type: Bucket
         -
           id: 39725a3a-d91f-4991-81b7-5d3c9d93d8f8
           input: customerExpensePerUserRank
