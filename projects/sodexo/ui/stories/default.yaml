@@ -577,7 +577,7 @@ layout:
         -
           id: 39725a3a-d91f-4991-81b7-5d3c9d93d8f8
           input: customerExpensePerUserRank
-          type: HorizontalBar
+          type: Rank
     -
       id: dd687e91-cdd3-405e-a83c-e7390980f2129
       type: CardContainer
