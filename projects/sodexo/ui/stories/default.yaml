@@ -61,6 +61,12 @@ data:
   bestUser:
     department: STC
     discipline: SDE
+  _t_bestUser_text:
+    text:
+      $proc: template
+      $args:
+        - Best user is {{discipline}} from department {{department}}
+        - $ref: bestUser
 
   _t_filter_timestamp_and_bestUser:
     $proc: merge
@@ -80,6 +86,11 @@ data:
       $ref: _measureCustomer
     bestUser:
       $ref: bestUser
+  _t_bestCustomerQuery_text:
+    text:
+      $proc: stringify
+      $args:
+        - bestCustomerQuery
 
   mapCustomerMetric:
     $proc: property
@@ -536,8 +547,8 @@ layout:
           type: SingleSelector
         -
           key: ad787eb2-5197-4b5a-8c7a-0f33b498788e
-          input: bestUser
-          type: PlainData
+          input: _t_bestUser_text
+          type: TextBlock
     -
       key: f5406497-f36a-4b7e-b39e-c959428c437c
       type: CardContainer
@@ -552,8 +563,8 @@ layout:
       childItems:
         -
           key: 6f294d7b-1424-4269-8ab2-ce3ce8f524bc
-          input: bestCustomerQuery
-          type: PlainData
+          input: _t_bestCustomerQuery_text
+          type: TextBlock
         -
           key: f707cdf5-849e-4136-a707-00404967b693
           input: bestCustomerTSAD

@@ -4,14 +4,25 @@ name: '基础分析'
 # Data flow diagram
 data:
   title: PowerAI
-
+  _t_title_text:
+    text:
+      $ref: title
   number: 0
+  _t_number_text:
+    text:
+      $proc: stringify
+      $args:
+        - $ref: number
   newNumber:
     $proc: sum
     $args:
       - $ref: num
       - 1
-
+  _t_newNumber_text:
+    text:
+      $proc: stringify
+      $args:
+        - $ref: number
   selectorValue: 午餐
   selectorOptions:
     $proc: fetchOptions
@@ -26,22 +37,23 @@ data:
       $ref: selectorOptions
 
   selection:
-    $ref: selectorValue
+    text:
+      $ref: selectorValue
 
 # Dashboard Layout
 layout:
   key: cee4bb00-dd8d-492d-b8a2-2511577187b9
-  type: SectionContainer,
+  type: SectionContainer
   items:
     - key: d0e84a79-970d-446c-96b1-062f3c75be5c
       type: TextBlock
-      input: title
+      input: _t_title_text
     - key: 32c58c85-a40e-4441-9081-2a15268fc67b
       type: TextBlock
-      input: number
+      input: _t_number_text
     - key: fa7dc449-0bd7-47da-ae41-3682624e400c
       type: TextBlock
-      input: newNumber
+      input: _t_newNumber_text
     - key: f6a7b9de-80b6-42e8-bd6a-f3632a0fa94e
       type: SingleSelector
       input: selector
