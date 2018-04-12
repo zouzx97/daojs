@@ -9,7 +9,7 @@ export default class Cell extends PureComponent {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      Control: _.constant(null),
+      Control: null,
     };
     this.controlPromise = this.context.componentRegistry.get(this.props.type);
   }
@@ -45,16 +45,20 @@ export default class Cell extends PureComponent {
       Control,
     } = this.state;
 
+    if (!Control) {
+      return null;
+    }
+
     if (!input && !output) {
       return <Control {...otherProps} />;
     }
 
     return (
-      <Spin spinning={this.isUpdating.get(input)}>
+      <Spin spinning={this.context.isUpdating.get(input)}>
         <Control
-          value={this.context.data.get(input)}
           {...otherProps}
-          update={this.context.updateData}
+          update={this.updateData}
+          {...this.context.data.get(input)}
         />
       </Spin>
     );

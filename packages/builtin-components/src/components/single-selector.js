@@ -23,7 +23,7 @@ export default class SingleSelector extends Component {
 
 SingleSelector.propTypes = {
   label: PropTypes.string,
-  enums: PropTypes.arrayOf(PropTypes.any).isRequired,
+  enums: PropTypes.arrayOf(PropTypes.any),
   defaultValue: PropTypes.string,
   update: PropTypes.func.isRequired,
 };
@@ -31,4 +31,5 @@ SingleSelector.propTypes = {
 SingleSelector.defaultProps = {
   label: null,
   defaultValue: undefined,
+  enums: [],
 };
