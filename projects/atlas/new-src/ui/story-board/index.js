@@ -3,8 +3,11 @@ import _ from 'lodash';
 import { Map } from 'immutable';
 import PropTypes from 'prop-types';
 import createClient from '@daojs/worker-rpc/client';
-import Layout from '../layout';
+import components from '@daojs/builtin-components';
 import story from './story.yaml';
+import componentRegistry from '../components';
+
+const { LayoutDefault } = components;
 
 function extractInputs(nodes) {
   return _.reduce(nodes, (memo, { input, items }) => {
@@ -72,11 +75,12 @@ export default class StoryBoard extends React.Component {
   }
 
   render() {
-    return (<Layout
+    return (<LayoutDefault
       layout={this.props.layout}
       data={this.state.data}
       isUpdating={this.state.updating}
       update={this.update}
+      componentRegistry={componentRegistry}
     />);
   }
 }
