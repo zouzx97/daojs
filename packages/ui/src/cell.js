@@ -40,7 +40,7 @@ export default class Cell extends PureComponent {
     }
 
     if (this.props.input) {
-      this.props.agent.off(`invalidate:${this.props.input}`, this.invalidate);
+      this.props.agent.off(`cn-invalidate:${this.props.input}`, this.invalidate);
     }
   }
 
@@ -50,7 +50,7 @@ export default class Cell extends PureComponent {
   }
 
   loadControl = () => {
-    this.loadControlPromise = ComponentRegistry.get(this.props.type);
+    this.loadControlPromise = Promise.resolve(ComponentRegistry.get(this.props.type));
     this.loadControlPromise.then((Control) => {
       this.setState(({ Control, isLoadingControl: false }));
     });
@@ -58,7 +58,7 @@ export default class Cell extends PureComponent {
 
   loadData = () => {
     if (this.props.input) {
-      const loadDataPromise = this.props.agent.call('get', this.props.input);
+      const loadDataPromise = Promise.resolve(this.props.agent.call('get', this.props.input));
 
       this.loadDataPromise = loadDataPromise;
       loadDataPromise.then((data) => {
