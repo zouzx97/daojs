@@ -55,7 +55,7 @@ export default class AdjustableContainer extends Component {
 
     getLayout({
       storyId: this.props.id,
-      sectionIds: _.map(items, item => _.result(item, 'key', item)),
+      sectionIds: _.map(items, item => _.result(item, 'id', item)),
     }).then((layout) => {
       this.setState({ layout });
     });
@@ -74,22 +74,23 @@ export default class AdjustableContainer extends Component {
 
   render() {
     return (
-      <ResponsiveReactGridLayout
-        className="layout"
-        layouts={{ lg: this.state.layout }}
-        breakpoints={{ lg: 1200 }}
-        cols={{ lg: 12 }}
-        rowHeight={rowHeight}
-        margin={[marginX, marginY]}
-        onDrag={args => this.onLayoutChange(args)}
-        onResize={args => this.onLayoutChange(args)}
-        onDragStop={args => this.saveLayout(args)}
-        onResizeStop={args => this.saveLayout(args)}
-      >
-        <StoryboardContext.Consumer>
-          { ({ agent }) => _.map(this.props.items, item => <Cell key={item.id} agent={agent} {...item} />) }
-        </StoryboardContext.Consumer>
-      </ResponsiveReactGridLayout>
+      <StoryboardContext.Consumer>
+        { ({ agent }) => (
+          <ResponsiveReactGridLayout
+            className="layout"
+            layouts={{ lg: this.state.layout }}
+            breakpoints={{ lg: 1200 }}
+            cols={{ lg: 12 }}
+            rowHeight={rowHeight}
+            margin={[marginX, marginY]}
+            onDrag={args => this.onLayoutChange(args)}
+            onResize={args => this.onLayoutChange(args)}
+            onDragStop={args => this.saveLayout(args)}
+            onResizeStop={args => this.saveLayout(args)}
+          >
+            {_.map(this.props.items, item => <Cell key={item.id} agent={agent} {...item} />) }
+          </ResponsiveReactGridLayout>) }
+      </StoryboardContext.Consumer>
     );
   }
 }

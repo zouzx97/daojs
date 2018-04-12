@@ -21,6 +21,8 @@ layout:
   id: 175adc1c-b185-489a-b20b-facd86250468
   type: FlexboxContainer
   props:
+    direction: 'vertical'
+    align: 'center' #start, end, center
     items:
       - id: ddbd6cbe-0f7b-43d6-a1b3-6ffdc3dda101
         type: FormInput
