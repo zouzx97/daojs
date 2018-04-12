@@ -1,10 +1,10 @@
 import { Loader } from '@daojs/calculation-network';
 import Registry from '@daojs/registry';
 import registerProcedures from '@daojs/worker-rpc/server';
-import * as coreProcedures from './procedures';
+import builtinProcedures from '@daojs/procedures/builtin';
 
 const ProcedureRegistry = new Registry()
-  .register(coreProcedures);
+  .register(builtinProcedures);
 
 let contextNetwork = null;
 
