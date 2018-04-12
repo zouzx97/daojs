@@ -4,8 +4,10 @@ import { Map } from 'immutable';
 import PropTypes from 'prop-types';
 import createClient from '@daojs/worker-rpc/client';
 import components from '@daojs/builtin-components';
+import Registry from '@daojs/registry';
 import story from './story.yaml';
-import componentRegistry from '../components';
+
+const componentRegistry = new Registry().register(components);
 
 const { LayoutDefault } = components;
 
