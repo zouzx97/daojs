@@ -56,6 +56,9 @@ export default {
         input: 'selector',
         output: 'selectedSelector',
         type: 'SingleSelector',
+        style: {
+          display: 'inline-block',
+        },
       },
     ],
     items: [{
