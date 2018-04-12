@@ -28,7 +28,9 @@ export default class Cell extends PureComponent {
   componentWillUnmount() {
     // Cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
     this.loadControlPromise.cancel();
-    this.loadDataPromise.cancel();
+    if (this.loadDataPromise) {
+      this.loadDataPromise.cancel();
+    }
 
     if (this.props.input) {
       this.props.agent.off(`invalidate:${this.props.input}`, this.invalidate);

@@ -16,7 +16,7 @@ data:
   newNumber:
     $proc: sum
     $args:
-      - $ref: num
+      - $ref: number
       - 1
   _t_newNumber_text:
     text:
@@ -25,7 +25,7 @@ data:
         - $ref: number
   selectorValue: 午餐
   selectorOptions:
-    $proc: fetchOptions
+    $proc: stringify
     $args:
       - metrics: 'Revenue'
         dimension: 'Period'
@@ -44,20 +44,21 @@ data:
 layout:
   id: cee4bb00-dd8d-492d-b8a2-2511577187b9
   type: AdjustableContainer
-  items:
-    - id: d0e84a79-970d-446c-96b1-062f3c75be5c
-      type: TextBlock
-      input: _t_title_text
-    - id: 32c58c85-a40e-4441-9081-2a15268fc67b
-      type: TextBlock
-      input: _t_number_text
-    - id: fa7dc449-0bd7-47da-ae41-3682624e400c
-      type: TextBlock
-      input: _t_newNumber_text
-    - id: f6a7b9de-80b6-42e8-bd6a-f3632a0fa94e
-      type: SingleSelector
-      input: selector
-      output: selectorValue
-    - id: 88e4382a-27df-4fa0-bcfe-b7950f86783c
-      type: TextBlock
-      input: selection
+  props:
+    items:
+      - id: d0e84a79-970d-446c-96b1-062f3c75be5c
+        type: TextBlock
+        input: _t_title_text
+      - id: 32c58c85-a40e-4441-9081-2a15268fc67b
+        type: TextBlock
+        input: _t_number_text
+      - id: fa7dc449-0bd7-47da-ae41-3682624e400c
+        type: TextBlock
+        input: _t_newNumber_text
+      - id: f6a7b9de-80b6-42e8-bd6a-f3632a0fa94e
+        type: SingleSelector
+        input: selector
+        output: selectorValue
+      - id: 88e4382a-27df-4fa0-bcfe-b7950f86783c
+        type: TextBlock
+        input: selection
