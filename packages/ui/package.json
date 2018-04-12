@@ -14,6 +14,7 @@
     "@daojs/worker-agent": "^0.0.1",
     "antd": "^3.4.1",
     "bluebird": "^3.5.1",
+    "eslint-config-daojs": "^0.0.1",
     "immutable": "^3.8.2",
     "lodash": "^4.17.5",
     "prop-types": "^15.6.1",

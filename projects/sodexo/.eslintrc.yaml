@@ -1,17 +1,10 @@
 ---
 # Refer to docs/javascript/README.md for detail
 extends:
-  - airbnb
-  - "plugin:react/recommended"
+  - daojs
   - "plugin:lodash/canonical"
 
-env:
-  es6: true
-
-parser: babel-eslint
-
 rules:
-  linebreak-style: off
   no-var: error
 
 plugins:
