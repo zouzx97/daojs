@@ -1,3 +1,5 @@
+import Promise from 'bluebird';
+
 class EventAgent {
   constructor(postMessage) {
     this.postMessage = postMessage;

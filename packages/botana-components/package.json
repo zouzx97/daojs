@@ -16,17 +16,9 @@
     "eslint-config-airbnb": "^16.1.0"
   },
   "dependencies": {
-    "@daojs/registry": "^0.0.1",
-    "antd": "^3.4.1",
-    "echarts-for-react": "^2.0.8",
-    "eslint-config-daojs": "^0.0.1",
-    "immutable": "^3.8.2",
+    "@daojs/builtin-components": "^0.0.1",
     "lodash": "^4.17.5",
-    "moment": "^2.22.0",
     "prop-types": "^15.6.1",
-    "react": "^16.3.1",
-    "react-grid-layout": "^0.16.6",
-    "react-markdown": "^3.3.0",
-    "react-resizable": "^1.7.5"
+    "react": "^16.3.1"
   }
 }
