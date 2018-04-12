@@ -49,7 +49,10 @@ export default class CardContainer extends PureComponent {
 
 CardContainer.propTypes = {
   actions: PropTypes.arrayOf(any),
-  childItems: PropTypes.node,
+  childItems: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.objectOf(any),
+    PropTypes.string,
+  ])),
   title: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.objectOf(any),

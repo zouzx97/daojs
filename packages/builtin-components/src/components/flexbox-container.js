@@ -19,7 +19,10 @@ export default class FlexBoxContainer extends PureComponent {
 }
 
 FlexBoxContainer.propTypes = {
-  childItems: PropTypes.arrayOf(any),
+  childItems: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.objectOf(any),
+    PropTypes.string,
+  ])),
   style: PropTypes.objectOf(any),
 };
 
