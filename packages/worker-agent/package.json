@@ -4,7 +4,7 @@
   "description": "Web worker remote procedure call",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -37,8 +37,5 @@
     "karma-webpack": "^3.0.0",
     "mocha": "^5.0.5",
     "webpack": "^4.5.0"
-  },
-  "scripts": {
-    "test": "karma start --single-run"
   }
 }
