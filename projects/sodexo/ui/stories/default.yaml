@@ -61,12 +61,6 @@ data:
   bestUser:
     department: STC
     discipline: SDE
-  _t_bestUser_text:
-    text:
-      $proc: template
-      $args:
-        - Best user is {{discipline}} from department {{department}}
-        - $ref: bestUser
 
   _t_filter_timestamp_and_bestUser:
     $proc: merge
@@ -547,8 +541,8 @@ layout:
           type: SingleSelector
         -
           id: ad787eb2-5197-4b5a-8c7a-0f33b498788e
-          input: _t_bestUser_text
-          type: TextBlock
+          input: bestUser
+          type: BestUser
     -
       id: f5406497-f36a-4b7e-b39e-c959428c437c
       type: CardContainer
