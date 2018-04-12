@@ -24,7 +24,7 @@ export default function Bar(props) {
           yAxis: props.isHorizontal ? argumentAxis : dependentAxis,
           series: _.map(metricDimensions, dim => ({
             type: 'bar',
-            name: _.get(props.value, `key2name[${dim}]`, dim),
+            name: _.get(props.key2name, dim, dim),
             data: _.map(source, row => row[dim]),
           })),
           xAxis: props.isHorizontal ? dependentAxis : argumentAxis,

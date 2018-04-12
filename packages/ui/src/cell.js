@@ -77,6 +77,7 @@ export default class Cell extends PureComponent {
 
   render() {
     const {
+      id,
       props,
     } = this.props;
 
@@ -89,7 +90,7 @@ export default class Cell extends PureComponent {
 
     return (
       <Spin spinning={isLoadingData || isLoadingControl}>
-        { Control && <Control {...props} {...data} update={this.updateData} /> }
+        { Control && <Control id={id} {...props} {...data} update={this.updateData} /> }
       </Spin>
     );
   }
@@ -97,7 +98,7 @@ export default class Cell extends PureComponent {
 
 Cell.propTypes = {
   type: PropTypes.string.isRequired,
-  key: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   props: PropTypes.objectOf(any),
   agent: PropTypes.objectOf(any).isRequired,
   input: PropTypes.string,
