@@ -1,4 +1,4 @@
-import registerProcedure from '../../server';
+import { master } from '../..';
 
 function string2array(str, seg = 1) {
   const arr = [];
@@ -50,7 +50,7 @@ function stringArithmeticFor(proc) {
   };
 }
 
-registerProcedure({
+master.register({
   string2array,
   array2string,
   add: stringArithmeticFor(add),

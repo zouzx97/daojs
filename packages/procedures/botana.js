@@ -1,1 +1,1 @@
-export * from './src/@botana';
+export * from './src/botana';

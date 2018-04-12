@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { Map } from 'immutable';
 import PropTypes from 'prop-types';
-import createClient from '@daojs/worker-rpc/client';
+import { WorkerAgent } from '@daojs/worker-agent';
 import components from '@daojs/builtin-components';
 import Registry from '@daojs/registry';
 import story from './story.yaml';
@@ -20,9 +20,8 @@ function extractInputs(nodes) {
   }, []);
 }
 
-const p$client = createClient('dist/worker.js');
-
-p$client.then(client => client.setup(story));
+const agent = new WorkerAgent('dist/worker.js');
+agent.register({ getStory: _.constant(story) });
 
 export default class StoryBoard extends React.Component {
   constructor(props) {
@@ -45,10 +44,8 @@ export default class StoryBoard extends React.Component {
   }
 
   fetchData = async (inputs) => {
-    const client = await p$client;
-
     _.forEach(inputs, async (input) => {
-      const value = await client.get(input);
+      const value = await agent.call('get', input);
 
       this.setState(({
         data,
@@ -61,8 +58,7 @@ export default class StoryBoard extends React.Component {
   }
 
   update = async (key, value) => {
-    const client = await p$client;
-    const invalidateKeys = await client.set(key, value);
+    const invalidateKeys = await agent.call('set', key, value);
     const invalidateNodes = _.intersection(invalidateKeys, this.inputNodes);
 
     this.setState(({

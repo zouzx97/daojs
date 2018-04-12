@@ -1,5 +1,5 @@
 {
-  "name": "@daojs/worker-rpc",
+  "name": "@daojs/worker-agent",
   "version": "0.0.1",
   "description": "Web worker remote procedure call",
   "main": "index.js",

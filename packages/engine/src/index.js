@@ -1,32 +1,22 @@
+import _ from 'lodash';
 import { Loader } from '@daojs/calculation-network';
 import Registry from '@daojs/registry';
-import registerProcedures from '@daojs/worker-rpc/server';
+import { master } from '@daojs/worker-agent';
 import builtinProcedures from '@daojs/procedures/builtin';
 
-const ProcedureRegistry = new Registry()
-  .register(builtinProcedures);
+export const ProcedureRegistry = new Registry();
 
-let contextNetwork = null;
+ProcedureRegistry.register(builtinProcedures);
 
-function setup(story = {}) {
-  contextNetwork = new Loader(ProcedureRegistry).load(story);
-}
+const loader = new Loader(ProcedureRegistry);
+const p$cn = master.call('getStory').then(story => loader.load(story));
 
-async function set(key, value) {
-  return (await contextNetwork).set({ [key]: value });
-}
-
-async function get(key) {
-  return (await contextNetwork).get(key);
-}
-
-function teardown() {
-  contextNetwork = null;
-}
-
-registerProcedures({
-  get,
-  set,
-  setup,
-  teardown,
+master.register({
+  async set(key, value) {
+    const invalidateKeys = (await p$cn).set({ [key]: value });
+    _.forEach(invalidateKeys, k => master.trigger(`cn-invalidate:${k}`));
+  },
+  async get(key) {
+    return (await p$cn).get(key);
+  },
 });
