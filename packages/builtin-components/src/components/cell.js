@@ -6,12 +6,12 @@ import { Spin } from 'antd';
 import ComponentRegistry from '@daojs/registry';
 
 export default class Cell extends PureComponent {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
-      Control: _.constant(null),
+      Control: null,
     };
-    this.controlPromise = this.componentRegistry.get(this.props.type);
+    this.controlPromise = this.context.componentRegistry.get(this.props.type);
   }
 
   componentDidMount() {
@@ -31,7 +31,7 @@ export default class Cell extends PureComponent {
   }
 
   updateData = (value) => {
-    this.update(this.props.output, value);
+    this.context.update(this.props.output, value);
   }
 
   render() {
@@ -45,16 +45,20 @@ export default class Cell extends PureComponent {
       Control,
     } = this.state;
 
+    if (!Control) {
+      return null;
+    }
+
     if (!input && !output) {
       return <Control {...otherProps} />;
     }
 
     return (
-      <Spin spinning={this.isUpdating.get(input)}>
+      <Spin spinning={this.context.isUpdating.get(input)}>
         <Control
-          value={this.data.get(input)}
           {...otherProps}
           update={this.updateData}
+          {...this.context.data.get(input)}
         />
       </Spin>
     );

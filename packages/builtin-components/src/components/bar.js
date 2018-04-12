@@ -5,7 +5,7 @@ import AtlasChart from './atlas-chart';
 export default function Bar(props) {
   return (
     <AtlasChart
-      value={props.value}
+      {...props}
       getOption={({
         source,
         metricDimensions,

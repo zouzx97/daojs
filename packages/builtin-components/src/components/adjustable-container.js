@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { any } from 'prop-types';
 import _ from 'lodash';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
@@ -24,12 +24,12 @@ export default class AdjustableContainer extends Component {
   }
 
   componentDidMount() {
-    const childItems = _.isArray(this.props.childItems) ?
-      this.props.childItems : [this.props.childItems];
+    const items = _.isArray(this.props.items) ?
+      this.props.items : [this.props.items];
 
     getLayout({
       storyId: this.props.id,
-      sectionIds: _.map(childItems, 'key'),
+      sectionIds: _.map(items, item => _.result(item, 'key', item)),
     }).then((layout) => {
       this.setState({ layout });
     });
@@ -60,7 +60,7 @@ export default class AdjustableContainer extends Component {
         onDragStop={args => this.saveLayout(args)}
         onResizeStop={args => this.saveLayout(args)}
       >
-        {_.map(this.props.childItems, item => config2Cell(item))}
+        {_.map(this.props.items, item => config2Cell(item))}
       </ResponsiveReactGridLayout>
     );
   }
@@ -68,12 +68,12 @@ export default class AdjustableContainer extends Component {
 
 AdjustableContainer.propTypes = {
   id: PropTypes.string.isRequired,
-  childItems: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]),
+  items: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.objectOf(any),
+    PropTypes.string,
+  ])),
 };
 
 AdjustableContainer.defaultProps = {
-  childItems: [],
+  items: [],
 };

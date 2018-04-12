@@ -5,7 +5,7 @@ import Bar from './bar';
 export default function HorizontalBar(props) {
   return (
     <Bar
-      value={props.value}
+      {...props}
       isHorizontal
     />
   );
