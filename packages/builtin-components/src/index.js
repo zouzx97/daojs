@@ -5,7 +5,7 @@ import FormInput from './components/form-input';
 import FormField from './components/form-field';
 import Heatmap from './components/heatmap';
 import MultiSelector from './components/multi-selector';
-import Cell from './components/cell';
+// import Cell from './components/cell';
 import SectionContainer from './components/section-container';
 import Donut from './components/donut';
 import StackBar from './components/stack-bar';
@@ -16,10 +16,10 @@ import SectionCard from './components/section-card';
 import LineBarChart from './components/line-bar';
 import Markdown from './components/markdown';
 import CellTest from './components/cell-test';
-import CardContainer from './components/card-container';
-import FlexBoxContainer from './components/flexbox-container';
-import AdjustableContainer from './components/adjustable-container';
-import LayoutDefault from './components/layout-default';
+// import CardContainer from './components/card-container';
+// import FlexBoxContainer from './components/flexbox-container';
+// import AdjustableContainer from './components/adjustable-container';
+// import LayoutDefault from './components/layout-default';
 
 import Bar from './components/bar';
 import HorizontalBar from './components/horizontal-bar';
@@ -35,7 +35,7 @@ export default {
   FormInput,
   FormField,
   Heatmap,
-  Cell,
+  // Cell,
   MultiSelector,
   SectionContainer,
   Donut,
@@ -47,10 +47,10 @@ export default {
   LineBarChart,
   Markdown,
   CellTest,
-  CardContainer,
-  FlexBoxContainer,
-  AdjustableContainer,
-  LayoutDefault,
+  // CardContainer,
+  // FlexBoxContainer,
+  // AdjustableContainer,
+  // LayoutDefault,
 
   Bar,
   HorizontalBar,

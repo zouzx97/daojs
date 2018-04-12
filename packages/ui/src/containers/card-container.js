@@ -52,7 +52,7 @@ export default class CardContainer extends PureComponent {
             }}
           >
             <StoryboardContext.Consumer>
-              { ({ agent }) => _.map(items, item => <Cell agent={agent} {...item} />) }
+              { ({ agent }) => _.map(items, item => <Cell key={item.id} agent={agent} {...item} />) }
             </StoryboardContext.Consumer>
           </div>
         </Card>
