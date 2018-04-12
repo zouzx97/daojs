@@ -24,12 +24,12 @@ export default class AdjustableContainer extends Component {
   }
 
   componentDidMount() {
-    const childItems = _.isArray(this.props.childItems) ?
-      this.props.childItems : [this.props.childItems];
+    const items = _.isArray(this.props.items) ?
+      this.props.items : [this.props.items];
 
     getLayout({
       storyId: this.props.id,
-      sectionIds: _.map(childItems, item => _.result(item, 'key', item)),
+      sectionIds: _.map(items, item => _.result(item, 'key', item)),
     }).then((layout) => {
       this.setState({ layout });
     });
@@ -60,7 +60,7 @@ export default class AdjustableContainer extends Component {
         onDragStop={args => this.saveLayout(args)}
         onResizeStop={args => this.saveLayout(args)}
       >
-        {_.map(this.props.childItems, item => config2Cell(item))}
+        {_.map(this.props.items, item => config2Cell(item))}
       </ResponsiveReactGridLayout>
     );
   }
@@ -68,12 +68,12 @@ export default class AdjustableContainer extends Component {
 
 AdjustableContainer.propTypes = {
   id: PropTypes.string.isRequired,
-  childItems: PropTypes.arrayOf(PropTypes.oneOfType([
+  items: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.objectOf(any),
     PropTypes.string,
   ])),
 };
 
 AdjustableContainer.defaultProps = {
-  childItems: [],
+  items: [],
 };
