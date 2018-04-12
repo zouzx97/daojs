@@ -35,8 +35,6 @@ export default class SodexoLayout extends React.Component {
       componentRegistry,
     } = this.props;
 
-    const story = categories[0].stories[0];
-
     return (
       <Layout>
         <Header className="header">

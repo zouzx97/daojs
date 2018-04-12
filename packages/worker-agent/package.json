@@ -39,6 +39,7 @@
     "webpack": "^4.5.0"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "eslint-config-daojs": "^0.0.1"
   }
 }

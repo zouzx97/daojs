@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { any } from 'prop-types';
 
 export default function TextBlock(props) {
   return (
-    <span>{props.text}</span>
+    <span style={{ ...props.style }}>{props.text}</span>
   );
 }
 
@@ -12,8 +12,10 @@ TextBlock.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
+  style: PropTypes.objectOf(any),
 };
 
 TextBlock.defaultProps = {
   text: '',
+  style: {},
 };

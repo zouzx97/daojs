@@ -5,13 +5,29 @@ import _ from 'lodash';
 import Cell from '../cell';
 import StoryboardContext from '../storyboard-context';
 
+const directionMap = {
+  vertical: 'column',
+  horizontal: 'row',
+};
+
+const alignMap = {
+  start: 'flex-start',
+  end: 'flex-end',
+};
+
 export default class FlexboxContainer extends PureComponent {
   render() {
+    const {
+      direction,
+      align,
+    } = this.props;
     return (
       <div
         style={{
           display: 'flex',
           ...this.props.style,
+          flexDirection: directionMap[direction] || 'row',
+          justifyContent: alignMap[align] || align,
         }}
       >
         <StoryboardContext.Consumer>
@@ -28,9 +44,13 @@ FlexboxContainer.propTypes = {
     PropTypes.string,
   ])),
   style: PropTypes.objectOf(any),
+  direction: PropTypes.string,
+  align: PropTypes.string,
 };
 
 FlexboxContainer.defaultProps = {
   items: [],
   style: {},
+  direction: 'horizontal',
+  align: 'start',
 };
