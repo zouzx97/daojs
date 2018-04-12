@@ -8,7 +8,7 @@ export default class LineWithMarkArea extends Line {
     const {
       markLine,
       markArea,
-    } = this.props.value;
+    } = this.props;
 
 
     return [

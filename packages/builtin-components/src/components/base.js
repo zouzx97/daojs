@@ -10,7 +10,7 @@ export default class BaseChart extends PureComponent {
   getSource() {
     const {
       source,
-    } = this.props.value;
+    } = this.props;
     if (_.isNil(source)) {
       throw new Error('Chart source is nil');
     }
@@ -26,7 +26,7 @@ export default class BaseChart extends PureComponent {
   }
 
   getAxisDimension() {
-    return _.first(this.props.value.axisDimensions) ||
+    return _.first(this.props.axisDimensions) ||
       _.first(this.getDimensions());
   }
 
@@ -52,9 +52,9 @@ export default class BaseChart extends PureComponent {
   }
 
   getMetricDimensions() {
-    return _.isEmpty(this.props.value.metricDimensions) ?
+    return _.isEmpty(this.props.metricDimensions) ?
       _.difference(this.getDimensions(), [this.getAxisDimension()]) :
-      this.props.value.metricDimensions;
+      this.props.metricDimensions;
   }
 
   getSeriesOption() {
@@ -63,7 +63,7 @@ export default class BaseChart extends PureComponent {
 
   getTitleOption() {
     return {
-      text: this.props.value.title || this.props.title,
+      text: this.props.title,
     };
   }
 
@@ -95,10 +95,14 @@ export default class BaseChart extends PureComponent {
 }
 
 BaseChart.propTypes = {
-  value: PropTypes.objectOf(PropTypes.any).isRequired,
+  source: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  axisDimensions: PropTypes.arrayOf(PropTypes.string),
+  metricDimensions: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
 };
 
 BaseChart.defaultProps = {
-  title: '',
+  axisDimensions: [],
+  metricDimensions: [],
+  title: null,
 };
