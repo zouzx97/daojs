@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import 'antd/dist/antd.css';
-import StoryBoard from './storyboard';
+import Storyboard from './storyboard';
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu, ItemGroup: MenuItemGroup } = Menu;
@@ -17,8 +17,15 @@ export default class SodexoLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: 'dashboard',
+      selected: this.props.defaultStory,
     };
+    this.stories = _.reduce(
+      this.props.categories,
+      (memo, { stories }) => _.reduce(stories, (m, story) => _.extend(m, {
+        [story.name]: story,
+      }), memo),
+      {},
+    );
   }
   render() {
     const {
@@ -68,7 +75,7 @@ export default class SodexoLayout extends React.Component {
           </Sider>
           <Layout style={{ backgroundColor: 'rgb(240, 242, 245)' }}>
             <Content style={contentStyle}>
-              <StoryBoard story={story} />
+              <Storyboard story={this.stories[this.state.selected] || {}} engine="dist/engine.js" />
             </Content>
           </Layout>
         </Layout>
