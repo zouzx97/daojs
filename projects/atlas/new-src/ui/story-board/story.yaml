@@ -1,7 +1,10 @@
 ---
-bar: 2
-test: 3
-selectedSelector: 午餐
+bar:
+  text: 2
+test:
+  text: 3
+selectedSelector:
+  text: 午餐
 foo:
   $proc: sum
   $args:
