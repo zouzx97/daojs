@@ -11,6 +11,10 @@ data:
       customerId: count
     交易笔数:
       transactionId: count
+  _c_metricNameDictionary:
+    利润: revenue
+    独立用户数: customerId
+    交易笔数: transactionId
   _c_groupByDictionary:
     餐厅名称: Branch
     餐卡类别: cardType
@@ -425,25 +429,16 @@ data:
     enums:
       $ref: _c_metricEnum
   activenessTraffic:
-    # // sort the data to know start & end
-    # const sorted = _.sortBy(rawData, 'timestamp');
-
-    # const first = sorted[0].timestamp;
-    # const end = _.last(sorted).timestamp;
-
-    # const keyed = _.keyBy(sorted, 'timestamp');
-
-    # const measureKey = _.keys(metricsDictionary[measure])[0];
-
-    # // fill 0 data in
-    # const source = _.map(_.range(first, end + 1, 10 * 60 * 1000), time => ({
-    #   timestamp: (new Date(time)).toLocaleTimeString({}, { hour: '2-digit', minute: '2-digit', hour12: false }),
-    #   [measureKey]: keyed[time] ? keyed[time][measureKey] : 0,
-    # }));
     source:
       $ref: fetchTraffic
     axisDimensions:
       - timestamp
+    metricDimensions:
+      -
+        $proc: property
+        $args:
+          - $ref: _c_metricNameDictionary
+          - $ref: _measureActiveness
     key2name: _c_metricReverseDictionary
 
   # growth
