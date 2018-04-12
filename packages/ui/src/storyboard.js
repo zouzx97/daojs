@@ -1,8 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
-import { Map } from 'immutable';
 import PropTypes from 'prop-types';
 import { WorkerAgent } from '@daojs/worker-agent';
+import StoryboardContext from './storyboard-context';
+import Cell from './cell';
 
 export default class Storyboard extends React.Component {
   constructor(props) {
@@ -11,58 +12,17 @@ export default class Storyboard extends React.Component {
     const { story, engine } = props;
     const { data, layout } = story;
 
-
-    this.p$client = createEngineClient(data, engine);
-
-    this.state = {
-      data: Map(),
-      updating: Map(),
-    };
-  }
-
-  componentDidMount() {
-    this.fetchData(this.inputNodes);
-  }
-
-  p$client = createEngineClient(this.props.story, this.props.engine)
-
-  async fetchData(keys) {
-    const commit = key => value => this.setState(({ data, updating }) => ({
-      data: data.set(key, value),
-      updating: updating.set(key, false),
-    }));
-    const client = await this.p$client;
-    const values = _.map(keys, key => client.get(key).tap(commit(key)));
-
-    return _.zipObject(keys, await Promise.all(values));
-  }
-
-  update = async (key, value) => {
-    const client = this.p$client.set(key, value);
-  }
-
-  update = async (key, value) => {
-    const invalidateKeys = await client.call('set', key, value);
-    const invalidateNodes = _.intersection(invalidateKeys, this.inputNodes);
-
-    this.setState(({
-      data,
-      updating,
-    }) => ({
-      data,
-      updating: updating.merge(_.zipObject(invalidateNodes, _.fill(Array(invalidateNodes.length), true))), //eslint-disable-line
-    }));
-
-    this.fetchData(invalidateNodes);
+    this.agent = new WorkerAgent(engine);
+    this.agent.register({ getStory: _.constant(data) });
+    this.layout = layout;
   }
 
   render() {
-    return (<Layout
-      layout={this.props.layout}
-      data={this.state.data}
-      isUpdating={this.state.updating}
-      update={this.update}
-    />);
+    return (
+      <StoryboardContext.Provider value={{ agent: this.agent }}>
+        {this.props.renderCell(this.layout)}
+      </StoryboardContext.Provider>
+    );
   }
 }
 
@@ -73,8 +33,12 @@ Storyboard.propTypes = {
     layout: PropTypes.object,
   }).isRequired,
   engine: PropTypes.string,
+  renderCell: PropTypes.func,
 };
 
 Storyboard.defaultProps = {
   engine: './engine.js',
+  renderCell(props) {
+    return <Cell {...props} />;
+  },
 };

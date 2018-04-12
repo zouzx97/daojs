@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@daojs/calculation-network": "^0.0.1",
-    "@daojs/procedures": "^1.0.0",
+    "@daojs/procedures": "^0.0.1",
     "@daojs/registry": "^0.0.1",
     "@daojs/worker-agent": "^0.0.1",
     "lodash": "^4.17.5",
