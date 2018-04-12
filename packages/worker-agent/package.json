@@ -37,5 +37,8 @@
     "karma-webpack": "^3.0.0",
     "mocha": "^5.0.5",
     "webpack": "^4.5.0"
+  },
+  "dependencies": {
+    "eslint-config-daojs": "^0.0.1"
   }
 }
