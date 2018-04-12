@@ -10,7 +10,15 @@ export default class CardContainer extends PureComponent {
       actions,
       items,
     } = this.props;
-    const extras = _.map(actions, action => config2Cell(action));
+    const extras = (
+      <span
+        role="presentation"
+        onMouseDown={(e) => { e.stopPropagation(); }}
+        onMouseUp={(e) => { e.stopPropagation(); }}
+      >
+        {_.map(actions, action => config2Cell(action))}
+      </span>
+    );
     return (
       <div
         {...this.props}

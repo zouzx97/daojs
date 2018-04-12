@@ -1,5 +1,14 @@
 ---
 # Refer to docs/javascript/README.md for detail
+extends:
+  - airbnb
+  - "plugin:react/recommended"
+  - "plugin:lodash/canonical"
+
+env:
+  es6: true
+
+parser: babel-eslint
 
 rules:
   no-var: error
@@ -49,4 +58,5 @@ rules:
 
 plugins:
   - fp
+  - lodash
   - "lodash-fp"
