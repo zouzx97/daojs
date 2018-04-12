@@ -20,7 +20,7 @@ export default class Storyboard extends React.Component {
   render() {
     return (
       <StoryboardContext.Provider value={{ agent: this.agent }}>
-        {this.props.renderCell(this.layout)}
+        <Cell {...this.layout} />
       </StoryboardContext.Provider>
     );
   }
@@ -33,12 +33,8 @@ Storyboard.propTypes = {
     layout: PropTypes.object,
   }).isRequired,
   engine: PropTypes.string,
-  renderCell: PropTypes.func,
 };
 
 Storyboard.defaultProps = {
   engine: './engine.js',
-  renderCell(props) {
-    return <Cell {...props} />;
-  },
 };

@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Cell from '../cell';
 import StoryboardContext from '../storyboard-context';
 
-export default class FlexBoxContainer extends PureComponent {
+export default class FlexboxContainer extends PureComponent {
   render() {
     return (
       <div
@@ -22,7 +22,7 @@ export default class FlexBoxContainer extends PureComponent {
   }
 }
 
-FlexBoxContainer.propTypes = {
+FlexboxContainer.propTypes = {
   items: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.objectOf(any),
     PropTypes.string,
@@ -30,7 +30,7 @@ FlexBoxContainer.propTypes = {
   style: PropTypes.objectOf(any),
 };
 
-FlexBoxContainer.defaultProps = {
+FlexboxContainer.defaultProps = {
   items: [],
   style: {},
 };

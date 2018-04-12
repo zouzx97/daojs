@@ -1,7 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes, { any } from 'prop-types';
+import Promise from 'bluebird';
 import { Spin } from 'antd';
 import ComponentRegistry from './component-registry';
+
+Promise.config({
+  cancellation: true,
+});
 
 export default class Cell extends PureComponent {
   constructor(props) {
@@ -27,8 +32,12 @@ export default class Cell extends PureComponent {
 
   componentWillUnmount() {
     // Cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
-    this.loadControlPromise.cancel();
-    this.loadDataPromise.cancel();
+    if (this.loadControlPromise) {
+      this.loadControlPromise.cancel();
+    }
+    if (this.loadDataPromise) {
+      this.loadDataPromise.cancel();
+    }
 
     if (this.props.input) {
       this.props.agent.off(`invalidate:${this.props.input}`, this.invalidate);
