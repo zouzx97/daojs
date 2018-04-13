@@ -4,8 +4,30 @@ name: 充值及沉淀资金
 
 # Data flow diagram
 data:
+  cardTypes:
+    enums:
+      - 汇总
+      - 员工卡
+      - 访客卡
+    defaultValue: 汇总
+  granularity:
+    enums:
+      - 按天
+      - 按周
+      - 按月
+    defaultValue: 按周
+
+  defaultCardType: 按周
 
 # Dashboard Layout
 layout:
   id: 836bf8e9-ae20-42fa-9e08-8541f26db6f6
-  type: AdjustableContainer
+  type: FlexboxContainer
+  props:
+    direction: 'vertical'
+    align: 'center'
+    items:
+      - id: dbca7612-1847-4262-82c8-9db7a0e30004
+        type: MultiSelector
+        input: cardTypes
+        output: defaultCardType

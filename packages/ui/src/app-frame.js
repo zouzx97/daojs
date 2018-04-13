@@ -59,7 +59,7 @@ export default class AppFrame extends React.Component {
       }, memo);
     }, {});
 
-    this.state = { selectedStory, selectedCategory };
+    this.state = { selectedStory: 'b47efc62-da23-49d6-ab9c-2a734d53299a', selectedCategory };
   }
 
   render() {
