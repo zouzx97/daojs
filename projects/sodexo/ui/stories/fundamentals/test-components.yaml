@@ -34,6 +34,38 @@ data:
       - 自助餐厅
       - 西餐厅
       - 意大利餐厅
+  mealSelector:
+    enums:
+      - 汇总
+      - 早餐
+      - 午餐
+      - 晚餐
+  cardSelector:
+    enums:
+      - 汇总
+      - 员工卡
+      - 访客卡
+  granularitySelector:
+    enums:
+      - text: 按天
+        value: Daily
+      - text: 按周
+        value: Weekly
+      - text: 按月
+        value: Monthly
+  _time:
+    start: '2018-01-01'
+    end: '2018-02-01'
+  _time_start:
+    $proc: property
+    $args:
+      - $ref: _time
+      - start
+  _time_end:
+    $proc: property
+    $args:
+      - $ref: _time
+      - end
 # Dashboard Layout
 layout:
   id: 9850ccd3-b5f9-4b96-afe7-e3650964cbe4
@@ -51,3 +83,15 @@ layout:
       - id: 2d3433a9-71b4-59ab-9547-5ac98c86f945
         type: MultiSelector
         input: branchSelector
+      - id: 66f86490-6000-5800-b172-efa849ff208f
+        type: MultiSelector
+        input: mealSelector
+      - id: 5a11fe99-b9ce-5e37-97b5-d495c3b8a8a5
+        type: MultiSelector
+        input: cardSelector
+      - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
+        type: SingleSelector
+        input: granularitySelector
+      - id: 6f196a3c-d39e-52d3-ad13-e89806865275
+        type: TimeRange
+        output: _time

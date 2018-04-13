@@ -16,7 +16,7 @@ export default class TimeRangePicker extends PureComponent {
   }
 
   render() {
-    const { start, end } = this.props;
+    const { start = '2018-03-01', end = '2018-04-01' } = this.props;
 
     return (
       <div>
