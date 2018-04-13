@@ -25,7 +25,7 @@ ReactDOM.render(
       name: '智能运营助手',
       stories: AIOperations,
     }]}
-    defaultStory="61719802-0a2d-48b8-8225-5d80ecbb2699"
+    defaultStory="f60c9a14-8069-4ff1-ab51-aad9af6c5409"
     componentRegistry={ComponentRegistry}
   />,
   document.getElementById('container'),

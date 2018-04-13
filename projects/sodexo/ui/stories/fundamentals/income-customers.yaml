@@ -130,6 +130,63 @@ data:
       Metrics: Revenue
       OrderBy: DESC
       ValueLimit: 10
+  
+  incomePercentageByMeal:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - MealName
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: Revenue
+      OrderBy: DESC
+      ValueLimit: 10
+  
+  incomePercentageByCard:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - CardType
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: Revenue
+      OrderBy: DESC
+      ValueLimit: 10
+
+  customerPercentageByResturant:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - BranchName
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: UserCount
+      OrderBy: DESC
+      ValueLimit: 10
+  
+  customerPercentageByMeal:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - MealName
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: UserCount
+      OrderBy: DESC
+      ValueLimit: 10
+
+  customerPercentageByCard:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - CardType
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: UserCount
+      OrderBy: DESC
+      ValueLimit: 10
+
+
 
 layout:
   id: 90b2ff58-c292-48ff-8b8e-703b50a900e4
@@ -183,9 +240,24 @@ layout:
       - id: 4307046e-f941-444f-a2fe-562a80ae4734
         type: Trend
         input: revenueTrend
-      - id: 62587c53-7ee8-4e6e-adae-5115ea36307b
-        type: Trend
-        input: customerTrend
       - id: 2f93fe88-1bac-45ab-b710-930449a2379e
         type: Percentage
         input: incomePercentageByResturant
+      - id: d38e22bf-ef06-46b0-869f-d89b518df0f9
+        type: Percentage
+        input: incomePercentageByMeal
+      - id: 481276bf-d8a7-4063-914a-e70e83afaad6
+        type: Percentage
+        input: incomePercentageByCard
+      - id: 62587c53-7ee8-4e6e-adae-5115ea36307b
+        type: Trend
+        input: customerTrend
+      - id: 0a394c47-431c-4be3-81fe-ff0e4f27a548
+        type: Percentage
+        input: customerPercentageByResturant
+      - id: b593de2d-e460-4295-ac28-0727e9088656
+        type: Percentage
+        input: customerPercentageByMeal
+      - id: caa308af-f50c-4fa4-b0d8-cf83aa030f12
+        type: Percentage
+        input: customerPercentageByCard             
