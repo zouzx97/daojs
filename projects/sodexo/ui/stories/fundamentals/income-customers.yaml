@@ -13,22 +13,37 @@ data:
     - 自助餐厅
     - 西餐厅
     - 意大利餐厅
-  defaultResturant:
+  defaultResturants:
     - 汇总
-  selectedResturant: []
+  selectedResturants:
+    - 汇总
 
   mealTimes:
     - 汇总
     - 早餐
     - 午餐
     - 晚餐
-  
-  defaultMealTime:
+  defaultMealTimes:
     - 汇总
-  
-  selectedMealTime: []
+  selectedMealTimes:
+    - 汇总
 
-  
+  cardTypes:
+    - 汇总
+    - 员工卡
+    - 访客卡
+  defaultCardTypes:
+    - 汇总
+  selectedCardTypes:
+    - 汇总
+
+  granularities:
+    - 按天
+    - 按周
+    - 按月
+  defaultGranularity: 按天
+  selectedGranularity: 按天
+
 
   a: 1
   b: 2
@@ -47,11 +62,25 @@ data:
     value:
       $ref: sum
   ui_resturants:
-    value:
-      enums:
-        $ref: resturants
-      defaultValue:
-        $ref: defaultResturant
+    enums:
+      $ref: resturants
+    defaultValue:
+      $ref: defaultResturants
+  ui_mealTimes:
+    enums:
+      $ref: mealTimes
+    defaultValue:
+      $ref: defaultMealTimes
+  ui_cardTypes:
+    enums:
+      $ref: cardTypes
+    defaultValue:
+      $ref: defaultCardTypes
+  ui_granularities:
+    enums:
+      $ref: granularities
+    defaultValue:
+      $ref: defaultGranularity
 
 
 layout:
@@ -84,4 +113,16 @@ layout:
       - id: cacaaa77-0878-4dee-851f-f9d13e2c6ac6
         type: MultiSelector
         input: ui_resturants
-        output: selectedResturant
+        output: selectedResturants
+      - id: a36419d4-3931-4f72-a2cb-dbd3e611902c
+        type: MultiSelector
+        input: ui_mealTimes
+        output: selectedMealTimes
+      - id: b0ab148c-1eb2-48a0-8415-f5f22532ebed
+        type: MultiSelector
+        input: ui_cardTypes
+        output: selectedCardTypes
+      - id: 426a72ad-6176-4d56-a3f7-10ff1c3a692e
+        type: SingleSelector
+        input: ui_granularities
+        output: selectedGranularity
