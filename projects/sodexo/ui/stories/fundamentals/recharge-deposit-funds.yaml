@@ -1,0 +1,137 @@
+---
+id: b47efc62-da23-49d6-ab9c-2a734d53299a
+name: 充值及沉淀资金
+
+# Data flow diagram
+data:
+  # parameters
+  CardType:
+    - 员工卡
+  Granularity: Monthly
+
+  # ui nodes
+  ui_card_selector:
+    enums:
+      $proc: getEnum
+      $args: CardType
+    defaultValue:
+      - 员工卡
+    label: 卡类型
+  ui_granularity_selector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: Granularity
+    defaultValue: Monthly
+    label: 粒度
+  ui_recharge_trend:
+    $proc: slice
+    $args:
+      Metrics: ChargeAmount
+      Collapse:
+        - CardType
+        - ChargeType
+      StartTime: '2014-4-14T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Filters:
+        - CardType:
+            $ref: CardType
+          ChargeType:
+            - 充值
+        - FULL
+      Granularity:
+        $ref: Granularity
+  ui_average_charge_trend:
+    $proc: slice
+    $args:
+      Metrics: AvgChargeAmount
+      Collapse:
+        - CardType
+        - ChargeType
+      StartTime: '2014-4-14T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Filters:
+        - CardType:
+            $ref: CardType
+          ChargeType:
+            - 充值
+        - FULL
+      Granularity:
+        $ref: Granularity
+  ui_deposit_trend:
+    $proc: slice
+    $args:
+      Metrics: Deposit
+      Collapse:
+        - CardType
+      StartTime: '2014-4-14T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Filters:
+        - CardType:
+            $ref: CardType
+        - FULL
+      Granularity:
+        $ref: Granularity
+  ui_deposit_total_trend:
+    $proc: slice
+    $args:
+      Metrics: DepositTotal
+      Collapse:
+        - CardType
+      StartTime: '2014-4-14T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Filters:
+        - CardType:
+            $ref: CardType
+        - FULL
+      Granularity:
+        $ref: Granularity
+
+# Dashboard Layout
+layout:
+  id: 836bf8e9-ae20-42fa-9e08-8541f26db6f6
+  type: FlexboxContainer
+  props:
+    direction: 'vertical'
+    align: 'center'
+    items:
+      - id: dbca7612-1847-4262-82c8-9db7a0e30004
+        type: MultiSelector
+        input: ui_card_selector
+        output: CardType
+        props:
+          width: 30%
+      - id: b48b7573-b3e7-4bfe-871f-1d7df3ec83c7
+        type: SingleSelector
+        input: ui_granularity_selector
+        output: Granularity
+        props:
+          width: 30%
+      - id: f636790b-2b10-4887-9140-d7e30f52ba58
+        type: TimeRange
+        output: _time
+        props:
+          width: 30%
+          label: 时间
+      - id: 16166826-753e-4f7d-94ac-6864f51165a5
+        type: Trend
+        input: ui_recharge_trend
+        props:
+          title: 充值收入趋势
+      - id: 7c376695-9abf-430d-8cf4-11ff1f3e0383
+        type: Trend
+        input: ui_average_charge_trend
+        props:
+          title: 每用户平均充值变化
+      - id: df96303d-385b-4531-80ca-cb87377816fb
+        type: Trend
+        input: ui_deposit_trend
+        props:
+          title: 月沉淀资金变化
+
+      - id: fbe769c1-7691-43b8-add9-dcca6c8b1a8e
+        type: Trend
+        input: ui_deposit_total_trend
+        props:
+          title: 沉淀资金累计
+
+
