@@ -66,6 +66,24 @@ data:
     $args:
       - $ref: _time
       - end
+  revenueTrend:
+    $proc: slice
+    $args:
+        Collapse:
+          - BranchName
+          - MealName
+          - CardType
+        EndTime:
+          $ref: _time_end
+        Filter:
+          - CardType:
+            - 员工卡
+            - 访客卡
+          - FULL
+        Granularity: Monthly
+        Metrics: Deposit
+        StartTime:
+          $ref: _time_start
 # Dashboard Layout
 layout:
   id: 9850ccd3-b5f9-4b96-afe7-e3650964cbe4
