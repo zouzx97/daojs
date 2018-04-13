@@ -1,6 +1,6 @@
-export {
+import {
   sum,
-  add,
+  add as _add,
   ceil,
   divide,
   floor,
@@ -15,4 +15,8 @@ export {
   subtract,
   sumBy,
   constant,
-} from 'lodash';
+} from 'lodash/fp';
+
+export { sum };
+
+export const add = ({ augend, addend }) => _add(augend, addend);
