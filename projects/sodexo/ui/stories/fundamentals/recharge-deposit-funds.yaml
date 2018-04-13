@@ -5,11 +5,17 @@ name: 充值及沉淀资金
 # Data flow diagram
 data:
   # parameters
-  CardType:
+  p_card_type:
     - 员工卡
-  Granularity: Monthly
+  p_granularity: Monthly
+  p_time:
+    start: '2014-4-13'
+    end: '2018-4-14'
 
   # ui nodes
+  ui_time_range:
+    start: '2014-4-13'
+    end: '2018-4-14'
   ui_card_selector:
     enums:
       $proc: getEnum
@@ -26,65 +32,82 @@ data:
   ui_recharge_trend:
     $proc: slice
     $args:
-      Metrics: ChargeAmount
-      Collapse:
-        - CardType
-        - ChargeType
-      StartTime: '2014-4-14T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Filters:
-        - CardType:
-            $ref: CardType
-          ChargeType:
-            - 充值
-        - FULL
-      Granularity:
-        $ref: Granularity
+      $proc: sliceQuery
+      $args:
+        time:
+          $ref: p_time
+        CardType:
+          $ref: p_card_type
+        ChargeType:
+          - 充值
+        Collapse:
+          - CardType
+          - ChargeType
+        Granularity:
+          $ref: p_granularity
+        Metrics: ChargeAmount
   ui_average_charge_trend:
     $proc: slice
     $args:
-      Metrics: AvgChargeAmount
-      Collapse:
-        - CardType
-        - ChargeType
-      StartTime: '2014-4-14T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Filters:
-        - CardType:
-            $ref: CardType
-          ChargeType:
-            - 充值
-        - FULL
-      Granularity:
-        $ref: Granularity
+      $proc: sliceQuery
+      $args:
+        time:
+          $ref: p_time
+        CardType:
+          $ref: p_card_type
+        ChargeType:
+          - 充值
+        Collapse:
+          - CardType
+          - ChargeType
+        Granularity:
+          $ref: p_granularity
+        Metrics: AvgChargeAmount
+  ui_charge_count:
+    $proc: slice
+    $args:
+      $proc: sliceQuery
+      $args:
+        time:
+          $ref: p_time
+        CardType:
+          $ref: p_card_type
+        ChargeType:
+          - 充值
+        Collapse:
+          - CardType
+          - ChargeType
+        Granularity:
+          $ref: p_granularity
+        Metrics: ChargeCount
   ui_deposit_trend:
     $proc: slice
     $args:
-      Metrics: Deposit
-      Collapse:
-        - CardType
-      StartTime: '2014-4-14T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Filters:
-        - CardType:
-            $ref: CardType
-        - FULL
-      Granularity:
-        $ref: Granularity
+      $proc: sliceQuery
+      $args:
+        time:
+          $ref: p_time
+        CardType:
+          $ref: p_card_type
+        Collapse:
+          - CardType
+        Granularity:
+          $ref: p_granularity
+        Metrics: Deposit
   ui_deposit_total_trend:
     $proc: slice
     $args:
-      Metrics: DepositTotal
-      Collapse:
-        - CardType
-      StartTime: '2014-4-14T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Filters:
-        - CardType:
-            $ref: CardType
-        - FULL
-      Granularity:
-        $ref: Granularity
+      $proc: sliceQuery
+      $args:
+        time:
+          $ref: p_time
+        CardType:
+          $ref: p_card_type
+        Collapse:
+          - CardType
+        Granularity:
+          $ref: p_granularity
+        Metrics: DepositTotal
 
 # Dashboard Layout
 layout:
@@ -97,20 +120,16 @@ layout:
       - id: dbca7612-1847-4262-82c8-9db7a0e30004
         type: MultiSelector
         input: ui_card_selector
-        output: CardType
-        props:
-          width: 30%
+        output: p_card_type
       - id: b48b7573-b3e7-4bfe-871f-1d7df3ec83c7
         type: SingleSelector
         input: ui_granularity_selector
-        output: Granularity
-        props:
-          width: 30%
+        output: p_granularity
       - id: f636790b-2b10-4887-9140-d7e30f52ba58
         type: TimeRange
-        output: _time
+        input: ui_time_range
+        output: p_time
         props:
-          width: 30%
           label: 时间
       - id: 16166826-753e-4f7d-94ac-6864f51165a5
         type: Trend
@@ -122,12 +141,16 @@ layout:
         input: ui_average_charge_trend
         props:
           title: 每用户平均充值变化
+      # - id: d3458857-8ab9-40b2-8de0-63f5437a13b8
+      #   type: Trend
+      #   input: ui_charge_count
+      #   props:
+      #     title: 充值次数变化
       - id: df96303d-385b-4531-80ca-cb87377816fb
         type: Trend
         input: ui_deposit_trend
         props:
           title: 月沉淀资金变化
-
       - id: fbe769c1-7691-43b8-add9-dcca6c8b1a8e
         type: Trend
         input: ui_deposit_total_trend
