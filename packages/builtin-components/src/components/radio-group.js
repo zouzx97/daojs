@@ -38,7 +38,7 @@ export default class RadioGroup extends Component {
 
 RadioGroup.propTypes = {
   defaultValue: PropTypes.string,
-  enums: PropTypes.arrayOf(PropTypes.string).isRequired,
+  enums: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])).isRequired,
   update: PropTypes.func,
 };
 

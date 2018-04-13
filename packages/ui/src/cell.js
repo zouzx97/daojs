@@ -115,10 +115,11 @@ export default class Cell extends React.Component {
       isLoadingControl,
     } = this.state;
 
+    if (isLoadingData || isLoadingControl) {
+      return <Spin />;
+    }
     return (
-      <Spin spinning={isLoadingData || isLoadingControl}>
-        { Control && <Control id={id} {...props} {...data} update={this.updateData} /> }
-      </Spin>
+      <Control id={id} {...props} {...data} update={this.updateData} />
     );
   }
 }
