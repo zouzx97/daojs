@@ -39,7 +39,7 @@ export function sliceQuery({
   return {
     Collapse,
     EndTime: queryTime(time.end),
-    Filter: queryFilter({
+    Filters: queryFilter({
       BranchName,
       MealName,
       CardType,
