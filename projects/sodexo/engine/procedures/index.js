@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import builtProcedures from '@daojs/procedures/builtin';
-import botanaProcedures from '@daojs/procedures/botana';
+import * as builtProcedures from '@daojs/procedures/builtin';
+import * as botanaProcedures from '@daojs/procedures/botana';
 
 export default {
   sum: _.sum,
