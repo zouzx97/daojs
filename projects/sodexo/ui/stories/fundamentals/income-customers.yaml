@@ -13,8 +13,6 @@ data:
     - 自助餐厅
     - 西餐厅
     - 意大利餐厅
-  defaultResturants:
-    - 汇总
   selectedResturants:
     - 汇总
 
@@ -23,8 +21,6 @@ data:
     - 早餐
     - 午餐
     - 晚餐
-  defaultMealTimes:
-    - 汇总
   selectedMealTimes:
     - 汇总
 
@@ -32,8 +28,6 @@ data:
     - 汇总
     - 员工卡
     - 访客卡
-  defaultCardTypes:
-    - 汇总
   selectedCardTypes:
     - 汇总
 
@@ -41,9 +35,11 @@ data:
     - 按天
     - 按周
     - 按月
-  defaultGranularity: 按天
   selectedGranularity: 按天
 
+  selectedDateRange:
+    start: '2018-01-13'
+    end: '2018-04-13'
 
   a: 1
   b: 2
@@ -65,28 +61,30 @@ data:
     enums:
       $ref: resturants
     defaultValue:
-      $ref: defaultResturants
+      $ref: selectedResturants
   ui_mealTimes:
     enums:
       $ref: mealTimes
     defaultValue:
-      $ref: defaultMealTimes
+      $ref: selectedMealTimes
   ui_cardTypes:
     enums:
       $ref: cardTypes
     defaultValue:
-      $ref: defaultCardTypes
+      $ref: selectedCardTypes
   ui_granularities:
     enums:
       $ref: granularities
     defaultValue:
-      $ref: defaultGranularity
+      $ref: selectedGranularity
 
 
 layout:
   id: 90b2ff58-c292-48ff-8b8e-703b50a900e4
-  type: AdjustableContainer
+  type: FlexboxContainer
   props:
+    direction: 'vertical'
+    align: 'center'
     items:
       - id: 437b4f68-7505-4749-9663-63d39ec03cf3
         type: CardContainer
@@ -126,3 +124,8 @@ layout:
         type: SingleSelector
         input: ui_granularities
         output: selectedGranularity
+      - id: ed557de6-017a-4a87-bf87-a2ea6e34ea6e
+        type: TimeRange
+        input: selectedDateRange
+        output: selectedDateRange
+      
