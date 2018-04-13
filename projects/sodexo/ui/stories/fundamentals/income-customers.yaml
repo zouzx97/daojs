@@ -112,68 +112,86 @@ data:
   incomePercentageByResturant:
     $proc: ranker
     $args:
-      Dimensions:
-        - BranchName
-      StartTime: '2018-1-13T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Metrics: Revenue
-      OrderBy: DESC
-      ValueLimit: 10
+      $proc: rankerQuery
+      $args:
+        time:
+          $ref: selectedDateRange
+
+        Dimensions:
+          - BranchName
+        Metrics: Revenue
+        OrderBy: DESC
+        ValueLimit: 10
   
   incomePercentageByMeal:
     $proc: ranker
     $args:
-      Dimensions:
-        - MealName
-      StartTime: '2018-1-13T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Metrics: Revenue
-      OrderBy: DESC
-      ValueLimit: 10
+      $proc: rankerQuery
+      $args:
+        time:
+          $ref: selectedDateRange
+
+        Dimensions:
+          - MealName
+        Metrics: Revenue
+        OrderBy: DESC
+        ValueLimit: 10
   
   incomePercentageByCard:
     $proc: ranker
     $args:
-      Dimensions:
-        - CardType
-      StartTime: '2018-1-13T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Metrics: Revenue
-      OrderBy: DESC
-      ValueLimit: 10
+      $proc: rankerQuery
+      $args:
+        time:
+          $ref: selectedDateRange
+
+        Dimensions:
+          - CardType
+        Metrics: Revenue
+        OrderBy: DESC
+        ValueLimit: 10
 
   customerPercentageByResturant:
     $proc: ranker
     $args:
-      Dimensions:
-        - BranchName
-      StartTime: '2018-1-13T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Metrics: UserCount
-      OrderBy: DESC
-      ValueLimit: 10
+      $proc: rankerQuery
+      $args:
+        time:
+          $ref: selectedDateRange
+
+        Dimensions:
+          - BranchName
+        Metrics: UserCount
+        OrderBy: DESC
+        ValueLimit: 10
   
   customerPercentageByMeal:
     $proc: ranker
     $args:
-      Dimensions:
-        - MealName
-      StartTime: '2018-1-13T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Metrics: UserCount
-      OrderBy: DESC
-      ValueLimit: 10
+      $proc: rankerQuery
+      $args:
+        time:
+          $ref: selectedDateRange
+
+        Dimensions:
+          - MealName
+        Metrics: UserCount
+        OrderBy: DESC
+        ValueLimit: 10
 
   customerPercentageByCard:
     $proc: ranker
     $args:
-      Dimensions:
-        - CardType
-      StartTime: '2018-1-13T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Metrics: UserCount
-      OrderBy: DESC
-      ValueLimit: 10
+      $proc: rankerQuery
+      $args:
+        time:
+          $ref: selectedDateRange
+
+        Dimensions:
+          - CardType
+        Metrics: UserCount
+        OrderBy: DESC
+        ValueLimit: 10
 
 
 
