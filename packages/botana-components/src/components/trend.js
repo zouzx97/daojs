@@ -5,6 +5,11 @@ const { LineWithDataZoom } = components;
 
 export default function Trend(props) {
   return (
-    <LineWithDataZoom source={props[0].Values} {...props} />
+    <LineWithDataZoom
+      source={props[0].Values}
+      axisDimensions={['Timestamp']}
+      metricDimensions={['Value']}
+      {...props}
+    />
   );
 }

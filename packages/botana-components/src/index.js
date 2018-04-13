@@ -7,6 +7,7 @@ export { default as Cumulative } from './components/cumulative';
 export { default as GrowthRate } from './components/growth-rate';
 export { default as OverallValueTrend } from './components/overall-value-trend';
 export { default as OverallValue } from './components/overall-value';
+export { default as Percentage } from './components/percentage';
 export { default as Prediction } from './components/prediction';
 export { default as Promotion } from './components/promotion';
 export { default as Rank } from './components/rank';

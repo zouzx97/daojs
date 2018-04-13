@@ -78,6 +78,58 @@ data:
     defaultValue:
       $ref: selectedGranularity
 
+  revenueTrend:
+    $proc: slice
+    $args:
+      Collapse:
+        - BranchName
+        - MealName
+        - CardType
+      StartTime: '2014-4-14T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Filter:
+        $proc: queryFilter
+        $args:
+          BranchName:
+            $ref: selectedResturants
+          MealName:
+            $ref: selectedMealTimes
+          CardType:
+            $ref: selectedCardTypes
+      Granularity: Monthly
+      Metrics: Revenue
+  
+  customerTrend:
+    $proc: slice
+    $args:
+      Collapse:
+        - BranchName
+        - MealName
+        - CardType
+      StartTime: '2014-4-14T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Filter:
+        $proc: queryFilter
+        $args:
+          BranchName:
+            $ref: selectedResturants
+          MealName:
+            $ref: selectedMealTimes
+          CardType:
+            $ref: selectedCardTypes
+      Granularity: Daily
+      Metrics: UserCount
+  
+  incomePercentageByResturant:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - BranchName
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: Revenue
+      OrderBy: DESC
+      ValueLimit: 10
 
 layout:
   id: 90b2ff58-c292-48ff-8b8e-703b50a900e4
@@ -86,28 +138,28 @@ layout:
     direction: 'vertical'
     align: 'center'
     items:
-      - id: 437b4f68-7505-4749-9663-63d39ec03cf3
-        type: CardContainer
-        props:
-          width: 500px
-          height: 500px
-          items:
-            - id: ddbd6cbe-0f7b-43d6-a1b3-6ffdc3dda101
-              type: FormInput
-              output: a
-              input: ui_a
-              width: 200px
-      - id: 223a6d8c-7ee7-4dd6-9aea-62e7175c4b7c
-        type: FormInput
-        output: b
-        input: ui_b
-        props:
-          width: 200px
-      - id: a8c5e778-87d1-4c81-8ecf-821a15d16e4c
-        type: FormInput
-        input: ui_sum
-        props:
-          width: 300px
+      # - id: 437b4f68-7505-4749-9663-63d39ec03cf3
+      #   type: CardContainer
+      #   props:
+      #     width: 500px
+      #     height: 500px
+      #     items:
+      #       - id: ddbd6cbe-0f7b-43d6-a1b3-6ffdc3dda101
+      #         type: FormInput
+      #         output: a
+      #         input: ui_a
+      #         width: 200px
+      # - id: 223a6d8c-7ee7-4dd6-9aea-62e7175c4b7c
+      #   type: FormInput
+      #   output: b
+      #   input: ui_b
+      #   props:
+      #     width: 200px
+      # - id: a8c5e778-87d1-4c81-8ecf-821a15d16e4c
+      #   type: FormInput
+      #   input: ui_sum
+      #   props:
+      #     width: 300px
       - id: cacaaa77-0878-4dee-851f-f9d13e2c6ac6
         type: MultiSelector
         input: ui_resturants
@@ -128,4 +180,12 @@ layout:
         type: TimeRange
         input: selectedDateRange
         output: selectedDateRange
-      
+      - id: 4307046e-f941-444f-a2fe-562a80ae4734
+        type: Trend
+        input: revenueTrend
+      - id: 62587c53-7ee8-4e6e-adae-5115ea36307b
+        type: Trend
+        input: customerTrend
+      - id: 2f93fe88-1bac-45ab-b710-930449a2379e
+        type: Percentage
+        input: incomePercentageByResturant
