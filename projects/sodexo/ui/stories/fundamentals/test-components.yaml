@@ -5,20 +5,6 @@ name: 测试
 # Data flow diagram
 data:
   title: PowerAI Test
-  testData:
-    $proc: slice
-    $args:
-        Collapse:
-          - CardType
-        EndTime: '2018-4-13T00:00:00Z'
-        Filter:
-          - CardType:
-            - 员工卡
-            - 访客卡
-          - FULL
-        Granularity: Monthly
-        Metrics: Deposit
-        StartTime: '2014-4-14T00:00:00Z'
   bestUser:
     department: STC
     discipline: SDE
@@ -50,20 +36,23 @@ data:
     enums:
       $proc: getEnumSelectorProps
       $args: Granularity
+    defaultValue: Daily
   Granularity: Daily
   _time:
     start: '2018-01-01'
     end: '2018-02-01'
   _time_start:
-    $proc: property
+    $proc: result
     $args:
-      - $ref: _time
-      - start
+      object:
+        $ref: _time
+      path: start
   _time_end:
-    $proc: property
+    $proc: result
     $args:
-      - $ref: _time
-      - end
+      object:
+        $ref: _time
+      path: end
   revenueTrend:
     $proc: slice
     $args:
@@ -71,7 +60,10 @@ data:
         - BranchName
         - MealName
         - CardType
-      EndTime: '2018-4-13T00:00:00Z'
+      EndTime:
+        $proc: queryTime
+        $args:
+          $ref: _time_end
       Filter:
         $proc: queryFilter
         $args:
@@ -84,7 +76,10 @@ data:
       Granularity:
         $ref: Granularity
       Metrics: Revenue
-      StartTime: '2014-4-14T00:00:00Z'
+      StartTime:
+        $proc: queryTime
+        $args:
+          $ref: _time_start
 
 # Dashboard Layout
 layout:
@@ -94,9 +89,6 @@ layout:
     direction: 'vertical'
     align: 'center'
     items:
-      - id: f4f1f881-adba-4300-b1f6-4bb14658359a
-        type: ActiveDays
-        input: testData
       - id: 131e8217-1547-514a-8644-171d5252bfce
         type: BestUser
         input: bestUser

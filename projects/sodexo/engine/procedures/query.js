@@ -20,3 +20,7 @@ export function queryFilter({
     'FULL',
   ];
 }
+
+export function queryTime(time = '2018-01-01') {
+  return `${time}T00:00:00Z`;
+}
