@@ -62,21 +62,25 @@ data:
       $ref: resturants
     defaultValue:
       $ref: selectedResturants
+    label: 餐厅
   ui_mealTimes:
     enums:
       $ref: mealTimes
     defaultValue:
       $ref: selectedMealTimes
+    label: 用餐时段
   ui_cardTypes:
     enums:
       $ref: cardTypes
     defaultValue:
       $ref: selectedCardTypes
+    label: 卡类型
   ui_granularities:
     enums:
       $ref: granularities
     defaultValue:
       $ref: selectedGranularity
+    label: 粒度
 
   revenueTrend:
     $proc: slice
@@ -130,6 +134,63 @@ data:
       Metrics: Revenue
       OrderBy: DESC
       ValueLimit: 10
+  
+  incomePercentageByMeal:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - MealName
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: Revenue
+      OrderBy: DESC
+      ValueLimit: 10
+  
+  incomePercentageByCard:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - CardType
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: Revenue
+      OrderBy: DESC
+      ValueLimit: 10
+
+  customerPercentageByResturant:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - BranchName
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: UserCount
+      OrderBy: DESC
+      ValueLimit: 10
+  
+  customerPercentageByMeal:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - MealName
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: UserCount
+      OrderBy: DESC
+      ValueLimit: 10
+
+  customerPercentageByCard:
+    $proc: ranker
+    $args:
+      Dimensions:
+        - CardType
+      StartTime: '2018-1-13T00:00:00Z'
+      EndTime: '2018-4-13T00:00:00Z'
+      Metrics: UserCount
+      OrderBy: DESC
+      ValueLimit: 10
+
+
 
 layout:
   id: 90b2ff58-c292-48ff-8b8e-703b50a900e4
@@ -180,12 +241,45 @@ layout:
         type: TimeRange
         input: selectedDateRange
         output: selectedDateRange
+        props:
+          label: 时间
       - id: 4307046e-f941-444f-a2fe-562a80ae4734
         type: Trend
         input: revenueTrend
-      - id: 62587c53-7ee8-4e6e-adae-5115ea36307b
-        type: Trend
-        input: customerTrend
+        props:
+          title: 收入趋势
       - id: 2f93fe88-1bac-45ab-b710-930449a2379e
         type: Percentage
         input: incomePercentageByResturant
+        props:
+          title: 各餐厅收入比例
+      - id: d38e22bf-ef06-46b0-869f-d89b518df0f9
+        type: Percentage
+        input: incomePercentageByMeal
+        props:
+          title: 各用餐时段收入比例
+      - id: 481276bf-d8a7-4063-914a-e70e83afaad6
+        type: Percentage
+        input: incomePercentageByCard
+        props:
+          title: 各卡种收入比例
+      - id: 62587c53-7ee8-4e6e-adae-5115ea36307b
+        type: Trend
+        input: customerTrend
+        props:
+          title: 用餐人数趋势
+      - id: 0a394c47-431c-4be3-81fe-ff0e4f27a548
+        type: Percentage
+        input: customerPercentageByResturant
+        props:
+          title: 各餐厅客流比例
+      - id: b593de2d-e460-4295-ac28-0727e9088656
+        type: Percentage
+        input: customerPercentageByMeal
+        props:
+          title: 各用餐时段客流比例
+      - id: caa308af-f50c-4fa4-b0d8-cf83aa030f12
+        type: Percentage
+        input: customerPercentageByCard
+        props:
+          title: 各卡种客流比例

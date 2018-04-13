@@ -115,7 +115,6 @@ export default class Donut extends BaseChart {
 }
 
 Donut.propTypes = {
-  value: PropTypes.objectOf(PropTypes.any).isRequired,
   title: PropTypes.string,
   subTitle: PropTypes.string,
   hasLegend: PropTypes.bool,
