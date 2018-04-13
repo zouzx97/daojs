@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import PropTypes, { any } from 'prop-types';
 import Promise from 'bluebird';
 import { Spin } from 'antd';
@@ -73,32 +73,27 @@ export default class Cell extends React.Component {
   }
 
   loadControl = () => {
-    if (this.props.type) {
-      const loadControlPromise = Promise.resolve(ComponentRegistry.get(this.props.type));
-      this.loadControlPromise = loadControlPromise;
-      this.loadControlPromise.then((Control) => {
-        if (this.loadControlPromise === loadControlPromise) {
-          this.setState(({ Control, isLoadingControl: false }));
-        }
-      });
-    } else {
-      this.setState({ isLoadingControl: false });
-    }
+    const { type } = this.props;
+    const loadControlPromise = Promise.resolve(type ? ComponentRegistry.get(type) : null);
+
+    this.loadControlPromise = loadControlPromise;
+    this.loadControlPromise.then((Control) => {
+      if (this.loadControlPromise === loadControlPromise) {
+        this.setState(({ Control, isLoadingControl: false }));
+      }
+    });
   }
 
   loadData = () => {
-    if (this.props.input) {
-      const loadDataPromise = Promise.resolve(this.props.agent.call('get', this.props.input));
+    const { agent, input } = this.props;
+    const loadDataPromise = Promise.resolve(input ? agent.call('get', input) : null);
 
-      this.loadDataPromise = loadDataPromise;
-      loadDataPromise.then((data) => {
-        if (this.loadDataPromise === loadDataPromise) {
-          this.setState({ data, isLoadingData: false });
-        }
-      });
-    } else {
-      this.setState({ isLoadingData: false });
-    }
+    this.loadDataPromise = loadDataPromise;
+    loadDataPromise.then((data) => {
+      if (this.loadDataPromise === loadDataPromise) {
+        this.setState({ data, isLoadingData: false });
+      }
+    });
   }
 
   updateData = (value) => {
