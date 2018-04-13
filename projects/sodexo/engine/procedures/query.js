@@ -24,3 +24,28 @@ export function queryFilter({
 export function queryTime(time = '2018-01-01') {
   return `${time}T00:00:00Z`;
 }
+
+export function sliceQuery({
+  time,
+
+  BranchName,
+  MealName,
+  CardType,
+
+  Collapse,
+  Granularity,
+  Metrics,
+}) {
+  return {
+    Collapse,
+    EndTime: queryTime(time.end),
+    Filter: queryFilter({
+      BranchName,
+      MealName,
+      CardType,
+    }),
+    Granularity,
+    Metrics,
+    StartTime: queryTime(time.start),
+  };
+}
