@@ -5,6 +5,6 @@ export default function getInsightFunc(type) {
   return function insightFunc(params) {
     const uri = `${constants.host}/${constants.path}?type=${type}`;
 
-    return request.post(uri, params);
+    return request.post(uri, params).then(({ data }) => data);
   };
 }

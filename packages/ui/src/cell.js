@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import PropTypes, { any } from 'prop-types';
 import Promise from 'bluebird';
 import { Spin } from 'antd';
