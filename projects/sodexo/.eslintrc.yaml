@@ -4,8 +4,15 @@ extends:
   - daojs
   - "plugin:lodash/canonical"
 
+env:
+  es6: true
+  browser: true
+
+parser: babel-eslint
+
 rules:
   no-var: error
+  react/jsx-filename-extension: off
 
 plugins:
   - lodash

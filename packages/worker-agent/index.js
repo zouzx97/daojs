@@ -65,6 +65,7 @@ class RpcAgent extends EventAgent {
 
   register(procedures) {
     Object.assign(this.procedures, procedures);
+    return this;
   }
 
   call(name, ...args) {
@@ -84,6 +85,11 @@ export class WorkerAgent extends RpcAgent {
 
     super(worker.postMessage.bind(worker));
     worker.onmessage = ({ data }) => this.handleMessage(data);
+    this.worker = worker;
+  }
+
+  terminate() {
+    this.worker.terminate();
   }
 }
 
