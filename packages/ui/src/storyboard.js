@@ -28,6 +28,14 @@ export default class Storyboard extends React.Component {
     this.state = {};
   }
 
+  componentWillUnmount() {
+    const { agent } = this.state;
+
+    if (agent) {
+      agent.terminate();
+    }
+  }
+
   render() {
     const { layout, agent } = this.state;
 
