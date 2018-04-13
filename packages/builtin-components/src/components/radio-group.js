@@ -23,15 +23,18 @@ export default class RadioGroup extends Component {
     const opts = _.map(enums, item => ({ value: item.value || item, text: item.text || item }));
 
     return enums.length > 0 ? (
-      <Radio.Group
-        value={this.state.radioSelectValue}
-        onChange={args => this.onRadioChange(args)}
-      >
-        {_.map(opts, (opt) => {
-          const { value: optKey, text } = opt;
-          return (<Radio.Button key={optKey} value={optKey}>{text}</Radio.Button>);
-        })}
-      </Radio.Group>
+      <div>
+        {this.props.label}
+        <Radio.Group
+          value={this.state.radioSelectValue}
+          onChange={args => this.onRadioChange(args)}
+        >
+          {_.map(opts, (opt) => {
+            const { value: optKey, text } = opt;
+            return (<Radio.Button key={optKey} value={optKey}>{text}</Radio.Button>);
+          })}
+        </Radio.Group>
+      </div>
     ) : null;
   }
 }
@@ -40,9 +43,11 @@ RadioGroup.propTypes = {
   defaultValue: PropTypes.string,
   enums: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])).isRequired,
   update: PropTypes.func,
+  label: PropTypes.string,
 };
 
 RadioGroup.defaultProps = {
   update: _.noop,
   defaultValue: undefined,
+  label: '',
 };
