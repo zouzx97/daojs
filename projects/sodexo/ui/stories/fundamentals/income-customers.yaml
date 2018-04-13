@@ -31,32 +31,13 @@ data:
   selectedCardTypes:
     - 汇总
 
-  granularities:
-    - 按天
-    - 按周
-    - 按月
-  selectedGranularity: 按天
+
+  selectedGranularity: Daily
 
   selectedDateRange:
     start: '2018-01-13'
     end: '2018-04-13'
 
-  a: 1
-  b: 2
-  ui_a:
-    value:
-      $ref: a
-  ui_b:
-    value:
-      $ref: b
-  sum:
-    $proc: 'sum'
-    $args:
-      - $ref: a
-      - $ref: b
-  ui_sum:
-    value:
-      $ref: sum
   ui_resturants:
     enums:
       $ref: resturants
@@ -77,52 +58,56 @@ data:
     label: 卡类型
   ui_granularities:
     enums:
-      $ref: granularities
-    defaultValue:
-      $ref: selectedGranularity
+      $proc: getEnumSelectorProps
+      $args: Granularity
+    defaultValue: Daily
     label: 粒度
 
   revenueTrend:
     $proc: slice
     $args:
-      Collapse:
-        - BranchName
-        - MealName
-        - CardType
-      StartTime: '2014-4-14T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Filter:
-        $proc: queryFilter
-        $args:
-          BranchName:
-            $ref: selectedResturants
-          MealName:
-            $ref: selectedMealTimes
-          CardType:
-            $ref: selectedCardTypes
-      Granularity: Monthly
-      Metrics: Revenue
+      $proc: sliceQuery
+      $args:
+        time:
+          $ref: selectedDateRange
+
+        BranchName:
+          $ref: selectedResturants
+        MealName:
+          $ref: selectedMealTimes
+        CardType:
+          $ref: selectedCardTypes
+        
+        Collapse:
+          - BranchName
+          - MealName
+          - CardType
+        Granularity:
+          $ref: selectedGranularity
+        Metrics: Revenue
   
   customerTrend:
     $proc: slice
     $args:
-      Collapse:
-        - BranchName
-        - MealName
-        - CardType
-      StartTime: '2014-4-14T00:00:00Z'
-      EndTime: '2018-4-13T00:00:00Z'
-      Filter:
-        $proc: queryFilter
-        $args:
-          BranchName:
-            $ref: selectedResturants
-          MealName:
-            $ref: selectedMealTimes
-          CardType:
-            $ref: selectedCardTypes
-      Granularity: Daily
-      Metrics: UserCount
+      $proc: sliceQuery
+      $args:
+        time:
+          $ref: selectedDateRange
+
+        BranchName:
+          $ref: selectedResturants
+        MealName:
+          $ref: selectedMealTimes
+        CardType:
+          $ref: selectedCardTypes
+        
+        Collapse:
+          - BranchName
+          - MealName
+          - CardType
+        Granularity:
+          $ref: selectedGranularity
+        Metrics: UserCount
   
   incomePercentageByResturant:
     $proc: ranker
@@ -199,28 +184,6 @@ layout:
     direction: 'vertical'
     align: 'center'
     items:
-      # - id: 437b4f68-7505-4749-9663-63d39ec03cf3
-      #   type: CardContainer
-      #   props:
-      #     width: 500px
-      #     height: 500px
-      #     items:
-      #       - id: ddbd6cbe-0f7b-43d6-a1b3-6ffdc3dda101
-      #         type: FormInput
-      #         output: a
-      #         input: ui_a
-      #         width: 200px
-      # - id: 223a6d8c-7ee7-4dd6-9aea-62e7175c4b7c
-      #   type: FormInput
-      #   output: b
-      #   input: ui_b
-      #   props:
-      #     width: 200px
-      # - id: a8c5e778-87d1-4c81-8ecf-821a15d16e4c
-      #   type: FormInput
-      #   input: ui_sum
-      #   props:
-      #     width: 300px
       - id: cacaaa77-0878-4dee-851f-f9d13e2c6ac6
         type: MultiSelector
         input: ui_resturants
