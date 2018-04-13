@@ -1,0 +1,53 @@
+---
+name: 测试
+
+# Data flow diagram
+data:
+  title: PowerAI
+  _t_title_text:
+    text:
+      $ref: title
+  number: 0
+  _t_number_text:
+    text:
+      $proc: stringify
+      $args:
+        - $ref: number
+  newNumber:
+    $proc: sum
+    $args:
+      - $ref: number
+      - 1
+  _t_newNumber_text:
+    text:
+      $proc: stringify
+      $args:
+        - $ref: number
+  selectorValue: 午餐
+  selectorOptions:
+    $proc: stringify
+    $args:
+      - metrics: 'Revenue'
+        dimension: 'Period'
+
+  selector:
+    defaultValue:
+      $ref: selectorValue
+    options:
+      $ref: selectorOptions
+
+  selection:
+    text:
+      $ref: selectorValue
+
+# Dashboard Layout
+layout:
+  id: 9850ccd3-b5f9-4b96-afe7-e3650964cbe4
+  type: AdjustableContainer
+  props:
+    direction: 'vertical'
+    align: 'center'
+    items:
+      - id: f4f1f881-adba-4300-b1f6-4bb14658359a
+        type: ActiveDays
+        input: _t_newNumber_text
