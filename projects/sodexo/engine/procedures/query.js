@@ -57,3 +57,21 @@ export function sliceQuery({
     StartTime: queryTime(time.start),
   };
 }
+
+export function rankerQuery({
+  time,
+  Dimensions,
+  Metrics,
+  OrderBy,
+  ValueLimit,
+}) {
+  return {
+    StartTime: queryTime(time.start),
+    EndTime: queryTime(time.end),
+    Dimensions,
+    Metrics,
+    OrderBy,
+    ValueLimit,
+  };
+}
+
