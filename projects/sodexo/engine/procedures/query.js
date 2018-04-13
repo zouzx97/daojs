@@ -46,6 +46,6 @@ export function sliceQuery({
     }),
     Granularity,
     Metrics,
-    StartTime: queryTime(time.end),
+    StartTime: queryTime(time.start),
   };
 }
