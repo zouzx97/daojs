@@ -1,7 +1,11 @@
 import _ from 'lodash';
 
 function singlePredicate(dimension) {
-  return dimension.length === 1 && dimension[0] === '汇总' ?
+  if (_.isNil(dimension)) {
+    return null;
+  }
+
+  return !dimension.length === 1 && dimension[0] === '汇总' ?
     null :
     _.without(dimension, '汇总');
 }
@@ -10,12 +14,14 @@ export function queryFilter({
   BranchName,
   MealName,
   CardType,
+  ChargeType,
 }) {
   return [
     _.pickBy({
       BranchName: singlePredicate(BranchName),
       MealName: singlePredicate(MealName),
       CardType: singlePredicate(CardType),
+      ChargeType: singlePredicate(ChargeType),
     }, _.negate(_.isEmpty)),
     'FULL',
   ];
@@ -31,6 +37,7 @@ export function sliceQuery({
   BranchName,
   MealName,
   CardType,
+  ChargeType,
 
   Collapse,
   Granularity,
@@ -39,10 +46,11 @@ export function sliceQuery({
   return {
     Collapse,
     EndTime: queryTime(time.end),
-    Filter: queryFilter({
+    Filters: queryFilter({
       BranchName,
       MealName,
       CardType,
+      ChargeType,
     }),
     Granularity,
     Metrics,
