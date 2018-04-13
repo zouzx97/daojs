@@ -41,45 +41,28 @@ data:
   _time:
     start: '2018-01-01'
     end: '2018-02-01'
-  _time_start:
-    $proc: result
-    $args:
-      object:
-        $ref: _time
-      path: start
-  _time_end:
-    $proc: result
-    $args:
-      object:
-        $ref: _time
-      path: end
   revenueTrend:
     $proc: slice
     $args:
-      Collapse:
-        - BranchName
-        - MealName
-        - CardType
-      EndTime:
-        $proc: queryTime
-        $args:
-          $ref: _time_end
-      Filter:
-        $proc: queryFilter
-        $args:
-          BranchName:
-            $ref: BranchName
-          MealName:
-            $ref: MealName
-          CardType:
-            $ref: CardType
-      Granularity:
-        $ref: Granularity
-      Metrics: Revenue
-      StartTime:
-        $proc: queryTime
-        $args:
-          $ref: _time_start
+      $proc: sliceQuery
+      $args:
+        time:
+          $ref: _time
+
+        BranchName:
+          $ref: BranchName
+        MealName:
+          $ref: MealName
+        CardType:
+          $ref: CardType
+
+        Collapse:
+          - BranchName
+          - MealName
+          - CardType
+        Granularity:
+          $ref: Granularity
+        Metrics: Revenue
 
 # Dashboard Layout
 layout:
