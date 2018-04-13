@@ -62,21 +62,25 @@ data:
       $ref: resturants
     defaultValue:
       $ref: selectedResturants
+    label: 餐厅
   ui_mealTimes:
     enums:
       $ref: mealTimes
     defaultValue:
       $ref: selectedMealTimes
+    label: 用餐时段
   ui_cardTypes:
     enums:
       $ref: cardTypes
     defaultValue:
       $ref: selectedCardTypes
+    label: 卡类型
   ui_granularities:
     enums:
       $ref: granularities
     defaultValue:
       $ref: selectedGranularity
+    label: 粒度
 
   revenueTrend:
     $proc: slice
@@ -237,6 +241,8 @@ layout:
         type: TimeRange
         input: selectedDateRange
         output: selectedDateRange
+        props:
+          label: 时间
       - id: 4307046e-f941-444f-a2fe-562a80ae4734
         type: Trend
         input: revenueTrend

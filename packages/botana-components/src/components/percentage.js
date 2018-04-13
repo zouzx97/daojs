@@ -15,6 +15,7 @@ export default function Percentage(props) {
   return (
     <Donut
       source={source}
+      {...props}
     />
   );
 }
