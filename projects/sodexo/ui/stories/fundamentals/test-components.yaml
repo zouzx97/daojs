@@ -34,17 +34,29 @@ data:
       - 自助餐厅
       - 西餐厅
       - 意大利餐厅
+    defaultValue:
+      - 汇总
+  BranchName:
+    - 汇总
   mealSelector:
     enums:
       - 汇总
       - 早餐
       - 午餐
       - 晚餐
+    defaultValue:
+      - 汇总
+  MealName:
+    - 汇总
   cardSelector:
     enums:
       - 汇总
       - 员工卡
       - 访客卡
+    defaultValue:
+      - 汇总
+  CardType:
+    - 汇总
   granularitySelector:
     enums:
       - text: 按天
@@ -69,21 +81,24 @@ data:
   revenueTrend:
     $proc: slice
     $args:
-        Collapse:
-          - BranchName
-          - MealName
-          - CardType
-        EndTime:
-          $ref: _time_end
-        Filter:
-          - CardType:
-            - 员工卡
-            - 访客卡
-          - FULL
-        Granularity: Monthly
-        Metrics: Deposit
-        StartTime:
-          $ref: _time_start
+      Collapse:
+        - BranchName
+        - MealName
+        - CardType
+      EndTime: '2018-4-13T00:00:00Z'
+      Filter:
+        $proc: queryFilter
+        $args:
+          BranchName:
+            $ref: BranchName
+          MealName:
+            $ref: MealName
+          CardType:
+            $ref: CardType
+      Granularity: Monthly
+      Metrics: Revenue
+      StartTime: '2014-4-14T00:00:00Z'
+
 # Dashboard Layout
 layout:
   id: 9850ccd3-b5f9-4b96-afe7-e3650964cbe4
@@ -101,15 +116,21 @@ layout:
       - id: 2d3433a9-71b4-59ab-9547-5ac98c86f945
         type: MultiSelector
         input: branchSelector
+        output: BranchName
       - id: 66f86490-6000-5800-b172-efa849ff208f
         type: MultiSelector
         input: mealSelector
+        output: MealName
       - id: 5a11fe99-b9ce-5e37-97b5-d495c3b8a8a5
         type: MultiSelector
         input: cardSelector
+        output: CardType
       - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
         type: SingleSelector
         input: granularitySelector
       - id: 6f196a3c-d39e-52d3-ad13-e89806865275
         type: TimeRange
         output: _time
+      - id: 2cd4447f-2b1a-5c9a-9fc2-23371db57b2b
+        type: Trend
+        input: revenueTrend

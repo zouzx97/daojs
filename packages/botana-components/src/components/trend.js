@@ -5,6 +5,6 @@ const { LineWithDataZoom } = components;
 
 export default function Trend(props) {
   return (
-    <LineWithDataZoom {...props} />
+    <LineWithDataZoom source={props[0].Values} {...props} />
   );
 }
