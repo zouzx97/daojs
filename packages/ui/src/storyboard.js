@@ -6,23 +6,36 @@ import StoryboardContext from './storyboard-context';
 import Cell from './cell';
 
 export default class Storyboard extends React.Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { story, engine } = nextProps;
+    const { data, agent } = prevState;
+
+    return {
+      ...story,
+      agent: data === story.data ? agent : (() => {
+        if (agent) {
+          agent.terminate();
+        }
+        return story.data ? new WorkerAgent(engine).register({
+          getStory: _.constant(story.data),
+        }) : null;
+      })(),
+    };
+  }
+
   constructor(props) {
     super(props);
-
-    const { story, engine } = props;
-    const { data, layout } = story;
-
-    this.agent = new WorkerAgent(engine);
-    this.agent.register({ getStory: _.constant(data) });
-    this.layout = layout;
+    this.state = {};
   }
 
   render() {
-    return (
-      <StoryboardContext.Provider value={{ agent: this.agent }}>
-        <Cell agent={this.agent} {...this.layout} />
+    const { layout, agent } = this.state;
+
+    return agent ? (
+      <StoryboardContext.Provider value={{ agent }}>
+        <Cell agent={agent} {...layout} />
       </StoryboardContext.Provider>
-    );
+    ) : null;
   }
 }
 
