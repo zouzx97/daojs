@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React  from 'react';
 import PropTypes, { any } from 'prop-types';
 import Promise from 'bluebird';
 import { Spin } from 'antd';
@@ -8,25 +8,48 @@ Promise.config({
   cancellation: true,
 });
 
-export default class Cell extends PureComponent {
-  constructor(props) {
-    super(props);
-    const { input } = this.props;
-    this.state = {
+export default class Cell extends React.Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.type === prevState.type) {
+      return null;
+    }
+
+    return {
       data: null,
-      isLoadingData: Boolean(input),
+      isLoadingData: Boolean(nextProps.input),
 
       Control: null,
       isLoadingControl: true,
     };
+  }
 
-    this.loadControl();
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null,
+      isLoadingData: true,
+      Control: null,
+      isLoadingControl: true,
+    };
     this.loadData();
+    this.loadControl();
   }
 
   componentDidMount() {
     if (this.props.input) {
       this.props.agent.on(`cn-invalidate:${this.props.input}`, this.invalidate);
+    }
+  }
+
+  componentDidUpdate() {
+    const { isLoadingData, isLoadingControl } = this.state;
+
+    if (isLoadingData) {
+      this.loadData();
+    }
+
+    if (isLoadingControl) {
+      this.loadControl();
     }
   }
 
@@ -45,20 +68,27 @@ export default class Cell extends PureComponent {
   }
 
   invalidate = () => {
-    this.setState(() => ({ data: null, isLoadingData: true }));
+    this.setState(() => ({ isLoadingData: true }));
     this.loadData();
   }
 
   loadControl = () => {
-    this.loadControlPromise = ComponentRegistry.get(this.props.type);
-    this.loadControlPromise.then((Control) => {
-      this.setState(({ Control, isLoadingControl: false }));
-    });
+    if (this.props.type) {
+      const loadControlPromise = Promise.resolve(ComponentRegistry.get(this.props.type));
+      this.loadControlPromise = loadControlPromise;
+      this.loadControlPromise.then((Control) => {
+        if (this.loadControlPromise === loadControlPromise) {
+          this.setState(({ Control, isLoadingControl: false }));
+        }
+      });
+    } else {
+      this.setState({ isLoadingControl: false });
+    }
   }
 
   loadData = () => {
     if (this.props.input) {
-      const loadDataPromise = this.props.agent.call('get', this.props.input);
+      const loadDataPromise = Promise.resolve(this.props.agent.call('get', this.props.input));
 
       this.loadDataPromise = loadDataPromise;
       loadDataPromise.then((data) => {
@@ -66,6 +96,8 @@ export default class Cell extends PureComponent {
           this.setState({ data, isLoadingData: false });
         }
       });
+    } else {
+      this.setState({ isLoadingData: false });
     }
   }
 
