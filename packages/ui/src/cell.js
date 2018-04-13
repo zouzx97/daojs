@@ -40,7 +40,7 @@ export default class Cell extends PureComponent {
     }
 
     if (this.props.input) {
-      this.props.agent.off(`invalidate:${this.props.input}`, this.invalidate);
+      this.props.agent.off(`cn-invalidate:${this.props.input}`, this.invalidate);
     }
   }
 
