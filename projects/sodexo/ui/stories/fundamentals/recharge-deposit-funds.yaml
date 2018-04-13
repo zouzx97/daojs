@@ -1,0 +1,11 @@
+---
+id: b47efc62-da23-49d6-ab9c-2a734d53299a
+name: 充值及沉淀资金
+
+# Data flow diagram
+data:
+
+# Dashboard Layout
+layout:
+  id: 836bf8e9-ae20-42fa-9e08-8541f26db6f6
+  type: AdjustableContainer
