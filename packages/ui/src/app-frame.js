@@ -31,7 +31,7 @@ function renderCategorySubMenu(category) {
   return (
     <SubMenu key={category.id} title={reunderCategorySubMenuTitle(category)} >
       { isStoryEditable ? (
-        <Item key={0}>
+        <Item key="add-customer-story">
           <Icon type="plus-circle" />
           <span>添加</span>
         </Item>) : null }
@@ -137,7 +137,7 @@ export default class AppFrame extends React.Component {
               defaultOpenKeys={[this.state.selectedCategory]}
               mode="inline"
               onSelect={({ key }) => {
-                if (key === '0') {
+                if (key === 'add-customer-story') {
                   this.showCustomStoryEditor();
                 } else {
                   this.setState({ selectedStory: key });
