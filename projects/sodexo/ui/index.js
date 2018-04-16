@@ -9,6 +9,7 @@ import components from './components';
 import {
   Fundamentals,
   AIOperations,
+  CustomStories,
 } from './stories/index';
 
 ComponentRegistry.register(botanaComponents).register(components);
@@ -24,6 +25,11 @@ ReactDOM.render(
       id: 'b115caf6-620f-4a07-9cff-7f813d7e2c5f',
       name: '智能运营助手',
       stories: AIOperations,
+    }, {
+      id: '0dabd0a2-1124-54a3-98dc-685aa110d129',
+      name: '定制story',
+      stories: CustomStories,
+      isStoryEditable: true,
     }]}
     defaultStory="f60c9a14-8069-4ff1-ab51-aad9af6c5409"
     componentRegistry={ComponentRegistry}

@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import React from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import Storyboard from './storyboard';
+import CustomStoryEditor from './custom-story';
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu, Item } = Menu;
@@ -12,7 +13,29 @@ const contentStyle = {
   padding: 24,
 };
 
-function renderStoryMenuItem(story) {
+function renderStoryMenuItem(story, hasDeleteLink = false) {
+  if (hasDeleteLink === true) {
+    return (
+      <Item key={story.id}>
+        <Icon
+          type="close-circle"
+          onClick={(e) => {
+            e.preventDefault();
+            const existingStoriesIndexesJSON = localStorage.getItem('customeStories.index');
+            const existingStoriesIndexes = _.isEmpty(existingStoriesIndexesJSON) ?
+              [] : JSON.parse(existingStoriesIndexesJSON);
+
+            localStorage.setItem('customeStories.index', JSON.stringify(_.without(existingStoriesIndexes, story.id)));
+            localStorage.removeItem(`customeStories.${story.id}`);
+
+            window.location.reload();
+          }}
+        />
+        <span>{story.name}</span>
+      </Item>
+    );
+  }
+
   return <Item key={story.id}>{story.name}</Item>;
 }
 
@@ -26,10 +49,15 @@ function reunderCategorySubMenuTitle(category) {
 }
 
 function renderCategorySubMenu(category) {
-  const { stories } = category;
+  const { stories, isStoryEditable } = category;
   return (
     <SubMenu key={category.id} title={reunderCategorySubMenuTitle(category)} >
-      { _.map(stories, renderStoryMenuItem) }
+      { isStoryEditable ? (
+        <Item key="add-customer-story">
+          <Icon type="plus-circle" />
+          <span>添加</span>
+        </Item>) : null }
+      { _.map(stories, story => renderStoryMenuItem(story, isStoryEditable)) }
     </SubMenu>
   );
 }
@@ -59,7 +87,38 @@ export default class AppFrame extends React.Component {
       }, memo);
     }, {});
 
-    this.state = { selectedStory, selectedCategory };
+    this.state = { selectedStory, selectedCategory, isCustomStoryEditorVisible: false };
+
+    this.discardCustomStoryEditing = this.discardCustomStoryEditing.bind(this);
+    this.showCustomStoryEditor = this.showCustomStoryEditor.bind(this);
+    this.commitNewCustomStory = this.commitNewCustomStory.bind(this);
+  }
+
+  showCustomStoryEditor() {
+    this.setState({ isCustomStoryEditorVisible: true });
+  }
+
+  discardCustomStoryEditing() {
+    this.setState({ isCustomStoryEditorVisible: false });
+  }
+
+  commitNewCustomStory(storyJson) {
+    try {
+      const newStory = JSON.parse(storyJson);
+      const existingStoriesIndexesJSON = localStorage.getItem('customeStories.index');
+      const existingStoriesIndexes = _.isEmpty(existingStoriesIndexesJSON) ?
+        [] : JSON.parse(existingStoriesIndexesJSON);
+
+      localStorage.setItem('customeStories.index', JSON.stringify(_.uniq([newStory.id, ...existingStoriesIndexes])));
+      localStorage.setItem(`customeStories.${newStory.id}`, storyJson);
+
+      this.setState({ isCustomStoryEditorVisible: false });
+
+      window.location.reload();
+    } catch (error) {
+      alert('你的json格式似乎有问题，请打开debug tool查看详细信息');
+      window.console.log(error);
+    }
   }
 
   render() {
@@ -99,7 +158,13 @@ export default class AppFrame extends React.Component {
               defaultSelectedKeys={[this.state.selectedStory]}
               defaultOpenKeys={[this.state.selectedCategory]}
               mode="inline"
-              onSelect={({ key }) => { this.setState({ selectedStory: key }); }}
+              onSelect={({ key }) => {
+                if (key === 'add-customer-story') {
+                  this.showCustomStoryEditor();
+                } else {
+                  this.setState({ selectedStory: key });
+                }
+              }}
             >
               { _.map(categories, renderCategorySubMenu) }
             </Menu>
@@ -110,6 +175,11 @@ export default class AppFrame extends React.Component {
             </Content>
           </Layout>
         </Layout>
+        <CustomStoryEditor
+          isCustomStoryEditorVisible={this.state.isCustomStoryEditorVisible}
+          discardCustomStoryEditing={this.discardCustomStoryEditing}
+          commitNewCustomStory={this.commitNewCustomStory}
+        />
       </Layout>
     );
   }
