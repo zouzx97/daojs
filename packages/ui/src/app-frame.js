@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import Storyboard from './storyboard';
 
@@ -26,9 +26,14 @@ function reunderCategorySubMenuTitle(category) {
 }
 
 function renderCategorySubMenu(category) {
-  const { stories } = category;
+  const { stories, isStoryEditable } = category;
   return (
     <SubMenu key={category.id} title={reunderCategorySubMenuTitle(category)} >
+      { isStoryEditable ? (
+        <Item key={0}>
+          <Icon type="plus-circle" />
+          <span>添加</span>
+        </Item>) : null }
       { _.map(stories, renderStoryMenuItem) }
     </SubMenu>
   );
@@ -59,7 +64,18 @@ export default class AppFrame extends React.Component {
       }, memo);
     }, {});
 
-    this.state = { selectedStory, selectedCategory };
+    this.state = { selectedStory, selectedCategory, isCustomStoryEditorVisible: false };
+
+    this.discardCustomStoryEditing = this.discardCustomStoryEditing.bind(this);
+    this.showCustomStoryEditor = this.showCustomStoryEditor.bind(this);
+  }
+
+  showCustomStoryEditor() {
+    this.setState({ isCustomStoryEditorVisible: true });
+  }
+
+  discardCustomStoryEditing() {
+    this.setState({ isCustomStoryEditorVisible: false });
   }
 
   render() {
@@ -99,7 +115,13 @@ export default class AppFrame extends React.Component {
               defaultSelectedKeys={[this.state.selectedStory]}
               defaultOpenKeys={[this.state.selectedCategory]}
               mode="inline"
-              onSelect={({ key }) => { this.setState({ selectedStory: key }); }}
+              onSelect={({ key }) => {
+                if (key === '0') {
+                  this.showCustomStoryEditor();
+                } else {
+                  this.setState({ selectedStory: key });
+                }
+              }}
             >
               { _.map(categories, renderCategorySubMenu) }
             </Menu>
@@ -110,6 +132,16 @@ export default class AppFrame extends React.Component {
             </Content>
           </Layout>
         </Layout>
+        <Modal
+          title="Basic Modal"
+          visible={this.state.isCustomStoryEditorVisible}
+          onOk={this.commitNewCustomStory}
+          onCancel={this.discardCustomStoryEditing}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
       </Layout>
     );
   }
