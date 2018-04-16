@@ -81,10 +81,14 @@ export default class AppFrame extends React.Component {
   }
 
   commitNewCustomStory(storyJson) {
-    const existingStories = localStorage.getItem('customeStories') || [];
     const newStory = JSON.parse(storyJson);
+    const existingStoriesIndexesJSON = localStorage.getItem('customeStories.index');
+    const existingStoriesIndexes = _.isEmpty(existingStoriesIndexesJSON) ?
+      [] : JSON.parse(existingStoriesIndexesJSON);
 
-    localStorage.setItem('customeStories', JSON.stringify([newStory, ...existingStories]));
+    localStorage.setItem('customeStories.index', JSON.stringify(_.uniq([newStory.id, ...existingStoriesIndexes])));
+    localStorage.setItem(`customeStories.${newStory.id}`, storyJson);
+
     this.setState({ isCustomStoryEditorVisible: false });
 
     window.location.reload();
