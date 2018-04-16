@@ -63,6 +63,9 @@ data:
         Granularity:
           $ref: Granularity
         Metrics: Revenue
+  revenueTrendChartProps:
+    source:
+      $ref: revenueTrend
 
 # Dashboard Layout
 layout:
@@ -96,4 +99,4 @@ layout:
         output: _time
       - id: 2cd4447f-2b1a-5c9a-9fc2-23371db57b2b
         type: Trend
-        input: revenueTrend
+        input: revenueTrendChartProps
