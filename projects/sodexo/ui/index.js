@@ -12,9 +12,6 @@ import {
   CustomStories,
 } from './stories/index';
 
-console.log(AIOperations);
-console.log(CustomStories);
-
 ComponentRegistry.register(botanaComponents).register(components);
 ReactDOM.render(
   <AppFrame

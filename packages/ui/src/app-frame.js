@@ -86,6 +86,8 @@ export default class AppFrame extends React.Component {
 
     localStorage.setItem('customeStories', JSON.stringify([newStory, ...existingStories]));
     this.setState({ isCustomStoryEditorVisible: false });
+
+    window.location.reload();
   }
 
   render() {
