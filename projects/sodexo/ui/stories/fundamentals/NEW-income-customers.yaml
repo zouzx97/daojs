@@ -1,0 +1,299 @@
+---
+id: 5451174e-b670-502c-9849-a0fb9352194f
+name: '收入及客流'
+
+data:
+  resturants:
+    # - 汇总
+    - text: 汇总
+      value: ALLUP
+    - 员工餐厅
+    - 粤菜餐厅
+    - 北京小院
+    - 咖啡厅
+    - 咖喱屋
+    - 自助餐厅
+    - 西餐厅
+    - 意大利餐厅
+  selectedResturants:
+    # - 汇总
+    - ALLUP
+
+  mealTimes:
+    # - 汇总
+    - text: 汇总
+      value: ALLUP
+    - 早餐
+    - 午餐
+    - 晚餐
+  selectedMealTimes:
+    # - 汇总
+    - ALLUP
+
+  cardTypes:
+    # - 汇总
+    - text: 汇总
+      value: ALLUP
+    - 员工卡
+    - 访客卡
+  selectedCardTypes:
+    # - 汇总
+    - ALLUP
+
+  granularities:
+    - text: 按天
+      value: Daily
+    - text: 按周
+      value: Weekly
+    - text: 按月
+      value: Monthly
+  selectedGranularity: Daily
+
+  selectedDateRange:
+    start: '2018-01-13'
+    end: '2018-04-13'
+
+  queryStartTime:
+    $proc: template
+    $args:
+      string: '{{date}}T00:00:00Z'
+      model:
+        date:
+          $proc: result
+          object: selectedDateRange
+          path: start
+
+  queryEndTime:
+    $proc: template
+    $args:
+      string: '{{date}}T00:00:00Z'
+      model:
+        date:
+          $proc: result
+          object: selectedDateRange
+          path: end
+
+  ui_resturants:
+    enums:
+      $ref: resturants
+    defaultValue:
+      $ref: selectedResturants
+    label: 餐厅
+  ui_mealTimes:
+    enums:
+      $ref: mealTimes
+    defaultValue:
+      $ref: selectedMealTimes
+    label: 用餐时段
+  ui_cardTypes:
+    enums:
+      $ref: cardTypes
+    defaultValue:
+      $ref: selectedCardTypes
+    label: 卡类型
+  ui_granularities:
+    enums:
+      $ref: granularities
+    defaultValue: Daily
+    label: 粒度
+
+  revenueTrend:
+    $proc: slice
+    $args:
+      StartTime:
+        $ref: queryStartTime
+      EndTime:
+        $ref: queryEndTime
+      Filters:
+        -
+          BranchName:
+            $ref: selectedResturants
+          MealName:
+            $ref: selectedMealTimes
+          CardType:
+            $ref: selectedCardTypes
+      Collapse:
+        - BranchName
+        - MealName
+        - CardType
+      Granularity:
+        $ref: selectedGranularity
+      Metrics: Revenue
+  revenueTrendChartProps:
+    source:
+      $ref: revenueTrend
+
+  customerTrend:
+    $proc: slice
+    $args:
+      StartTime:
+        $ref: queryStartTime
+      EndTime:
+        $ref: queryEndTime
+      Filters:
+        -
+          BranchName:
+            $ref: selectedResturants
+          MealName:
+            $ref: selectedMealTimes
+          CardType:
+            $ref: selectedCardTypes
+      Collapse:
+        - BranchName
+        - MealName
+        - CardType
+      Granularity:
+        $ref: selectedGranularity
+      Metrics: UserCount
+  customerTrendChartProps:
+    source:
+      $ref: customerTrend
+
+  incomePercentageByResturant:
+    $proc: ranker
+    $args:
+      StartTime:
+        $ref: queryStartTime
+      EndTime:
+        $ref: queryEndTime
+      Dimensions:
+        - BranchName
+      Metrics: Revenue
+      OrderBy: DESC
+      ValueLimit: 10
+
+  incomePercentageByMeal:
+    $proc: ranker
+    $args:
+      StartTime:
+        $ref: queryStartTime
+      EndTime:
+        $ref: queryEndTime
+      Dimensions:
+        - MealName
+      Metrics: Revenue
+      OrderBy: DESC
+      ValueLimit: 10
+
+  incomePercentageByCard:
+    $proc: ranker
+    $args:
+      StartTime:
+        $ref: queryStartTime
+      EndTime:
+        $ref: queryEndTime
+      Dimensions:
+        - CardType
+      Metrics: Revenue
+      OrderBy: DESC
+      ValueLimit: 10
+
+  customerPercentageByResturant:
+    $proc: ranker
+    $args:
+      StartTime:
+        $ref: queryStartTime
+      EndTime:
+        $ref: queryEndTime
+      Dimensions:
+        - BranchName
+      Metrics: UserCount
+      OrderBy: DESC
+      ValueLimit: 10
+
+  customerPercentageByMeal:
+    $proc: ranker
+    $args:
+      StartTime:
+        $ref: queryStartTime
+      EndTime:
+        $ref: queryEndTime
+      Dimensions:
+        - MealName
+      Metrics: UserCount
+      OrderBy: DESC
+      ValueLimit: 10
+
+  customerPercentageByCard:
+    $proc: ranker
+    $args:
+      StartTime:
+        $ref: queryStartTime
+      EndTime:
+        $ref: queryEndTime
+      Dimensions:
+        - CardType
+      Metrics: UserCount
+      OrderBy: DESC
+      ValueLimit: 10
+
+
+layout:
+  id: 90b2ff58-c292-48ff-8b8e-703b50a900e4
+  type: FlexboxContainer
+  props:
+    direction: 'vertical'
+    align: 'center'
+    items:
+      - id: cacaaa77-0878-4dee-851f-f9d13e2c6ac6
+        type: MultiSelector
+        input: ui_resturants
+        output: selectedResturants
+      - id: a36419d4-3931-4f72-a2cb-dbd3e611902c
+        type: MultiSelector
+        input: ui_mealTimes
+        output: selectedMealTimes
+      - id: b0ab148c-1eb2-48a0-8415-f5f22532ebed
+        type: MultiSelector
+        input: ui_cardTypes
+        output: selectedCardTypes
+      - id: 426a72ad-6176-4d56-a3f7-10ff1c3a692e
+        type: SingleSelector
+        input: ui_granularities
+        output: selectedGranularity
+      - id: ed557de6-017a-4a87-bf87-a2ea6e34ea6e
+        type: TimeRange
+        input: selectedDateRange
+        output: selectedDateRange
+        props:
+          label: 时间
+      - id: 4307046e-f941-444f-a2fe-562a80ae4734
+        type: Trend
+        input: revenueTrendChartProps
+        props:
+          title: 收入趋势
+      - id: 2f93fe88-1bac-45ab-b710-930449a2379e
+        type: Percentage
+        input: incomePercentageByResturant
+        props:
+          title: 各餐厅收入比例
+      - id: d38e22bf-ef06-46b0-869f-d89b518df0f9
+        type: Percentage
+        input: incomePercentageByMeal
+        props:
+          title: 各用餐时段收入比例
+      - id: 481276bf-d8a7-4063-914a-e70e83afaad6
+        type: Percentage
+        input: incomePercentageByCard
+        props:
+          title: 各卡种收入比例
+      - id: 62587c53-7ee8-4e6e-adae-5115ea36307b
+        type: Trend
+        input: customerTrendChartProps
+        props:
+          title: 用餐人数趋势
+      - id: 0a394c47-431c-4be3-81fe-ff0e4f27a548
+        type: Percentage
+        input: customerPercentageByResturant
+        props:
+          title: 各餐厅客流比例
+      - id: b593de2d-e460-4295-ac28-0727e9088656
+        type: Percentage
+        input: customerPercentageByMeal
+        props:
+          title: 各用餐时段客流比例
+      - id: caa308af-f50c-4fa4-b0d8-cf83aa030f12
+        type: Percentage
+        input: customerPercentageByCard
+        props:
+          title: 各卡种客流比例
