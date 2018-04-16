@@ -1,3 +1,3 @@
 const customStories = localStorage.getItem('customeStories');
 
-export default customStories;
+export default JSON.parse(customStories);

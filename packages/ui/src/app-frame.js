@@ -3,6 +3,7 @@ import React from 'react';
 import { Layout, Menu, Icon, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import Storyboard from './storyboard';
+import CustomStoryEditor from './custom-story';
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu, Item } = Menu;
@@ -68,6 +69,7 @@ export default class AppFrame extends React.Component {
 
     this.discardCustomStoryEditing = this.discardCustomStoryEditing.bind(this);
     this.showCustomStoryEditor = this.showCustomStoryEditor.bind(this);
+    this.commitNewCustomStory = this.commitNewCustomStory.bind(this);
   }
 
   showCustomStoryEditor() {
@@ -75,6 +77,14 @@ export default class AppFrame extends React.Component {
   }
 
   discardCustomStoryEditing() {
+    this.setState({ isCustomStoryEditorVisible: false });
+  }
+
+  commitNewCustomStory(storyJson) {
+    const existingStories = localStorage.getItem('customeStories') || [];
+    const newStory = JSON.parse(storyJson);
+
+    localStorage.setItem('customeStories', JSON.stringify([newStory, ...existingStories]));
     this.setState({ isCustomStoryEditorVisible: false });
   }
 
@@ -132,16 +142,11 @@ export default class AppFrame extends React.Component {
             </Content>
           </Layout>
         </Layout>
-        <Modal
-          title="Basic Modal"
-          visible={this.state.isCustomStoryEditorVisible}
-          onOk={this.commitNewCustomStory}
-          onCancel={this.discardCustomStoryEditing}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
+        <CustomStoryEditor
+          isCustomStoryEditorVisible={this.state.isCustomStoryEditorVisible}
+          discardCustomStoryEditing={this.discardCustomStoryEditing}
+          commitNewCustomStory={this.commitNewCustomStory}
+        />
       </Layout>
     );
   }

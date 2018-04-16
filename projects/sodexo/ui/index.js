@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom';
 import {
   AppFrame,
   ComponentRegistry,
-  CustomStories,
 } from '@daojs/ui';
 import * as botanaComponents from '@daojs/botana-components';
 import components from './components';
 import {
   Fundamentals,
   AIOperations,
+  CustomStories,
 } from './stories/index';
+
+console.log(AIOperations);
+console.log(CustomStories);
 
 ComponentRegistry.register(botanaComponents).register(components);
 ReactDOM.render(
