@@ -103,10 +103,7 @@ export default class Cell extends React.Component {
   }
 
   render() {
-    const {
-      id,
-      props,
-    } = this.props;
+    const { props } = this.props;
 
     const {
       Control,
@@ -119,14 +116,13 @@ export default class Cell extends React.Component {
       return <Spin />;
     }
     return (
-      <Control id={id} {...props} {...data} update={this.updateData} />
+      <Control {...props} {...data} update={this.updateData} />
     );
   }
 }
 
 Cell.propTypes = {
   type: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
   props: PropTypes.objectOf(any),
   agent: PropTypes.objectOf(any).isRequired,
   input: PropTypes.string,

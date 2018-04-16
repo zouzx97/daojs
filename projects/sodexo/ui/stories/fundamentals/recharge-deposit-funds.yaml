@@ -125,50 +125,72 @@ data:
       $ref: ui_deposit_total_trend
 # Dashboard Layout
 layout:
-  id: 836bf8e9-ae20-42fa-9e08-8541f26db6f6
-  type: FlexboxContainer
+  type: GridLayout
   props:
-    direction: 'vertical'
-    align: 'center'
-    items:
-      - id: dbca7612-1847-4262-82c8-9db7a0e30004
-        type: MultiSelector
-        input: ui_card_selector
-        output: p_card_type
-      - id: b48b7573-b3e7-4bfe-871f-1d7df3ec83c7
-        type: SingleSelector
-        input: ui_granularity_selector
-        output: p_granularity
-      - id: f636790b-2b10-4887-9140-d7e30f52ba58
-        type: TimeRange
-        input: ui_time_range
-        output: p_time
-        props:
-          label: 时间
-      - id: 16166826-753e-4f7d-94ac-6864f51165a5
-        type: Trend
-        input: ui_recharge_trend_ChartProps
-        props:
-          title: 充值收入趋势
-      - id: 7c376695-9abf-430d-8cf4-11ff1f3e0383
-        type: Trend
-        input: ui_average_charge_trend_ChartProps
-        props:
-          title: 每用户平均充值变化
-      # - id: d3458857-8ab9-40b2-8de0-63f5437a13b8
-      #   type: Trend
-      #   input: ui_charge_count_ChartProps
-      #   props:
-      #     title: 充值次数变化
-      - id: df96303d-385b-4531-80ca-cb87377816fb
-        type: Trend
-        input: ui_deposit_trend_ChartProps
-        props:
-          title: 月沉淀资金变化
-      - id: fbe769c1-7691-43b8-add9-dcca6c8b1a8e
-        type: Trend
-        input: ui_deposit_total_trend_ChartProps
-        props:
-          title: 沉淀资金累计
-
-
+    gutter: 20
+    rows:
+      - id: a5abfdac-e821-5c53-a00a-acdf4ab66695
+        cols:
+          - id: dbca7612-1847-4262-82c8-9db7a0e30004
+            content:
+              type: MultiSelector
+              input: ui_card_selector
+              output: p_card_type
+      - id: 4243d0af-99aa-5fe3-87dc-6c87c467563d
+        gutter: 10
+        cols:
+          - id: b48b7573-b3e7-4bfe-871f-1d7df3ec83c7
+            span: 4
+            content:
+              type: SingleSelector
+              input: ui_granularity_selector
+              output: p_granularity
+          - id: f636790b-2b10-4887-9140-d7e30f52ba58
+            offset: 12
+            span: 8
+            content:
+              type: TimeRange
+              input: ui_time_range
+              output: p_time
+              props:
+                label: 时间
+      - id: 8deaf45c-fc3f-5667-b2d5-1e642bbea264
+        cols:
+          - id: 16166826-753e-4f7d-94ac-6864f51165a5
+            content:
+              type: Trend
+              input: ui_recharge_trend_ChartProps
+              props:
+                title: 充值收入趋势
+      - id: baa44e19-253a-55ff-84f7-f9cf000cb39f
+        cols:
+          - id: 7c376695-9abf-430d-8cf4-11ff1f3e0383
+            content:
+              type: Trend
+              input: ui_average_charge_trend_ChartProps
+              props:
+                title: 每用户平均充值变化
+      # - id: f3e3cf5a-ff05-5827-b9af-175dba1b346b
+      #   cols:
+      #     - id: d3458857-8ab9-40b2-8de0-63f5437a13b8
+      #       content:
+      #         type: Trend
+      #         input: ui_charge_count_ChartProps
+      #         props:
+      #           title: 充值次数变化
+      - id: fb3b1d69-49b4-5756-b149-2221d6b1244c
+        cols:
+          - id: df96303d-385b-4531-80ca-cb87377816fb
+            content:
+              type: Trend
+              input: ui_deposit_trend_ChartProps
+              props:
+                title: 月沉淀资金变化
+      - id: 8907a4ff-1698-5d35-8e80-245f846b9d48
+        cols:
+          - id: fbe769c1-7691-43b8-add9-dcca6c8b1a8e
+            content:
+              type: Trend
+              input: ui_deposit_total_trend_ChartProps
+              props:
+                title: 沉淀资金累计
