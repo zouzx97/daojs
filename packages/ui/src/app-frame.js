@@ -13,7 +13,29 @@ const contentStyle = {
   padding: 24,
 };
 
-function renderStoryMenuItem(story) {
+function renderStoryMenuItem(story, hasDeleteLink = false) {
+  if (hasDeleteLink === true) {
+    return (
+      <Item key={story.id}>
+        <Icon
+          type="close-circle"
+          onClick={(e) => {
+            e.preventDefault();
+            const existingStoriesIndexesJSON = localStorage.getItem('customeStories.index');
+            const existingStoriesIndexes = _.isEmpty(existingStoriesIndexesJSON) ?
+              [] : JSON.parse(existingStoriesIndexesJSON);
+
+            localStorage.setItem('customeStories.index', JSON.stringify(_.without(existingStoriesIndexes, story.id)));
+            localStorage.removeItem(`customeStories.${story.id}`);
+
+            window.location.reload();
+          }}
+        />
+        <span>{story.name}</span>
+      </Item>
+    );
+  }
+
   return <Item key={story.id}>{story.name}</Item>;
 }
 
@@ -35,7 +57,7 @@ function renderCategorySubMenu(category) {
           <Icon type="plus-circle" />
           <span>添加</span>
         </Item>) : null }
-      { _.map(stories, renderStoryMenuItem) }
+      { _.map(stories, story => renderStoryMenuItem(story, isStoryEditable)) }
     </SubMenu>
   );
 }
