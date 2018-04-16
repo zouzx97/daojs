@@ -31,7 +31,6 @@ data:
   selectedCardTypes:
     - 汇总
 
-
   selectedGranularity: Daily
 
   selectedDateRange:
@@ -93,7 +92,7 @@ data:
           $ref: selectedMealTimes
         CardType:
           $ref: selectedCardTypes
-        
+
         Collapse:
           - BranchName
           - MealName
@@ -101,7 +100,10 @@ data:
         Granularity:
           $ref: selectedGranularity
         Metrics: Revenue
-  
+  revenueTrendChartProps:
+    source:
+      $ref: revenueTrend
+
   customerTrend:
     $proc: slice
     $args:
@@ -116,7 +118,7 @@ data:
           $ref: selectedMealTimes
         CardType:
           $ref: selectedCardTypes
-        
+
         Collapse:
           - BranchName
           - MealName
@@ -124,7 +126,10 @@ data:
         Granularity:
           $ref: selectedGranularity
         Metrics: UserCount
-  
+  customerTrendChartProps:
+    source:
+      $ref: customerTrend
+
   incomePercentageByResturant:
     $proc: ranker
     $args:
@@ -138,7 +143,7 @@ data:
         Metrics: Revenue
         OrderBy: DESC
         ValueLimit: 10
-  
+
   incomePercentageByMeal:
     $proc: ranker
     $args:
@@ -152,7 +157,7 @@ data:
         Metrics: Revenue
         OrderBy: DESC
         ValueLimit: 10
-  
+
   incomePercentageByCard:
     $proc: ranker
     $args:
@@ -180,7 +185,7 @@ data:
         Metrics: UserCount
         OrderBy: DESC
         ValueLimit: 10
-  
+
   customerPercentageByMeal:
     $proc: ranker
     $args:
@@ -220,21 +225,18 @@ layout:
           - id: 48d9617d-1482-5ed5-b68d-85ae085fd2bd
             span: 8
             content:
-              id: cacaaa77-0878-4dee-851f-f9d13e2c6ac6
               type: MultiSelector
               input: ui_resturants
               output: selectedResturants
           - id: a36419d4-3931-4f72-a2cb-dbd3e611902c
             span: 8
             content:
-              id: be648b02-c640-5407-b3e9-f00d6a01d7e8
               type: MultiSelector
               input: ui_mealTimes
               output: selectedMealTimes
           - id: b0ab148c-1eb2-48a0-8415-f5f22532ebed
             span: 8
             content:
-              id: 37491829-fa8b-5449-b397-923f8ba60290
               type: MultiSelector
               input: ui_cardTypes
               output: selectedCardTypes
@@ -262,7 +264,7 @@ layout:
           - id: 4307046e-f941-444f-a2fe-562a80ae4734
             content:
               type: Trend
-              input: revenueTrend
+              input: revenueTrendChartProps
               props:
                 title: 收入趋势
       - id: 392c62aa-a4e5-59ec-b4c4-969b45ec0470
@@ -271,7 +273,6 @@ layout:
         - id: 2f93fe88-1bac-45ab-b710-930449a2379e
           span: 8
           content:
-            id: 4cda557b-0f45-5f54-bb44-4f6715669cef
             type: Percentage
             input: incomePercentageByResturant
             props:
@@ -279,7 +280,6 @@ layout:
         - id: d38e22bf-ef06-46b0-869f-d89b518df0f9
           span: 8
           content:
-            id: 8a6f304a-f8f8-59e4-9231-84ed8b4bd0d9
             type: Percentage
             input: incomePercentageByMeal
             props:
@@ -287,7 +287,6 @@ layout:
         - id: 481276bf-d8a7-4063-914a-e70e83afaad6
           span: 8
           content:
-            id: bdcface5-0561-5942-bbbf-0a23a51a0d59
             type: Percentage
             input: incomePercentageByCard
             props:
@@ -296,9 +295,8 @@ layout:
         cols:
         - id: 62587c53-7ee8-4e6e-adae-5115ea36307b
           content:
-            id: c613d5fa-8bd4-5b40-9455-a3d2b97102d3
             type: Trend
-            input: customerTrend
+            input: customerTrendChartProps
             props:
               title: 用餐人数趋势
       - id: ec91008e-31f5-5a04-b377-708457585bff
@@ -306,7 +304,6 @@ layout:
         - id: 0a394c47-431c-4be3-81fe-ff0e4f27a548
           span: 8
           content:
-            id: 56b7e385-4fea-5e5f-b1fd-0706b93a634a
             type: Percentage
             input: customerPercentageByResturant
             props:
@@ -314,7 +311,6 @@ layout:
         - id: b593de2d-e460-4295-ac28-0727e9088656
           span: 8
           content:
-            id: c0abe78c-ae92-56c4-a759-3ad682112c88
             type: Percentage
             input: customerPercentageByMeal
             props:
@@ -322,7 +318,6 @@ layout:
         - id: caa308af-f50c-4fa4-b0d8-cf83aa030f12
           span: 8
           content:
-            id: 233909c7-f338-57fc-9f26-db9049ce5b9a
             type: Percentage
             input: customerPercentageByCard
             props:
