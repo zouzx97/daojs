@@ -77,7 +77,7 @@ data:
           $ref: selectedMealTimes
         CardType:
           $ref: selectedCardTypes
-        
+
         Collapse:
           - BranchName
           - MealName
@@ -85,7 +85,10 @@ data:
         Granularity:
           $ref: selectedGranularity
         Metrics: Revenue
-  
+  revenueTrendChartProps:
+    source:
+      $ref: revenueTrend
+
   customerTrend:
     $proc: slice
     $args:
@@ -100,7 +103,7 @@ data:
           $ref: selectedMealTimes
         CardType:
           $ref: selectedCardTypes
-        
+
         Collapse:
           - BranchName
           - MealName
@@ -108,7 +111,10 @@ data:
         Granularity:
           $ref: selectedGranularity
         Metrics: UserCount
-  
+  customerTrendChartProps:
+    source:
+      $ref: customerTrend
+
   incomePercentageByResturant:
     $proc: ranker
     $args:
@@ -122,7 +128,7 @@ data:
         Metrics: Revenue
         OrderBy: DESC
         ValueLimit: 10
-  
+
   incomePercentageByMeal:
     $proc: ranker
     $args:
@@ -136,7 +142,7 @@ data:
         Metrics: Revenue
         OrderBy: DESC
         ValueLimit: 10
-  
+
   incomePercentageByCard:
     $proc: ranker
     $args:
@@ -164,7 +170,7 @@ data:
         Metrics: UserCount
         OrderBy: DESC
         ValueLimit: 10
-  
+
   customerPercentageByMeal:
     $proc: ranker
     $args:
@@ -226,7 +232,7 @@ layout:
           label: 时间
       - id: 4307046e-f941-444f-a2fe-562a80ae4734
         type: Trend
-        input: revenueTrend
+        input: revenueTrendChartProps
         props:
           title: 收入趋势
       - id: 2f93fe88-1bac-45ab-b710-930449a2379e
@@ -246,7 +252,7 @@ layout:
           title: 各卡种收入比例
       - id: 62587c53-7ee8-4e6e-adae-5115ea36307b
         type: Trend
-        input: customerTrend
+        input: customerTrendChartProps
         props:
           title: 用餐人数趋势
       - id: 0a394c47-431c-4be3-81fe-ff0e4f27a548
