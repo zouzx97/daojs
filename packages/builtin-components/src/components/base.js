@@ -33,13 +33,7 @@ export default class BaseChart extends PureComponent {
   getAxisData() {
     const axisDim = this.getAxisDimension();
     return _.chain(this.getSource())
-      .map((row) => {
-        const rawData = row[axisDim];
-        if (axisDim === 'timestamp' && _.isString(rawData)) {
-          return rawData.replace('T00:00:00Z', '').replace('T00:00:00.000Z', '');
-        }
-        return rawData;
-      })
+      .map(row => this.axisValueConverter(row[axisDim], axisDim))
       .value();
   }
 
@@ -76,6 +70,13 @@ export default class BaseChart extends PureComponent {
 
   getEvents() {
     return {};
+  }
+
+  axisValueConverter(value, key) {
+    if (_.isString(key) && _.toLower(key) === 'timestamp' && _.isString(value)) {
+      return value.replace('T00:00:00Z', '').replace('T00:00:00.000Z', '');
+    }
+    return value;
   }
 
   render() {
