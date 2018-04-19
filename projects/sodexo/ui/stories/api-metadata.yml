@@ -69,14 +69,17 @@
       - Deposit
       - ChargeCount
       - AvgChargeAmount
+    Dimension:
+      type: string
+      enum:
+      - BranchName
+      - MealName
+      - CardType
+
     requestDimensions:
       type: array
       items:
-        type: string
-        enum:
-        - BranchName
-        - MealName
-        - CardType
+        $ref: '#/definitions/Dimension'
 
     OrderBy:
       type: string
