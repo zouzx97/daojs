@@ -29,54 +29,54 @@
     requestFilters:
       type: array
       items:
-        -
-          CardType:
-            type: array
-            items:
-              $ref: "#/definitions/CardType"
-          ChargeType:
-            type: array
-            items:
-              $ref: "#/definitions/ChargeType"
-          MealName:
-            type: array
-            items:
-              $ref: "#/definitions/MealName"
-          BranchName:
-            type: array
-            items:
-              $ref: "#/definitions/BranchName"
-        -
-          type: string
-          enum:
-            - FULL
+      -
+        CardType:
+          type: array
+          items:
+            $ref: "#/definitions/CardType"
+        ChargeType:
+          type: array
+          items:
+            $ref: "#/definitions/ChargeType"
+        MealName:
+          type: array
+          items:
+            $ref: "#/definitions/MealName"
+        BranchName:
+          type: array
+          items:
+            $ref: "#/definitions/BranchName"
+      -
+        type: string
+        enum:
+        - FULL
     time:
       type: string
       format: date-time
     Granularity:
       type: string
       enum:
-        - Daily
-        - Weekly
-        - Monthly
+      - Daily
+      - Weekly
+      - Monthly
     Metric:
       type: string
       enum:
-        - Revenue
-        - UserCount
-        - ChargeAmount
-        - DepositTotal
-        - Deposit
-        - ChargeCount
-        - AvgChargeAmount
+      - Revenue
+      - UserCount
+      - ChargeAmount
+      - DepositTotal
+      - Deposit
+      - ChargeCount
+      - AvgChargeAmount
     requestDimensions:
       type: array
       items:
         type: string
         enum:
-          - BranchName
-          - MealName
-          - CardType
+        - BranchName
+        - MealName
+        - CardType
 
     OrderBy:
       type: string
@@ -164,7 +164,7 @@
       type: object
       properties:
         request:
-          type: object
+          type:
           properties:
             Dimensions:
               $ref: "#/definitions/requestDimensions"
