@@ -1,5 +1,25 @@
 ---
   definitions:
+    AvgChargeAmount:
+      type: number
+      format: currency
+    ChargeAmount:
+      type: number
+      format: currency
+    ChargeCount:
+      type: integer
+    Deposit:
+      type: number
+      format: currency
+    DepositTotal:
+      type: number
+      format: currency
+    Revenue:
+      type: number
+      format: currency
+    UserCount:
+      type: integer
+
     CardType:
       type: string
       enum:
@@ -62,19 +82,20 @@
     Metric:
       type: string
       enum:
+      - AvgChargeAmount
+      - ChargeAmount
+      - ChargeCount
+      - Deposit
+      - DepositTotal
       - Revenue
       - UserCount
-      - ChargeAmount
-      - DepositTotal
-      - Deposit
-      - ChargeCount
-      - AvgChargeAmount
     Dimension:
       type: string
       enum:
       - BranchName
-      - MealName
       - CardType
+      - ChargeType
+      - MealName
 
     requestDimensions:
       type: array
