@@ -4,10 +4,6 @@ name: 测试
 
 # Data flow diagram
 data:
-  title: PowerAI Test
-  bestUser:
-    department: STC
-    discipline: SDE
   branchSelector:
     enums:
       $proc: getEnumSelectorProps
@@ -75,9 +71,6 @@ layout:
     direction: 'vertical'
     align: 'center'
     items:
-      - id: 131e8217-1547-514a-8644-171d5252bfce
-        type: BestUser
-        input: bestUser
       - id: 2d3433a9-71b4-59ab-9547-5ac98c86f945
         type: MultiSelector
         input: branchSelector

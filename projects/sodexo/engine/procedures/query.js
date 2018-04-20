@@ -5,9 +5,9 @@ function singlePredicate(dimension) {
     return null;
   }
 
-  return !dimension.length === 1 && dimension[0] === '汇总' ?
+  return !dimension.length === 1 && dimension[0] === null ?
     null :
-    _.without(dimension, '汇总');
+    _.without(dimension, null);
 }
 
 export function queryFilter({

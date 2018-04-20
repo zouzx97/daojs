@@ -4,7 +4,6 @@ name: '收入及客流'
 
 data:
   resturants:
-    # - 汇总
     - text: 汇总
       value: ALLUP
     - 员工餐厅
@@ -16,28 +15,23 @@ data:
     - 西餐厅
     - 意大利餐厅
   selectedResturants:
-    # - 汇总
     - ALLUP
 
   mealTimes:
-    # - 汇总
     - text: 汇总
       value: ALLUP
     - 早餐
     - 午餐
     - 晚餐
   selectedMealTimes:
-    # - 汇总
     - ALLUP
 
   cardTypes:
-    # - 汇总
     - text: 汇总
       value: ALLUP
     - 员工卡
     - 访客卡
   selectedCardTypes:
-    # - 汇总
     - ALLUP
 
   granularities:
