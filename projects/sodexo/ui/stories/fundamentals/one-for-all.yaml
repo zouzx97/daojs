@@ -1,9 +1,28 @@
 ---
-id: 7fdc3a32-1369-45dc-80a8-5db7ebe8299e
-name: 测试
+id: c4718aca-2705-5941-be66-afe4b08f3a08
+name: 合一
 
 # Data flow diagram
 data:
+  metricSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: Metric
+    defaultValue: Revenue
+  Metric: Revenue
+  insightSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: insightProcedure
+    defaultValue: slice
+  insight: slice
+
+  dimensionSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: Dimension
+    defaultValue: BranchName
+  Dimension: BranchName
   branchSelector:
     enums:
       $proc: getEnumSelectorProps
@@ -28,12 +47,47 @@ data:
       - null
   CardType:
     - null
+  chargeSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: ChargeType
+    defaultValue:
+      - null
+  ChargeType:
+    - null
   granularitySelector:
     enums:
       $proc: getEnumSelectorProps
       $args: Granularity
     defaultValue: Daily
   Granularity: Daily
+  orderSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: OrderBy
+    defaultValue: DESC
+  OrderBy: DESC
+  limitSelector:
+    enums:
+      - 10
+      - 20
+      - 50
+      - 100
+    defaultValue: 10
+  ValueLimit: 10
+  clientInsightSelector:
+    enums:
+      -
+        value: identity
+        text: 原数据
+      -
+        value: cumulative
+        text: 累积数据
+      -
+        value: growthRate
+        text: 增长率
+    defaultValue: identity
+  clientInsight: identity
   _time:
     start: '2018-01-01'
     end: '2018-02-01'
@@ -65,12 +119,24 @@ data:
 
 # Dashboard Layout
 layout:
-  id: 9850ccd3-b5f9-4b96-afe7-e3650964cbe4
+  id: e1b7ad85-83a2-543a-bd49-b3ed11d6ea11
   type: FlexboxContainer
   props:
     direction: 'vertical'
     align: 'center'
     items:
+      - id: 0c4fbf8b-6e5f-5a2e-80e0-1992b3cbc94e
+        type: SingleSelector
+        input: metricSelector
+        output: Metric
+      - id: 0c4fbf8b-6e5f-5a2e-80e0-1992b3cbc94e
+        type: SingleSelector
+        input: insightSelector
+        output: insight
+      - id: 0c4fbf8b-6e5f-5a2e-80e0-1992b3cbc94e
+        type: SingleSelector
+        input: dimensionSelector
+        output: Dimension
       - id: 2d3433a9-71b4-59ab-9547-5ac98c86f945
         type: MultiSelector
         input: branchSelector
@@ -83,10 +149,26 @@ layout:
         type: MultiSelector
         input: cardSelector
         output: CardType
+      - id: c2685cea-7997-5358-aacf-656330b94911
+        type: MultiSelector
+        input: chargeSelector
+        output: ChargeType
       - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
         type: SingleSelector
         input: granularitySelector
         output: Granularity
+      - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
+        type: SingleSelector
+        input: orderSelector
+        output: OrderBy
+      - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
+        type: SingleSelector
+        input: limitSelector
+        output: ValueLimit
+      - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
+        type: SingleSelector
+        input: clientInsightSelector
+        output: clientInsight
       - id: 6f196a3c-d39e-52d3-ad13-e89806865275
         type: TimeRange
         output: _time
