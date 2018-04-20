@@ -112,9 +112,16 @@
         - DESC
         - ASC
 
+    insightProcedure:
+      type: string
+      enum:
+        - predicate
+        - ranker
+        - slice
+
   type: object
   properties:
-    Predicate:
+    predicate:
       type: object
       properties:
         request:
@@ -152,7 +159,7 @@
                       type: number
                     Value:
                       type: number
-    Slice:
+    slice:
       type: object
       properties:
         request:
@@ -188,7 +195,7 @@
                       $ref: "#/definitions/time"
                     Value:
                       type: number
-    Ranker:
+    ranker:
       type: object
       properties:
         request:
