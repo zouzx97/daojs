@@ -4,7 +4,9 @@ name: '收入及客流'
 
 data:
   resturants:
-    - 汇总
+    -
+      text: 汇总
+      value: null
     - 员工餐厅
     - 粤菜餐厅
     - 北京小院
@@ -14,22 +16,26 @@ data:
     - 西餐厅
     - 意大利餐厅
   selectedResturants:
-    - 汇总
+    - null
 
   mealTimes:
-    - 汇总
+    -
+      text: 汇总
+      value: null
     - 早餐
     - 午餐
     - 晚餐
   selectedMealTimes:
-    - 汇总
+    - null
 
   cardTypes:
-    - 汇总
+    -
+      text: 汇总
+      value: null
     - 员工卡
     - 访客卡
   selectedCardTypes:
-    - 汇总
+    - null
 
   selectedGranularity: Daily
 
@@ -77,7 +83,7 @@ data:
       CardType:
         $ref: selectedCardTypes
     Collapse:
-    
+
   revenueTrend:
     $proc: slice
     $args:

@@ -22,21 +22,25 @@
 
     CardType:
       type: string
+      nullable: true
       enum:
       - 员工卡
       - 访客卡
     ChargeType:
       type: string
+      nullable: true
       enum:
       - 充值
     MealName:
       type: string
+      nullable: true
       enum:
       - 早餐
       - 午餐
       - 晚餐
     BranchName:
       type: string
+      nullable: true
       enum:
       - 员工餐厅
       - 粤菜餐厅

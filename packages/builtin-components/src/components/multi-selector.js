@@ -36,7 +36,7 @@ export default class MultiSelector extends Component {
       defaultValue,
       enums,
     } = this.props;
-    const opts = _.map(enums, item => ({ value: item.value || item, text: item.text || item }));
+    const opts = _.map(enums, item => (_.isString(item) ? { value: item, text: item } : item));
 
     const selector = enums.length > 0 ? (
       <Select
