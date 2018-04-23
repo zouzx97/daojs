@@ -35,8 +35,7 @@
     "testEnvironment": "node"
   },
   "scripts": {
-    "pretest": "eslint .",
-    "test": "jest"
+    "pretest": "eslint ."
   },
   "repository": "https://github.com/daojs/daojs.git",
   "license": "MIT"
