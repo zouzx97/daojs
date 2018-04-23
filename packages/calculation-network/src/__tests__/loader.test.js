@@ -28,7 +28,8 @@ describe('Loader', () => {
         cn.get('tic'),
         cn.get('tac'),
         cn.get('toe'),
-      ])).resolves.toEqual([3, 2, 9, 10, { value: 4 }]);
+        cn.get('procNameRef'),
+      ])).resolves.toEqual([3, 2, 9, 10, { value: 4 }, 3]);
 
       expect(cn.set({ bar: 3 })).toEqual(['bar', 'tic', 'tac']);
       await expect(Promise.all([

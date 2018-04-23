@@ -26,3 +26,10 @@ toe:
     $args:
       - $ref: foo
       - 1
+proc: sum
+procNameRef:
+  $proc:
+    $ref: proc
+  $args:
+    - 1
+    - 2
