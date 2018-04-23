@@ -5,6 +5,7 @@
 	},
   "workspaces": [
     "packages/*",
-    "projects/*"
+    "projects/*",
+    "tools/*"
   ]
 }
