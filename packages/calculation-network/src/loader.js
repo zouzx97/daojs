@@ -43,7 +43,9 @@ function evaluate(obj, registry, context = {}) {
       });
     }
 
-    return Promise.props(_.mapValues(obj, elem => evaluate(elem, registry, context)));
+    const props = Promise.props(_.mapValues(obj, elem => evaluate(elem, registry, context)));
+
+    return proc && proc.$ref ? props.then(val => evaluate(val, registry, context)) : props;
   }
   return obj;
 }
