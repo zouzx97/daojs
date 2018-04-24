@@ -16,11 +16,15 @@ data:
       $args: insightProcedure
     defaultValue: slice
   insight: slice
-
+  dimensionType:
+    $proc: getMetricDimensionType
+    $args:
+      $ref: Metric
   dimensionSelector:
     enums:
       $proc: getEnumSelectorProps
-      $args: Dimension
+      $args:
+        $ref: dimensionType
     defaultValue: BranchName
   Dimension: BranchName
   branchSelector:
@@ -111,9 +115,11 @@ data:
           $ref: ChargeType
 
         Collapse:
-          - BranchName
-          - MealName
-          - CardType
+          $proc: getEnum
+          $args:
+            $proc: getMetricDimensionType
+            $args:
+              $ref: Metric
         Dimensions:
           - $ref: Dimension
         Granularity:
