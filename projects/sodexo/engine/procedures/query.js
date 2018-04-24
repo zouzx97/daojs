@@ -31,6 +31,31 @@ export function queryTime(time = '2018-01-01') {
   return `${time}T00:00:00Z`;
 }
 
+export function predicateQuery({
+  time,
+
+  BranchName,
+  MealName,
+  CardType,
+  ChargeType,
+
+  Granularity,
+  Metrics,
+}) {
+  return {
+    StartTime: queryTime(time.start),
+    EndTime: queryTime(time.end),
+    Filters: queryFilter({
+      BranchName,
+      MealName,
+      CardType,
+      ChargeType,
+    }),
+    Granularity,
+    Metrics,
+  };
+}
+
 export function sliceQuery({
   time,
 
@@ -60,6 +85,12 @@ export function sliceQuery({
 
 export function rankerQuery({
   time,
+
+  BranchName,
+  MealName,
+  CardType,
+  ChargeType,
+
   Dimensions,
   Metrics,
   OrderBy,
@@ -69,9 +100,75 @@ export function rankerQuery({
     StartTime: queryTime(time.start),
     EndTime: queryTime(time.end),
     Dimensions,
+    Filters: queryFilter({
+      BranchName,
+      MealName,
+      CardType,
+      ChargeType,
+    }),
     Metrics,
     OrderBy,
     ValueLimit,
   };
 }
 
+export function queryArgs({
+  insight,
+  time,
+
+  BranchName,
+  MealName,
+  CardType,
+  ChargeType,
+
+  Collapse,
+  Dimensions,
+  Granularity,
+  Metrics,
+  OrderBy,
+  ValueLimit,
+}) {
+  switch (insight) {
+    case 'slice':
+      return sliceQuery({
+        time,
+
+        BranchName,
+        MealName,
+        CardType,
+        ChargeType,
+
+        Collapse,
+        Granularity,
+        Metrics,
+      });
+    case 'ranker':
+      return rankerQuery({
+        time,
+
+        // ranker API would fail when filter exists
+        // BranchName,
+        // MealName,
+        // CardType,
+        // ChargeType,
+
+        Dimensions,
+        Metrics,
+        OrderBy,
+        ValueLimit,
+      });
+    case 'predicate':
+    default:
+      return predicateQuery({
+        time,
+
+        BranchName,
+        MealName,
+        CardType,
+        ChargeType,
+
+        Granularity,
+        Metrics,
+      });
+  }
+}
