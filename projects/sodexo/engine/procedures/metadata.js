@@ -37,6 +37,8 @@ const insightProcedureTexts = {
 
 const enumTexts = {
   Dimension: DimensionTexts,
+  ChargeDimension: DimensionTexts,
+  TransactionDimension: DimensionTexts,
   Granularity: GranularityTexts,
   Metric: MetricTexts,
   OrderBy: OrderByTexts,
@@ -54,4 +56,25 @@ export function getEnumSelectorProps(name) {
     value,
     text: value === null ? '汇总' : _.get(enumTexts, [name, value].join('.'), value),
   }));
+}
+
+export function getMetricDimensionType(metric) {
+  if (_.includes([
+    'AvgChargeAmount',
+    'ChargeAmount',
+    'ChargeCount',
+    'Deposit',
+    'DepositTotal',
+  ], metric)) {
+    return 'ChargeDimension';
+  }
+
+  if (_.includes([
+    'Revenue',
+    'UserCount',
+  ], metric)) {
+    return 'TransactionDimension';
+  }
+
+  throw new Error(`unrecongnized metric ${metric}`);
 }
