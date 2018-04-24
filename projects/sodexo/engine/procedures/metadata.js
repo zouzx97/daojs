@@ -59,20 +59,11 @@ export function getEnumSelectorProps(name) {
 }
 
 export function getMetricDimensionType(metric) {
-  if (_.includes([
-    'AvgChargeAmount',
-    'ChargeAmount',
-    'ChargeCount',
-    'Deposit',
-    'DepositTotal',
-  ], metric)) {
+  if (_.includes(getEnum('ChargeMetric'), metric)) {
     return 'ChargeDimension';
   }
 
-  if (_.includes([
-    'Revenue',
-    'UserCount',
-  ], metric)) {
+  if (_.includes(getEnum('TransactionMetric'), metric)) {
     return 'TransactionDimension';
   }
 
