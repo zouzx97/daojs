@@ -145,6 +145,13 @@ export function queryArgs({
     case 'ranker':
       return rankerQuery({
         time,
+
+        // ranker API would fail when filter exists
+        // BranchName,
+        // MealName,
+        // CardType,
+        // ChargeType,
+
         Dimensions,
         Metrics,
         OrderBy,
