@@ -93,6 +93,19 @@
       - DepositTotal
       - Revenue
       - UserCount
+    ChargeMetric:
+      type: string
+      enum:
+      - AvgChargeAmount
+      - ChargeAmount
+      - ChargeCount
+      - Deposit
+      - DepositTotal
+    TransactionMetric:
+      type: string
+      enum:
+      - Revenue
+      - UserCount
     Dimension:
       type: string
       enum:

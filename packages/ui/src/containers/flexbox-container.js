@@ -36,8 +36,12 @@ export default class FlexboxContainer extends PureComponent {
               id,
               props = {},
             } = item;
-            const { width, height } = props;
-            return (<div style={{ width, height }} key={id}><Cell agent={agent} {...item} /></div>);
+            const { width, height, flex } = props;
+            return (
+              <div style={{ width, height, flex }} key={id}>
+                <Cell agent={agent} {...item} />
+              </div>
+            );
           })}
         </StoryboardContext.Consumer>
       </div>
