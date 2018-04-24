@@ -91,32 +91,55 @@ data:
   _time:
     start: '2018-01-01'
     end: '2018-02-01'
-  revenueTrend:
-    $proc: slice
+  request:
+    $proc:
+      $ref: insight
     $args:
-      $proc: sliceQuery
+      $proc: queryArgs
       $args:
+        insight:
+          $ref: insight
         time:
           $ref: _time
-
         BranchName:
           $ref: BranchName
         MealName:
           $ref: MealName
         CardType:
           $ref: CardType
+        ChargeType:
+          $ref: ChargeType
 
         Collapse:
           - BranchName
           - MealName
           - CardType
+        Dimensions:
+          - $ref: Dimension
         Granularity:
           $ref: Granularity
-        Metrics: Revenue
-  revenueTrendChartProps:
+        Metrics:
+          $ref: Metric
+        OrderBy:
+          $ref: OrderBy
+        ValueLimit:
+          $ref: ValueLimit
+  chartProps:
     source:
-      $ref: revenueTrend
-
+      $ref: request
+    insight:
+      $ref: insight
+  avalaibleCharts:
+    slice: Trend
+    ranker: Pie
+    predicate: Trend
+  chartType:
+    $proc-lambda: ({ charts, insight }) => charts[insight]
+    $args:
+      charts:
+        $ref: avalaibleCharts
+      insight:
+        $ref: insight
 # Dashboard Layout
 layout:
   id: e1b7ad85-83a2-543a-bd49-b3ed11d6ea11
@@ -129,11 +152,11 @@ layout:
         type: SingleSelector
         input: metricSelector
         output: Metric
-      - id: 0c4fbf8b-6e5f-5a2e-80e0-1992b3cbc94e
+      - id: 28458f16-4d39-5d77-be9f-e6b21bc28218
         type: SingleSelector
         input: insightSelector
         output: insight
-      - id: 0c4fbf8b-6e5f-5a2e-80e0-1992b3cbc94e
+      - id: 21635f7d-3eab-55c4-adc2-3c03f39d8822
         type: SingleSelector
         input: dimensionSelector
         output: Dimension
@@ -157,21 +180,22 @@ layout:
         type: SingleSelector
         input: granularitySelector
         output: Granularity
-      - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
+      - id: e2274f1d-5841-5077-bf9d-debbcf650c77
         type: SingleSelector
         input: orderSelector
         output: OrderBy
-      - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
+      - id: 23c5f19b-7bd6-53dd-afc7-ae430644127b
         type: SingleSelector
         input: limitSelector
         output: ValueLimit
-      - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
+      - id: 67452182-dc73-5846-9ac2-0847915f99c5
         type: SingleSelector
         input: clientInsightSelector
         output: clientInsight
       - id: 6f196a3c-d39e-52d3-ad13-e89806865275
         type: TimeRange
         output: _time
+
       - id: 2cd4447f-2b1a-5c9a-9fc2-23371db57b2b
-        type: Trend
-        input: revenueTrendChartProps
+        type: OneForAll
+        input: chartProps

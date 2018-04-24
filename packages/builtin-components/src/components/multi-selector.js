@@ -61,7 +61,10 @@ export default class MultiSelector extends Component {
 MultiSelector.propTypes = {
   label: PropTypes.string,
   defaultValue: PropTypes.arrayOf(PropTypes.string),
-  enums: PropTypes.arrayOf(PropTypes.string),
+  enums: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
+    value: PropTypes.string,
+    text: PropTypes.string,
+  })])),
   currentValue: PropTypes.arrayOf(PropTypes.string),
   update: PropTypes.func,
 };

@@ -17,3 +17,5 @@ export { default as Risk } from './components/risk';
 export { default as Traffic } from './components/traffic';
 export { default as Trend } from './components/trend';
 export { default as TSAD } from './components/tsad';
+
+export { default as OneForAll } from './components/one-for-all';
