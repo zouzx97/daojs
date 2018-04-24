@@ -20,6 +20,12 @@ data:
     $proc: getMetricDimensionType
     $args:
       $ref: Metric
+  shouldShowDimensionSelector:
+    $proc: isEqual
+    $args:
+      value:
+        $ref: insight
+      other: ranker
   dimensionSelector:
     enums:
       $proc: getEnumSelectorProps
@@ -165,6 +171,7 @@ layout:
       - id: 21635f7d-3eab-55c4-adc2-3c03f39d8822
         type: SingleSelector
         input: dimensionSelector
+        condition: shouldShowDimensionSelector
         output: Dimension
       - id: 2d3433a9-71b4-59ab-9547-5ac98c86f945
         type: MultiSelector
