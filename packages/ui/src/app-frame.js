@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import { Layout, Menu, Icon, Modal } from 'antd';
 import 'antd/dist/antd.css';
+import './style/app-frame.css';
 import Storyboard from './storyboard';
 import CustomStoryEditor from './custom-story';
 
@@ -129,7 +130,7 @@ export default class AppFrame extends React.Component {
     } = this.props;
 
     return (
-      <Layout>
+      <Layout className="dao-app-frame">
         <Header className="header">
           <div style={{
             display: 'inline-block',
@@ -152,7 +153,11 @@ export default class AppFrame extends React.Component {
           </h3>
         </Header>
         <Layout>
-          <Sider>
+          <Sider
+            // collapse when window width < 768px
+            breakpoint="md"
+            collapsedWidth={0}
+          >
             <Menu
               theme="dark"
               defaultSelectedKeys={[this.state.selectedStory]}
