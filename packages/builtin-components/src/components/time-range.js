@@ -9,6 +9,17 @@ const { RangePicker } = DatePicker;
 const dateFormat = 'YYYY-MM-DD';
 
 export default class TimeRangePicker extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    if (!props.start || !props.end) {
+      props.update({
+        start: '2018-01-01',
+        end: '2018-04-01',
+      });
+    }
+  }
+
   onChange(values) {
     const [start, end] = values;
     const value = { start: start.format(dateFormat), end: end.format(dateFormat) };
@@ -16,7 +27,7 @@ export default class TimeRangePicker extends PureComponent {
   }
 
   render() {
-    const { start = '2018-03-01', end = '2018-04-01' } = this.props;
+    const { start = '2018-01-01', end = '2018-04-01' } = this.props;
 
     return (
       <div>
@@ -31,12 +42,14 @@ export default class TimeRangePicker extends PureComponent {
 }
 
 TimeRangePicker.propTypes = {
-  value: PropTypes.objectOf(PropTypes.any),
+  start: PropTypes.string,
+  end: PropTypes.string,
   label: PropTypes.string,
   update: PropTypes.func.isRequired,
 };
 
 TimeRangePicker.defaultProps = {
   label: null,
-  value: {},
+  start: undefined,
+  end: undefined,
 };
