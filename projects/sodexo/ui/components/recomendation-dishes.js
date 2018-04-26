@@ -1,41 +1,76 @@
 import React from 'react';
+import _ from 'lodash';
 import { Row, Col } from 'antd';
 import PropTypes from 'prop-types';
-import { Prediction } from '@daojs/botana-components';
 
 export default function RecommendationNewDishes(props) {
   return (
-    <div>
-      <Row>
-        <Col>
-          Name:
-        </Col>
-        <Col>{props.name}</Col>
-        <Col>
-          Taste:
-        </Col>
-        <Col>{props.taste}</Col>
-        <Col>
-          Price:
-        </Col>
-        <Col>{props.price}</Col>
-      </Row>
-      <Row>
-        <Col>
-          <Prediction source={props.predication} />
-        </Col>
-      </Row>
-    </div>
+    <Row
+      gutter={24}
+    >
+      {_.map(props.recommendations, (item, index) => (
+        <Col
+          key={index}
+          xs={24}
+          sm={24}
+          md={12}
+          lg={8}
+          xl={6}
+          xxl={4}
+        >
+          <img style={{ width: '100%' }} src={item.img} alt={item.alt} />
+          <div
+            style={{
+              fontFamily: 'Microsoft Yahei',
+              padding: '5px',
+              background: 'white',
+            }}
+          >
+            <span
+              style={{
+                color: '#333',
+                fontSize: '18px',
+              }}
+            >
+              {item.name}
+            </span>
+            <div
+              style={{
+                color: '#999',
+                fontSize: '12px',
+              }}
+            >
+              <span>Taste: {item.taste}</span>
+              <br />
+              <span>Price: {item.price}</span>
+            </div>
+          </div>
+          { item.tag ? (
+            <div
+              style={{
+                display: 'inline-block',
+                verticalAlign: 'top',
+                position: 'absolute',
+                top: '12px',
+                right: '-3px',
+                background: '#60a531',
+                color: 'white',
+                padding: '0px 10px',
+                lineHeight: '32px',
+                fontSize: '14px',
+              }}
+            >
+              <span>{item.tag}</span>
+            </div>) : null}
+        </Col>))}
+    </Row>
   );
 }
 
 RecommendationNewDishes.propTypes = {
-  name: PropTypes.string.isRequired,
-  taste: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  predication: PropTypes.arrayOf(PropTypes.object),
+  recommendations: PropTypes.arrayOf(PropTypes.object),
 };
 
 RecommendationNewDishes.defaultProps = {
-  predication: [],
+  recommendations: [],
 };
