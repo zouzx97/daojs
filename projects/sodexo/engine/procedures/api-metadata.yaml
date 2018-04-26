@@ -93,12 +93,35 @@
       - DepositTotal
       - Revenue
       - UserCount
+    ChargeMetric:
+      type: string
+      enum:
+      - AvgChargeAmount
+      - ChargeAmount
+      - ChargeCount
+      - Deposit
+      - DepositTotal
+    TransactionMetric:
+      type: string
+      enum:
+      - Revenue
+      - UserCount
     Dimension:
       type: string
       enum:
       - BranchName
       - CardType
       - ChargeType
+      - MealName
+    ChargeDimension:
+      type: string
+      enum:
+      - ChargeType
+    TransactionDimension:
+      type: string
+      enum:
+      - BranchName
+      - CardType
       - MealName
 
     requestDimensions:

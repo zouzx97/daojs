@@ -41,31 +41,30 @@ data:
   ui_selection:
     text:
       $ref: selectorValue
-
+  ui_recommendation_dishes:
+    recommendations:
+      -
+        name: 荞叶鸡蛋煎饼#早餐#
+        toaste: 五香味
+        price: 12
+        img: http://s1.st.meishij.net/r/222/140/4535222/a4535222_143797749935129.jpg
+        alt: huiguorou
+        tag: 健脑益智
+      -
+        name: 荞叶鸡蛋煎饼
+        toaste: 五香味
+        price: 12
+        img: http://s1.st.meishij.net/r/222/140/4535222/a4535222_143797749935129.jpg
+        alt: huiguorou
 # Dashboard Layout
 layout:
   id: cee4bb00-dd8d-492d-b8a2-2511577187b9
-  type: AdjustableContainer
+  type: FlexboxContainer
   props:
     items:
-      - id: asdksldjf
-        type: CardContainer
-        props:
-          title: sldkfjskldfjskldfjskldfjskldfjsdkl
-          items:
-            - id: d0e84a79-970d-446c-96b1-062f3c75be5c
-              type: TextBlock
-              input: ui_title
-      - id: 32c58c85-a40e-4441-9081-2a15268fc67b
-        type: TextBlock
-        input: ui_number
-      - id: fa7dc449-0bd7-47da-ae41-3682624e400c
-        type: TextBlock
-        input: ui_newNumber
-      - id: f6a7b9de-80b6-42e8-bd6a-f3632a0fa94e
-        type: SingleSelector
-        input: ui_selector
-        output: selectorValue
       - id: 88e4382a-27df-4fa0-bcfe-b7950f86783c
-        type: TextBlock
-        input: ui_selection
+        type: RecommendationDishes
+        input: ui_recommendation_dishes
+        props:
+          width: '100%'
+

@@ -39,9 +39,14 @@ export default class RadioGroup extends Component {
   }
 }
 
+const valueProps = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
+
 RadioGroup.propTypes = {
-  defaultValue: PropTypes.string,
-  enums: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])).isRequired,
+  defaultValue: valueProps,
+  enums: PropTypes.arrayOf(PropTypes.oneOfType([valueProps, PropTypes.shape({
+    value: valueProps,
+    text: PropTypes.string,
+  })])).isRequired,
   update: PropTypes.func,
   label: PropTypes.string,
 };

@@ -229,19 +229,22 @@ layout:
         gutter: 10
         cols:
           - id: 48d9617d-1482-5ed5-b68d-85ae085fd2bd
-            span: 8
+            md: 24
+            lg: 8
             content:
               type: MultiSelector
               input: ui_resturants
               output: selectedResturants
           - id: a36419d4-3931-4f72-a2cb-dbd3e611902c
-            span: 8
+            md: 24
+            lg: 8
             content:
               type: MultiSelector
               input: ui_mealTimes
               output: selectedMealTimes
           - id: b0ab148c-1eb2-48a0-8415-f5f22532ebed
-            span: 8
+            md: 24
+            lg: 8
             content:
               type: MultiSelector
               input: ui_cardTypes
@@ -250,14 +253,17 @@ layout:
         gutter: 10
         cols:
           - id: 426a72ad-6176-4d56-a3f7-10ff1c3a692e
-            span: 4
+            md: 24
+            lg: 8
             content:
               type: SingleSelector
               input: ui_granularities
               output: selectedGranularity
           - id: ed557de6-017a-4a87-bf87-a2ea6e34ea6e
-            offset: 12
-            span: 8
+            md: 24
+            lg: 
+              span: 8
+              offset: 8
             content:
               type: TimeRange
               input: selectedDateRange
@@ -277,21 +283,24 @@ layout:
         gutter: 10
         cols:
         - id: 2f93fe88-1bac-45ab-b710-930449a2379e
-          span: 8
+          md: 24
+          lg: 8
           content:
             type: Percentage
             input: incomePercentageByResturant
             props:
               title: 各餐厅收入比例
         - id: d38e22bf-ef06-46b0-869f-d89b518df0f9
-          span: 8
+          md: 24
+          lg: 8
           content:
             type: Percentage
             input: incomePercentageByMeal
             props:
               title: 各用餐时段收入比例
         - id: 481276bf-d8a7-4063-914a-e70e83afaad6
-          span: 8
+          md: 24
+          lg: 8
           content:
             type: Percentage
             input: incomePercentageByCard
@@ -308,21 +317,24 @@ layout:
       - id: ec91008e-31f5-5a04-b377-708457585bff
         cols:
         - id: 0a394c47-431c-4be3-81fe-ff0e4f27a548
-          span: 8
+          md: 24
+          lg: 8
           content:
             type: Percentage
             input: customerPercentageByResturant
             props:
               title: 各餐厅客流比例
         - id: b593de2d-e460-4295-ac28-0727e9088656
-          span: 8
+          md: 24
+          lg: 8
           content:
             type: Percentage
             input: customerPercentageByMeal
             props:
               title: 各用餐时段客流比例
         - id: caa308af-f50c-4fa4-b0d8-cf83aa030f12
-          span: 8
+          md: 24
+          lg: 8
           content:
             type: Percentage
             input: customerPercentageByCard

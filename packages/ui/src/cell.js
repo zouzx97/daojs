@@ -17,6 +17,8 @@ export default class Cell extends React.Component {
     return {
       data: null,
       isLoadingData: Boolean(nextProps.input),
+      condition: true,
+      isLoadingCondition: Boolean(nextProps.condition),
 
       Control: null,
       isLoadingControl: true,
@@ -28,6 +30,8 @@ export default class Cell extends React.Component {
     this.state = {
       data: null,
       isLoadingData: true,
+      condition: true,
+      isLoadingCondition: true,
       Control: null,
       isLoadingControl: true,
     };
@@ -39,13 +43,20 @@ export default class Cell extends React.Component {
     if (this.props.input) {
       this.props.agent.on(`cn-invalidate:${this.props.input}`, this.invalidate);
     }
+    if (this.props.condition) {
+      this.props.agent.on(`cn-invalidate:${this.props.condition}`, this.invalidateCondition);
+    }
   }
 
   componentDidUpdate() {
-    const { isLoadingData, isLoadingControl } = this.state;
+    const { isLoadingData, isLoadingCondition, isLoadingControl } = this.state;
 
     if (isLoadingData) {
       this.loadData();
+    }
+
+    if (isLoadingCondition) {
+      this.loadCondition();
     }
 
     if (isLoadingControl) {
@@ -65,11 +76,19 @@ export default class Cell extends React.Component {
     if (this.props.input) {
       this.props.agent.off(`cn-invalidate:${this.props.input}`, this.invalidate);
     }
+    // if (this.props.condition) {
+    //   this.props.agent.off(`cn-invalidate:${this.props.condition}`, this.invalidateCondition);
+    // }
   }
 
   invalidate = () => {
     this.setState(() => ({ isLoadingData: true }));
     this.loadData();
+  }
+
+  invalidateCondition = () => {
+    this.setState(() => ({ isLoadingCondition: true }));
+    this.loadCondition();
   }
 
   loadControl = () => {
@@ -96,6 +115,19 @@ export default class Cell extends React.Component {
     });
   }
 
+  loadCondition = () => {
+    const { agent, condition } = this.props;
+
+    const loadConditionPromise = Promise.resolve(condition ? agent.call('get', condition) : true);
+
+    this.loadConditionPromise = loadConditionPromise;
+    loadConditionPromise.then((data) => {
+      if (this.loadConditionPromise === loadConditionPromise) {
+        this.setState({ condition: data, isLoadingCondition: false });
+      }
+    });
+  }
+
   updateData = (value) => {
     if (this.props.output) {
       this.props.agent.call('set', this.props.output, value);
@@ -107,17 +139,19 @@ export default class Cell extends React.Component {
 
     const {
       Control,
+      condition,
+      isLoadingCondition,
       data,
       isLoadingData,
       isLoadingControl,
     } = this.state;
 
-    if (isLoadingData || isLoadingControl) {
+    if (isLoadingData || isLoadingControl || isLoadingCondition) {
       return <Spin />;
     }
-    return (
+    return condition ? (
       <Control {...props} {...data} update={this.updateData} />
-    );
+    ) : null;
   }
 }
 
@@ -126,11 +160,13 @@ Cell.propTypes = {
   props: PropTypes.objectOf(any),
   agent: PropTypes.objectOf(any).isRequired,
   input: PropTypes.string,
+  condition: PropTypes.string,
   output: PropTypes.string,
 };
 
 Cell.defaultProps = {
   input: undefined,
+  condition: undefined,
   output: undefined,
   props: {},
 };
