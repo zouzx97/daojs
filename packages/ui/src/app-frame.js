@@ -154,8 +154,8 @@ export default class AppFrame extends React.Component {
         </Header>
         <Layout>
           <Sider
-            // collapse when window width < 768px
-            breakpoint="md"
+            // collapse when window width < 992px
+            breakpoint="lg"
             collapsedWidth={0}
           >
             <Menu
