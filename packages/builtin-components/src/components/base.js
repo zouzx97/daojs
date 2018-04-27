@@ -79,17 +79,26 @@ export default class BaseChart extends PureComponent {
     return value;
   }
 
+  getStyle() {
+    return {};
+  }
+
   render() {
     if (_.isEmpty(this.getSource())) {
       return null;
     }
+    const {
+      style,
+      ...otherProps
+    } = this.props;
     return (
       <ReactEcharts
         theme="theme1"
         option={this.getOption()}
         notMerge={true} //eslint-disable-line
         onEvents={this.getEvents()}
-        {...this.props}
+        style={_.defaults({}, style, this.getStyle())}
+        {...otherProps}
       />
     );
   }
@@ -100,10 +109,12 @@ BaseChart.propTypes = {
   axisDimensions: PropTypes.arrayOf(PropTypes.string),
   metricDimensions: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
+  style: PropTypes.objectOf(PropTypes.any),
 };
 
 BaseChart.defaultProps = {
   axisDimensions: [],
   metricDimensions: [],
   title: null,
+  style: {},
 };
