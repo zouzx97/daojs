@@ -22,7 +22,7 @@ module.exports = {
   },
   devServer: {
     contentBase: './',
-    port: 8080,
+    port: 9003,
     publicPath: '/dist/',
   },
   module: {
