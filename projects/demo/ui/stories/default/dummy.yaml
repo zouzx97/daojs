@@ -44,7 +44,7 @@ data:
 # Dashboard Layout
 layout:
   id: cee4bb00-dd8d-492d-b8a2-2511577187b9
-  type: SectionContainer
+  type: GridLayout
   props:
     items:
       - id: d0e84a79-970d-446c-96b1-062f3c75be5c

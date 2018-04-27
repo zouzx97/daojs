@@ -149,6 +149,11 @@ export default class Cell extends React.Component {
     if (isLoadingData || isLoadingControl || isLoadingCondition) {
       return <Spin />;
     }
+
+    if (condition && _.isNil(Control)) {
+      console.warn(`Control is null for type: ${this.props.type}, you may not registry this component`); // eslint-disable-line
+      return null;
+    }
     return condition ? (
       <Control {...props} {...data} update={this.updateData} />
     ) : null;

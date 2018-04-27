@@ -4,13 +4,15 @@ import {
   AppFrame,
   ComponentRegistry,
 } from '@daojs/ui';
+import * as botanaComponents from '@daojs/botana-components';
+
 import components from './components';
 import {
   DefaultStories,
   CustomStories,
 } from './stories/index';
 
-ComponentRegistry.register(components);
+ComponentRegistry.register(components).register(botanaComponents);
 ReactDOM.render(
   <AppFrame
     title="@daojs/project-demo"

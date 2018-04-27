@@ -31,8 +31,12 @@
     "yaml-loader": "^0.5.0"
   },
   "dependencies": {
+    "@daojs/botana-components": "^0.0.1",
     "@daojs/engine": "^0.0.1",
     "@daojs/ui": "^0.0.2",
+    "antd": "^3.4.3",
+    "lodash": "^4.17.10",
+    "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1"
   }
