@@ -189,6 +189,21 @@ layout:
     direction: 'vertical'
     align: 'center'
     items:
+      - id: 17a1acaa-12ba-5b86-92ff-6bbc3cbabc60
+        type: FlexboxContainer
+        props:
+          direction: horizontal
+          align: center
+          items:
+            - id: bb3d1ca6-7d99-596a-8cf2-ae7e9c503271
+              type: SearchDialog
+              output:
+                - insight
+                - CardType
+                - BranchName
+              props:
+                width: 80%
+                height: 34px
       - id: 48e9935c-0897-5606-aeb6-d7b8db6353fe
         type: FlexboxContainer
         props:

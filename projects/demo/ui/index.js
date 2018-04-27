@@ -6,7 +6,7 @@ import {
 } from '@daojs/ui';
 import * as botanaComponents from '@daojs/botana-components';
 
-import components from './components';
+import * as components from './components';
 import {
   DefaultStories,
   CustomStories,

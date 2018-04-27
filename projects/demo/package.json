@@ -32,6 +32,7 @@
   "dependencies": {
     "@daojs/botana-components": "^0.0.1",
     "@daojs/engine": "^0.0.1",
+    "@daojs/procedures": "^0.0.1",
     "@daojs/ui": "^0.0.2",
     "antd": "^3.4.3",
     "lodash": "^4.17.10",
