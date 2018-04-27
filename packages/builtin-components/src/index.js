@@ -5,7 +5,7 @@ import FormInput from './components/form-input';
 import FormField from './components/form-field';
 import Heatmap from './components/heatmap';
 // import Cell from './components/cell';
-import SectionContainer from './components/section-container';
+// import SectionContainer from './components/section-container';
 import Donut from './components/donut';
 import StackBar from './components/stack-bar';
 import LineWithDataZoom from './components/line-datazoom';
@@ -36,7 +36,7 @@ export default {
   FormField,
   Heatmap,
   // Cell,
-  SectionContainer,
+  // SectionContainer,
   Donut,
   LineWithDataZoom,
   LineWithMarkArea,

@@ -1,1 +1,1 @@
-export default {};
+export { default as CustomizeDishes } from './customize-dishes';
