@@ -290,15 +290,21 @@ layout:
             type: SingleSelector
             input: limitSelector
             output: ValueLimit
-      - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
-        type: SingleSelector
-        input: granularitySelector
+      - id: ed11b88b-7e22-517f-9eab-ff40afa1bf70
+        type: FlexboxContainer
         condition: isSliceOrPredicateInsight
-        output: Granularity
-      - id: 67452182-dc73-5846-9ac2-0847915f99c5
-        type: SingleSelector
-        input: clientInsightSelector
-        output: clientInsight
+        props:
+          direction: horizontal
+          align: space-between
+          items:
+          - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
+            type: SingleSelector
+            input: granularitySelector
+            output: Granularity
+          - id: 67452182-dc73-5846-9ac2-0847915f99c5
+            type: SingleSelector
+            input: clientInsightSelector
+            output: clientInsight
 
       - id: 2cd4447f-2b1a-5c9a-9fc2-23371db57b2b
         type: OneForAll
