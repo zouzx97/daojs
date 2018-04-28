@@ -1,8 +1,20 @@
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import React from 'react';
+import ContainerDimensions from 'react-container-dimensions';
 import BaseChart from './base';
 
-export default class Donut extends BaseChart {
+const breakPoint = 500; // px
+const bigLayoutCenterLeft = 0.3;
+const bigLayoutCenterTop = 0.5;
+const smallLayoutCenterLeft = 0.5;
+const smallLayoutCenterTop = 0.35;
+
+function toPercentString(float) {
+  return `${_.round(float * 100)}%`;
+}
+
+class Donut extends BaseChart {
   getMetricDimensions() {
     // Donut chart only supports 1 dimension
     return _.slice(super.getMetricDimensions(), 0, 1);
@@ -25,9 +37,17 @@ export default class Donut extends BaseChart {
   getSeriesOption() {
     const source = this.getSourceAndAggregateRest();
     const axisDim = this.getAxisDimension();
+    const position = this.containerWidth > breakPoint ?
+      {
+        center: [toPercentString(bigLayoutCenterLeft), toPercentString(bigLayoutCenterTop)],
+      } :
+      {
+        center: [toPercentString(smallLayoutCenterLeft), toPercentString(smallLayoutCenterTop)],
+      };
 
     return _.chain(this.getMetricDimensions())
       .map(metricDim => ({
+        ...position,
         type: 'pie',
         name: metricDim,
         radius: ['50%', '70%'],
@@ -54,12 +74,20 @@ export default class Donut extends BaseChart {
     const source = this.getSourceAndAggregateRest();
     const axisDim = this.getAxisDimension();
     const metricDim = this.getMetricDimensions()[0];
+    const position = this.containerWidth > breakPoint ?
+      {
+        top: 'middle',
+        right: '5%',
+      } :
+      {
+        bottom: '5%',
+        left: 'center',
+      };
 
     return this.props.hasLegend ?
       {
+        ...position,
         orient: 'vertical',
-        top: 'middle',
-        right: '5%',
         // Use circle icon for all legends
         data: _.map(source, row => ({
           name: row[axisDim],
@@ -87,16 +115,29 @@ export default class Donut extends BaseChart {
       title,
       subTitle,
     } = this.props;
+    const {
+      containerWidth: width,
+      containerHeight: height,
+    } = this;
+    const position = width > breakPoint ?
+      {
+        left: ((bigLayoutCenterLeft * width) - (0.5 * _.min([bigLayoutCenterLeft * width, bigLayoutCenterTop * height]))) + (0.02 * width),
+        top: 'middle',
+      } :
+      {
+        left: 'center',
+        top: (smallLayoutCenterTop * height) - (0.02 * height),
+      };
+
     return {
+      ...position,
       text: title,
       subtext: subTitle,
-      x: 'center',
-      y: 'center',
       textStyle: {
-        fontSize: '26',
+        fontSize: '18',
       },
       subtextStyle: {
-        fontSize: '16',
+        fontSize: '14',
       },
     };
   }
@@ -112,6 +153,28 @@ export default class Donut extends BaseChart {
       ...super.getOption(),
     };
   }
+
+  getStyle() {
+    return this.containerWidth > breakPoint ?
+      {
+        height: '300px',
+      } :
+      {
+        height: '500px',
+      };
+  }
+
+  render() {
+    return (
+      <ContainerDimensions>
+        { ({ width, height }) => {
+          this.containerWidth = width;
+          this.containerHeight = height;
+          return super.render();
+        }}
+      </ContainerDimensions>
+    );
+  }
 }
 
 Donut.propTypes = {
@@ -125,3 +188,5 @@ Donut.defaultProps = {
   subTitle: '',
   hasLegend: true,
 };
+
+export default Donut;
