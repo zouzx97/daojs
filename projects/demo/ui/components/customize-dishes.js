@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 
-export default function RecommendationNewDishes(props) {
+export default function CustomizeDishes(props) {
   return (
     <Row
       gutter={24}
@@ -67,10 +67,10 @@ export default function RecommendationNewDishes(props) {
   );
 }
 
-RecommendationNewDishes.propTypes = {
+CustomizeDishes.propTypes = {
   recommendations: PropTypes.arrayOf(PropTypes.object),
 };
 
-RecommendationNewDishes.defaultProps = {
+CustomizeDishes.defaultProps = {
   recommendations: [],
 };

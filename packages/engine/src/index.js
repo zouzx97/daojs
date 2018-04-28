@@ -12,8 +12,8 @@ const loader = new Loader(ProcedureRegistry);
 const p$cn = master.call('getStory').then(story => loader.load(story));
 
 master.register({
-  async set(key, value) {
-    const invalidateKeys = (await p$cn).set({ [key]: value });
+  async set(value) {
+    const invalidateKeys = (await p$cn).set(value);
     _.forEach(invalidateKeys, k => master.trigger(`cn-invalidate:${k}`));
   },
   async get(key) {

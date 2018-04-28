@@ -129,13 +129,21 @@ export default class Cell extends React.Component {
   }
 
   updateData = (value) => {
-    if (this.props.output) {
-      this.props.agent.call('set', this.props.output, value);
+    const { output } = this.props;
+
+    if (output) {
+      if (Array.isArray(output)) {
+        if (typeof value === 'object') {
+          this.props.agent.call('set', value);
+        }
+      } else {
+        this.props.agent.call('set', { [output]: value });
+      }
     }
   }
 
   render() {
-    const { props } = this.props;
+    const { props, output } = this.props;
 
     const {
       Control,
@@ -155,7 +163,7 @@ export default class Cell extends React.Component {
       return null;
     }
     return condition ? (
-      <Control {...props} {...data} update={this.updateData} />
+      <Control {...props} {...data} output={output} update={this.updateData} />
     ) : null;
   }
 }
@@ -166,7 +174,7 @@ Cell.propTypes = {
   agent: PropTypes.objectOf(any).isRequired,
   input: PropTypes.string,
   condition: PropTypes.string,
-  output: PropTypes.string,
+  output: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 };
 
 Cell.defaultProps = {
