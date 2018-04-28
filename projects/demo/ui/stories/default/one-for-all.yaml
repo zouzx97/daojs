@@ -8,13 +8,15 @@ data:
     enums:
       $proc: getEnumSelectorProps
       $args: Metric
-    defaultValue: Revenue
+    defaultValue:
+      $ref: Metric
   Metric: Revenue
   insightSelector:
     enums:
       $proc: getEnumSelectorProps
       $args: insightProcedure
-    defaultValue: slice
+    defaultValue:
+      $ref: insight
   insight: slice
   dimensionType:
     $proc: getMetricDimensionType
@@ -44,7 +46,8 @@ data:
       $proc: getEnumSelectorProps
       $args:
         $ref: dimensionType
-    defaultValue: BranchName
+    defaultValue:
+      $ref: Dimension
   Dimension: BranchName
   isTransactionMetric:
     $proc: includes
@@ -67,7 +70,7 @@ data:
       $proc: getEnumSelectorProps
       $args: BranchName
     defaultValue:
-      - null
+      $ref: BranchName
   BranchName:
     - null
   mealSelector:
@@ -75,7 +78,7 @@ data:
       $proc: getEnumSelectorProps
       $args: MealName
     defaultValue:
-      - null
+      $ref: MealName
   MealName:
     - null
   cardSelector:
@@ -83,7 +86,7 @@ data:
       $proc: getEnumSelectorProps
       $args: CardType
     defaultValue:
-      - null
+      $ref: CardType
   CardType:
     - null
   chargeSelector:
@@ -98,13 +101,15 @@ data:
     enums:
       $proc: getEnumSelectorProps
       $args: Granularity
-    defaultValue: Daily
+    defaultValue:
+      $ref: Granularity
   Granularity: Daily
   orderSelector:
     enums:
       $proc: getEnumSelectorProps
       $args: OrderBy
-    defaultValue: DESC
+    defaultValue:
+      $ref: OrderBy
   OrderBy: DESC
   limitSelector:
     enums:
@@ -112,7 +117,8 @@ data:
       - 20
       - 50
       - 100
-    defaultValue: 10
+    defaultValue:
+      $ref: ValueLimit
   ValueLimit: 10
   clientInsightSelector:
     enums:
@@ -125,7 +131,8 @@ data:
       -
         value: growthRate
         text: 增长率
-    defaultValue: identity
+    defaultValue:
+      $ref: clientInsight
   clientInsight: identity
   _time:
     start: '2018-01-01'
@@ -201,6 +208,13 @@ layout:
                 - insight
                 - CardType
                 - BranchName
+                - Granularity
+                - Metric
+                - clientInsight
+                - ValueLimit
+                - OrderBy
+                - MealName
+                - Dimension
               props:
                 width: 80%
                 height: 34px
