@@ -1,6 +1,6 @@
 ---
 id: 48d0a126-0208-5c36-9bfe-2035a60789e1
-name: 合一NEW
+name: 合一
 
 # Data flow diagram
 data:
@@ -201,7 +201,6 @@ layout:
             lg: 8
             align: center
             height: 34px
-            padding: 0 0 5px 0
             content:
               type: SearchDialog
               output:
@@ -218,7 +217,7 @@ layout:
       - id: b4b34fae-40ab-584e-8a20-fa83f83b8224
         gutter: 24
         align: bottom
-        padding: 5px 0 0 0
+        padding: 20px 0 0 0
         cols:
           - id: 468c3395-b95d-56b2-8082-824b6d6ec15c
             md: 24
