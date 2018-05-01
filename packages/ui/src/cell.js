@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import PropTypes, { any } from 'prop-types';
 import Promise from 'bluebird';
 import { Spin } from 'antd';
@@ -93,7 +94,8 @@ export default class Cell extends React.Component {
 
   loadControl = () => {
     const { type } = this.props;
-    const loadControlPromise = Promise.resolve(type ? ComponentRegistry.get(type) : null);
+    const loadControlPromise =
+      Promise.resolve(_.isString(type) ? ComponentRegistry.get(type) : type);
 
     this.loadControlPromise = loadControlPromise;
     this.loadControlPromise.then((Control) => {
@@ -163,13 +165,20 @@ export default class Cell extends React.Component {
       return null;
     }
     return condition ? (
-      <Control {...props} {...data} output={output} update={this.updateData} />
+      <Control
+        {...props}
+        {...data}
+        output={output}
+        update={this.updateData}
+      >
+        {this.props.children}
+      </Control>
     ) : null;
   }
 }
 
 Cell.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
   props: PropTypes.objectOf(any),
   agent: PropTypes.objectOf(any).isRequired,
   input: PropTypes.string,

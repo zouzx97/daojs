@@ -6,27 +6,52 @@ import StoryboardContext from '../storyboard-context';
 
 const ROW_PROPS = ['align', 'gutter', 'justify', 'type'];
 const COL_PROPS = ['offset', 'order', 'pull', 'push', 'span', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+const STYLE = ['height', 'padding'];
+
+class GridRow extends React.PureComponent {
+  render() {
+    return (
+      <Row
+        {..._.pick(this.props, ROW_PROPS)}
+        gutter={30}
+        style={{
+          ..._.pick(this.props, STYLE),
+        }}
+      >
+        {_.map(this.props.children, (child, i) => (
+          <Col {..._.pick(this.props.cols[i], COL_PROPS)} key={this.props.cols[i].id}>
+            <div
+              style={{
+                ..._.pick(this.props.cols[i], STYLE),
+              }}
+            >
+              {child}
+            </div>
+          </Col>))}
+      </Row>
+    );
+  }
+}
 
 export default function GridLayout(props) {
   const { rows } = props;
 
   return (
     <div>
-      {
-        _.map(rows, row => (
-          <Row {..._.pick(row, ROW_PROPS)} key={row.id}>
-            {
-              _.map(row.cols, col => (
-                <Col {..._.pick(col, COL_PROPS)} key={col.id}>
-                  <StoryboardContext.Consumer>
-                    {({ agent }) => <Cell agent={agent} {...col.content} />}
-                  </StoryboardContext.Consumer>
-                </Col>
-              ))
-            }
-          </Row>
-      ))
-      }
+      <StoryboardContext.Consumer>
+        {
+          ({ agent }) => _.map(rows, row =>
+            (
+              <Cell type={GridRow} agent={agent} condition={row.condition} props={row} key={row.id}>
+                {
+                  _.map(row.cols, col => (
+                    <Cell agent={agent} condition={col.condition} {...col.content} key={col.id} />
+                  ))
+                }
+              </Cell>
+            ))
+        }
+      </StoryboardContext.Consumer>
     </div>
   );
 }

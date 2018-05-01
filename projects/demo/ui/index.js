@@ -27,7 +27,7 @@ ReactDOM.render(
       stories: CustomStories,
       isStoryEditable: true,
     }]}
-    defaultStory="35a62e19-4b1b-4541-85aa-aa86b56c44ae"
+    defaultStory="48d0a126-0208-5c36-9bfe-2035a60789e1"
     componentRegistry={ComponentRegistry}
   />,
   document.getElementById('container'),
