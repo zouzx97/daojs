@@ -1,6 +1,6 @@
 ---
-id: c4718aca-2705-5941-be66-afe4b08f3a08
-name: 合一
+id: 48d0a126-0208-5c36-9bfe-2035a60789e1
+name: 合一NEW
 
 # Data flow diagram
 data:
@@ -190,19 +190,19 @@ data:
         $ref: insight
 # Dashboard Layout
 layout:
-  id: e1b7ad85-83a2-543a-bd49-b3ed11d6ea11
-  type: FlexboxContainer
+  type: GridLayout
   props:
-    direction: 'vertical'
-    align: 'center'
-    items:
-      - id: 17a1acaa-12ba-5b86-92ff-6bbc3cbabc60
-        type: FlexboxContainer
-        props:
-          direction: horizontal
-          align: center
-          items:
-            - id: bb3d1ca6-7d99-596a-8cf2-ae7e9c503271
+    gutter: 24
+    rows:
+      - id: 12a0d563-91c5-577b-8e7a-d4b0ee2df7dd
+        cols:
+          - id: 07ae8310-93f3-54b3-b385-b939bb3cbf77
+            md: 24
+            lg: 8
+            align: center
+            height: 34px
+            padding: 0 0 5px 0
+            content:
               type: SearchDialog
               output:
                 - insight
@@ -215,97 +215,153 @@ layout:
                 - OrderBy
                 - MealName
                 - Dimension
+      - id: b4b34fae-40ab-584e-8a20-fa83f83b8224
+        gutter: 24
+        align: bottom
+        padding: 5px 0 0 0
+        cols:
+          - id: 468c3395-b95d-56b2-8082-824b6d6ec15c
+            md: 24
+            lg: 8
+            content:
+              type: SingleSelector
+              input: insightSelector
+              output: insight
               props:
-                width: 80%
-                height: 34px
-      - id: 48e9935c-0897-5606-aeb6-d7b8db6353fe
-        type: FlexboxContainer
-        props:
-          direction: horizontal
-          align: space-between
-          items:
-          - id: 8bcb026d-dacf-5d43-b544-f7419d7691b3
-            type: FlexboxContainer
-            props:
-              direction: horizontal
-              align: start
-              items:
-                - id: 28458f16-4d39-5d77-be9f-e6b21bc28218
-                  type: SingleSelector
-                  input: insightSelector
-                  output: insight
-                - id: 0c4fbf8b-6e5f-5a2e-80e0-1992b3cbc94e
-                  type: SingleSelector
-                  input: metricSelector
-                  output: Metric
-          - id: c2685cea-7997-5358-aacf-656330b94911
-            type: MultiSelector
-            input: chargeSelector
-            condition: isChargeMetric
-            output: ChargeType
-          - id: 6f196a3c-d39e-52d3-ad13-e89806865275
-            type: TimeRange
-            output: _time
-      - id: c20629f9-52dd-5ba3-a25e-50b1601549f4
-        type: FlexboxContainer
+                label: 分析
+      - id: 8d0afafe-846d-51cd-b92a-47bbd10db2b1
+        gutter: 24
+        cols:
+          - id: 229ec690-afd3-51d4-9817-257949ecaafc
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: metricSelector
+              output: Metric
+              props:
+                label: 指标
+          - id: 42b5ccdd-c0dd-5327-a75a-50db07d077d5
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: TimeRange
+              output: _time
+              props:
+                label: 时间
+      - id: ac2aecdd-8f09-5b37-9bcc-65587980d834
+        gutter: 24
+        condition: isChargeMetric
+        cols:
+          - id: b7ff6eb8-4758-51f2-9d62-3027597224d5
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: MultiSelector
+              input: chargeSelector
+              output: ChargeType
+              props:
+                label: 充值类型
+      - id: 5939c453-a212-5637-9e9a-2c95fa150a68
+        gutter: 24
         condition: isTransactionMetric
-        props:
-          direction: horizontal
-          align: space-between
-          items:
-          - id: 2d3433a9-71b4-59ab-9547-5ac98c86f945
-            type: MultiSelector
-            input: branchSelector
-            output: BranchName
-            props:
-              flex: 1 1 auto
+        cols:
+          - id: 1d6c3a01-6781-5b53-b404-ba80ac7dc216
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: MultiSelector
+              input: branchSelector
+              output: BranchName
+              props:
+                label: 餐厅名称
           - id: 66f86490-6000-5800-b172-efa849ff208f
-            type: MultiSelector
-            input: mealSelector
-            output: MealName
-            props:
-              flex: 1 1 auto
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: MultiSelector
+              input: mealSelector
+              output: MealName
+              props:
+                label: 用餐时段
           - id: 5a11fe99-b9ce-5e37-97b5-d495c3b8a8a5
-            type: MultiSelector
-            input: cardSelector
-            output: CardType
-            props:
-              flex: 1 1 auto
-      - id: ed11b88b-7e22-517f-9eab-ff40afa1bf70
-        type: FlexboxContainer
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: MultiSelector
+              input: cardSelector
+              output: CardType
+              props:
+                label: 卡类型
+      - id: 3cf3a3b3-e653-5d10-b581-245294f6f503
+        gutter: 24
         condition: isRankerInsight
-        props:
-          direction: horizontal
-          align: space-between
-          items:
+        cols:
           - id: 21635f7d-3eab-55c4-adc2-3c03f39d8822
-            type: SingleSelector
-            input: dimensionSelector
-            output: Dimension
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: dimensionSelector
+              output: Dimension
+              props:
+                label: 维度
           - id: e2274f1d-5841-5077-bf9d-debbcf650c77
-            type: SingleSelector
-            input: orderSelector
-            output: OrderBy
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: orderSelector
+              output: OrderBy
+              props:
+                label: 排序
           - id: 23c5f19b-7bd6-53dd-afc7-ae430644127b
-            type: SingleSelector
-            input: limitSelector
-            output: ValueLimit
-      - id: ed11b88b-7e22-517f-9eab-ff40afa1bf70
-        type: FlexboxContainer
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: limitSelector
+              output: ValueLimit
+              props:
+                label: Top
+      - id: 7fbe7687-c36e-5f95-985f-450a37aac271
+        gutter: 24
         condition: isSliceOrPredicateInsight
-        props:
-          direction: horizontal
-          align: space-between
-          items:
+        cols:
           - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
-            type: SingleSelector
-            input: granularitySelector
-            output: Granularity
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: granularitySelector
+              output: Granularity
+              props:
+                label: 粒度
           - id: 67452182-dc73-5846-9ac2-0847915f99c5
-            type: SingleSelector
-            input: clientInsightSelector
-            output: clientInsight
-
-      - id: 2cd4447f-2b1a-5c9a-9fc2-23371db57b2b
-        type: OneForAll
-        input: chartProps
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: clientInsightSelector
+              output: clientInsight
+              props:
+                label: 客户端分析
+      - id: 61a20bbf-ec39-54a5-bed4-7baa11b6918a
+        cols:
+          - id: 2952d949-206f-590e-b5fe-23b735eab7fb
+            md: 24
+            lg: 24
+            content:
+              type: OneForAll
+              input: chartProps
