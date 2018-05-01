@@ -227,7 +227,7 @@ layout:
               input: insightSelector
               output: insight
               props:
-                label: 分析
+                label: "分析: "
       - id: 8d0afafe-846d-51cd-b92a-47bbd10db2b1
         gutter: 24
         cols:
@@ -240,7 +240,7 @@ layout:
               input: metricSelector
               output: Metric
               props:
-                label: 指标
+                label: "指标: "
           - id: 42b5ccdd-c0dd-5327-a75a-50db07d077d5
             md: 24
             lg: 8
@@ -249,7 +249,7 @@ layout:
               type: TimeRange
               output: _time
               props:
-                label: 时间
+                label: "时间: "
       - id: ac2aecdd-8f09-5b37-9bcc-65587980d834
         gutter: 24
         condition: isChargeMetric
@@ -263,7 +263,7 @@ layout:
               input: chargeSelector
               output: ChargeType
               props:
-                label: 充值类型
+                label: "充值类型: "
       - id: 5939c453-a212-5637-9e9a-2c95fa150a68
         gutter: 24
         condition: isTransactionMetric
@@ -277,7 +277,7 @@ layout:
               input: branchSelector
               output: BranchName
               props:
-                label: 餐厅名称
+                label: "餐厅名称: "
           - id: 66f86490-6000-5800-b172-efa849ff208f
             md: 24
             lg: 8
@@ -287,7 +287,7 @@ layout:
               input: mealSelector
               output: MealName
               props:
-                label: 用餐时段
+                label: "用餐时段: "
           - id: 5a11fe99-b9ce-5e37-97b5-d495c3b8a8a5
             md: 24
             lg: 8
@@ -297,7 +297,7 @@ layout:
               input: cardSelector
               output: CardType
               props:
-                label: 卡类型
+                label: "卡类型: "
       - id: 3cf3a3b3-e653-5d10-b581-245294f6f503
         gutter: 24
         condition: isRankerInsight
@@ -311,7 +311,7 @@ layout:
               input: dimensionSelector
               output: Dimension
               props:
-                label: 维度
+                label: "维度: "
           - id: e2274f1d-5841-5077-bf9d-debbcf650c77
             md: 24
             lg: 8
@@ -321,7 +321,7 @@ layout:
               input: orderSelector
               output: OrderBy
               props:
-                label: 排序
+                label: "排序: "
           - id: 23c5f19b-7bd6-53dd-afc7-ae430644127b
             md: 24
             lg: 8
@@ -331,7 +331,7 @@ layout:
               input: limitSelector
               output: ValueLimit
               props:
-                label: Top
+                label: "Top: "
       - id: 7fbe7687-c36e-5f95-985f-450a37aac271
         gutter: 24
         condition: isSliceOrPredicateInsight
@@ -345,7 +345,7 @@ layout:
               input: granularitySelector
               output: Granularity
               props:
-                label: 粒度
+                label: "粒度: "
           - id: 67452182-dc73-5846-9ac2-0847915f99c5
             md: 24
             lg: 8
@@ -355,7 +355,7 @@ layout:
               input: clientInsightSelector
               output: clientInsight
               props:
-                label: 客户端分析
+                label: "客户端分析: "
       - id: 61a20bbf-ec39-54a5-bed4-7baa11b6918a
         cols:
           - id: 2952d949-206f-590e-b5fe-23b735eab7fb
