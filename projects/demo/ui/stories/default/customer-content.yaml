@@ -1,0 +1,19 @@
+---
+id: be8cbbfc-d7a2-5912-8410-2cc6a7d3c71c
+name: 客户展示
+
+data:
+  topDishes:
+    $proc: getTopDishes
+layout:
+  type: GridLayout
+  props:
+    gutter: 24
+    rows:
+      - id: f175acad-cc73-5e9e-978f-7b386d24364e
+        gutter: 24
+        cols:
+          - id: c6b56dd0-6a7f-58b2-988e-52e15a895f66
+            content:
+              type: CustomizeDishes
+              input: topDishes
