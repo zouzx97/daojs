@@ -17,6 +17,10 @@ export default function CustomizeDishes(props) {
           lg={8}
           xl={6}
           xxl={4}
+          key={item.id}
+          style={{
+            marginTop: '10px',
+          }}
         >
           <img style={{ width: '100%' }} src={item.img} alt={item.alt} />
           <div
