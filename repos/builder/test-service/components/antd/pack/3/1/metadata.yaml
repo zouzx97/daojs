@@ -1,0 +1,10 @@
+---
+  type: cdn
+  urls:
+    debug: https://cdnjs.cloudflare.com/ajax/libs/antd/3.1.3/antd.js
+    release: https://cdnjs.cloudflare.com/ajax/libs/antd/3.1.3/antd.min.js
+  dependencies:
+    cdnjs/moment.js@2: moment
+    cdnjs/react@16: React
+    cdnjs/react-dom@16: ReactDOM
+

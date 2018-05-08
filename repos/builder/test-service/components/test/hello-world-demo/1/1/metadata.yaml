@@ -1,0 +1,8 @@
+---
+  type: babel
+  dependencies:
+    cdnjs/react-dom@16: ReactDOM
+    cdnjs/react@16: React
+    daojs/style-loader@1: loadStyle
+    antd/pack@3: '{ DatePicker }'
+    test/hello-world@1: HelloWorld

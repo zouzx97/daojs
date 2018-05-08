@@ -1,0 +1,4 @@
+---
+  type: babel
+  dependencies:
+    cdnjs/react@16: React

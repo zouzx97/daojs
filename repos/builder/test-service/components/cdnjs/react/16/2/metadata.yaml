@@ -1,0 +1,6 @@
+---
+  type: cdn
+  name: react
+  urls:
+    debug: https://cdnjs.cloudflare.com/ajax/libs/react/16.2.0/umd/react.development.js
+    release: https://cdnjs.cloudflare.com/ajax/libs/react/16.2.0/umd/react.production.min.js
