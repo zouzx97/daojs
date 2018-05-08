@@ -33,8 +33,8 @@ const rawExamples = [
   {
     name: 'demo',
     description: 'demo项目',
-    coverImage: '/img/sodexo.png',
-    logoImage: '/img/sodexo.logo.png',
+    coverImage: '/img/demo.png',
+    logoImage: '/img/demo.png',
     categories: [{
       id: '35a62e19-4b1b-4541-85aa-aa86b56c44ae',
       name: 'Default stories',

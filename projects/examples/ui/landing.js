@@ -35,11 +35,10 @@ const Landing = ({ examples }) => (
       <div style={{ background: '#fff', padding: '30px' }}>
         <Row gutter={16}>
           {_.map(examples, example => (
-            <Col span={8} key={example.name}>
+            <Col span={4} key={example.name}>
               <Link to={`/${example.name}`} >
                 <Card
                   hoverable
-                  style={{ width: 300 }}
                   cover={<img alt="example" src={example.coverImage} />}
                 >
                   <Card.Meta
