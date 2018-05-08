@@ -8,6 +8,11 @@ module.exports = {
       './ui/index.js',
       'react-hot-loader/patch',
     ],
+    engine: [
+      'babel-polyfill',
+      './engine/index.js',
+      'react-hot-loader/patch',
+    ],
   },
   devtool: 'source-map',
   output: {

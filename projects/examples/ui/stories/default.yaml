@@ -1,0 +1,681 @@
+---
+data:
+  _c_metricEnum:
+    - 独立用户数
+    - 利润
+    - 交易笔数
+  _c_metricsDictionary:
+    利润:
+      revenue: sum
+    独立用户数:
+      customerId: count
+    交易笔数:
+      transactionId: count
+  _c_metricNameDictionary:
+    利润: revenue
+    独立用户数: customerId
+    交易笔数: transactionId
+  _c_groupByDictionary:
+    餐厅名称: Branch
+    餐卡类别: cardType
+    菜品类别: SKU
+  _c_metricReverseDictionary:
+    revenue: 利润
+    customerId: 独立用户数
+    transactionId: 交易笔数
+  _c_string2GranularityMap:
+    日: day
+    月: month
+    周: week
+
+  _measureUser: null
+  _time:
+    start: '2018-01-01'
+    end: '2018-02-01'
+  _time_start:
+    $proc: property
+    $args:
+      - $ref: _time
+      - start
+  _time_end:
+    $proc: property
+    $args:
+      - $ref: _time
+      - end
+  _t_filter_timestamp:
+    timestamp:
+      type: time-range
+      from:
+        $ref: _time_start
+      end:
+        $ref: _time_end
+
+  _measureCustomer: null
+  _granularityCustomer: null
+  _measureFavor: null
+  _dimensionFavor: null
+  _measureActiveness: null
+  _measureGrowth: null
+
+  measureUser:
+    defaultValue: 独立用户数
+    enums:
+      $ref: _c_metricEnum
+
+  bestUser:
+    department: STC
+    discipline: SDE
+
+  _t_filter_timestamp_and_bestUser:
+    $proc: merge
+    $args:
+      - $ref: _t_filter_timestamp
+      - $ref: bestUser
+
+  measureCustomer:
+    defaultValue: 独立用户数
+    enums:
+      $ref: _c_metricEnum
+
+  bestCustomerQuery:
+    time:
+      $ref: _time
+    measure:
+      $ref: _measureCustomer
+    bestUser:
+      $ref: bestUser
+  _t_bestCustomerQuery_text:
+    text:
+      $proc: stringify
+      $args:
+        - bestCustomerQuery
+
+  mapCustomerMetric:
+    $proc: property
+    $args:
+      -
+        利润:
+          revenue: sum
+        独立用户数:
+          customerId: count
+        交易笔数:
+          transactionId: count
+      - $ref: _measureCustomer
+
+  fetchCustomerTSAD:
+    $proc: query
+    $args:
+      - Transaction
+      -
+        aggregation:
+          $ref: mapCustomerMetric
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          timestamp: day
+
+  bestCustomerTSAD:
+    source:
+      $proc: property
+      $args:
+        - $ref: fetchCustomerTSAD
+        - data
+    axisDimensions:
+      - timestamp
+    metricDimensions:
+      $proc: keys
+      $args:
+        - $ref: mapCustomerMetric
+    title:
+      $proc: concat
+      $args:
+        - $ref: _measureCustomer
+        - 的变化趋势
+    key2name:
+      $ref: _c_metricReverseDictionary
+
+  granularityCustomer:
+    label: Granularity
+    defaultValue: 独立用户数
+    enums:
+      - 日
+      - 周
+      - 月
+
+  fetchCustomerExpencePerUserBucket:
+    $proc: query2
+    $args:
+      -
+        $proc: query2
+        $args:
+          -
+            $proc: query
+            $args:
+              - Transaction
+              -
+                aggregation:
+                  revenue: sum
+                filter:
+                  $ref: _t_filter_timestamp_and_bestUser
+                groupBy:
+                  timestamp:
+                    $proc: property
+                    $args:
+                      - $ref: _c_string2GranularityMap
+                      - $ref: _granularityCustomer
+                  customerId: value
+          -
+            aggregation:
+              revenue: average
+            groupBy:
+              customerId: value
+      -
+        aggregation:
+          customerId: count
+        groupBy:
+          revenue:
+            type: bin
+            step: 10
+
+  customerExpensePerUserBucket:
+    title: Best Customer Expense Per User Bucket
+    source:
+          # let's do this in chart
+          #const data = _.map(rawData, d => ({
+          #  销售额: `${d.revenue} ~ ${d.revenue + 10}`,
+          #  用户数: d.customerId,
+          #}));
+      $ref: fetchCustomerExpencePerUserBucket
+    axisDimensions:
+      - 销售额
+    metricDimensions:
+      - 用户数
+    key2name:
+      $ref: _c_metricReverseDictionary
+
+  fetchCustomerExpensePerUserRank:
+    $proc: query2
+    $args:
+      -
+        $proc: query
+        $args:
+          - Transaction
+          -
+            aggregation:
+              revenue: sum
+            filter:
+              $ref: _t_filter_timestamp_and_bestUser
+            groupBy:
+              customerId: value
+      -
+        aggregation:
+          revenue: average
+        groupBy:
+          customerId: value
+        orderBy:
+          - -revenue
+        top: 10
+
+  customerExpensePerUserRank:
+    title: 单个客户的消费排名
+    source:
+      $ref: fetchCustomerExpensePerUserRank
+    axisDimensions:
+      - customerId
+    metricDimensions:
+      - revenue
+    key2name:
+      $ref: _c_metricReverseDictionary
+
+  measureFavor:
+    defaultValue: 独立用户数
+    enums:
+      $ref: _c_metricEnum
+
+  dimensionFavor:
+    defaultValue: 餐厅名称
+    enums:
+      - 餐厅名称
+      - 餐卡类别
+      - 菜品类别
+
+  fetchFavorBestCustomerReduce:
+    $proc: query
+    $args:
+      - Transaction
+      -
+        aggregation:
+          $proc: property
+          $args:
+            - $ref: _c_metricsDictionary
+            - $ref: _measureFavor
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          $proc: fromPairs
+          $args:
+            -
+              -
+                $proc: property
+                $args:
+                  - $ref: _c_groupByDictionary
+                  - $ref: dimensionFavor
+              - value
+  fetchFavorBestCustomerTrend:
+    $proc: query
+    $args:
+      - Transaction
+      -
+        aggregation:
+          $proc: property
+          $args:
+            - $ref: _c_metricsDictionary
+            - $ref: _measureFavor
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          $proc: fromPairs
+          $args:
+            -
+              - timestamp
+              - day
+            -
+              -
+                $proc: property
+                $args:
+                  - $ref: _c_groupByDictionary
+                  - $ref: dimensionFavor
+              - value
+  favorBestCustomerTrend:
+    # const dimensionKey = _.keys(dimensionsDictionary[dimension])[0];
+    # const measureKey = _.keys(metricsDictionary[measure])[0];
+
+    # const dataAggregated = _.chain(rawData)
+    #   .groupBy(_.property('timestamp'))
+    #   .mapValues(val => _.reduce(val, (memo, cur) => ({
+    #     [cur[dimensionKey]]: cur[measureKey], ...memo,
+    #   }), {}))
+    #   .value();
+
+    # const series = _.uniq(_.reduce(dataAggregated, (memo, cur) => [
+    #   ..._.keys(cur), ...memo], []));
+
+    # const source = _.map(dataAggregated, (val, id) => ({
+    #   timestamp: id,
+    #   ..._.zipObject(series, _.map(series, s => val[s] || 0)),
+    # }));
+    source:
+      $ref: fetchFavorBestCustomerTrend
+    axisDimensions:
+      - timestamp
+    key2name:
+      $ref: _c_metricReverseDictionary
+
+  # Section 4
+  fetchUsageMealCardReduce:
+    $proc: query
+    $args:
+      - Transaction
+      -
+        aggregation:
+          customerId: count
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          cardType: value
+
+  usageMealCardReduce:
+    title:
+      $proc: concat
+      $args:
+        - 共有
+        -
+          $proc: sum
+          $args:
+            -
+              $proc: map
+              $args:
+                - $ref: fetchUsageMealCardReduce
+                - customerId
+        - 人充值
+    source:
+      $ref: fetchUsageMealCardReduce
+    axisDimensions:
+      - cardType
+    metricDimensions:
+      - customerId
+
+  fetchUsageMealCardBucketCRAP:
+    $proc: query2
+    $args:
+      -
+        $proc: query
+        $args:
+          - Recharge
+          -
+            aggregation:
+              rechargeAmount: sum
+            filter:
+              $ref: _t_filter_timestamp_and_bestUser
+            groupBy:
+              customerId: value
+      -
+        aggregation:
+          customerId: count
+        groupBy:
+          rechargeAmount:
+            type: bin
+            step: 200
+  usageMealCardBucketCRAP:
+    source:
+      $ref: fetchUsageMealCardBucketCRAP
+    axisDimensions:
+      - rechargeAmount
+    metricDimensions:
+      - customerId
+    key2name: _c_metricReverseDictionary
+  usageMealCardQuery:
+    time:
+      $ref: _time
+    bestUser:
+      $ref: bestUser
+    measure: CardBalance
+  usageMealCardBucketCB:
+    time:
+      $ref: _time
+    bestUser:
+      $ref: bestUser
+    measure: CardBlance
+  _t_fetchTraffic_aggregation:
+    $proc: property
+    $args:
+      - $ref: _c_metricsDictionary
+      - $ref: _measureActiveness
+  fetchTraffic:
+    $proc: query2
+    $args:
+      -
+        $proc: query
+        $args:
+          - Transaction
+          -
+            aggregation:
+              $ref: _t_fetchTraffic_aggregation
+            filter:
+              $ref: _t_filter_timestamp_and_bestUser
+            groupBy:
+              timestamp:
+                type: time-bin
+                step: PT10M
+      -
+        aggregation:
+          $proc: fromPairs
+          $args:
+            -
+              $proc: property
+              $args:
+                -
+                  $proc: keys
+                  $args:
+                    - $ref: _t_fetchTraffic_aggregation
+                - 0
+            - average
+        groupBy:
+          timestamp:
+            type: time-phase
+            step: P1D
+  measureActiveness:
+    defaultValue: 独立用户数
+    enums:
+      $ref: _c_metricEnum
+  activenessTraffic:
+    source:
+      $ref: fetchTraffic
+    axisDimensions:
+      - timestamp
+    metricDimensions:
+      -
+        $proc: property
+        $args:
+          - $ref: _c_metricNameDictionary
+          - $ref: _measureActiveness
+    key2name: _c_metricReverseDictionary
+
+  # growth
+  measureGrowth:
+    defaultValue: 独立用户数
+    enums:
+      $ref: _c_metricEnum
+  fetchTrendForGrowth:
+    $proc: query
+    $args:
+      - Transaction
+      -
+        aggregation:
+          $proc: property
+          $args:
+            - $ref: _c_metricsDictionary
+            - $ref: _measureGrowth
+        filter:
+          $ref: _t_filter_timestamp
+        groupBy:
+          timestamp: day
+  _t_fetchTrendForGrowth_dependent_args:
+    - $ref: fetchTrendForGrowth
+    -
+      measureKey:
+        $proc: property
+        $args:
+          -
+            $proc: keys
+            $args:
+              -
+                $proc: property
+                $args:
+                  - $ref: _c_metricsDictionary
+                  - $ref: measureGrowth
+          - 0
+      timestampKey: timestamp
+
+  fetchCumulativeTrend:
+    $proc: cumulative
+    $args:
+      $ref: _t_fetchTrendForGrowth_dependent_args
+  fetchGrowthRateTrend:
+    $proc: growthRate
+    $args:
+      $ref: _t_fetchTrendForGrowth_dependent_args
+
+  growthAbilityCumulative:
+    # const measureKey = _.keys(metricsDictionary[measure])[0];
+
+    # const source = _.map(rawData, ({ timestamp, value }) => ({
+    #   timestamp,
+    #   [measureKey]: value,
+    # }));
+    title: 累计的变化趋势
+    source:
+      $ref: fetchCumulativeTrend
+    axisDimensions:
+      - timestamp
+    key2name: _c_metricReverseDictionary
+  growthAbilityGrowthRate:
+    # const measureKey = _.keys(metricsDictionary[measure])[0];
+
+    # const source = _.map(rawData, ({ timestamp, value }) => ({
+    #   timestamp,
+    #   [measureKey]: value,
+    # }));
+    title: 增长率的变化趋势
+    source:
+      $ref: fetchGrowthRateTrend
+    axisDimensions:
+      - timestamp
+    key2name: _c_metricReverseDictionary
+
+layout:
+  id: 05f542f1-b844-4c90-b417-7b00887505cb
+  type: FlexboxContainer
+  props:
+    items:
+      -
+        id: 0e3a3cc8-b7bd-4de7-a314-b387068b7e31
+        type: TimeRange
+        output: _time
+        props:
+          label: Time Range
+      -
+        id: 77ba05fe-4450-4892-a0f3-67e3d1035e93
+        type: CardContainer
+        props:
+          title: Best User
+          actions:
+            -
+              id: ff55dbec-03da-4abd-97f3-5696bae23002
+              input: measureUser
+              output: _measureUser
+              type: SingleSelector
+          items:
+            -
+              id: ad787eb2-5197-4b5a-8c7a-0f33b498788e
+              input: _t_bestUser_text
+              type: TextBlock
+      -
+        id: f5406497-f36a-4b7e-b39e-c959428c437c
+        type: CardContainer
+        props:
+          title: Best Customer Overview
+          actions:
+            -
+              id: 55692da5-aa05-4f75-8487-b76f332e1d85
+              input: measureCustomer
+              output: _measureCustomer
+              type: SingleSelector
+          items:
+            -
+              id: 6f294d7b-1424-4269-8ab2-ce3ce8f524bc
+              input: _t_bestCustomerQuery_text
+              type: TextBlock
+            -
+              id: f707cdf5-849e-4136-a707-00404967b693
+              input: bestCustomerTSAD
+              type: LineWithDataZoom
+      -
+        id: 26006b89-6fc5-4457-ab35-bd56b95eb30c
+        type: CardContainer
+        props:
+          title: Best Customer Overview
+          actions:
+            -
+              id: dd687e91-cdd3-405e-a83c-e7390980f299
+              input: granularityCustomer
+              output: _granularityCustomer
+              type: SingleSelector
+          items:
+            -
+              id: 6c267f36-cfea-4352-b5c2-0400ab23c8c3
+              input: customerExpensePerUserBucket
+              type: Bar
+            -
+              id: 39725a3a-d91f-4991-81b7-5d3c9d93d8f8
+              input: customerExpensePerUserRank
+              type: HorizontalBar
+      -
+        id: dd687e91-cdd3-405e-a83c-e7390980f2129
+        type: CardContainer
+        props:
+          title: 偏好分析
+          actions:
+            -
+              id: dd687e91-cdd3-405e-a83c-e7390980f211
+              input: measureCustomer
+              output: _measureFavor
+              type: SingleSelector
+            -
+              id: dd687e91-cdd3-405e-a83c-e73909823s21
+              input: dimensionFavor
+              output: _dimensionFavor
+              type: SingleSelector
+          items:
+            -
+              id: 4c8a27d3-eafe-4ccc-a043-1c1ee9da6ec9
+              input: favorBestCustomerReduce
+              type: Donut
+              props:
+                title: 喜好的比例
+            -
+              id: f784ea02-0062-4826-a313-f05f23e3e965
+              input: favorBestCustomerTrend
+              type: LineWithDataZoom
+              props:
+                title: 喜好的变化趋势
+      -
+        id: ee98ab85-8681-4c98-8405-6a909e545490
+        type: CardContainer
+        props:
+          title: 餐卡的使用情况
+          items:
+            -
+              id: 06e137eb-d0f6-4283-b3ad-eaf6784b69ff
+              input: usageMealCardReduce
+              type: Donut
+              props:
+                subTitle: 餐卡的使用比例
+            -
+              id: 0c51862b-848d-4857-ae81-db2395a1ba4e
+              input: usageMealCardBucketCRAP
+              type: Bar
+              props:
+                title: 单个客户的餐卡充值金额
+            -
+              id: a345e33d-dc4e-4f46-9201-decd1df35331
+              input: usageMealCardQuery
+              type: TextBlock
+              props:
+                title: Usage of Meal SectionCard Query
+            -
+              id: 99f0bd2c-84f6-4c6d-a042-4d44499f3b44
+              input: usageMealCardBucketCB
+              type: TextBlock
+              props:
+                title: Usage of Meal SectionCard CardBalance
+      -
+        id: dcd876ba-b28e-4fdd-9afd-c818480e4f81
+        type: CardContainer
+        props:
+          title: 活跃度
+          actions:
+            -
+              id: 2812a4c7-8d3f-4653-bc59-9c52d1261a23
+              input: measureActiveness
+              output: _measureActiveness
+              type: SingleSelector
+          items:
+            -
+              id: a5625442-a21c-4190-9b3d-d75d9ab5f4c5
+              input: activenessTraffic
+              type: LineWithDataZoom
+      -
+        id: 02c6bb6a-e92d-4f61-a763-5c446cc433fd
+        type: CardContainer
+        props:
+          title: 增长能力
+          actions:
+            -
+              id: f9d64d52-cc34-4122-8dd5-92928b283f8c
+              input: measureGrowth
+              output: _measureGrowth
+              type: SingleSelector
+          items:
+            -
+              id: 9d455f26-220c-40a1-bd49-48985ed20247
+              input: growthAbilityCumulative
+              type: LineWithDataZoom
+              subTitle: Growth Ability Cumulative
+            -
+              id: c2235628-29ef-43e5-a19b-ac4822681d66
+              input: growthAbilityGrowthRate
+              type: LineWithDataZoom
+              props:
+                subTitle: Growth Ability Growth Rate
+
