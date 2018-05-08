@@ -17,7 +17,15 @@ const ExamplePage = ({
   name, title, logo, categories,
 }) => (
   <div>
-    <Button type="primary" href={`#/${name}/stories`}>View stories</Button>
+    <Button
+      type="primary"
+      href={`#/${name}/stories`}
+      style={{
+        margin: '0.5rem 3rem',
+      }}
+    >
+      View stories
+    </Button>
     <AppFrame
       title={title}
       logo={logo}

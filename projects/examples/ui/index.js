@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import { HashRouter, Switch, Route, Redirect, Link, withRouter } from 'react-router-dom';
 import { Breadcrumb } from 'antd';
+import 'antd/dist/antd.css';
 
 import Landing from './landing';
 import ExamplePage from './example-page';
@@ -100,7 +101,13 @@ const Home = withRouter((props) => {
 
   return (
     <div>
-      <Breadcrumb>
+      <Breadcrumb style={{
+        backgroundColor: '#f8f8f8',
+        float: 'left',
+        padding: 5,
+        margin: '0.5rem',
+      }}
+      >
         {breadcrumbItems}
       </Breadcrumb>
       <Switch>

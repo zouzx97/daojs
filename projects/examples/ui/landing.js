@@ -4,10 +4,9 @@ import { Link } from 'react-router-dom';
 
 import { Layout, Card, Col, Row, Button, Icon } from 'antd';
 import _ from 'lodash';
-import 'antd/dist/antd.css';
 
 const Landing = ({ examples }) => (
-  <Layout>
+  <Layout style={{ clear: 'both' }}>
     <Layout.Content style={{
       background: '#ECECEC',
       }}
