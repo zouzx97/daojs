@@ -1,0 +1,70 @@
+---
+id: 8b392896-dd2f-49b2-b819-0365eb5c86a8
+name: '基础分析'
+
+# Data flow diagram
+data:
+  # Parameters
+  title: PowerAI
+  number: 0
+  selectorValue: 午餐
+
+  # Intermedia
+  newNumber:
+    $proc: sum
+    $args:
+      - $ref: number
+      - 1
+
+  # UI
+  ui_title:
+    text:
+      $ref: title
+  ui_number:
+    text:
+      $proc: stringify
+      $args:
+        - $ref: number
+  ui_newNumber:
+    text:
+      $proc: stringify
+      $args:
+        - $ref: number
+  ui_selector:
+    defaultValue:
+      $ref: selectorValue
+    options:
+      $proc: stringify
+      $args:
+        - metrics: 'Revenue'
+          dimension: 'Period'
+  ui_selection:
+    text:
+      $ref: selectorValue
+  ui_recommendation_dishes:
+    recommendations:
+      -
+        name: 荞叶鸡蛋煎饼#早餐#
+        toaste: 五香味
+        price: 12
+        img: http://s1.st.meishij.net/r/222/140/4535222/a4535222_143797749935129.jpg
+        alt: huiguorou
+        tag: 健脑益智
+      -
+        name: 荞叶鸡蛋煎饼
+        toaste: 五香味
+        price: 12
+        img: http://s1.st.meishij.net/r/222/140/4535222/a4535222_143797749935129.jpg
+        alt: huiguorou
+# Dashboard Layout
+layout:
+  id: cee4bb00-dd8d-492d-b8a2-2511577187b9
+  type: FlexboxContainer
+  props:
+    items:
+      - id: 88e4382a-27df-4fa0-bcfe-b7950f86783c
+        type: RecommendationDishes
+        input: ui_recommendation_dishes
+        props:
+          width: '100%'
+

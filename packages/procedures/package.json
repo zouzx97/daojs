@@ -9,6 +9,7 @@
     "axios": "^0.18.0",
     "eslint-config-daojs": "^0.0.1",
     "lodash": "^4.17.5",
+    "react-router-dom": "^4.2.2",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
