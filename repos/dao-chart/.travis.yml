@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "node"
+  - "lts/*"
+  - "8"
+cache: yarn
+
+install:
+  - cd ui && yarn && cd ..
+  - cd mt && yarn && cd ..
+
+script:
+  - cd ui
+  - yarn run lint
+  - yarn run build
+  - yarn run test
+  - cd ..
+  - cd mt
+  - yarn run lint
+  - yarn test
