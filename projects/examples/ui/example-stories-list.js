@@ -7,13 +7,15 @@ import JSONTree from 'react-json-tree';
 const { Panel } = Collapse;
 
 const ExampleStoriesList = ({ categories }) => (
-  <Collapse>
-    {_.map(categories, ({ name, stories }) => (
-      <Panel header={name} key={name}>
-        <JSONTree data={stories} />
-      </Panel>
-    ))}
-  </Collapse>
+  <div>
+    <Collapse>
+      {_.map(categories, ({ name: catName, stories }) => (
+        <Panel header={catName} key={catName}>
+          <JSONTree data={stories} />
+        </Panel>
+      ))}
+    </Collapse>
+  </div>
 );
 
 ExampleStoriesList.propTypes = {
