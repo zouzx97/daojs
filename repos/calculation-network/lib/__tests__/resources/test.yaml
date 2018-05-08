@@ -1,0 +1,28 @@
+---
+foo:
+  @proc: sum
+  @args:
+    - 1
+    - 2
+    - @proc: sum
+bar: 2
+tic:
+  @proc: sum
+  @args:
+    - @ref: foo
+    - @ref: bar
+    - @proc: sum
+      @args:
+        - @ref: foo
+        - 1
+tac:
+  @proc: sum
+  @args:
+    - @ref: tic
+    - 1
+toe:
+  value:
+    @proc: sum
+    @args:
+      - @ref: foo
+      - 1
