@@ -5,6 +5,7 @@ import {
   AppFrame,
   ComponentRegistry,
 } from '@daojs/ui';
+import { NavLink } from 'react-router-dom';
 
 // =.=! I dont like this
 import * as botanaComponents from '@daojs/botana-components';
@@ -12,17 +13,23 @@ import * as components from './components';
 
 ComponentRegistry.register(botanaComponents).register(components);
 
-const ExamplePage = ({ title, logo, categories }) => (
-  <AppFrame
-    title={title}
-    logo={logo}
-    categories={categories}
-    defaultStory={_.head(categories).id}
-    componentRegistry={ComponentRegistry}
-  />
+const ExamplePage = ({
+  name, title, logo, categories,
+}) => (
+  <div>
+    <NavLink to={`/${name}/stories`}>View stories</NavLink>
+    <AppFrame
+      title={title}
+      logo={logo}
+      categories={categories}
+      defaultStory={_.head(categories).id}
+      componentRegistry={ComponentRegistry}
+    />
+  </div>
 );
 
 ExamplePage.propTypes = {
+  name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
   categories: PropTypes.arrayOf(PropTypes.any).isRequired,
