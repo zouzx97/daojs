@@ -5,7 +5,7 @@ import {
   AppFrame,
   ComponentRegistry,
 } from '@daojs/ui';
-import { NavLink } from 'react-router-dom';
+import { Button } from 'antd';
 
 // =.=! I dont like this
 import * as botanaComponents from '@daojs/botana-components';
@@ -17,7 +17,7 @@ const ExamplePage = ({
   name, title, logo, categories,
 }) => (
   <div>
-    <NavLink to={`/${name}/stories`}>View stories</NavLink>
+    <Button type="primary" href={`#/${name}/stories`}>View stories</Button>
     <AppFrame
       title={title}
       logo={logo}
