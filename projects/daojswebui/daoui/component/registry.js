@@ -113,7 +113,7 @@ class Registry extends Component {
       />);
 
     return (
-      <div style={this.props.style}>
+      <div className="daojs-component-registry" style={this.props.style}>
         <Form layout="inline">
           <Form.Item label="Name">
             <Input
@@ -123,6 +123,9 @@ class Registry extends Component {
                 this.onChange({
                   name: e.target.value,
                 });
+              }}
+              style={{
+                display: 'inline-grid',
               }}
             />
           </Form.Item>
@@ -196,7 +199,7 @@ class Registry extends Component {
         }
         <Form layout="vertical">
           <Form.Item>
-            <Tabs defaultActiveKey="source" onChange={() => {}}>
+            <Tabs defaultActiveKey="source">
               <TabPane tab="Source" key="source">{sourceEditor}</TabPane>
               <TabPane tab="README" key="readme">{readmeEditor}</TabPane>
               <TabPane tab="Demo" key="demo">{demoEditor}</TabPane>

@@ -19,6 +19,9 @@ export default class extends Component {
         placeholder="Filter"
         enterButton={false}
         onKeyUp={this.onSearch}
+        style={{
+          display: 'inline-grid',
+        }}
       />
     );
   }
