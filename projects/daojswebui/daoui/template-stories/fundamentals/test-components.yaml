@@ -1,0 +1,102 @@
+---
+id: 7fdc3a32-1369-45dc-80a8-5db7ebe8299e
+name: 测试
+
+# Data flow diagram
+data:
+  title: PowerAI Test
+  bestUser:
+    department: STC
+    discipline: SDE
+  branchSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: BranchName
+    defaultValue:
+      - null
+  BranchName:
+    - null
+  mealSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: MealName
+    defaultValue:
+      - null
+  MealName:
+    - null
+  cardSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: CardType
+    defaultValue:
+      - null
+  CardType:
+    - null
+  granularitySelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: Granularity
+    defaultValue: Daily
+  Granularity: Daily
+  _time:
+    start: '2018-01-01'
+    end: '2018-02-01'
+  revenueTrend:
+    $proc: slice
+    $args:
+      $proc: sliceQuery
+      $args:
+        time:
+          $ref: _time
+
+        BranchName:
+          $ref: BranchName
+        MealName:
+          $ref: MealName
+        CardType:
+          $ref: CardType
+
+        Collapse:
+          - BranchName
+          - MealName
+          - CardType
+        Granularity:
+          $ref: Granularity
+        Metrics: Revenue
+  revenueTrendChartProps:
+    source:
+      $ref: revenueTrend
+
+# Dashboard Layout
+layout:
+  id: 9850ccd3-b5f9-4b96-afe7-e3650964cbe4
+  type: FlexboxContainer
+  props:
+    direction: 'vertical'
+    align: 'center'
+    items:
+      - id: 131e8217-1547-514a-8644-171d5252bfce
+        type: BestUser
+        input: bestUser
+      - id: 2d3433a9-71b4-59ab-9547-5ac98c86f945
+        type: MultiSelector
+        input: branchSelector
+        output: BranchName
+      - id: 66f86490-6000-5800-b172-efa849ff208f
+        type: MultiSelector
+        input: mealSelector
+        output: MealName
+      - id: 5a11fe99-b9ce-5e37-97b5-d495c3b8a8a5
+        type: MultiSelector
+        input: cardSelector
+        output: CardType
+      - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
+        type: SingleSelector
+        input: granularitySelector
+        output: Granularity
+      - id: 6f196a3c-d39e-52d3-ad13-e89806865275
+        type: TimeRange
+        output: _time
+      - id: 2cd4447f-2b1a-5c9a-9fc2-23371db57b2b
+        type: Trend
+        input: revenueTrendChartProps

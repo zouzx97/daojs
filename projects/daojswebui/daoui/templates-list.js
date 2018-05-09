@@ -3,7 +3,7 @@ import {
   AIOperations,
   DefaultStories,
   CustomStories,
-} from '../ui/stories/index';
+} from './template-stories';
 
 const examples = [
   {
