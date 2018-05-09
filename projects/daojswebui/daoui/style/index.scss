@@ -1,0 +1,18 @@
+body > #container {
+  .ant-btn, .ant-input {
+    border-radius: 1px;
+  }
+  .source-code pre {
+    margin: 0 !important;
+    border: 0 !important;
+  }
+  .readme {
+    th, td {
+      border: 1px solid #eee;
+      padding: 16px;
+    }
+    thead {
+      background: #fafafa;
+    }
+  }
+}
