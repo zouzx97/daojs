@@ -7,7 +7,7 @@ import JSONTree from 'react-json-tree';
 const { Panel } = Collapse;
 
 const ExampleStoriesList = ({ categories }) => (
-  <div>
+  <div style={{ clear: 'both' }}>
     <Collapse>
       {_.map(categories, ({ name: catName, stories }) => (
         <Panel header={catName} key={catName}>
