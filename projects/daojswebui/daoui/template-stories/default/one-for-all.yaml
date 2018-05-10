@@ -1,0 +1,366 @@
+---
+id: 48d0a126-0208-5c36-9bfe-2035a60789e1
+name: 合一
+
+# Data flow diagram
+data:
+  metricSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: Metric
+    defaultValue:
+      $ref: Metric
+  Metric: Revenue
+  insightSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: insightProcedure
+    defaultValue:
+      $ref: insight
+  insight: slice
+  dimensionType:
+    $proc: getMetricDimensionType
+    $args:
+      $ref: Metric
+  isRankerInsight:
+    $proc: isEqual
+    $args:
+      value:
+        $ref: insight
+      other: ranker
+  isSliceOrPredicateInsight:
+    $proc: or
+    $args:
+      - $proc: isEqual
+        $args:
+          value:
+            $ref: insight
+          other: slice
+      - $proc: isEqual
+        $args:
+          value:
+            $ref: insight
+          other: predicate
+  dimensionSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args:
+        $ref: dimensionType
+    defaultValue:
+      $ref: Dimension
+  Dimension: BranchName
+  isTransactionMetric:
+    $proc: includes
+    $args:
+      collection:
+        $proc: getEnum
+        $args: TransactionMetric
+      value:
+        $ref: Metric
+  isChargeMetric:
+    $proc: includes
+    $args:
+      collection:
+        $proc: getEnum
+        $args: ChargeMetric
+      value:
+        $ref: Metric
+  branchSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: BranchName
+    defaultValue:
+      $ref: BranchName
+  BranchName:
+    - null
+  mealSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: MealName
+    defaultValue:
+      $ref: MealName
+  MealName:
+    - null
+  cardSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: CardType
+    defaultValue:
+      $ref: CardType
+  CardType:
+    - null
+  chargeSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: ChargeType
+    defaultValue:
+      - null
+  ChargeType:
+    - null
+  granularitySelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: Granularity
+    defaultValue:
+      $ref: Granularity
+  Granularity: Daily
+  orderSelector:
+    enums:
+      $proc: getEnumSelectorProps
+      $args: OrderBy
+    defaultValue:
+      $ref: OrderBy
+  OrderBy: DESC
+  limitSelector:
+    enums:
+      - 10
+      - 20
+      - 50
+      - 100
+    defaultValue:
+      $ref: ValueLimit
+  ValueLimit: 10
+  clientInsightSelector:
+    enums:
+      -
+        value: identity
+        text: 原数据
+      -
+        value: cumulative
+        text: 累积数据
+      -
+        value: growthRate
+        text: 增长率
+    defaultValue:
+      $ref: clientInsight
+  clientInsight: identity
+  _time:
+    start: '2018-01-01'
+    end: '2018-02-01'
+  request:
+    $proc:
+      $ref: insight
+    $args:
+      $proc: queryArgs
+      $args:
+        insight:
+          $ref: insight
+        time:
+          $ref: _time
+        BranchName:
+          $ref: BranchName
+        MealName:
+          $ref: MealName
+        CardType:
+          $ref: CardType
+        ChargeType:
+          $ref: ChargeType
+
+        Collapse:
+          $proc: getEnum
+          $args:
+            $proc: getMetricDimensionType
+            $args:
+              $ref: Metric
+        Dimensions:
+          - $ref: Dimension
+        Granularity:
+          $ref: Granularity
+        Metrics:
+          $ref: Metric
+        OrderBy:
+          $ref: OrderBy
+        ValueLimit:
+          $ref: ValueLimit
+  chartProps:
+    source:
+      $ref: request
+    insight:
+      $ref: insight
+  avalaibleCharts:
+    slice: Trend
+    ranker: Pie
+    predicate: Trend
+  chartType:
+    $proc-lambda: ({ charts, insight }) => charts[insight]
+    $args:
+      charts:
+        $ref: avalaibleCharts
+      insight:
+        $ref: insight
+# Dashboard Layout
+layout:
+  type: GridLayout
+  props:
+    gutter: 24
+    rows:
+      - id: 12a0d563-91c5-577b-8e7a-d4b0ee2df7dd
+        cols:
+          - id: 07ae8310-93f3-54b3-b385-b939bb3cbf77
+            md: 24
+            lg: 8
+            align: center
+            height: 34px
+            content:
+              type: SearchDialog
+              output:
+                - insight
+                - CardType
+                - BranchName
+                - Granularity
+                - Metric
+                - clientInsight
+                - ValueLimit
+                - OrderBy
+                - MealName
+                - Dimension
+      - id: b4b34fae-40ab-584e-8a20-fa83f83b8224
+        gutter: 24
+        align: bottom
+        padding: 20px 0 0 0
+        cols:
+          - id: 468c3395-b95d-56b2-8082-824b6d6ec15c
+            md: 24
+            lg: 8
+            content:
+              type: SingleSelector
+              input: insightSelector
+              output: insight
+              props:
+                label: "分析: "
+      - id: 8d0afafe-846d-51cd-b92a-47bbd10db2b1
+        gutter: 24
+        cols:
+          - id: 229ec690-afd3-51d4-9817-257949ecaafc
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: metricSelector
+              output: Metric
+              props:
+                label: "指标: "
+          - id: 42b5ccdd-c0dd-5327-a75a-50db07d077d5
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: TimeRange
+              output: _time
+              props:
+                label: "时间: "
+      - id: ac2aecdd-8f09-5b37-9bcc-65587980d834
+        gutter: 24
+        condition: isChargeMetric
+        cols:
+          - id: b7ff6eb8-4758-51f2-9d62-3027597224d5
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: MultiSelector
+              input: chargeSelector
+              output: ChargeType
+              props:
+                label: "充值类型: "
+      - id: 5939c453-a212-5637-9e9a-2c95fa150a68
+        gutter: 24
+        condition: isTransactionMetric
+        cols:
+          - id: 1d6c3a01-6781-5b53-b404-ba80ac7dc216
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: MultiSelector
+              input: branchSelector
+              output: BranchName
+              props:
+                label: "餐厅名称: "
+          - id: 66f86490-6000-5800-b172-efa849ff208f
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: MultiSelector
+              input: mealSelector
+              output: MealName
+              props:
+                label: "用餐时段: "
+          - id: 5a11fe99-b9ce-5e37-97b5-d495c3b8a8a5
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: MultiSelector
+              input: cardSelector
+              output: CardType
+              props:
+                label: "卡类型: "
+      - id: 3cf3a3b3-e653-5d10-b581-245294f6f503
+        gutter: 24
+        condition: isRankerInsight
+        cols:
+          - id: 21635f7d-3eab-55c4-adc2-3c03f39d8822
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: dimensionSelector
+              output: Dimension
+              props:
+                label: "维度: "
+          - id: e2274f1d-5841-5077-bf9d-debbcf650c77
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: orderSelector
+              output: OrderBy
+              props:
+                label: "排序: "
+          - id: 23c5f19b-7bd6-53dd-afc7-ae430644127b
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: limitSelector
+              output: ValueLimit
+              props:
+                label: "Top: "
+      - id: 7fbe7687-c36e-5f95-985f-450a37aac271
+        gutter: 24
+        condition: isSliceOrPredicateInsight
+        cols:
+          - id: 3d61f356-b4fe-567d-9aa4-6dbb39467476
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: granularitySelector
+              output: Granularity
+              props:
+                label: "粒度: "
+          - id: 67452182-dc73-5846-9ac2-0847915f99c5
+            md: 24
+            lg: 8
+            padding: 10px 0
+            content:
+              type: SingleSelector
+              input: clientInsightSelector
+              output: clientInsight
+              props:
+                label: "客户端分析: "
+      - id: 61a20bbf-ec39-54a5-bed4-7baa11b6918a
+        cols:
+          - id: 2952d949-206f-590e-b5fe-23b735eab7fb
+            md: 24
+            lg: 24
+            content:
+              type: OneForAll
+              input: chartProps

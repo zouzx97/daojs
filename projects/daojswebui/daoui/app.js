@@ -5,6 +5,7 @@ import ComponentDetail from './component/componentDetailHoC';
 import RegistryStudio from './component/registryStudio';
 import Home from './component/home';
 import Frame from './component/frame';
+import TemplatesIndex from './component/templates-index';
 
 function HomeHoC() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route exact path="/" component={HomeHoC} />
         <Route path="/registry/:componentName*" component={RegistryStudio} />
         <Route path="/detail/:componentName*" component={ComponentDetail} />
+        <Route path="/templates" component={TemplatesIndex} />
       </Frame>
     </HashRouter>
   );
