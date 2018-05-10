@@ -18,7 +18,16 @@ const TemplateView = ({
         margin: '0.5rem 3rem',
       }}
     >
-      View stories
+      View
+    </Button>
+    <Button
+      type="secondary"
+      href={`#/editor`}
+      style={{
+        margin: '0.5rem 3rem',
+      }}
+    >
+      Copy&Edit
     </Button>
     <AppFrame
       title={title}
