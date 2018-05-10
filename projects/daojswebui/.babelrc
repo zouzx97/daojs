@@ -5,6 +5,7 @@
     "transform-object-rest-spread",
     "syntax-dynamic-import",
     "dynamic-import-webpack",
+    "transform-class-properties",
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
   ],
   "presets": ["react", "env"]

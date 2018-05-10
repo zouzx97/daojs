@@ -15,4 +15,9 @@ body > #container {
       background: #fafafa;
     }
   }
+  .daojs-component-registry {
+    .ant-tabs-nav {
+      display: inline-table;
+    }
+  }
 }

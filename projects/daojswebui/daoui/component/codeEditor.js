@@ -42,7 +42,6 @@ export default class Editor extends Component {
   }
 }
 
-
 Editor.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
