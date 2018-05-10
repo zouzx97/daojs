@@ -40,12 +40,23 @@ export default function GridLayout(props) {
     <div>
       <StoryboardContext.Consumer>
         {
-          ({ agent }) => _.map(rows, row =>
+          ({ agent }) => _.map(rows, (row, rowIndex) =>
             (
-              <Cell type={GridRow} agent={agent} condition={row.condition} props={row} key={row.id}>
+              <Cell
+                type={GridRow}
+                agent={agent}
+                condition={row.condition}
+                props={row}
+                key={row.id || rowIndex}
+              >
                 {
-                  _.map(row.cols, col => (
-                    <Cell agent={agent} condition={col.condition} {...col.content} key={col.id} />
+                  _.map(row.cols, (col, colIndex) => (
+                    <Cell
+                      agent={agent}
+                      condition={col.condition}
+                      {...col.content}
+                      key={col.id || colIndex}
+                    />
                   ))
                 }
               </Cell>
