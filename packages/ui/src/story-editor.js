@@ -38,7 +38,9 @@ export default class StoryEditor extends React.PureComponent {
         <Row gutter={24}>
           <Col span={12}>
             <TextArea
-              autosize
+              autosize={{
+                minRows: 50,
+              }}
               value={this.state.content}
               autoComplete="on"
               onChange={event => this.updateStory(event.target.value)}
