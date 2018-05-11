@@ -96,7 +96,7 @@
 "@daojs/builtin-components@file:./packages/builtin-components":
   version "0.0.1"
   dependencies:
-    "@daojs/builtin-components" "file:./C:/Users/yuzhon/AppData/Local/Yarn/Cache/v1/npm-@daojs/builtin-components-0.0.1-18d8dce2-b218-4843-94c4-6ee4e08d9732-1526027502563"
+    "@daojs/builtin-components" "file:./C:/Users/yuzhon/AppData/Local/Yarn/Cache/v1/npm-@daojs/builtin-components-0.0.1-3bd748ca-1f4e-49be-86e8-1f789ecb871f-1526030011433"
     "@daojs/registry" "^0.0.1"
     antd "^3.4.1"
     echarts-for-react "^2.0.8"
@@ -9005,6 +9005,10 @@ raw-body@2, raw-body@2.3.2, raw-body@^2.2.0:
     http-errors "1.6.2"
     iconv-lite "0.4.19"
     unpipe "1.0.0"
+
+raw-loader@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-0.5.1.tgz#0c3d0beaed8a01c966d9787bf778281252a979aa"
 
 rc-align@2.x:
   version "2.3.6"

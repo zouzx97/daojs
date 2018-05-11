@@ -1,6 +1,5 @@
 import axios from 'axios';
 import _ from 'lodash';
-import builtinComponents from '@daojs/builtin-components';
 import builtinComponentsData from '@daojs/builtin-components/demo';
 import { SERVICE_URL, BLACK_LIST, MODE } from './constants';
 
@@ -26,13 +25,7 @@ const getAllComponents = (() => {
       .catch(() => []);
   }
 
-  const names = _.keys(builtinComponents);
-  const response = _.map(names, name => ({
-    name,
-    ...builtinComponentsData[name],
-  }));
-
-  return Promise.resolve(response);
+  return Promise.resolve(builtinComponentsData);
 })();
 
 // TODO: will support real query, just list and concat children
@@ -74,5 +67,7 @@ export function getComponent({ name, version = 0 }) {
       });
   }
 
-  return Promise.resolve(builtinComponentsData[name]);
+  return Promise.resolve({
+    data: _.find(builtinComponentsData, comp => comp.name === name),
+  });
 }

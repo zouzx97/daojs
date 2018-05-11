@@ -1,5 +1,9 @@
 import React from 'react';
-import { Line } from '@daojs/builtin-components';
+import builtinComponents from '@daojs/builtin-components';
+
+const {
+  Line,
+} = builtinComponents;
 
 export default function LineDemo() {
   return (

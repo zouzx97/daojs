@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import ComponentDetail from './componentDetail';
 import { getComponent } from '../repository';
+import { MODE } from '../constants';
 
-export default class extends Component {
+export default class ComponentDetailHoC extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
   }
@@ -36,22 +37,30 @@ export default class extends Component {
     if (!_.isNull(data) || _.isEmpty(name)) {
       return;
     }
-    Promise.all([
-      getComponent({ name }),
-      getComponent({ name: `${name}/demo` }),
-    ]).then(([
-      { data: self },
-      { data: demo },
-    ]) => {
-      this.setState({
-        data: { ...self, demo: { ...demo } },
+    if (MODE === 'server') {
+      Promise.all([
+        getComponent({ name }),
+        getComponent({ name: `${name}/demo` }),
+      ]).then(([
+        { data: self },
+        { data: demo },
+      ]) => {
+        this.setState({
+          data: { ...self, demo: { ...demo } },
+        });
       });
-    });
+    } else {
+      getComponent({ name }).then(({ data: newData }) => {
+        this.setState({ data: newData });
+      });
+    }
   }
 
   render() {
     return (
-      this.state.data && <ComponentDetail name={this.state.name} {...this.state.data} />
+      _.isEmpty(this.state.data) ?
+        null :
+        <ComponentDetail name={this.state.name} {...this.state.data} />
     );
   }
 }

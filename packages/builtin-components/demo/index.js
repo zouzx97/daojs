@@ -1,13 +1,18 @@
+/* eslint-disable */
+
 import LineDemo from './line.demo';
-import lineDemoRaw from 'text-loader?./line.demo';
+import lineDemoSource from '!raw-loader!./line.demo.js';
 import lineMD from './line.md';
 
-export default {
-  Line: {
+export default [
+  {
+    name: 'Line',
     category: 'chart',
     description: 'Easily visualize your data using line chart.',
     readme: lineMD,
-    demo: LineDemo,
-    demoCode: lineDemoRaw,
-  },
-};
+    demo: {
+      Comp: LineDemo,
+      source: lineDemoSource,
+    },
+  }
+];
