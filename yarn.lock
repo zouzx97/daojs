@@ -93,6 +93,25 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@daojs/builtin-components@file:./packages/builtin-components":
+  version "0.0.1"
+  dependencies:
+    "@daojs/builtin-components" "file:./C:/Users/yuzhon/AppData/Local/Yarn/Cache/v1/npm-@daojs/builtin-components-0.0.1-18d8dce2-b218-4843-94c4-6ee4e08d9732-1526027502563"
+    "@daojs/registry" "^0.0.1"
+    antd "^3.4.1"
+    echarts-for-react "^2.0.8"
+    eslint-config-daojs "^0.0.1"
+    immutable "^3.8.2"
+    lodash "^4.17.5"
+    moment "^2.22.0"
+    prop-types "^15.6.1"
+    react "^16.3.1"
+    react-container-dimensions "^1.3.3"
+    react-grid-layout "^0.16.6"
+    react-markdown "^3.3.0"
+    react-resizable "^1.7.5"
+    react-router-dom "^4.2.2"
+
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"

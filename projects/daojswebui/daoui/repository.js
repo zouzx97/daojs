@@ -1,10 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 import builtinComponents from '@daojs/builtin-components';
-import {
-  demo as builtinComponentsDemo,
-  meta as builtinComponentsMeta,
-} from '@daojs/builtin-components/demo';
+import builtinComponentsData from '@daojs/builtin-components/demo';
 import { SERVICE_URL, BLACK_LIST, MODE } from './constants';
 
 export function postComponent(options) {
@@ -32,7 +29,7 @@ const getAllComponents = (() => {
   const names = _.keys(builtinComponents);
   const response = _.map(names, name => ({
     name,
-    ...builtinComponentsMeta[name],
+    ...builtinComponentsData[name],
   }));
 
   return Promise.resolve(response);
@@ -59,19 +56,23 @@ export function listChildren({
 }
 
 export function getComponent({ name, version = 0 }) {
-  let url = `${SERVICE_URL}/components/@/${name}`;
-  if (version) {
-    url = `${url}?v=${version}`;
+  if (MODE === 'server') {
+    let url = `${SERVICE_URL}/components/@/${name}`;
+    if (version) {
+      url = `${url}?v=${version}`;
+    }
+    return axios
+      .get(url)
+      .then(response => _.defaults({
+        data: _.defaults(response.data, {
+          version,
+        }),
+      }, response))
+      .catch((e) => {
+        console.error(e); // eslint-disable-line
+        return { data: {} };
+      });
   }
-  return axios
-    .get(url)
-    .then(response => _.defaults({
-      data: _.defaults(response.data, {
-        version,
-      }),
-    }, response))
-    .catch((e) => {
-      console.error(e); // eslint-disable-line
-      return { data: {} };
-    });
+
+  return Promise.resolve(builtinComponentsData[name]);
 }
