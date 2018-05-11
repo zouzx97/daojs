@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MonacoEditor from 'react-monaco-editor'; // eslint-disable-line
+// import MonacoEditor from 'react-monaco-editor'; // eslint-disable-line
 import PropTypes from 'prop-types';
 
 export default class Editor extends Component {
@@ -20,7 +20,7 @@ export default class Editor extends Component {
             height: '700px',
           }}
         >
-          <MonacoEditor
+          {/* <MonacoEditor
             theme="vs"
             options={{
               minimap: {
@@ -35,7 +35,7 @@ export default class Editor extends Component {
               },
             }}
             {...this.props}
-          />
+          /> */}
         </div>
       </div>
     );

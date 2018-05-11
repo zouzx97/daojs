@@ -39,6 +39,7 @@
   "dependencies": {
     "@daojs/engine": "^0.0.1",
     "@daojs/ui": "^0.0.2",
+    "@daojs/builtin-components": "*",
     "antd": "^3.5.0",
     "axios": "^0.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

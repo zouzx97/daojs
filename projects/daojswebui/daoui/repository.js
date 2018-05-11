@@ -1,6 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
-import { SERVICE_URL, BLACK_LIST } from './constants';
+import builtinComponentsData from '@daojs/builtin-components/demo';
+import { SERVICE_URL, BLACK_LIST, MODE } from './constants';
 
 export function postComponent(options) {
   const { name } = options;
@@ -14,12 +15,18 @@ export function postComponent(options) {
     });
 }
 
-const getAllComponents = axios.get(`${SERVICE_URL}/list/@/`)
-  .then(response => _.chain(response)
-    .get('data.children', [])
-    .reject(item => _.includes(BLACK_LIST, item.name))
-    .value())
-  .catch(() => []);
+const getAllComponents = (() => {
+  if (MODE === 'server') {
+    return axios.get(`${SERVICE_URL}/list/@/`)
+      .then(response => _.chain(response)
+        .get('data.children', [])
+        .reject(item => _.includes(BLACK_LIST, item.name))
+        .value())
+      .catch(() => []);
+  }
+
+  return Promise.resolve(builtinComponentsData);
+})();
 
 // TODO: will support real query, just list and concat children
 export function search({
@@ -42,19 +49,25 @@ export function listChildren({
 }
 
 export function getComponent({ name, version = 0 }) {
-  let url = `${SERVICE_URL}/components/@/${name}`;
-  if (version) {
-    url = `${url}?v=${version}`;
+  if (MODE === 'server') {
+    let url = `${SERVICE_URL}/components/@/${name}`;
+    if (version) {
+      url = `${url}?v=${version}`;
+    }
+    return axios
+      .get(url)
+      .then(response => _.defaults({
+        data: _.defaults(response.data, {
+          version,
+        }),
+      }, response))
+      .catch((e) => {
+        console.error(e); // eslint-disable-line
+        return { data: {} };
+      });
   }
-  return axios
-    .get(url)
-    .then(response => _.defaults({
-      data: _.defaults(response.data, {
-        version,
-      }),
-    }, response))
-    .catch((e) => {
-      console.error(e); // eslint-disable-line
-      return { data: {} };
-    });
+
+  return Promise.resolve({
+    data: _.find(builtinComponentsData, comp => comp.name === name),
+  });
 }
