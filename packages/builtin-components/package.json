@@ -17,6 +17,7 @@
     "jest": "^22.4.3"
   },
   "dependencies": {
+    "@daojs/builtin-components": "file:.",
     "@daojs/registry": "^0.0.1",
     "antd": "^3.4.1",
     "echarts-for-react": "^2.0.8",

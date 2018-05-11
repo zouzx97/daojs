@@ -7,3 +7,5 @@ export const BLACK_LIST = [
   'echarts-for-react',
   'echarts-map-china',
 ];
+
+export const MODE = 'client';
