@@ -1,5 +1,5 @@
 import React from 'react';
-import builtinComponents from '@daojs/builtin-components';
+import builtinComponents from '../src/index';
 
 const {
   Line,
