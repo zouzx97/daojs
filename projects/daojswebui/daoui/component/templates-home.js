@@ -20,7 +20,7 @@ class TemplatesHome extends React.Component {
       <Row>
         <Col span={6} />
         <Col span={12}>
-          <Card title="餐饮类解决方案" bordered={false} extra={<Button href="#">了解更多</Button>}>
+          <Card title="餐饮类解决方案" bordered="false" extra={<Button href="#">了解更多</Button>}>
             <Row gutter={16}>
               {_.map(this.examples, example => (
                 <Col span={8} key={example.name}>
@@ -28,12 +28,12 @@ class TemplatesHome extends React.Component {
                     <Card
                       hoverable
                       cover={<img alt="example" src={example.coverImage} />}
-                      bordered={false}
+                      bordered="false"
                     >
                       <Card.Meta
                         title={example.name}
                         description={example.description}
-                        bordered={false}
+                        bordered="false"
                       />
                     </Card>
                   </Link>
@@ -66,7 +66,7 @@ class TemplatesHome extends React.Component {
             <div align="center" style={{ padding: '20px' }}>
               <img
                 src="https://themes.getbootstrap.com/wp-content/themes/bootstrap-marketplace/assets/images/elements/bootstrap-stack.png"
-                srcSet="https://themes.getbootstrap.com/wp-content/themes/bootstrap-marketplace/assets/images/elements/bootstrap-stack.png 1x, https://themes.getbootstrap.com/wp-content/themes/bootstrap-marketplace/assets/images/elements/bootstrap-stack@2x.png 2x" 
+                srcSet="https://themes.getbootstrap.com/wp-content/themes/bootstrap-marketplace/assets/images/elements/bootstrap-stack.png 1x, https://themes.getbootstrap.com/wp-content/themes/bootstrap-marketplace/assets/images/elements/bootstrap-stack@2x.png 2x"
                 alt="Dao"
               />
               <h1 style={{
