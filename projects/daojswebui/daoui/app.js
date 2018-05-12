@@ -1,10 +1,10 @@
 import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
-import { AppFrameEditor } from '@daojs/ui';
 import ComponentDetail from './component/componentDetailHoC';
 import RegistryStudio from './component/registryStudio';
 import Home from './component/home';
 import Frame from './component/frame';
+import TemplateEditor from './component/template-editor';
 import TemplatesIndex from './component/templates-index';
 
 function HomeHoC() {
@@ -17,11 +17,11 @@ export default function App() {
   return (
     <HashRouter>
       <Frame>
-        <Route exact path="/editor" component={AppFrameEditor} />
         <Route exact path="/" component={HomeHoC} />
         <Route path="/registry/:componentName*" component={RegistryStudio} />
         <Route path="/detail/:componentName*" component={ComponentDetail} />
         <Route path="/templates" component={TemplatesIndex} />
+        <Route path="/editor/:frameType/:id" component={TemplateEditor} />
       </Frame>
     </HashRouter>
   );
