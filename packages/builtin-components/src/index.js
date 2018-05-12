@@ -21,6 +21,7 @@ import CellTest from './components/cell-test';
 // import LayoutDefault from './components/layout-default';
 
 import Bar from './components/bar';
+import Scatter from './components/scatter';
 import Funnel from './components/funnel';
 import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
@@ -29,6 +30,7 @@ import Select from './components/select';
 import SingleSelector from './components/single-selector';
 import TextBlock from './components/text-block';
 import TimeRange from './components/time-range';
+import Trend from './components/trend/index';
 
 export default {
   Compare,
@@ -48,6 +50,7 @@ export default {
   LineBarChart,
   Markdown,
   CellTest,
+  Scatter,
   // CardContainer,
   // FlexBoxContainer,
   // AdjustableContainer,
@@ -61,4 +64,5 @@ export default {
   SingleSelector,
   TextBlock,
   TimeRange,
+  Trend,
 };

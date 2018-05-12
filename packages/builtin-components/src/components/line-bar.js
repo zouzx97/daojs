@@ -85,6 +85,7 @@ export default class LineBarChart extends PureComponent { //eslint-disable-line
         axisPointer: {
           type: 'shadow',
         },
+        show: this.props.showAxis,
       }],
       yAxis: _.map(yAxisMetrics, metric => ({
         type: 'value',
@@ -92,6 +93,7 @@ export default class LineBarChart extends PureComponent { //eslint-disable-line
         splitLine: {
           show: false,
         },
+        show: this.props.showAxis,
       })),
       series: _.map(this.getMetricDimensions(), (series) => {
         const seriesType = metric2TypeMap[series].type;
@@ -126,9 +128,11 @@ export default class LineBarChart extends PureComponent { //eslint-disable-line
 
 LineBarChart.propTypes = {
   value: PropTypes.objectOf(PropTypes.any).isRequired,
+  showAxis: PropTypes.bool,
   title: PropTypes.string,
 };
 
 LineBarChart.defaultProps = {
+  showAxis: true,
   title: '',
 };

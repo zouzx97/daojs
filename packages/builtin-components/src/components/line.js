@@ -40,12 +40,16 @@ export default class Line extends BaseChart {
 
   getOption() {
     return {
-      legend: {},
+      legend: {
+        show: this.props.showAxis,
+      },
       tooltip: {
         trigger: 'axis',
+        show: this.props.showAxis,
       },
       yAxis: {
         type: 'value',
+        show: this.props.showAxis,
       },
       xAxis: this.getAxisOption(),
       ...super.getOption(),
@@ -65,8 +69,10 @@ export default class Line extends BaseChart {
 
 Line.propTypes = {
   onSlicerChange: PropTypes.func,
+  showAxis: PropTypes.bool,
 };
 
 Line.defaultProps = {
   onSlicerChange: _.noop,
+  showAxis: true,
 };

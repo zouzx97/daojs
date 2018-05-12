@@ -42,6 +42,7 @@ export default class BaseChart extends PureComponent {
       data: this.getAxisData(),
       type: 'category',
       boundaryGap: false,
+      show: this.props.showAxis,
     };
   }
 
@@ -110,6 +111,7 @@ BaseChart.propTypes = {
   metricDimensions: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
   style: PropTypes.objectOf(PropTypes.any),
+  showAxis: PropTypes.bool,
 };
 
 BaseChart.defaultProps = {
@@ -117,4 +119,5 @@ BaseChart.defaultProps = {
   metricDimensions: [],
   title: null,
   style: {},
+  showAxis: true,
 };

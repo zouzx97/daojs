@@ -23,7 +23,58 @@ import funnelDemoSource from '!raw-loader!./funnel.demo.js';
 import stackBarDemo from './stackBar.demo';
 import stackBarDemoSource from '!raw-loader!./stackBar.demo.js';
 
+import scatterDemo from './scatter.demo';
+import scatterDemoSource from '!raw-loader!./scatter.demo.js';
+
 export default [
+  {
+    name: '趋势',
+    key: 'trend',
+    // possible values: chart, slicer, utility, layout, container
+    category: 'utilities',
+    description: 'Easily visualize your data using line chart.',
+    readme: lineMD,
+    demo: {
+      Comp: trendDemo,
+      source: trendDemoSource,
+    },
+  },
+  {
+    name: '线段图',
+    key: 'line',
+    // possible values: chart, slicer, utility, layout, container
+    category: 'chart',
+    description: 'Easily visualize your data using line chart.',
+    readme: lineMD,
+    demo: {
+      Comp: lineDemo,
+      source: lineDemoSource,
+    },
+  },
+  {
+    name: '线段柱状图',
+    key: 'line-bar',
+    // possible values: chart, slicer, utility, layout, container
+    category: 'chart',
+    description: 'Easily visualize your data using line-bar chart.',
+    readme: lineMD,
+    demo: {
+      Comp: lineBarDemo,
+      source: lineBarDemoSource,
+    },
+  },
+  {
+    name: '气泡图', 
+    key: 'scatter',
+    // possible values: chart, slicer, utility, layout, container
+    category: 'chart',
+    description: 'Easily visualize your data using scatter chart.',
+    readme: lineMD,
+    demo: {
+      Comp: scatterDemo,
+      source: scatterDemoSource,
+    },
+  },
   {
     name: '堆栈柱状图',
     key: 'stack-bar',
@@ -60,18 +111,7 @@ export default [
       source: donutDemoSource,
     },
   },
-  {
-    name: '线段柱状图',
-    key: 'line-bar',
-    // possible values: chart, slicer, utility, layout, container
-    category: 'chart',
-    description: 'Easily visualize your data using line-bar chart.',
-    readme: lineMD,
-    demo: {
-      Comp: lineBarDemo,
-      source: lineBarDemoSource,
-    },
-  },
+
   {
     name: '柱状图',
     key: 'bar',
@@ -96,16 +136,5 @@ export default [
       source: chinaMapDemoSource,
     },
   },
-  {
-    name: '线段图',
-    key: 'line',
-    // possible values: chart, slicer, utility, layout, container
-    category: 'chart',
-    description: 'Easily visualize your data using line chart.',
-    readme: lineMD,
-    demo: {
-      Comp: lineDemo,
-      source: lineDemoSource,
-    },
-  },
+
 ];
