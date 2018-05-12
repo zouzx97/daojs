@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Form, Icon, Menu } from 'antd';
 
@@ -15,7 +16,17 @@ function renderCategoryFactory(comps) {
 }
 
 export default class ComponentList extends React.Component {
+  static propTypes = {
+    comps: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onSelect: PropTypes.func.isRequired,
+    selectedCompName: PropTypes.string.isRequired,
+    showResults: PropTypes.bool.isRequired,
+  }
+
   onClick = ({ key }) => {
+    if (!_.some(this.props.comps, ({ name }) => name === key)) {
+      return;
+    }
     // key is component name
     this.props.onSelect(key);
   }
@@ -23,10 +34,10 @@ export default class ComponentList extends React.Component {
   render() {
     const {
       comps = [],
-      total = comps.length,
       selectedCompName,
       showResults,
     } = this.props;
+    const total = comps.length;
     const renderCategory = renderCategoryFactory(comps);
 
     return (
