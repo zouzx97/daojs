@@ -58,12 +58,12 @@ export default class ComponentList extends React.Component {
           onClick={this.onClick}
         >
 
-          { renderCategory(Menu.SubMenu, { title: 'Layout', key: 'layout' }) }
-          { renderCategory(Menu.SubMenu, { title: 'Container', key: 'container' }) }
-          <Menu.SubMenu title="Components" key="component" >
-            { renderCategory(Menu.ItemGroup, { title: 'Charts', key: 'chart' }) }
-            { renderCategory(Menu.ItemGroup, { title: 'Slicers', key: 'slicer' }) }
-            { renderCategory(Menu.ItemGroup, { title: 'Utilities', key: 'utility' }) }
+          { renderCategory(Menu.SubMenu, { title: '布局', key: 'layout' }) }
+          { renderCategory(Menu.SubMenu, { title: '容器', key: 'container' }) }
+          <Menu.SubMenu title="模块" key="component" >
+            { renderCategory(Menu.ItemGroup, { title: '图标', key: 'chart' }) }
+            { renderCategory(Menu.ItemGroup, { title: '切片器', key: 'slicer' }) }
+            { renderCategory(Menu.ItemGroup, { title: '工具', key: 'utility' }) }
           </Menu.SubMenu>
         </Menu>
       </Form>
