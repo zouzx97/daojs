@@ -21,6 +21,7 @@ import CellTest from './components/cell-test';
 // import LayoutDefault from './components/layout-default';
 
 import Bar from './components/bar';
+import Funnel from './components/funnel';
 import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
 import RadioGroup from './components/radio-group';
@@ -35,6 +36,7 @@ export default {
   FormInput,
   FormField,
   Heatmap,
+  Funnel,
   // Cell,
   // SectionContainer,
   Donut,

@@ -10,7 +10,7 @@ const {
   Line,
 } = builtinComponents;
 
-export default function LineDemo() {
+export default function ChinaMapDemo() {
   return (
     <Line
       source={fakeData.timeStampData}
@@ -20,7 +20,7 @@ export default function LineDemo() {
       axisDimensions={['timestamp']}
       // Metric dimensions prop is optional.
       // If not specified, all dimensions except axis dimensions would be used.
-      metricDimensions={['value1', 'value2', 'value3', 'value4']}
+      metricDimensions={['value1', 'value2']}
     />
   );
 }
