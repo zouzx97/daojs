@@ -147,4 +147,16 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using wordcloud chart.',
   },
+  {
+    name: 'Form Field',
+    key: 'form-field',
+    category: 'slicer',
+    description: '',
+  },
+  {
+    name: 'Form Input',
+    key: 'form-input',
+    category: 'slicer',
+    description: '',
+  },
 ];
