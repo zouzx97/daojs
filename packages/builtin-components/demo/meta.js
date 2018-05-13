@@ -165,4 +165,10 @@ export default [
     category: 'slicer',
     description: '',
   },
+  {
+    name: 'Radio Group',
+    key: 'radio-group',
+    category: 'slicer',
+    description: '',
+  },
 ];
