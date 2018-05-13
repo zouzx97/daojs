@@ -10,6 +10,7 @@ export default function FormInputDemo() {
     <FormInput
       label="Form field"
       value="initial value"
+      update={() => {}}
     />
   );
 }

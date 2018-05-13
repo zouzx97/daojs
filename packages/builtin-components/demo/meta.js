@@ -159,4 +159,10 @@ export default [
     category: 'slicer',
     description: '',
   },
+  {
+    name: 'Multi Selector',
+    key: 'multi-selector',
+    category: 'slicer',
+    description: '',
+  },
 ];
