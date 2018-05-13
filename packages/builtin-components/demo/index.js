@@ -1,111 +1,38 @@
-/* eslint-disable */
+import Promise from 'bluebird';
+import _ from 'lodash';
+import metadataList from './meta';
 
-import lineDemo from './line.demo';
-import lineDemoSource from '!raw-loader!./line.demo.js';
-import lineMD from './md/line.md';
+function getDemoComp(key) {
+  return import(`./demo/${key}.demo`)
+    .then(_.property('default'));
+}
 
-import barDemo from './bar.demo';
-import barDemoSource from '!raw-loader!./bar.demo.js';
-import barMD from './md/bar.md';
+function getDemoSource(key) {
+  return import(`!raw-loader!./demo/${key}.demo.js`)
+    .then(_.property('default'))
+    .catch(() => '');
+}
 
-import lineBarDemo from './lineBar.demo';
-import lineBarDemoSource from '!raw-loader!./lineBar.demo.js';
+function getReadme(key) {
+  return import(`./md/${key}.md`)
+    .then(_.property('default'))
+    .catch(() => '');
+}
 
-import chinaMapDemo from './chinaMap.demo';
-import chinaMapDemoSource from '!raw-loader!./chinaMap.demo.js';
+export default Promise.map(metadataList, (metadata) => {
+  const { key } = metadata;
 
-import donutDemo from './donut.demo';
-import donutDemoSource from '!raw-loader!./donut.demo.js';
-
-import funnelDemo from './funnel.demo';
-import funnelDemoSource from '!raw-loader!./funnel.demo.js';
-
-import stackBarDemo from './stackBar.demo';
-import stackBarDemoSource from '!raw-loader!./stackBar.demo.js';
-
-export default [
-  {
-    name: '堆栈柱状图',
-    key: 'stack-bar',
-    // possible values: chart, slicer, utility, layout, container
-    category: 'chart',
-    description: 'Easily visualize your data using stack bar chart.',
-    readme: lineMD,
+  return Promise.all([
+    getDemoComp(key),
+    getDemoSource(key),
+    getReadme(key),
+  ]).then(([demoComp, demoSource, readme]) => ({
     demo: {
-      Comp: stackBarDemo,
-      source: stackBarDemoSource,
+      Comp: demoComp,
+      source: demoSource,
     },
-  },
-  {
-    name: '漏斗图',
-    key: 'funnel',
-    // possible values: chart, slicer, utility, layout, container
-    category: 'chart',
-    description: 'Easily visualize your data using funnel chart.',
-    readme: lineMD,
-    demo: {
-      Comp: funnelDemo,
-      source: funnelDemoSource,
-    },
-  },
-  {
-    name: '圆环图',
-    key: 'donut',
-    // possible values: chart, slicer, utility, layout, container
-    category: 'chart',
-    description: 'Easily visualize your data using donut chart.',
-    readme: lineMD,
-    demo: {
-      Comp: donutDemo,
-      source: donutDemoSource,
-    },
-  },
-  {
-    name: '线段柱状图',
-    key: 'line-bar',
-    // possible values: chart, slicer, utility, layout, container
-    category: 'chart',
-    description: 'Easily visualize your data using line-bar chart.',
-    readme: lineMD,
-    demo: {
-      Comp: lineBarDemo,
-      source: lineBarDemoSource,
-    },
-  },
-  {
-    name: '柱状图',
-    key: 'bar',
-    // possible values: chart, slicer, utility, layout, container
-    category: 'chart',
-    description: 'Easily visualize your data using bar chart.',
-    readme: barMD,
-    demo: {
-      Comp: barDemo,
-      source: barDemoSource,
-    },
-  },
-  {
-    name: '中国地图',
-    key: 'map-china',
-    // possible values: chart, slicer, utility, layout, container
-    category: 'chart',
-    description: 'Easily visualize your data using bar chart.',
-    readme: barMD,
-    demo: {
-      Comp: chinaMapDemo,
-      source: chinaMapDemoSource,
-    },
-  },
-  {
-    name: '线段图',
-    key: 'line',
-    // possible values: chart, slicer, utility, layout, container
-    category: 'chart',
-    description: 'Easily visualize your data using line chart.',
-    readme: lineMD,
-    demo: {
-      Comp: lineDemo,
-      source: lineDemoSource,
-    },
-  },
-];
+    readme,
+    ...metadata,
+  }));
+});
+

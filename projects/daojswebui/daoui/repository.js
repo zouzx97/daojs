@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
-import builtinComponentsData from '@daojs/builtin-components/demo';
+import builtinComponentsPromise from '@daojs/builtin-components/demo';
 import { SERVICE_URL, BLACK_LIST, MODE } from './constants';
 
 export function postComponent(options) {
@@ -25,7 +25,7 @@ const getAllComponents = (() => {
       .catch(() => []);
   }
 
-  return Promise.resolve(builtinComponentsData);
+  return builtinComponentsPromise;
 })();
 
 // TODO: will support real query, just list and concat children
@@ -67,7 +67,7 @@ export function getComponent({ name, version = 0 }) {
       });
   }
 
-  return Promise.resolve({
-    data: _.find(builtinComponentsData, comp => comp.name === name),
-  });
+  return builtinComponentsPromise.then(comps => ({
+    data: _.find(comps, ({ name: compName }) => compName === name),
+  }));
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import builtinComponents from '../src/index';
 import echarts from 'echarts';
-import daoTheme1 from './assets/DaoTheme1.json';
+import builtinComponents from '../../src/index';
+import daoTheme1 from '../assets/DaoTheme1.json';
 import fakeData from './fakeData.demo';
 
 echarts.registerTheme('theme1', daoTheme1);
