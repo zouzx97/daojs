@@ -74,4 +74,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using compare chart.',
   },
+  {
+    name: '累计图',
+    key: 'cumulative',
+    category: 'chart',
+    description: 'Easily visualize your data using cumulative chart.',
+  },
 ];

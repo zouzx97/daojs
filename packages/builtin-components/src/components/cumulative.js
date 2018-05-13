@@ -3,17 +3,14 @@ import Line from './line';
 
 export default class Cumulative extends Line {
   getSource() {
-    const rawSource = this.props.source;
+    const rawSource = super.getSource();
     const paddingZero = _.chain(rawSource)
       .first()
-      .size()
-      .range()
-      .map(() => 0)
+      .mapValues(() => 0)
       .value();
     return [
-      rawSource[0],
       paddingZero,
-      ...rawSource.slice(1),
+      ...rawSource,
     ];
   }
 

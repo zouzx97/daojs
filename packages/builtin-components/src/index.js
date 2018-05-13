@@ -24,6 +24,7 @@ import Bar from './components/bar';
 import BoxPlot from './components/box-plot';
 import Bullet from './components/bullet';
 import CircleTimeline from './components/circle-timeline';
+import Cumulative from './components/cumulative';
 import Funnel from './components/funnel';
 import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
@@ -34,7 +35,6 @@ import TextBlock from './components/text-block';
 import TimeRange from './components/time-range';
 
 export default {
-  Compare,
   TimeSeries,
   FormInput,
   FormField,
@@ -60,6 +60,8 @@ export default {
   BoxPlot,
   Bullet,
   CircleTimeline,
+  Compare,
+  Cumulative,
   HorizontalBar,
   MultiSelector,
   RadioGroup,
