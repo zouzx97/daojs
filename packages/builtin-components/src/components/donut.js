@@ -121,7 +121,9 @@ class Donut extends BaseChart {
     } = this;
     const position = width > breakPoint ?
       {
-        left: ((bigLayoutCenterLeft * width) - (0.5 * _.min([bigLayoutCenterLeft * width, bigLayoutCenterTop * height]))) + (0.02 * width),
+        left: ((bigLayoutCenterLeft * width) -
+          (0.5 * _.min([bigLayoutCenterLeft * width, bigLayoutCenterTop * height])))
+          + (0.02 * width),
         top: 'middle',
       } :
       {
