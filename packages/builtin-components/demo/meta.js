@@ -62,4 +62,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using bullet chart.',
   },
+  {
+    name: '圆圈时间轴图',
+    key: 'circle-timeline',
+    category: 'chart',
+    description: 'Easily visualize your data using circle-timeline chart.',
+  },
 ];
