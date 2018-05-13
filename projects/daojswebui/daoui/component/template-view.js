@@ -38,13 +38,14 @@ class TemplateView extends React.PureComponent {
           View
         </Button>
         <Button
-          type="secondary"
           href={`#/editor/${frameType}/${id}`}
           style={{
             margin: '0.5rem 3rem',
+            background: '#4CAF50',
+            color: 'white',
           }}
         >
-          Try online
+          Copy & Try online >>
         </Button>
         {content}
       </div>
