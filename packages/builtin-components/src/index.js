@@ -31,6 +31,7 @@ import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
 import RadioGroup from './components/radio-group';
 import Radar from './components/radar';
+import Sankey from './components/sankey';
 import Select from './components/select';
 import SingleSelector from './components/single-selector';
 import TextBlock from './components/text-block';
@@ -69,6 +70,7 @@ export default {
   MultiSelector,
   Radar,
   RadioGroup,
+  Sankey,
   Select,
   SingleSelector,
   TextBlock,

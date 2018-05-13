@@ -105,4 +105,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using radar chart.',
   },
+  {
+    name: '桑基图',
+    key: 'sankey',
+    category: 'chart',
+    description: 'Easily visualize your data using sankey chart.',
+  },
 ];
