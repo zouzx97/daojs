@@ -1,7 +1,7 @@
 import React from 'react';
-import builtinComponents from '../src/index';
 import echarts from 'echarts';
-import daoTheme1 from './assets/DaoTheme1.json';
+import builtinComponents from '../../src/index';
+import daoTheme1 from '../assets/DaoTheme1.json';
 
 echarts.registerTheme('theme1', daoTheme1);
 
@@ -73,7 +73,7 @@ const data = [{
   year: '17',
   timestamp: '2017-09-01T07:00:00.000Z',
   targetGap: 59.63,
-  forecastGap: 51.39
+  forecastGap: 51.39,
 },
 {
   ape: '0.04549428',
@@ -84,7 +84,7 @@ const data = [{
   year: '17',
   timestamp: '2017-10-01T07:00:00.000Z',
   targetGap: 65.46000000000001,
-  forecastGap: 57.480000000000004
+  forecastGap: 57.480000000000004,
 },
 {
   ape: '0.127100012',
@@ -95,7 +95,7 @@ const data = [{
   year: '17',
   timestamp: '2017-11-01T07:00:00.000Z',
   targetGap: 69.74000000000001,
-  forecastGap: 61.21
+  forecastGap: 61.21,
 },
 {
   ape: '0.012046435',
