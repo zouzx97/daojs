@@ -21,6 +21,7 @@
     "@daojs/builtin-components": "file:.",
     "@daojs/registry": "^0.0.1",
     "antd": "^3.4.1",
+    "echarts": "*",
     "echarts-for-react": "^2.0.8",
     "eslint-config-daojs": "^0.0.1",
     "immutable": "^3.8.2",

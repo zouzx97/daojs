@@ -1,6 +1,6 @@
 import React from 'react';
-import builtinComponents from '../src/index';
 import echarts from 'echarts';
+import builtinComponents from '../src/index';
 import daoTheme2 from './assets/DaoTheme2.json';
 import fakeData from './fakeData.demo';
 

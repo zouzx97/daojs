@@ -8,6 +8,10 @@ import barDemo from './bar.demo';
 import barDemoSource from '!raw-loader!./bar.demo.js';
 import barMD from './md/bar.md';
 
+import boxPlotDemo from './box-plot.demo';
+import boxPlotDemoSource from '!raw-loader!./box-plot.demo.js';
+import boxPlotMD from './md/box-plot.md';
+
 import lineBarDemo from './lineBar.demo';
 import lineBarDemoSource from '!raw-loader!./lineBar.demo.js';
 
@@ -108,4 +112,16 @@ export default [
       source: lineDemoSource,
     },
   },
+  {
+    name: '箱线图',
+    key: 'box-plot',
+    // possible values: chart, slicer, utility, layout, container
+    category: 'chart',
+    description: 'Easily visualize your data using box-plot chart.',
+    readme: boxPlotMD,
+    demo: {
+      Comp: boxPlotDemo,
+      source: boxPlotDemoSource,
+    },
+  }
 ];

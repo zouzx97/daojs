@@ -21,6 +21,7 @@ import CellTest from './components/cell-test';
 // import LayoutDefault from './components/layout-default';
 
 import Bar from './components/bar';
+import BoxPlot from './components/box-plot';
 import Funnel from './components/funnel';
 import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
@@ -54,6 +55,7 @@ export default {
   // LayoutDefault,
 
   Bar,
+  BoxPlot,
   HorizontalBar,
   MultiSelector,
   RadioGroup,
