@@ -178,6 +178,12 @@ export default [
     description: '',
   },
   {
+    name: 'Single Selector',
+    key: 'single-selector',
+    category: 'slicer',
+    description: '',
+  },
+  {
     name: 'Time Range Picker',
     key: 'time-range-picker',
     category: 'slicer',
