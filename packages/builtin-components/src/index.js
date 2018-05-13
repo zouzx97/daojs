@@ -35,6 +35,7 @@ import Sankey from './components/sankey';
 import Select from './components/select';
 import Scatter from './components/scatter';
 import SingleSelector from './components/single-selector';
+import Spine from './components/spine';
 import TextBlock from './components/text-block';
 import TimeRange from './components/time-range';
 
@@ -75,6 +76,7 @@ export default {
   Select,
   Scatter,
   SingleSelector,
+  Spine,
   TextBlock,
   TimeRange,
 };

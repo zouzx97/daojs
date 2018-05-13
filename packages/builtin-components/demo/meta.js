@@ -36,6 +36,12 @@ export default [
     description: 'Easily visualize your data using bar chart.',
   },
   {
+    name: '成对条形图',
+    key: 'spine',
+    category: 'chart',
+    description: 'Easily visualize your data using spine chart.',
+  },
+  {
     name: '中国地图',
     key: 'map-china',
     // possible values: chart, slicer, utility, layout, container
