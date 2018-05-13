@@ -66,7 +66,7 @@ data:
       $proc: getEnumSelectorProps
       $args: Granularity
     defaultValue: Daily
-    label: 粒度
+    label: "粒度 "
 
   revenueTrend2:
     $proc: slice
@@ -223,14 +223,15 @@ data:
 layout:
   type: GridLayout
   props:
-    gutter: 20
+    gutter: 24
     rows:
       - id: 6100731f-fe10-560e-b170-520fe0d027a0
-        gutter: 10
+        gutter: 24
         cols:
           - id: 48d9617d-1482-5ed5-b68d-85ae085fd2bd
             md: 24
             lg: 8
+            padding: 10px 0
             content:
               type: MultiSelector
               input: ui_resturants
@@ -238,6 +239,7 @@ layout:
           - id: a36419d4-3931-4f72-a2cb-dbd3e611902c
             md: 24
             lg: 8
+            padding: 10px 0
             content:
               type: MultiSelector
               input: ui_mealTimes
@@ -245,25 +247,29 @@ layout:
           - id: b0ab148c-1eb2-48a0-8415-f5f22532ebed
             md: 24
             lg: 8
+            padding: 10px 0
             content:
               type: MultiSelector
               input: ui_cardTypes
               output: selectedCardTypes
       - id: d31b9a32-bbb8-583a-967b-e975bbdbb2b5
-        gutter: 10
+        gutter: 24
+        align: bottom
         cols:
           - id: 426a72ad-6176-4d56-a3f7-10ff1c3a692e
             md: 24
             lg: 8
+            padding: 10px 0
             content:
               type: SingleSelector
               input: ui_granularities
               output: selectedGranularity
           - id: ed557de6-017a-4a87-bf87-a2ea6e34ea6e
             md: 24
-            lg: 
+            lg:
               span: 8
               offset: 8
+            padding: 10px 0
             content:
               type: TimeRange
               input: selectedDateRange
