@@ -123,4 +123,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using scatter chart.',
   },
+  {
+    name: '树状图',
+    key: 'treemap',
+    category: 'chart',
+    description: 'Easily visualize your data using treemap chart.',
+  },
 ];

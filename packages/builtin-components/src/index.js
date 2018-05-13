@@ -38,6 +38,7 @@ import SingleSelector from './components/single-selector';
 import Spine from './components/spine';
 import TextBlock from './components/text-block';
 import TimeRange from './components/time-range';
+import Treemap from './components/treemap';
 
 export default {
   TimeSeries,
@@ -79,4 +80,5 @@ export default {
   Spine,
   TextBlock,
   TimeRange,
+  Treemap,
 };
