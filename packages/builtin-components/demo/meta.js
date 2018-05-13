@@ -86,4 +86,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using diverging-stacked-bar chart.',
   },
+  {
+    name: '热力图',
+    key: 'heatmap',
+    category: 'chart',
+    description: 'Easily visualize your data using heatmap chart.',
+  },
 ];
