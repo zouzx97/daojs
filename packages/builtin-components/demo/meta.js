@@ -171,4 +171,10 @@ export default [
     category: 'slicer',
     description: '',
   },
+  {
+    name: 'Select',
+    key: 'select',
+    category: 'slicer',
+    description: '',
+  },
 ];
