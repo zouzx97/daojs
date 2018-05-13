@@ -50,6 +50,13 @@ export default [
     description: 'Easily visualize your data using line chart.',
   },
   {
+    name: '线段图 + 数据缩放',
+    key: 'line-datazoom',
+    // possible values: chart, slicer, utility, layout, container
+    category: 'chart',
+    description: 'Easily visualize your data using line chart with datazoom.',
+  },
+  {
     name: '箱线图',
     key: 'box-plot',
     // possible values: chart, slicer, utility, layout, container
