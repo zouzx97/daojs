@@ -126,7 +126,6 @@ export default class AppFrameEditor extends React.Component {
         width="100%"
         footer={null}
         onCancel={() => this.setState({ isPreviewing: false })}
-        afterClose={() => this.setState({ isPreviewing: false })}
       >
         <AppFrame
           title={title}
@@ -238,6 +237,7 @@ export default class AppFrameEditor extends React.Component {
             }}
           >
             <Button
+              type="primary"
               onClick={() => this.setState({ isPreviewing: true })}
             >
               Preview
