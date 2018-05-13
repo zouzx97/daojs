@@ -141,4 +141,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using waterfall chart.',
   },
+  {
+    name: '标签云',
+    key: 'wordcloud',
+    category: 'chart',
+    description: 'Easily visualize your data using wordcloud chart.',
+  },
 ];
