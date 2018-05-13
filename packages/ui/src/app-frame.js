@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Layout, Menu, Icon, Modal } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import 'antd/dist/antd.css';
 import './style/app-frame.css';
 import Storyboard from './storyboard';

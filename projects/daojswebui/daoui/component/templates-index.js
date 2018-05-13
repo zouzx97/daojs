@@ -16,6 +16,8 @@ const examples = _.map(rawExamples, rawExample => _.defaults({}, rawExample, {
         title={rawExample.name}
         logo={rawExample.logoImage}
         categories={rawExample.categories}
+        id={rawExample.id}
+        frameType={rawExample.frameType}
       />
     );
   },
