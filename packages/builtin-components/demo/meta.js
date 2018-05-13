@@ -68,4 +68,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using circle-timeline chart.',
   },
+  {
+    name: '比较图',
+    key: 'compare',
+    category: 'chart',
+    description: 'Easily visualize your data using compare chart.',
+  },
 ];
