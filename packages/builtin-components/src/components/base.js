@@ -105,7 +105,7 @@ export default class BaseChart extends PureComponent {
 }
 
 BaseChart.propTypes = {
-  source: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  source: PropTypes.arrayOf(PropTypes.any).isRequired,
   axisDimensions: PropTypes.arrayOf(PropTypes.string),
   metricDimensions: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,

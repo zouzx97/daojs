@@ -20,11 +20,10 @@ data = data.map(item => [hours[item[1]], days[item[0]], item[2] || '-']);
 
 export default function HeatmapDemo() {
   return (
-    <Heatmap value={{
-      source: data,
-      axisDimensions: ['hours'],
-      metricDimensions: ['days'],
-    }}
+    <Heatmap
+      source={data}
+      axisDimensions={['hours']}
+      metricDimensions={['days']}
     />
   );
 }

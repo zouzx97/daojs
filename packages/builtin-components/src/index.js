@@ -25,7 +25,7 @@ import BoxPlot from './components/box-plot';
 import Bullet from './components/bullet';
 import CircleTimeline from './components/circle-timeline';
 import Cumulative from './components/cumulative';
-import DiverginStackedBar from './components/diverging-stacked-bar';
+import DivergingStackedBar from './components/diverging-stacked-bar';
 import Funnel from './components/funnel';
 import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
@@ -61,7 +61,7 @@ export default {
   CircleTimeline,
   Compare,
   Cumulative,
-  DiverginStackedBar,
+  DivergingStackedBar,
   Funnel,
   Heatmap,
   HorizontalBar,
