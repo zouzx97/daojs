@@ -39,6 +39,7 @@ import Spine from './components/spine';
 import TextBlock from './components/text-block';
 import TimeRange from './components/time-range';
 import Treemap from './components/treemap';
+import VerticleTimeline from './components/vertical-timeline';
 
 export default {
   TimeSeries,
@@ -81,4 +82,5 @@ export default {
   TextBlock,
   TimeRange,
   Treemap,
+  VerticleTimeline,
 };

@@ -129,4 +129,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using treemap chart.',
   },
+  {
+    name: '垂直时间轴',
+    key: 'vertical-timeline',
+    category: 'chart',
+    description: 'Easily visualize your data using vertical-timeline chart.',
+  },
 ];
