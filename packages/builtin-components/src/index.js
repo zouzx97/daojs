@@ -25,6 +25,7 @@ import BoxPlot from './components/box-plot';
 import Bullet from './components/bullet';
 import CircleTimeline from './components/circle-timeline';
 import Cumulative from './components/cumulative';
+import DiverginStackedBar from './components/diverging-stacked-bar';
 import Funnel from './components/funnel';
 import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
@@ -38,8 +39,6 @@ export default {
   TimeSeries,
   FormInput,
   FormField,
-  Heatmap,
-  Funnel,
   // Cell,
   // SectionContainer,
   Donut,
@@ -62,6 +61,9 @@ export default {
   CircleTimeline,
   Compare,
   Cumulative,
+  DiverginStackedBar,
+  Funnel,
+  Heatmap,
   HorizontalBar,
   MultiSelector,
   RadioGroup,

@@ -80,4 +80,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using cumulative chart.',
   },
+  {
+    name: '分向堆叠条形图',
+    key: 'diverging-stacked-bar',
+    category: 'chart',
+    description: 'Easily visualize your data using diverging-stacked-bar chart.',
+  },
 ];
