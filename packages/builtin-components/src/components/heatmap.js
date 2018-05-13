@@ -29,7 +29,7 @@ export default class Heatmap extends BaseChart {
     // const metrics = this.getMetricDimensions();
 
     const maxAbs = _.max(_.map(source, row => Math.abs(row[2])));
-    
+
     return {
       legend: {
         show: false,

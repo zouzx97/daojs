@@ -135,4 +135,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using vertical-timeline chart.',
   },
+  {
+    name: '瀑布图',
+    key: 'waterfall',
+    category: 'chart',
+    description: 'Easily visualize your data using waterfall chart.',
+  },
 ];

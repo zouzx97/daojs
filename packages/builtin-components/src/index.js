@@ -39,7 +39,8 @@ import Spine from './components/spine';
 import TextBlock from './components/text-block';
 import TimeRange from './components/time-range';
 import Treemap from './components/treemap';
-import VerticleTimeline from './components/vertical-timeline';
+import VerticalTimeline from './components/vertical-timeline';
+import Waterfall from './components/waterfall';
 
 export default {
   TimeSeries,
@@ -82,5 +83,6 @@ export default {
   TextBlock,
   TimeRange,
   Treemap,
-  VerticleTimeline,
+  VerticalTimeline,
+  Waterfall,
 };
