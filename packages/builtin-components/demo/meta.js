@@ -183,4 +183,10 @@ export default [
     category: 'slicer',
     description: '',
   },
+  {
+    name: 'Markdown',
+    key: 'markdown',
+    category: 'utility',
+    description: '',
+  },
 ];
