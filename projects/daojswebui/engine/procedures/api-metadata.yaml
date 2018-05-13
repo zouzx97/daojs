@@ -1,0 +1,244 @@
+---
+  definitions:
+    AvgChargeAmount:
+      type: number
+      format: currency
+    ChargeAmount:
+      type: number
+      format: currency
+    ChargeCount:
+      type: integer
+    Deposit:
+      type: number
+      format: currency
+    DepositTotal:
+      type: number
+      format: currency
+    Revenue:
+      type: number
+      format: currency
+    UserCount:
+      type: integer
+
+    CardType:
+      type: string
+      nullable: true
+      enum:
+      - 员工卡
+      - 访客卡
+    ChargeType:
+      type: string
+      nullable: true
+      enum:
+      - 充值
+    MealName:
+      type: string
+      nullable: true
+      enum:
+      - 早餐
+      - 午餐
+      - 晚餐
+    BranchName:
+      type: string
+      nullable: true
+      enum:
+      - 员工餐厅
+      - 粤菜餐厅
+      - 北京小院
+      - 咖啡厅
+      - 咖喱屋
+      - 自助餐厅
+      - 西餐厅
+      - 意大利餐厅
+    requestFilters:
+      type: array
+      items:
+      -
+        CardType:
+          type: array
+          items:
+            $ref: "#/definitions/CardType"
+        ChargeType:
+          type: array
+          items:
+            $ref: "#/definitions/ChargeType"
+        MealName:
+          type: array
+          items:
+            $ref: "#/definitions/MealName"
+        BranchName:
+          type: array
+          items:
+            $ref: "#/definitions/BranchName"
+      -
+        type: string
+        enum:
+        - FULL
+    time:
+      type: string
+      format: date-time
+    Granularity:
+      type: string
+      enum:
+      - Daily
+      - Weekly
+      - Monthly
+    Metric:
+      type: string
+      enum:
+      - AvgChargeAmount
+      - ChargeAmount
+      - ChargeCount
+      - Deposit
+      - DepositTotal
+      - Revenue
+      - UserCount
+    ChargeMetric:
+      type: string
+      enum:
+      - AvgChargeAmount
+      - ChargeAmount
+      - ChargeCount
+      - Deposit
+      - DepositTotal
+    TransactionMetric:
+      type: string
+      enum:
+      - Revenue
+      - UserCount
+    Dimension:
+      type: string
+      enum:
+      - BranchName
+      - CardType
+      - ChargeType
+      - MealName
+    ChargeDimension:
+      type: string
+      enum:
+      - ChargeType
+    TransactionDimension:
+      type: string
+      enum:
+      - BranchName
+      - CardType
+      - MealName
+
+    requestDimensions:
+      type: array
+      items:
+        $ref: '#/definitions/Dimension'
+
+    OrderBy:
+      type: string
+      enum:
+        - DESC
+        - ASC
+
+    insightProcedure:
+      type: string
+      enum:
+        - predicate
+        - ranker
+        - slice
+
+  type: object
+  properties:
+    predicate:
+      type: object
+      properties:
+        request:
+          type: object
+          properties:
+            EndTime:
+              $ref: "#/definitions/time"
+            Filters:
+              $ref: "#/definitions/requestFilters"
+            Granularity:
+              $ref: "#/definitions/Granularity"
+            Metrics:
+              $ref: "#/definitions/Metric"
+            StartTime:
+              $ref: "#/definitions/time"
+        response:
+          type: array
+          items:
+            type: object
+            properties:
+              Dimensions:
+                type: object
+              Values:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    LowerBound:
+                      type: number
+                    Predict:
+                      type: number
+                    Timestamp:
+                      $ref: "#/definitions/time"
+                    UpperBound:
+                      type: number
+                    Value:
+                      type: number
+    slice:
+      type: object
+      properties:
+        request:
+          type: object
+          properties:
+            Collapse:
+              $ref: "#/definitions/requestDimensions"
+            EndTime:
+              $ref: "#/definitions/time"
+            Filters:
+              $ref: "#/definitions/requestFilters"
+            Granularity:
+              $ref: "#/definitions/Granularity"
+            Metrics:
+              $ref: "#/definitions/Metric"
+            StartTime:
+              $ref: "#/definitions/time"
+        response:
+          type: array
+          items:
+            type: object
+            properties:
+              Dimensions:
+                type: object
+              Values:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    __Id:
+                      type: string
+                    Timestamp:
+                      $ref: "#/definitions/time"
+                    Value:
+                      type: number
+    ranker:
+      type: object
+      properties:
+        request:
+          type:
+          properties:
+            Dimensions:
+              $ref: "#/definitions/requestDimensions"
+            EndTime:
+              $ref: "#/definitions/time"
+            Filters:
+              $ref: "#/definitions/requestFilters"
+            Metrics:
+              $ref: "#/definitions/Metric"
+            OrderBy:
+              $ref: "#/definitions/OrderBy"
+            StartTime:
+              $ref: "#/definitions/time"
+            ValueLimit:
+              type: number
+        response:
+          type: array
+          items:
+            type: object

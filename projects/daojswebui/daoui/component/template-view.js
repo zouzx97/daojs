@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { ComponentRegistry } from '@daojs/ui';
 import { Button } from 'antd';
 import { frameMapper } from '../frameMapper';
+import ComponentRegistry from '../../components-registry';
 
 class TemplateView extends React.PureComponent {
   render() {
