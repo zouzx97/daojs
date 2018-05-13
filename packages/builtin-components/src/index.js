@@ -33,6 +33,7 @@ import RadioGroup from './components/radio-group';
 import Radar from './components/radar';
 import Sankey from './components/sankey';
 import Select from './components/select';
+import Scatter from './components/scatter';
 import SingleSelector from './components/single-selector';
 import TextBlock from './components/text-block';
 import TimeRange from './components/time-range';
@@ -72,6 +73,7 @@ export default {
   RadioGroup,
   Sankey,
   Select,
+  Scatter,
   SingleSelector,
   TextBlock,
   TimeRange,

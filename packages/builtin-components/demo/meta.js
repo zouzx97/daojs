@@ -111,4 +111,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using sankey chart.',
   },
+  {
+    name: '散点图',
+    key: 'scatter',
+    category: 'chart',
+    description: 'Easily visualize your data using scatter chart.',
+  },
 ];
