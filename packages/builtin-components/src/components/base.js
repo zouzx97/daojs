@@ -72,15 +72,15 @@ export default class BaseChart extends PureComponent {
     return {};
   }
 
+  getStyle() {
+    return {};
+  }
+
   axisValueConverter(value, key) {
     if (_.isString(key) && _.toLower(key) === 'timestamp' && _.isString(value)) {
       return value.replace('T00:00:00Z', '').replace('T00:00:00.000Z', '');
     }
     return value;
-  }
-
-  getStyle() {
-    return {};
   }
 
   render() {
@@ -105,7 +105,7 @@ export default class BaseChart extends PureComponent {
 }
 
 BaseChart.propTypes = {
-  source: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  source: PropTypes.arrayOf(PropTypes.any).isRequired,
   axisDimensions: PropTypes.arrayOf(PropTypes.string),
   metricDimensions: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,

@@ -15,29 +15,38 @@ import SectionCard from './components/section-card';
 import LineBarChart from './components/line-bar';
 import Markdown from './components/markdown';
 import CellTest from './components/cell-test';
-// import CardContainer from './components/card-container';
-// import FlexBoxContainer from './components/flexbox-container';
+import CardContainer from './components/card-container';
+import FlexBoxContainer from './components/flexbox-container';
 // import AdjustableContainer from './components/adjustable-container';
 // import LayoutDefault from './components/layout-default';
 
 import Bar from './components/bar';
 import BoxPlot from './components/box-plot';
+import Bullet from './components/bullet';
+import CircleTimeline from './components/circle-timeline';
+import Cumulative from './components/cumulative';
+import DivergingStackedBar from './components/diverging-stacked-bar';
 import Funnel from './components/funnel';
 import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
 import RadioGroup from './components/radio-group';
+import Radar from './components/radar';
+import Sankey from './components/sankey';
 import Select from './components/select';
+import Scatter from './components/scatter';
 import SingleSelector from './components/single-selector';
+import Spine from './components/spine';
 import TextBlock from './components/text-block';
 import TimeRange from './components/time-range';
+import Treemap from './components/treemap';
+import VerticalTimeline from './components/vertical-timeline';
+import Waterfall from './components/waterfall';
+import WordCloud from './components/wordcloud';
 
 export default {
-  Compare,
   TimeSeries,
   FormInput,
   FormField,
-  Heatmap,
-  Funnel,
   // Cell,
   // SectionContainer,
   Donut,
@@ -49,18 +58,33 @@ export default {
   LineBarChart,
   Markdown,
   CellTest,
-  // CardContainer,
-  // FlexBoxContainer,
+  CardContainer,
+  FlexBoxContainer,
   // AdjustableContainer,
   // LayoutDefault,
 
   Bar,
   BoxPlot,
+  Bullet,
+  CircleTimeline,
+  Compare,
+  Cumulative,
+  DivergingStackedBar,
+  Funnel,
+  Heatmap,
   HorizontalBar,
   MultiSelector,
+  Radar,
   RadioGroup,
+  Sankey,
   Select,
+  Scatter,
   SingleSelector,
+  Spine,
   TextBlock,
   TimeRange,
+  Treemap,
+  VerticalTimeline,
+  Waterfall,
+  WordCloud,
 };
