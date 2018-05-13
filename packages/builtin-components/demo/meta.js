@@ -201,4 +201,10 @@ export default [
     category: 'container',
     description: '',
   },
+  {
+    name: 'Flexbox Container',
+    key: 'flexbox-container',
+    category: 'container',
+    description: '',
+  },
 ];
