@@ -56,4 +56,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using box-plot chart.',
   },
+  {
+    name: '子弹图',
+    key: 'bullet',
+    category: 'chart',
+    description: 'Easily visualize your data using bullet chart.',
+  },
 ];

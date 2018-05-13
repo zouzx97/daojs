@@ -22,6 +22,7 @@ import CellTest from './components/cell-test';
 
 import Bar from './components/bar';
 import BoxPlot from './components/box-plot';
+import Bullet from './components/bullet';
 import Funnel from './components/funnel';
 import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
@@ -56,6 +57,7 @@ export default {
 
   Bar,
   BoxPlot,
+  Bullet,
   HorizontalBar,
   MultiSelector,
   RadioGroup,
