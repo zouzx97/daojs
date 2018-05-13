@@ -177,4 +177,10 @@ export default [
     category: 'slicer',
     description: '',
   },
+  {
+    name: 'Time Range Picker',
+    key: 'time-range-picker',
+    category: 'slicer',
+    description: '',
+  },
 ];
