@@ -17,9 +17,9 @@ export default function FlexBoxContainerDemo() {
     <FlexBoxContainer
       renderItems={renderItems}
       style={{
-            'flex-direction': 'row',
-            'justify-content': 'space-between',
-        }}
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}
     />
   );
 }

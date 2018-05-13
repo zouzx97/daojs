@@ -1,30 +1,32 @@
 import React, { PureComponent } from 'react';
-import PropTypes, { any } from 'prop-types';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Card } from 'antd';
-import config2Cell from '../utils/config-to-cell';
 
 export default class CardContainer extends PureComponent {
   render() {
     const {
-      actions,
-      items,
+      title,
+      renderItems,
+      renderExtras,
+      ...otherProps
     } = this.props;
+
     const extras = (
       <span
         role="presentation"
         onMouseDown={(e) => { e.stopPropagation(); }}
         onMouseUp={(e) => { e.stopPropagation(); }}
       >
-        {_.map(actions, action => config2Cell(action))}
+        {renderExtras()}
       </span>
     );
     return (
       <div
-        {...this.props}
+        {...otherProps}
       >
         <Card
-          title={this.props.title}
+          title={title}
           extra={extras}
           style={{
             height: '100%',
@@ -47,7 +49,7 @@ export default class CardContainer extends PureComponent {
               flex: 1,
             }}
           >
-            {_.map(items, item => config2Cell(item))}
+            {renderItems()}
           </div>
         </Card>
       </div>
@@ -56,20 +58,13 @@ export default class CardContainer extends PureComponent {
 }
 
 CardContainer.propTypes = {
-  actions: PropTypes.arrayOf(any),
-  items: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.objectOf(any),
-    PropTypes.string,
-  ])),
   title: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.objectOf(any),
+  renderItems: PropTypes.func,
+  renderExtras: PropTypes.func,
 };
 
 CardContainer.defaultProps = {
-  actions: [],
-  items: [],
   title: '',
-  className: '',
-  style: {},
+  renderItems: _.noop,
+  renderExtras: _.noop,
 };
