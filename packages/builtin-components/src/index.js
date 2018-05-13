@@ -41,7 +41,7 @@ import TimeRange from './components/time-range';
 import Treemap from './components/treemap';
 import VerticalTimeline from './components/vertical-timeline';
 import Waterfall from './components/waterfall';
-import Wordcloud from './components/wordcloud';
+import WordCloud from './components/wordcloud';
 
 export default {
   TimeSeries,
@@ -86,5 +86,5 @@ export default {
   Treemap,
   VerticalTimeline,
   Waterfall,
-  Wordcloud,
+  WordCloud,
 };
