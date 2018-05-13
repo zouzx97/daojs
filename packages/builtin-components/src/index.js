@@ -30,6 +30,7 @@ import Funnel from './components/funnel';
 import HorizontalBar from './components/horizontal-bar';
 import MultiSelector from './components/multi-selector';
 import RadioGroup from './components/radio-group';
+import Radar from './components/radar';
 import Select from './components/select';
 import SingleSelector from './components/single-selector';
 import TextBlock from './components/text-block';
@@ -66,6 +67,7 @@ export default {
   Heatmap,
   HorizontalBar,
   MultiSelector,
+  Radar,
   RadioGroup,
   Select,
   SingleSelector,

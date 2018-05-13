@@ -99,4 +99,10 @@ export default [
     category: 'chart',
     description: 'Easily visualize your data using heatmap chart.',
   },
+  {
+    name: '雷达图',
+    key: 'radar',
+    category: 'chart',
+    description: 'Easily visualize your data using radar chart.',
+  },
 ];
