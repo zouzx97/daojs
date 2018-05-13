@@ -195,4 +195,10 @@ export default [
     category: 'utility',
     description: '',
   },
+  {
+    name: 'Card Container',
+    key: 'card-container',
+    category: 'container',
+    description: '',
+  },
 ];
