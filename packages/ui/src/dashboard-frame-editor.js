@@ -14,11 +14,11 @@ const contentStyle = {
 export default class DashboardFrameEditor extends React.Component {
   constructor(props) {
     super(props);
-    const { config: { logo, name, story } } = props;
+    const { config: { logoImage, logo = logoImage, name, story } } = props;
     this.state = {
-      logo: logo,
+      logo,
       title: name,
-      story: story,
+      story,
       isPreviewing: false,
     };
   }
@@ -52,7 +52,7 @@ export default class DashboardFrameEditor extends React.Component {
       <Layout>
         <Header
           style={{
-            paddingTop: '20px',
+            paddingTop: '15px',
             background: 'white',
           }}
         >

@@ -4,7 +4,10 @@ import JSONTree from 'react-json-tree';
 
 const TemplateStoriesList = ({ value }) => (
   <div style={{ clear: 'both' }}>
-    <JSONTree data={value} />
+    <JSONTree
+      data={value}
+      shouldExpandNode={(keyName, data, level) => level < 4}
+    />
   </div>
 );
 

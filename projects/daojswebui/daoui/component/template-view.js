@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Button } from 'antd';
+import { Button, Layout } from 'antd';
 import { frameMapper } from '../frameMapper';
 import ComponentRegistry from '../../components-registry';
+
+const { Header, Content } = Layout;
 
 class TemplateView extends React.PureComponent {
   render() {
@@ -22,28 +24,36 @@ class TemplateView extends React.PureComponent {
     />);
 
     return (
-      <div>
-        <Button
-          type="primary"
-          href={`#/templates/${routeName}/stories`}
+      <Layout style={{ clear: 'both' }}>
+        <Header
           style={{
-            margin: '0.5rem 3rem',
+            paddingTop: '15px',
+            background: 'white',
           }}
         >
-          View
-        </Button>
-        <Button
-          href={`#/editor/${frameType}/${id}`}
-          style={{
-            margin: '0.5rem 3rem',
-            background: '#4CAF50',
-            color: 'white',
-          }}
-        >
-          Copy & Try online >>
-        </Button>
-        {content}
-      </div>
+          <Button
+            type="primary"
+            href={`#/templates/${routeName}/config`}
+            style={{
+              marginRight: '20px',
+            }}
+          >
+            View
+          </Button>
+          <Button
+            href={`#/templates/${routeName}/editor`}
+            style={{
+              background: '#4CAF50',
+              color: 'white',
+            }}
+          >
+            Copy & Try online >>
+          </Button>
+        </Header>
+        <Content>
+          {content}
+        </Content>
+      </Layout>
     );
   }
 }

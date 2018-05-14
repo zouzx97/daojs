@@ -124,7 +124,8 @@ export default class AppFrame extends React.Component {
 
   render() {
     const {
-      logo,
+      logoImage,
+      logo = logoImage,
       title,
       categories,
     } = this.props;

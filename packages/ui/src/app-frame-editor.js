@@ -16,7 +16,7 @@ const contentStyle = {
 };
 
 function config2State(config = {}) {
-  const { name = '', categories = [] } = config;
+  const { name = '', categories = [], logoImage, logo = logoImage } = config;
   const categoryList = _.map(categories, 'id');
   const configDetails = _.reduce(categories, (ret, category) => {
     const { id, name: categoryName, stories } = category;
@@ -43,6 +43,7 @@ function config2State(config = {}) {
   }, {});
 
   return {
+    logo,
     name,
     categoryList,
     configDetails,
@@ -62,6 +63,7 @@ export default class AppFrameEditor extends React.Component {
     return {
       ...this.props.config,
       name: this.state.name,
+      logo: this.state.logo,
       categories: _.map(this.state.categoryList, (categoryId) => {
         const { stories } = this.state.configDetails[categoryId];
         return {
@@ -229,7 +231,7 @@ export default class AppFrameEditor extends React.Component {
         <Layout>
           <Header
             style={{
-              paddingTop: '20px',
+              paddingTop: '15px',
               background: 'white',
             }}
           >

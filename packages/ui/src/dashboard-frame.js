@@ -12,7 +12,8 @@ const contentStyle = {
 
 export default function DashboardFrame(props) {
   const {
-    logo,
+    logoImage,
+    logo = logoImage,
     title,
     story,
   } = props;
