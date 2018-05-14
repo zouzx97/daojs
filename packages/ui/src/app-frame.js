@@ -69,8 +69,8 @@ export default class AppFrame extends React.Component {
     super(props);
 
     const {
-      defaultStory,
       categories,
+      defaultStory = _.get(categories, '[0].stories[0].id'),
     } = this.props;
 
     let selectedStory = defaultStory;

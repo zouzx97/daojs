@@ -3,7 +3,6 @@ import React from 'react';
 import { Layout, Menu, Icon, Input, Button, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import uuid from 'uuid4';
-import { ComponentRegistry } from '@daojs/ui';
 import './style/app-frame.css';
 import StoryEditor from './story-editor';
 import AppFrame from './app-frame';
@@ -131,8 +130,6 @@ export default class AppFrameEditor extends React.Component {
           title={title}
           logo={logo}
           categories={categories}
-          defaultStory={_.head(categories).id}
-          componentRegistry={ComponentRegistry}
         />
       </Modal>
     );

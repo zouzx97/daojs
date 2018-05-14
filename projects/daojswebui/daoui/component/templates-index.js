@@ -12,28 +12,23 @@ const examples = _.map(rawExamples, rawExample => _.defaults({}, rawExample, {
   pageComponent() {
     return (
       <TemplateView
-        name={rawExample.name}
-        title={rawExample.name}
-        logo={rawExample.logoImage}
-        categories={rawExample.categories}
-        id={rawExample.id}
-        frameType={rawExample.frameType}
+        {...rawExample}
       />
     );
   },
-  storiesListComponent() {
+  viewConfigComponent() {
     return (
       <TemplateStoriesList
-        name={rawExample.name}
-        categories={rawExample.categories}
+        routeName={rawExample.routeName}
+        value={rawExample.categories || rawExample.story}
       />
     );
   },
 }));
 
-const breadcrumbNameMap = _.reduce(rawExamples, (memo, { name }) => _.defaults({}, memo, ({
-  [`/templates/${name}`]: name,
-  [`/templates/${name}/stories`]: `stories of ${name}`,
+const breadcrumbNameMap = _.reduce(rawExamples, (memo, { routeName }) => _.defaults({}, memo, ({
+  [`/templates/${routeName}`]: routeName,
+  [`/templates/${routeName}/stories`]: `stories of ${routeName}`,
 })), {
   '/templates': 'all templates',
 });
@@ -66,10 +61,10 @@ const TemplatesIndex = withRouter((props) => {
       </Breadcrumb>
       <div>
         {_.map(examples, example => (
-          <Route exact key={`${example.name}-page`} path={`${match.url}/${example.name}`} component={example.pageComponent} />
+          <Route exact key={`${example.routeName}-page`} path={`${match.url}/${example.routeName}`} component={example.pageComponent} />
         ))}
         {_.map(examples, example => (
-          <Route key={`${example.name}-stories`} path={`${match.url}/${example.name}/stories`} component={example.storiesListComponent} />
+          <Route key={`${example.routeName}-stories`} path={`${match.url}/${example.routeName}/stories`} component={example.viewConfigComponent} />
         ))}
         <Route exact path={match.url} component={() => <TemplatesHome examples={examples} />} />
       </div>

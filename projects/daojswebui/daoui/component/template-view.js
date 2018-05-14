@@ -8,21 +8,16 @@ import ComponentRegistry from '../../components-registry';
 class TemplateView extends React.PureComponent {
   render() {
     const {
-      name,
-      title,
-      logo,
-      categories,
+      routeName,
       id,
       frameType = 'AppFrame',
     } = this.props;
 
     const Frame = frameMapper[frameType];
+    const props = _.omit(this.props, ['frameType', 'routeName', 'id']);
 
     const content = (<Frame
-      title={title}
-      logo={logo}
-      categories={categories}
-      defaultStory={_.head(categories).id}
+      {...props}
       componentRegistry={ComponentRegistry}
     />);
 
@@ -30,7 +25,7 @@ class TemplateView extends React.PureComponent {
       <div>
         <Button
           type="primary"
-          href={`#/templates/${name}/stories`}
+          href={`#/templates/${routeName}/stories`}
           style={{
             margin: '0.5rem 3rem',
           }}
@@ -49,16 +44,13 @@ class TemplateView extends React.PureComponent {
         </Button>
         {content}
       </div>
-    )
+    );
   }
 }
 
 
 TemplateView.propTypes = {
-  name: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  logo: PropTypes.string.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.any).isRequired,
+  routeName: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   frameType: PropTypes.string.isRequired,
 };
