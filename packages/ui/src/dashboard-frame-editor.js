@@ -3,6 +3,7 @@ import { Layout, Input, Modal, Button } from 'antd';
 import 'antd/dist/antd.css';
 import StoryEditor from './story-editor';
 import DashboardFrame from './dashboard-frame';
+import './style/dashboard-frame.css';
 
 const { Header, Content } = Layout;
 

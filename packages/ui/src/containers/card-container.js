@@ -28,10 +28,9 @@ export default class CardContainer extends PureComponent {
         title={this.props.title}
         extra={extras}
         style={{
-          height: '100%',
+          height: 'min-content',
           display: 'flex',
           flexDirection: 'column',
-          cursor: 'move',
         }}
         bodyStyle={{
           flex: 1,
