@@ -7,8 +7,9 @@ const {
 
 const renderItems = () => (
   <React.Fragment>
-    <span>This is item 1</span>
-    <span>This is item 2</span>
+    <div style={{ background: '#4cb5f5', flex: 1, height: '100%' }} />
+    <div style={{ background: '#20948b', flex: 1, height: '100%' }} />
+    <div style={{ background: '#de7a22', flex: 1, height: '100%' }} />
   </React.Fragment>
 );
 
@@ -19,6 +20,7 @@ export default function FlexBoxContainerDemo() {
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
+        height: '300px',
       }}
     />
   );
