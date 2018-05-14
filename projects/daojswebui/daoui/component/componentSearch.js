@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const { Search } = Input;
 
-export default class extends Component {
+export default class ComponentSearch extends Component {
   static propTypes = {
     onSearch: PropTypes.func.isRequired,
   }
@@ -21,6 +21,7 @@ export default class extends Component {
         onKeyUp={this.onSearch}
         style={{
           display: 'inline-grid',
+          marginBottom: '1em',
         }}
       />
     );

@@ -1,16 +1,12 @@
 import React from 'react';
-import {
-  Layout,
-} from 'antd';
+import PropType from 'prop-types';
+import { Layout } from 'antd';
 
 const {
   Content, Sider,
 } = Layout;
 
 const styles = {
-  button: {
-
-  },
   bg: {
     background: '#f0f2f5',
   },
@@ -26,11 +22,9 @@ export default function HomeLayout(props) {
       <Sider
         trigger={null}
         width={280}
-        style={styles.bg}
+        style={{ ...styles.bg, padding: '10px' }}
       >
-        <div
-          style={{ padding: '10px' }}
-        >
+        <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
           {LeftComp}
         </div>
       </Sider>
@@ -40,3 +34,8 @@ export default function HomeLayout(props) {
     </Layout>
   );
 }
+
+HomeLayout.propTypes = {
+  LeftComp: PropType.objectOf(PropType.any).isRequired,
+  RightComp: PropType.objectOf(PropType.any).isRequired,
+};

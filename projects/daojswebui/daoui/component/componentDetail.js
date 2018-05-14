@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col, Card, Form, Icon, Tooltip } from 'antd';
 import ReactMarkdown from 'react-markdown';
 import { SERVICE_URL, MODE } from '../constants';
@@ -13,6 +14,13 @@ const styles = {
 };
 
 export default class ComponentDetail extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    readme: PropTypes.string.isRequired,
+    demo: PropTypes.objectOf(PropTypes.any).isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
