@@ -28,7 +28,9 @@ class TemplateView extends React.PureComponent {
         <Header
           style={{
             paddingTop: '15px',
-            background: 'white',
+            marginBottom: '20px',
+            background: '#fafbfc',
+            borderBottom: '1px solid #e1e4e8',
           }}
         >
           <Button

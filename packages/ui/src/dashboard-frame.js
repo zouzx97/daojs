@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout } from 'antd';
 import 'antd/dist/antd.css';
 import Storyboard from './storyboard';
+import './style/dashboard-frame.css';
 
 const { Header, Content } = Layout;
 
@@ -20,7 +21,7 @@ export default function DashboardFrame(props) {
 
   return (
     <Layout className="dao-dashboard-frame">
-      <Header className="header">
+      <Header className="header dashboard-header">
         <div style={{
           display: 'inline-block',
           verticalAlign: 'middle',
@@ -35,7 +36,8 @@ export default function DashboardFrame(props) {
         <h3 style={{
           display: 'inline-block',
           verticalAlign: 'middle',
-          color: '#eee',
+          color: 'gray',
+          fontFamily: '微软雅黑',
         }}
         >
           { title }
