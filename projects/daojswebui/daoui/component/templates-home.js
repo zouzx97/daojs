@@ -15,16 +15,19 @@ class TemplatesHome extends React.Component {
   handleSearch() {
   }
 
-  renderCatetories() {
+  renderCatetories(title='餐饮类解决方案') {
     return (
-      <Row>
+      <Row style={{
+        marginBottom: '10px',
+      }}
+      >
         <Col span={6} />
         <Col span={12}>
-          <Card title="餐饮类解决方案" bordered="false" extra={<Button href="#">了解更多</Button>}>
+          <Card title={title} bordered="false" extra={<Button href="#">了解更多</Button>}>
             <Row gutter={16}>
               {_.map(this.examples, example => (
                 <Col span={8} key={example.name}>
-                  <Link to={`templates/${example.name}`} >
+                  <Link to={`templates/${example.routeName}`} >
                     <Card
                       hoverable
                       cover={<img alt="example" src={example.coverImage} />}

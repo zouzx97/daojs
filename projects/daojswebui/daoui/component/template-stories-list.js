@@ -1,25 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Collapse } from 'antd';
-import _ from 'lodash';
 import JSONTree from 'react-json-tree';
 
-const { Panel } = Collapse;
-
-const TemplateStoriesList = ({ categories }) => (
+const TemplateStoriesList = ({ value }) => (
   <div style={{ clear: 'both' }}>
-    <Collapse>
-      {_.map(categories, ({ name: catName, stories }) => (
-        <Panel header={catName} key={catName}>
-          <JSONTree data={stories} />
-        </Panel>
-      ))}
-    </Collapse>
+    <JSONTree
+      data={value}
+      shouldExpandNode={(keyName, data, level) => level < 4}
+    />
   </div>
 );
 
 TemplateStoriesList.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.any).isRequired,
+  value: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default TemplateStoriesList;

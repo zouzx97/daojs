@@ -7,35 +7,39 @@ import TemplatesHome from './templates-home';
 import TemplateView from './template-view';
 import TemplateStoriesList from './template-stories-list';
 import rawExamples from '../templates-list';
+import TemplateEditor from './template-editor';
 
 const examples = _.map(rawExamples, rawExample => _.defaults({}, rawExample, {
   pageComponent() {
     return (
       <TemplateView
-        name={rawExample.name}
-        title={rawExample.name}
-        logo={rawExample.logoImage}
-        categories={rawExample.categories}
-        id={rawExample.id}
-        frameType={rawExample.frameType}
+        {...rawExample}
       />
     );
   },
-  storiesListComponent() {
+  viewConfigComponent() {
     return (
       <TemplateStoriesList
-        name={rawExample.name}
-        categories={rawExample.categories}
+        routeName={rawExample.routeName}
+        value={rawExample.categories || rawExample.story}
+      />
+    );
+  },
+  editConfigComponent() {
+    return (
+      <TemplateEditor
+        config={rawExample}
       />
     );
   },
 }));
 
-const breadcrumbNameMap = _.reduce(rawExamples, (memo, { name }) => _.defaults({}, memo, ({
-  [`/templates/${name}`]: name,
-  [`/templates/${name}/stories`]: `stories of ${name}`,
+const breadcrumbNameMap = _.reduce(rawExamples, (memo, { routeName, name }) => _.defaults({}, memo, ({
+  [`/templates/${routeName}`]: name,
+  [`/templates/${routeName}/config`]: `Config of ${name}`,
+  [`/templates/${routeName}/editor`]: `Copy & Try ${name}`,
 })), {
-  '/templates': 'all templates',
+  '/templates': 'All templates',
 });
 
 const TemplatesIndex = withRouter((props) => {
@@ -66,10 +70,13 @@ const TemplatesIndex = withRouter((props) => {
       </Breadcrumb>
       <div>
         {_.map(examples, example => (
-          <Route exact key={`${example.name}-page`} path={`${match.url}/${example.name}`} component={example.pageComponent} />
+          <Route exact key={`${example.routeName}-page`} path={`${match.url}/${example.routeName}`} component={example.pageComponent} />
         ))}
         {_.map(examples, example => (
-          <Route key={`${example.name}-stories`} path={`${match.url}/${example.name}/stories`} component={example.storiesListComponent} />
+          <Route key={`${example.routeName}-config`} path={`${match.url}/${example.routeName}/config`} component={example.viewConfigComponent} />
+        ))}
+        {_.map(examples, example => (
+          <Route key={`${example.routeName}-editor`} path={`${match.url}/${example.routeName}/editor`} component={example.editConfigComponent} />
         ))}
         <Route exact path={match.url} component={() => <TemplatesHome examples={examples} />} />
       </div>
