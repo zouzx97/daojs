@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Form, Icon, Menu } from 'antd';
+import { Icon, Menu } from 'antd';
 
 function renderCategoryFactory(comps) {
-  return (Component, props) => (
-    <Component title={props.title} key={props.key}>
-      { comps.filter(item => _.includes(item.category, props.key)).map(item => (
-        <Menu.Item key={item.name} >
-          <Icon type="dot-chart" />{item.name}
-        </Menu.Item>
-      )) }
-    </Component>
-  );
+  return function renderCategory(Component, options) {
+    const compsToRender = _.filter(comps, comp => _.includes(comp.category, options.key));
+
+    return (
+      <Component title={options.title} key={options.key}>
+        { _.map(compsToRender, comp => (
+          <Menu.Item key={comp.name} >
+            <Icon type="dot-chart" />{comp.name}
+          </Menu.Item>
+        )) }
+      </Component>
+    );
+  };
 }
 
 export default class ComponentList extends React.Component {
@@ -41,21 +45,20 @@ export default class ComponentList extends React.Component {
     const renderCategory = renderCategoryFactory(comps);
 
     return (
-      <Form
-        layout="vertical"
-        style={{
-          marginTop: '20px',
-        }}
-      >
+      <React.Fragment>
         { showResults &&
           <p>{total} component result(s)</p>
         }
-
         <Menu
           mode="inline"
           defaultOpenKeys={['layout', 'container', 'component']}
           selectedKeys={[selectedCompName]}
           onClick={this.onClick}
+          style={{
+            flex: 1,
+            overflowY: 'auto',
+            overflowX: 'hidden',
+          }}
         >
 
           { renderCategory(Menu.SubMenu, { title: '布局', key: 'layout' }) }
@@ -66,7 +69,7 @@ export default class ComponentList extends React.Component {
             { renderCategory(Menu.ItemGroup, { title: '工具', key: 'utility' }) }
           </Menu.SubMenu>
         </Menu>
-      </Form>
+      </React.Fragment>
     );
   }
 }
