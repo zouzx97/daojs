@@ -3,18 +3,18 @@ import _ from 'lodash';
 import metadataList from './meta';
 
 function getDemoComp(key) {
-  return import(`./demo/${key}.demo`)
+  return import(/* webpackMode: "eager" */`./demo/${key}.demo`)
     .then(_.property('default'));
 }
 
 function getDemoSource(key) {
-  return import(`!raw-loader!./demo/${key}.demo.js`)
+  return import(/* webpackMode: "eager" */`!raw-loader!./demo/${key}.demo.js`)
     .then(_.property('default'))
     .catch(() => '');
 }
 
 function getReadme(key) {
-  return import(`./md/${key}.md`)
+  return import(/* webpackMode: "eager" */`./md/${key}.md`)
     .then(_.property('default'))
     .catch(() => '');
 }
