@@ -18,15 +18,18 @@ export default function HomeLayout(props) {
   } = props;
 
   return (
-    <Layout>
+    <Layout style={{ flex: 1 }}>
       <Sider
         trigger={null}
         width={280}
-        style={{ ...styles.bg, padding: '10px' }}
+        style={{
+          ...styles.bg,
+          padding: '10px',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
       >
-        <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
-          {LeftComp}
-        </div>
+        {LeftComp}
       </Sider>
       <Content style={{ margin: '0 10px 0 0' }}>
         {RightComp}

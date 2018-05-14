@@ -5,11 +5,15 @@ import Header from './header';
 
 export default function Frame(props) {
   return (
-    <Layout style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <Layout style={{
+      minHeight: '100vh',
+      maxHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+    }}
+    >
       <Header />
-      <div style={{ flex: 1 }}>
-        { props.children }
-      </div>
+      { props.children }
     </Layout>
   );
 }
