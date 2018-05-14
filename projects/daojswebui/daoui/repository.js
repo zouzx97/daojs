@@ -18,22 +18,45 @@ export function postComponent(options) {
 const getAllComponents = (() => {
   if (MODE === 'server') {
     return axios.get(`${SERVICE_URL}/list/@/`)
-      .then(response => _.chain(response)
-        .get('data.children', [])
-        .reject(item => _.includes(BLACK_LIST, item.name))
-        .value())
+      .then((response) => {
+        const rawComps = _.get(response, 'data.children', []);
+        const filteredComps = _.reject(rawComps, comp => _.includes(BLACK_LIST, comp.name));
+
+        return filteredComps;
+      })
       .catch(() => []);
   }
 
   return builtinComponentsPromise;
 })();
 
-// TODO: will support real query, just list and concat children
-export function search({
-  query = '',
-} = {}) {
-  return getAllComponents.then(comps => _.filter(comps, comp => _.includes(comp.name, query)));
-}
+export const search = (() => {
+  const getCompsLowerCase = getAllComponents.then((comps) => {
+    const compsLowerCase = _.map(comps, ({ name, ...other }) => ({
+      name,
+      nameLowerCase: _.toLower(name),
+      ...other,
+    }));
+
+    return compsLowerCase;
+  });
+
+  return function wrappedSearch({
+    query = '',
+  } = {}) {
+    const queryLowerCase = _.toLower(query);
+
+    return getCompsLowerCase.then((comps) => {
+      const filteredComps = _.filter(
+        comps,
+        ({ nameLowerCase }) => _.includes(nameLowerCase, queryLowerCase),
+      );
+
+      return filteredComps;
+    });
+  };
+})();
+
 
 // TODO: just list direct children of query
 export function listChildren({
