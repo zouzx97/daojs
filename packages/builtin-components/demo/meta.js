@@ -196,6 +196,12 @@ export default [
     description: '',
   },
   {
+    name: 'Adjustable Container',
+    key: 'adjustable-container',
+    category: 'container',
+    description: '',
+  },
+  {
     name: 'Card Container',
     key: 'card-container',
     category: 'container',
