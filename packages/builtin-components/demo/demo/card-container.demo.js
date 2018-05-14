@@ -14,6 +14,9 @@ export default function CardContainerDemo() {
       title="card-container"
       renderItems={renderItems}
       renderExtras={renderExtras}
+      style={{
+        height: '300px',
+      }}
     />
   );
 }
