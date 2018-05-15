@@ -112,7 +112,10 @@ export function rankerQuery({
       CardType,
       ChargeType,
     }),
-    Metrics,
+    Metrics: {
+      ...Metrics,
+      Tag: 'Total',
+    },
     OrderBy,
     ValueLimit,
   };

@@ -10,6 +10,6 @@ export default function getInsightFunc(type) {
         Business: 'Catering',
         Customer: 'Sodexo',
       },
-    }).then(({ data }) => data);
+    }).then(({ data }) => data).catch(() => []);
   };
 }
