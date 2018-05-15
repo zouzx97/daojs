@@ -1,5 +1,5 @@
 const path = require('path');
-// const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -78,6 +78,11 @@ module.exports = {
     module: 'empty',
   },
   plugins: [
-    // new MonacoWebpackPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: 'node_modules/monaco-editor/min/vs',
+        to: 'vs',
+      },
+    ]),
   ],
 };

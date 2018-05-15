@@ -5,7 +5,8 @@ import * as botanaProcedures from '@daojs/procedures/botana';
 
 import * as queryProcedures from './query';
 import * as metadataProcedures from './metadata';
-import * as customerContent from './customer-content';
+import * as getTopDishes from './getTopDishes';
+import * as getRevenue from './getBIData';
 
 export default {
   sum: _.sum,
@@ -14,5 +15,6 @@ export default {
   ...builtProcedures,
   ...queryProcedures,
   ...metadataProcedures,
-  ...customerContent,
+  ...getTopDishes,
+  ...getRevenue,
 };

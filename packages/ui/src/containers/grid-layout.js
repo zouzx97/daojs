@@ -6,7 +6,7 @@ import StoryboardContext from '../storyboard-context';
 
 const ROW_PROPS = ['align', 'gutter', 'justify', 'type'];
 const COL_PROPS = ['offset', 'order', 'pull', 'push', 'span', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
-const STYLE = ['height', 'padding'];
+const STYLE = ['height', 'padding', 'margin'];
 
 class GridRow extends React.PureComponent {
   render() {

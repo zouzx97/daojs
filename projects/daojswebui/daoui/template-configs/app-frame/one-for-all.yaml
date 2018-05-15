@@ -167,7 +167,9 @@ data:
         Granularity:
           $ref: Granularity
         Metrics:
-          $ref: Metric
+          Name:
+            $ref: Metric
+          Tag: Trend
         OrderBy:
           $ref: OrderBy
         ValueLimit:
