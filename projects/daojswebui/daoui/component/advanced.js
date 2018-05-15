@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { search } from '../repository';
-import ComponentList from './builtin-component-list';
+import ComponentList from './advanced-component-list';
 import ComponentSearch from './componentSearch';
 import ComponentDetail from './componentDetailHoC';
 import HomeLayout from './home-layout';
@@ -24,7 +24,7 @@ export default class Home extends Component {
     this.setState({
       comps,
       showResults: true,
-      selectedCompName: _.get(comps, '[0].name', ''),
+      selectedCompName: '简易卡片1',
     });
   })
 
