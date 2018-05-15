@@ -169,11 +169,16 @@ data:
         Metrics:
           Name:
             $ref: Metric
-          Tag: Trend
+          Tag:
+            $ref: Tag
         OrderBy:
           $ref: OrderBy
         ValueLimit:
           $ref: ValueLimit
+  Tag:
+    $proc: getTag
+    $args:
+      $ref: isSliceOrPredicateInsight,
   chartProps:
     source:
       $ref: request
