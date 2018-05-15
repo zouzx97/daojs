@@ -232,7 +232,7 @@ export default class AppFrameEditor extends React.Component {
           <Header
             style={{
               paddingTop: '15px',
-              background: 'white',
+              background: 'transparent',
             }}
           >
             <Button

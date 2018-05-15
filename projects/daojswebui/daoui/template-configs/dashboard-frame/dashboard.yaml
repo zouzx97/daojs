@@ -4,11 +4,17 @@ name: Dashboard
 
 data:
   revenue:
-    $proc: getRevenue
+    $proc: getBIData
+    $args:
+      Metric: Revenue
   userCount:
-    $proc: getUserCount
+    $proc: getBIData
+    $args:
+      Metric: UserCount
   chargeCount:
-    $proc: getChargeCount
+    $proc: getBIData
+    $args:
+      Metric: ChargeCount
   placehold:
     text: testxxx
   topDishes:
@@ -29,7 +35,7 @@ layout:
                     gutter: 24
                     cols:
                       - id: 9a18b61e-49bd-553a-abf7-3df05b7b7ca3
-                        lg: 18
+                        lg: 24
                         md: 24
                         margin: 0 0 24px 0
                         content:
@@ -40,39 +46,32 @@ layout:
                               - id: 66bf52ef-e858-585c-a1dc-50ab20660eca
                                 type: Trend
                                 input: revenue
-                      - id: 1c9dadea-8053-5025-abeb-15b2e6a8d00d
-                        lg: 6
-                        md: 24
-                        content:
-                          type: GridLayout
-                          props:
-                            rows:
-                              - id: 38ad0d12-1735-56bb-951c-601469b4f006
-                                cols:
-                                  - id: 3971db36-f2cc-5ba0-aa04-097a46376de2
-                                    lg: 24
-                                    md: 12
-                                    margin: 0 0 24px 0
-                                    content:
-                                      type: CardContainer
-                                      props:
-                                        title: 用户数
-                                        items:
-                                          - id: 66bf52ef-e858-585c-a1dc-50ab20660eca
-                                            type: Trend
-                                            input: userCount
-                                  - id: 370f1278-b14a-5dee-9da9-ec794cfa0074
-                                    lg: 24
-                                    md: 12
-                                    margin: 0 0 24px 0
-                                    content:
-                                      type: CardContainer
-                                      props:
-                                        title: 充值次数
-                                        items:
-                                          - id: 66bf52ef-e858-585c-a1dc-50ab20660eca
-                                            type: Trend
-                                            input: chargeCount
+      - id: 0e601242-e5af-53cc-896f-4faea4fec763
+        cols:
+          - id: 3971db36-f2cc-5ba0-aa04-097a46376de2
+            lg: 12
+            md: 24
+            margin: 0 0 24px 0
+            content:
+              type: CardContainer
+              props:
+                title: 用户数
+                items:
+                  - id: 66bf52ef-e858-585c-a1dc-50ab20660eca
+                    type: Trend
+                    input: userCount
+          - id: 370f1278-b14a-5dee-9da9-ec794cfa0074
+            lg: 12
+            md: 24
+            margin: 0 0 24px 0
+            content:
+              type: CardContainer
+              props:
+                title: 充值次数
+                items:
+                  - id: 66bf52ef-e858-585c-a1dc-50ab20660eca
+                    type: Trend
+                    input: chargeCount
       - id: 1d47af19-5479-5018-99ff-6e5d2b7ea4e6
         cols:
           - id: 00589d60-e5e3-568b-9e81-6fb9ca6da1f6
