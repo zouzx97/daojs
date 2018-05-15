@@ -60,7 +60,7 @@ export default class ComponentList extends React.Component {
             overflowX: 'hidden',
           }}
         >
-          { renderCategory(Menu.SubMenu, { title: '卡片', key: 'advanced' }) }
+          { renderCategory(Menu.SubMenu, { title: '无代码进阶模块', key: 'advanced' }) }
         </Menu>
       </React.Fragment>
     );
