@@ -24,7 +24,7 @@ export default class ComponentDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showCode: false,
+      showCode: true,
     };
   }
 
