@@ -40,12 +40,14 @@
     "antd": "^3.4.3",
     "eslint-config-daojs": "^0.0.1",
     "koa": "^2.5.0",
+    "koa-body": "^2.5.0",
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
     "lodash": "^4.17.5",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "request-promise": "^4.2.2"
   }
 }
