@@ -35,4 +35,3 @@ export default Promise.map(metadataList, (metadata) => {
     ...metadata,
   }));
 });
-

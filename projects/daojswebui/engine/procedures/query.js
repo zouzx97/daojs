@@ -16,15 +16,21 @@ export function queryFilter({
   CardType,
   ChargeType,
 }) {
-  return [
-    _.pickBy({
-      BranchName: singlePredicate(BranchName),
-      MealName: singlePredicate(MealName),
-      CardType: singlePredicate(CardType),
-      ChargeType: singlePredicate(ChargeType),
-    }, _.negate(_.isEmpty)),
-    'FULL',
-  ];
+  // return [
+  //   _.pickBy({
+  //     BranchName: singlePredicate(BranchName),
+  //     MealName: singlePredicate(MealName),
+  //     CardType: singlePredicate(CardType),
+  //     ChargeType: singlePredicate(ChargeType),
+  //   }, _.negate(_.isEmpty)),
+  //   'FULL',
+  // ];
+  return _.omitBy({
+    BranchName: singlePredicate(BranchName),
+    MealName: singlePredicate(MealName),
+    CardType: singlePredicate(CardType),
+    ChargeType: singlePredicate(ChargeType),
+  }, _.isEmpty);
 }
 
 export function queryTime(time = '2018-01-01') {
@@ -64,12 +70,12 @@ export function sliceQuery({
   CardType,
   ChargeType,
 
-  Collapse,
+  // Collapse,
   Granularity,
   Metrics,
 }) {
   return {
-    Collapse,
+    // Collapse,
     EndTime: queryTime(time.end),
     Filters: queryFilter({
       BranchName,

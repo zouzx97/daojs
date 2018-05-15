@@ -275,7 +275,7 @@ layout:
               input: selectedDateRange
               output: selectedDateRange
               props:
-                label: 时间
+                label: "时间 "
 
       - id: b5b982dc-69c4-5526-b760-43bf3a120f4e
         cols:

@@ -70,19 +70,24 @@ data:
 
   revenueTrend2:
     $proc: slice
-    Metrics: Revenue
+    Metrics:
+      Name: Revenue
+      Tag: Trend
     StartTime:
       $proc-lambda: (a) => a.start
       $args:
         $ref: selectedDateRange
-    Filter:
+    EndTime:
+      $proc-lambda: (a) => a.end
+      $args:
+        $ref: selectedDateRange
+    Filters:
       BranchName:
         $ref: selectedResturants
       MealName:
         $ref: selectedMealTimes
       CardType:
         $ref: selectedCardTypes
-    Collapse:
 
   revenueTrend:
     $proc: slice
@@ -105,7 +110,9 @@ data:
           - CardType
         Granularity:
           $ref: selectedGranularity
-        Metrics: Revenue
+        Metrics:
+          Name: Revenue
+          Tag: Trend
   revenueTrendChartProps:
     source:
       $ref: revenueTrend
@@ -131,7 +138,9 @@ data:
           - CardType
         Granularity:
           $ref: selectedGranularity
-        Metrics: UserCount
+        Metrics:
+          Name: UserCount
+          Tag: Trend
   customerTrendChartProps:
     source:
       $ref: customerTrend
@@ -146,7 +155,9 @@ data:
 
         Dimensions:
           - BranchName
-        Metrics: Revenue
+        Metrics:
+          Name: Revenue
+          Tag: Percent
         OrderBy: DESC
         ValueLimit: 10
 
@@ -160,7 +171,9 @@ data:
 
         Dimensions:
           - MealName
-        Metrics: Revenue
+        Metrics:
+          Name: Revenue
+          Tag: Percent
         OrderBy: DESC
         ValueLimit: 10
 
@@ -174,7 +187,9 @@ data:
 
         Dimensions:
           - CardType
-        Metrics: Revenue
+        Metrics:
+          Name: Revenue
+          Tag: Percent
         OrderBy: DESC
         ValueLimit: 10
 
@@ -188,7 +203,9 @@ data:
 
         Dimensions:
           - BranchName
-        Metrics: UserCount
+        Metrics:
+          Name: UserCount
+          Tag: Percent
         OrderBy: DESC
         ValueLimit: 10
 
@@ -202,7 +219,9 @@ data:
 
         Dimensions:
           - MealName
-        Metrics: UserCount
+        Metrics:
+          Name: UserCount
+          Tag: Percent
         OrderBy: DESC
         ValueLimit: 10
 
@@ -216,7 +235,9 @@ data:
 
         Dimensions:
           - CardType
-        Metrics: UserCount
+        Metrics:
+          Name: UserCount
+          Tag: Percent
         OrderBy: DESC
         ValueLimit: 10
 
@@ -275,7 +296,7 @@ layout:
               input: selectedDateRange
               output: selectedDateRange
               props:
-                label: 时间
+                label: "时间 "
 
       - id: b5b982dc-69c4-5526-b760-43bf3a120f4e
         cols:
