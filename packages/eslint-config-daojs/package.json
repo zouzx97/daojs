@@ -14,8 +14,10 @@
     "eslint-restricted-globals": "0.1.1"
   },
   "dependencies": {
+    "koa-body": "^2.5.0",
     "lodash": "^4.17.5",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "jest": "^22.4.3"
