@@ -34,7 +34,7 @@ export default class Home extends Component {
 
   render() {
     const LeftComp = (
-      <div>
+      <React.Fragment>
         <ComponentSearch
           onSearch={this.onSearch}
           style={{ width: '100%' }}
@@ -45,7 +45,7 @@ export default class Home extends Component {
           showResults={this.state.showResults}
           onSelect={this.onSelect}
         />
-      </div>
+      </React.Fragment>
     );
 
     const RightComp = (

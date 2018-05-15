@@ -12,8 +12,8 @@ class GridRow extends React.PureComponent {
   render() {
     return (
       <Row
-        {..._.pick(this.props, ROW_PROPS)}
         gutter={30}
+        {..._.pick(this.props, ROW_PROPS)}
         style={{
           ..._.pick(this.props, STYLE),
         }}

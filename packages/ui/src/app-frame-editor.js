@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import React from 'react';
-import { Layout, Menu, Icon, Input } from 'antd';
+import { Layout, Menu, Icon, Input, Button, Modal } from 'antd';
 import 'antd/dist/antd.css';
 import uuid from 'uuid4';
 import './style/app-frame.css';
 import StoryEditor from './story-editor';
-// import CustomStoryEditor from './custom-story';
+import AppFrame from './app-frame';
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu, Item } = Menu;
@@ -15,13 +15,65 @@ const contentStyle = {
   padding: 24,
 };
 
+function config2State(config = {}) {
+  const { name = '', categories = [], logoImage, logo = logoImage } = config;
+  const categoryList = _.map(categories, 'id');
+  const configDetails = _.reduce(categories, (ret, category) => {
+    const { id, name: categoryName, stories } = category;
+    const storiesDetails = _.reduce(stories, (result, story) => {
+      const { id: storyId, name: storyName } = story;
+      return {
+        ...result,
+        [storyId]: {
+          id: storyId,
+          name: storyName,
+          content: _.pick(story, ['data', 'layout']),
+        },
+      };
+    }, {});
+    return {
+      ...ret,
+      ...storiesDetails,
+      [id]: {
+        id,
+        name: categoryName,
+        stories: _.map(stories, 'id'),
+      },
+    };
+  }, {});
+
+  return {
+    logo,
+    name,
+    categoryList,
+    configDetails,
+  };
+}
+
 export default class AppFrameEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      configDetails: {},
-      categoryList: [],
+      ...config2State(props.config),
+      isPreviewing: false,
+    };
+  }
+
+  state2Config() {
+    return {
+      ...this.props.config,
+      name: this.state.name,
+      logo: this.state.logo,
+      categories: _.map(this.state.categoryList, (categoryId) => {
+        const { stories } = this.state.configDetails[categoryId];
+        return {
+          ...this.state.configDetails[categoryId],
+          stories: _.map(stories, storyId => ({
+            ..._.omit(this.state.configDetails[storyId], 'content'),
+            ...this.state.configDetails[storyId].content,
+          })),
+        };
+      }),
     };
   }
 
@@ -34,6 +86,7 @@ export default class AppFrameEditor extends React.Component {
         ...configDetails,
         [categoryId]: {
           name: '',
+          id: categoryId,
           stories: [],
         },
       },
@@ -53,10 +106,35 @@ export default class AppFrameEditor extends React.Component {
         },
         [storyId]: {
           name: '',
+          id: storyId,
           content: {},
         },
       },
     });
+  }
+
+  preview() {
+    const {
+      name: title,
+      logo,
+      categories,
+    } = this.state2Config();
+    return (
+      <Modal
+        title="Preview"
+        visible={this.state.isPreviewing}
+        destroyOnClose
+        width="100%"
+        footer={null}
+        onCancel={() => this.setState({ isPreviewing: false })}
+      >
+        <AppFrame
+          title={title}
+          logo={logo}
+          categories={categories}
+        />
+      </Modal>
+    );
   }
 
   renderInputItem(id) {
@@ -128,7 +206,7 @@ export default class AppFrameEditor extends React.Component {
   render() {
     const {
       logo,
-      title,
+      name,
       selectedStory,
       configDetails,
       // selectedCategory,
@@ -149,57 +227,77 @@ export default class AppFrameEditor extends React.Component {
     />) : (<span>{JSON.stringify(configDetails[selectedStory])}</span>);
 
     return (
-      <Layout className="dao-app-frame">
-        <Header className="header">
-          <div style={{
-            display: 'inline-block',
-            verticalAlign: 'middle',
-            height: '100%',
-            width: '100px',
-            backgroundImage: `url(${logo})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-          }}
-          />
-          <h3 style={{
-            display: 'inline-block',
-            verticalAlign: 'middle',
-            color: '#eee',
-          }}
-          >
-            <Input
-              placeholder="please input title"
-              value={title}
-              onChange={event => this.setState({ title: event.target.value })}
-            />
-          </h3>
-        </Header>
+      <div>
         <Layout>
-          <Sider
-            // collapse when window width < 992px
-            breakpoint="lg"
-            collapsedWidth={0}
+          <Header
+            style={{
+              paddingTop: '15px',
+              background: 'white',
+            }}
           >
-            <Menu
-              theme="dark"
-              defaultSelectedKeys={[selectedStory]}
-              // defaultOpenKeys={[selectedCategory]}
-              mode="inline"
-              onSelect={({ key }) => {
-                this.setState({ selectedStory: key });
-              }}
+            <Button
+              type="primary"
+              onClick={() => this.setState({ isPreviewing: true })}
             >
-              { this.renderCategories() }
-            </Menu>
-          </Sider>
-          <Layout style={{ backgroundColor: 'rgb(240, 242, 245)' }}>
-            <Content style={contentStyle}>
-              {rightContent}
-            </Content>
-          </Layout>
+              Preview
+            </Button>
+          </Header>
+          <Content>
+            <Layout className="dao-app-frame">
+              <Header className="header">
+                <div style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  height: '100%',
+                  width: '100px',
+                  backgroundImage: `url(${logo})`,
+                  backgroundPosition: 'center',
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                }}
+                />
+                <h3 style={{
+                  display: 'inline-block',
+                  verticalAlign: 'middle',
+                  color: '#eee',
+                }}
+                >
+                  <Input
+                    placeholder="please input title"
+                    value={name}
+                    onChange={event => this.setState({ name: event.target.value })}
+                  />
+                </h3>
+              </Header>
+              <Layout>
+                <Sider
+                  // collapse when window width < 992px
+                  breakpoint="lg"
+                  collapsedWidth={0}
+                >
+                  <Menu
+                    theme="dark"
+                    defaultSelectedKeys={[selectedStory]}
+                    // defaultOpenKeys={[selectedCategory]}
+                    mode="inline"
+                    onSelect={({ key }) => {
+                      this.setState({ selectedStory: key });
+                    }}
+                  >
+                    { this.renderCategories() }
+                  </Menu>
+                </Sider>
+                <Layout style={{ backgroundColor: 'rgb(240, 242, 245)' }}>
+                  <Content style={contentStyle}>
+                    {rightContent}
+                  </Content>
+                </Layout>
+              </Layout>
+            </Layout>
+          </Content>
         </Layout>
-      </Layout>
+        {this.preview()}
+      </div>
     );
   }
 }

@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col, Card, Form, Icon, Tooltip } from 'antd';
 import ReactMarkdown from 'react-markdown';
-import { SERVICE_URL } from '../constants';
+import { SERVICE_URL, MODE } from '../constants';
 import SourceCode from './source-code';
 
 const styles = {
@@ -13,6 +14,13 @@ const styles = {
 };
 
 export default class ComponentDetail extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    readme: PropTypes.string.isRequired,
+    demo: PropTypes.objectOf(PropTypes.any).isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -35,11 +43,14 @@ export default class ComponentDetail extends Component {
       <div>
         <Row style={styles.row} >
           <Col span={24}>
-            <iframe
-              title="demo"
-              src={`${SERVICE_URL}/view/@/${name}/demo`}
-              style={{ width: '100%', height: '500px', border: '0' }}
-            />
+            { MODE === 'server' ?
+              <iframe
+                title="demo"
+                src={`${SERVICE_URL}/view/@/${name}/demo`}
+                style={{ width: '100%', height: '500px', border: '0' }}
+              /> :
+              <demo.Comp />
+            }
           </Col>
         </Row>
         <Row style={_.defaults({ marginBottom: '15px' }, styles.row)}>

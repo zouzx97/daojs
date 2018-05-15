@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Layout, Menu, Icon, Modal } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import 'antd/dist/antd.css';
 import './style/app-frame.css';
 import Storyboard from './storyboard';
@@ -69,8 +69,8 @@ export default class AppFrame extends React.Component {
     super(props);
 
     const {
-      defaultStory,
       categories,
+      defaultStory = _.get(categories, '[0].stories[0].id'),
     } = this.props;
 
     let selectedStory = defaultStory;
@@ -124,7 +124,8 @@ export default class AppFrame extends React.Component {
 
   render() {
     const {
-      logo,
+      logoImage,
+      logo = logoImage,
       title,
       categories,
     } = this.props;

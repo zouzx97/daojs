@@ -1,49 +1,70 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import {
-  AppFrame,
-  ComponentRegistry,
-} from '@daojs/ui';
-import { Button } from 'antd';
+import { Button, Layout } from 'antd';
+import { frameMapper } from '../frameMapper';
+import ComponentRegistry from '../../components-registry';
 
-const TemplateView = ({
-  name, title, logo, categories,
-}) => (
-  <div>
-    <Button
-      type="primary"
-      href={`#/templates/${name}/stories`}
-      style={{
-        margin: '0.5rem 3rem',
-      }}
-    >
-      View
-    </Button>
-    <Button
-      type="secondary"
-      href={`#/editor`}
-      style={{
-        margin: '0.5rem 3rem',
-      }}
-    >
-      Copy&Edit
-    </Button>
-    <AppFrame
-      title={title}
-      logo={logo}
-      categories={categories}
-      defaultStory={_.head(categories).id}
+const { Header, Content } = Layout;
+
+class TemplateView extends React.PureComponent {
+  render() {
+    const {
+      routeName,
+      id,
+      frameType = 'AppFrame',
+    } = this.props;
+
+    const Frame = frameMapper[frameType];
+    const props = _.omit(this.props, ['frameType', 'routeName', 'id']);
+
+    const content = (<Frame
+      {...props}
       componentRegistry={ComponentRegistry}
-    />
-  </div>
-);
+    />);
+
+    return (
+      <Layout style={{ clear: 'both' }}>
+        <Header
+          style={{
+            paddingTop: '15px',
+            marginBottom: '20px',
+            background: '#fafbfc',
+            borderBottom: '1px solid #e1e4e8',
+          }}
+        >
+          <Button
+            type="primary"
+            href={`#/templates/${routeName}/config`}
+            style={{
+              marginRight: '20px',
+            }}
+          >
+            View
+          </Button>
+          <Button
+            href={`#/templates/${routeName}/editor`}
+            style={{
+              background: '#4CAF50',
+              color: 'white',
+            }}
+          >
+            Copy & Try online >>
+          </Button>
+        </Header>
+        <Content>
+          {content}
+        </Content>
+      </Layout>
+    );
+  }
+}
+
 
 TemplateView.propTypes = {
-  name: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  logo: PropTypes.string.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.any).isRequired,
+  routeName: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  frameType: PropTypes.string.isRequired,
 };
 
 export default TemplateView;

@@ -1,0 +1,30 @@
+---
+id: be8cbbfc-d7a2-5912-8410-2cc6a7d3c71c
+name: 客户展示
+
+data:
+  topDishes:
+    $proc: getTopDishes
+layout:
+  type: GridLayout
+  props:
+    gutter: 24
+    rows:
+      - id: f175acad-cc73-5e9e-978f-7b386d24364e
+        cols:
+          - id: c6b56dd0-6a7f-58b2-988e-52e15a895f66
+            content:
+              type: CustomizeDishes
+              input: topDishes
+      # - id: ed05a287-9e47-5f3c-ad19-fc79c22efc5d
+      #   padding: 10px 0
+      #   cols:
+      #     - id: cebcdb79-191e-5503-948b-e1c2d9bbf344
+      #       content:
+      #         type: CardContainer
+      #         props:
+      #           title: Top Dishes Recommendation
+      #           items:
+      #             - id: bffd204a-2717-598d-9b6f-20d79e11167a
+      #               input: topDishes
+      #               type: CustomizeDishes

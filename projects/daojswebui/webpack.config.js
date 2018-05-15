@@ -1,5 +1,5 @@
 const path = require('path');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -61,6 +61,16 @@ module.exports = {
           loader: 'sass-loader', // compiles Sass to CSS
         }],
       },
+      {
+        test: /\.less$/,
+        use: [{
+          loader: 'style-loader', // creates style nodes from JS strings
+        }, {
+          loader: 'css-loader', // translates CSS into CommonJS
+        }, {
+          loader: 'less-loader', // compiles Less to CSS
+        }],
+      },
     ],
   },
   node: {
@@ -68,6 +78,11 @@ module.exports = {
     module: 'empty',
   },
   plugins: [
-    new MonacoWebpackPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: 'node_modules/monaco-editor/min/vs',
+        to: 'vs',
+      },
+    ]),
   ],
 };

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes, { any } from 'prop-types';
 import _ from 'lodash';
-import config2Cell from '../utils/config-to-cell';
 
 export default class FlexBoxContainer extends PureComponent {
   render() {
@@ -12,21 +11,18 @@ export default class FlexBoxContainer extends PureComponent {
           ...this.props.style,
         }}
       >
-        {_.map(this.props.items, item => config2Cell(item))}
+        {this.props.renderItems()}
       </div>
     );
   }
 }
 
 FlexBoxContainer.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.objectOf(any),
-    PropTypes.string,
-  ])),
+  renderItems: PropTypes.func,
   style: PropTypes.objectOf(any),
 };
 
 FlexBoxContainer.defaultProps = {
-  items: [],
+  renderItems: _.noop,
   style: {},
 };

@@ -64,9 +64,6 @@ class Header extends React.PureComponent {
           <Menu.Item key="/templates">
             <Icon type="gift" />模版
           </Menu.Item>
-          <Menu.Item key="/editor">
-            <Icon type="plus-circle-o" />New Dashboard
-          </Menu.Item>
         </Menu>
       </Layout.Header>
     );
