@@ -7,10 +7,10 @@ data:
     $proc: getBIData
     $args:
       Metric: Revenue
-  userCount:
+  chargeAmount:
     $proc: getBIData
     $args:
-      Metric: UserCount
+      Metric: ChargeAmount
   chargeCount:
     $proc: getBIData
     $args:
@@ -53,11 +53,11 @@ layout:
             content:
               type: CardContainer
               props:
-                title: 用户数
+                title: 充值金额
                 items:
                   - id: 66bf52ef-e858-585c-a1dc-50ab20660eca
                     type: Trend
-                    input: userCount
+                    input: chargeAmount
           - id: 370f1278-b14a-5dee-9da9-ec794cfa0074
             lg: 12
             md: 24
