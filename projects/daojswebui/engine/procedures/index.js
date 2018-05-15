@@ -8,10 +8,6 @@ import * as metadataProcedures from './metadata';
 import * as getTopDishes from './getTopDishes';
 import * as getRevenue from './getBIData';
 
-function getTag(isSliceOrPredicateInsight) {
-  return isSliceOrPredicateInsight ? 'Trend' : 'Total';
-}
-
 export default {
   sum: _.sum,
   stringify: _.toString,
@@ -21,5 +17,4 @@ export default {
   ...metadataProcedures,
   ...getTopDishes,
   ...getRevenue,
-  getTag,
 };

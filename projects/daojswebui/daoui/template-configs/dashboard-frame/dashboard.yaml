@@ -15,8 +15,6 @@ data:
     $proc: getBIData
     $args:
       Metric: ChargeCount
-  placehold:
-    text: testxxx
   topDishes:
     $proc: getTopDishes
 layout:
