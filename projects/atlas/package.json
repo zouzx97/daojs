@@ -72,13 +72,5 @@
     "xlsx-to-json": "^0.3.0",
     "yaml-loader": "^0.5.0",
     "yamljs": "^0.3.0"
-  },
-  "scripts": {
-    "start": "node ./server.js",
-    "data": "cd simulator-data && cd master-kong && node generate-forecast-data",
-    "build": "webpack",
-    "dev": "webpack-dev-server",
-    "watch": "webpack --watch",
-    "lint": "eslint ./src"
   }
 }

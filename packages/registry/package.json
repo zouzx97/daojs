@@ -21,7 +21,9 @@
     "bluebird": "^3.5.1",
     "eslint-config-daojs": "^0.0.1",
     "immutable": "^3.8.2",
+    "koa-body": "^2.5.0",
     "lodash": "^4.17.5",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "request-promise": "^4.2.2"
   }
 }
