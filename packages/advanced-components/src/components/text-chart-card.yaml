@@ -1,0 +1,45 @@
+---
+input: params
+implementation:
+  data:
+    helpButtonProps:
+      text: help
+    title:
+      "$proc": result
+      "$args":
+        object:
+          "$ref": params
+        path: title
+    mainText:
+      text:
+        "$proc": result
+        "$args":
+          object:
+            "$ref": params
+          path: text
+    chartProps:
+      source:
+        "$proc": result
+        "$args":
+          object:
+            "$ref": params
+          path: chartData
+      axisDimensions:
+      - x
+      metricDimensions:
+      - y
+  layout:
+    type: CardContainer
+    props:
+      title: title
+      items:
+      - id: ad75c887-9456-51f8-8612-63af28e92c6e
+        type: TextBlock
+        input: mainText
+      - id: e5b943eb-a5e4-5c08-a0a4-56a8e016edd8
+        type: Bar
+        input: chartProps
+      actions:
+      - id: 6f6ebd96-8c50-58e8-8cef-4b40c1e2e15b
+        type: TextBlock
+        input: helpButtonProps
