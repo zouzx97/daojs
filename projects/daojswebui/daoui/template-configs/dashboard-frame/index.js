@@ -1,4 +1,5 @@
-import customerContent from './customer-content.yaml';
+// import customerContent from './customer-content.yaml';
+import customerContent from './dashboard.yaml';
 
 export default {
   name: '运营展示',
