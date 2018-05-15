@@ -1,6 +1,8 @@
 import axios from 'axios';
 import _ from 'lodash';
+import Promise from 'bluebird';
 import builtinComponentsPromise from '@daojs/builtin-components/demo';
+import advancedComponentsPromise from '@daojs/advanced-components/demo';
 import { SERVICE_URL, BLACK_LIST, MODE } from './constants';
 
 export function postComponent(options) {
@@ -27,7 +29,8 @@ const getAllComponents = (() => {
       .catch(() => []);
   }
 
-  return builtinComponentsPromise;
+  return Promise.all([builtinComponentsPromise, advancedComponentsPromise])
+    .spread((biComps, aComps) => [...biComps, ...aComps]);
 })();
 
 export const search = (() => {
@@ -90,7 +93,7 @@ export function getComponent({ name, version = 0 }) {
       });
   }
 
-  return builtinComponentsPromise.then(comps => ({
+  return getAllComponents.then(comps => ({
     data: _.find(comps, ({ name: compName }) => compName === name),
   }));
 }

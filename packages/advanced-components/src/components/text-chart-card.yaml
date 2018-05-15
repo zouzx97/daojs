@@ -18,10 +18,10 @@ implementation:
             "$ref": params
           path: text
       style:
-        font-size: 3em
-        align-items: center
+        fontSize: 3em
+        alignItems: center
         display: flex
-        flex-direction: column
+        flexDirection: column
     chartProps:
       source:
         "$proc": result
