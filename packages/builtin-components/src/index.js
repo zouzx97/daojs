@@ -43,6 +43,9 @@ import VerticalTimeline from './components/vertical-timeline';
 import Waterfall from './components/waterfall';
 import WordCloud from './components/wordcloud';
 
+// advanced components
+import BarList from './components/advanced/bar-list';
+
 export default {
   TimeSeries,
   FormInput,
@@ -87,4 +90,7 @@ export default {
   VerticalTimeline,
   Waterfall,
   WordCloud,
+
+  // advanced
+  BarList,
 };

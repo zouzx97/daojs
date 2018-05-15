@@ -213,4 +213,14 @@ export default [
     category: 'container',
     description: '',
   },
+
+  // advanced
+  {
+    name: 'BarList',
+    key: 'bar-list',
+    category: 'chart',
+    description: '',
+  },
+
+  // End advanced
 ];
