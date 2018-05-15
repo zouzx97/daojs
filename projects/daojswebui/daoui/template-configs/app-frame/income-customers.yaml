@@ -299,7 +299,7 @@ layout:
                 label: "时间 "
 
       - id: b5b982dc-69c4-5526-b760-43bf3a120f4e
-        margin: 0 0 24px 0
+        margin: 0 -15px 24px -15px
         cols:
           - id: 4307046e-f941-444f-a2fe-562a80ae4734
             content:
@@ -309,7 +309,7 @@ layout:
                 title: 收入趋势
       - id: 392c62aa-a4e5-59ec-b4c4-969b45ec0470
         gutter: 24
-        margin: 0 0 24px 0
+        margin: 0 -15px 24px -15px
         cols:
         - id: 2f93fe88-1bac-45ab-b710-930449a2379e
           md: 24
@@ -337,7 +337,7 @@ layout:
               title: 各卡种收入比例
       - id: b8fa271b-61f7-5a49-be98-bd519da90a6e
         gutter: 24
-        margin: 0 0 24px 0
+        margin: 0 -15px 24px -15px
         cols:
         - id: 62587c53-7ee8-4e6e-adae-5115ea36307b
           content:
@@ -346,6 +346,8 @@ layout:
             props:
               title: 用餐人数趋势
       - id: ec91008e-31f5-5a04-b377-708457585bff
+        gutter: 24
+        margin: 0 -15px 24px -15px
         cols:
         - id: 0a394c47-431c-4be3-81fe-ff0e4f27a548
           md: 24
