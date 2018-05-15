@@ -2,8 +2,10 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes, { any } from 'prop-types';
 import Promise from 'bluebird';
+import { Map } from 'immutable';
 import { Spin } from 'antd';
 import ComponentRegistry from './component-registry';
+import composeAdvancedComponent from './compose-advanced-component';
 
 Promise.config({
   cancellation: true,
@@ -100,6 +102,7 @@ export default class Cell extends React.Component {
     this.loadControlPromise = loadControlPromise;
     this.loadControlPromise.then((Control) => {
       if (this.loadControlPromise === loadControlPromise) {
+
         this.setState(({ Control, isLoadingControl: false }));
       }
     });
@@ -164,15 +167,18 @@ export default class Cell extends React.Component {
       console.warn(`Control is null for type: ${this.props.type}, you may not registry this component`); // eslint-disable-line
       return null;
     }
+
+    const ReactControl = Control instanceof Map ? composeAdvancedComponent(Control.toJS()) : Control;
+
     return condition ? (
-      <Control
+      <ReactControl
         {...props}
         {...data}
         output={output}
         update={this.updateData}
       >
         {this.props.children}
-      </Control>
+      </ReactControl>
     ) : null;
   }
 }

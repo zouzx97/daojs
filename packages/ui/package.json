@@ -6,6 +6,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@daojs/advanced-components": "^0.0.1",
     "@daojs/builtin-components": "^0.0.1",
     "@daojs/registry": "^0.0.1",
     "@daojs/worker-agent": "^0.0.1",
