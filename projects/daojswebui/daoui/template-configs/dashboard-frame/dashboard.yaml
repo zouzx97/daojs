@@ -56,7 +56,7 @@ layout:
                                     content:
                                       type: CardContainer
                                       props:
-                                        title: 用餐人数
+                                        title: 用户数
                                         items:
                                           - id: 66bf52ef-e858-585c-a1dc-50ab20660eca
                                             type: Trend
@@ -68,7 +68,7 @@ layout:
                                     content:
                                       type: CardContainer
                                       props:
-                                        title: 交易数量
+                                        title: 充值次数
                                         items:
                                           - id: 66bf52ef-e858-585c-a1dc-50ab20660eca
                                             type: Trend
