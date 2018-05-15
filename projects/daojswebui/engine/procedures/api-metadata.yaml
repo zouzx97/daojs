@@ -51,9 +51,8 @@
       - 西餐厅
       - 意大利餐厅
     requestFilters:
-      type: array
-      items:
-      -
+      type: object
+      properties:
         CardType:
           type: array
           items:
@@ -70,10 +69,6 @@
           type: array
           items:
             $ref: "#/definitions/BranchName"
-      -
-        type: string
-        enum:
-        - FULL
     time:
       type: string
       format: date-time
@@ -93,6 +88,19 @@
       - DepositTotal
       - Revenue
       - UserCount
+    Tag:
+      type: string
+      enum:
+      - Trend
+      - Percent
+      - Total
+    Metrics:
+      type: object
+      properties:
+        Name:
+          $ref: '#/definitions/Dimension'
+        Tag:
+          $ref: '#/definitions/Tag'
     ChargeMetric:
       type: string
       enum:
@@ -231,7 +239,7 @@
             Filters:
               $ref: "#/definitions/requestFilters"
             Metrics:
-              $ref: "#/definitions/Metric"
+              $ref: "#/definitions/Metrics"
             OrderBy:
               $ref: "#/definitions/OrderBy"
             StartTime:
