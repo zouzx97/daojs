@@ -54,7 +54,7 @@ export default class DashboardFrameEditor extends React.Component {
         <Header
           style={{
             paddingTop: '15px',
-            background: 'white',
+            background: 'transparent',
           }}
         >
           <Button
@@ -66,7 +66,7 @@ export default class DashboardFrameEditor extends React.Component {
         </Header>
         <Content>
           <Layout className="dao-dashboard-frame">
-            <Header className="header">
+            <Header className="header dashboard-header">
               <div style={{
                 display: 'inline-block',
                 verticalAlign: 'middle',
@@ -81,7 +81,8 @@ export default class DashboardFrameEditor extends React.Component {
               <h3 style={{
                 display: 'inline-block',
                 verticalAlign: 'middle',
-                color: '#eee',
+                color: 'gray',
+                fontFamily: '微软雅黑',
               }}
               >
                 <Input
