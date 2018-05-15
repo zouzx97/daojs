@@ -8,12 +8,6 @@
       format: currency
     ChargeCount:
       type: integer
-    Deposit:
-      type: number
-      format: currency
-    DepositTotal:
-      type: number
-      format: currency
     Revenue:
       type: number
       format: currency
@@ -84,8 +78,6 @@
       - AvgChargeAmount
       - ChargeAmount
       - ChargeCount
-      - Deposit
-      - DepositTotal
       - Revenue
       - UserCount
     Tag:
@@ -107,8 +99,6 @@
       - AvgChargeAmount
       - ChargeAmount
       - ChargeCount
-      - Deposit
-      - DepositTotal
     TransactionMetric:
       type: string
       enum:
