@@ -39,6 +39,7 @@
     "yaml-loader": "^0.5.0"
   },
   "dependencies": {
+    "@daojs/botana-components": "^0.0.1",
     "@daojs/builtin-components": "*",
     "@daojs/engine": "^0.0.1",
     "@daojs/procedures": "^0.0.1",
