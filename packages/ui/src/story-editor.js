@@ -45,8 +45,8 @@ export default class StoryEditor extends React.PureComponent {
         <Row gutter={24}>
           <Col span={12}>
             <MonacoEditor
-              width="800"
-              height="750"
+              width="100%"
+              height="100%"
               language="json"
               theme="vs"
               value={valueString}
