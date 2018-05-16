@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import ContainerDimensions from 'react-container-dimensions';
 import { ThemeContext } from '@daojs/contexts';
-import Donut from './donut';
+import { Icon } from 'antd';
 
 const padding = 15; // px
 
@@ -10,13 +10,8 @@ export default function Comp2(props) {
   const {
     title,
     subTitle,
-    percent,
+    icon,
   } = props;
-
-  const chartSource = [
-    { part: 1, value: percent },
-    { part: 2, value: 100 - percent },
-  ];
 
   const backgroundColor = '#fff';
 
@@ -66,10 +61,15 @@ export default function Comp2(props) {
                       width: `${_.round(radius * 0.8)}px`,
                       height: `${_.round(radius * 0.8)}px`,
                       borderRadius: `${_.round(radius * 0.8)}px`,
-                      backgroundColor: '#fff',
-                      opacity: 0.1,
+                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
                     }}
-                    />
+                    >
+                      <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 1.5)}px`, color: '#fff' }} />
+                    </div>
                   </div>
                 </div>
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
