@@ -30,7 +30,7 @@ export default class MiniBar extends React.Component {
     ];
 
     // for tooltip not to be hide
-    const chartHeight = height + 54;
+    const chartHeight = height + 30;
 
     return (
       <div className={styles.miniChart} style={{ height }}>
