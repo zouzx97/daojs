@@ -28,7 +28,7 @@ export default function Weather(props) {
     key: 'temp',
     render: (text, record) => {
       const { high, low } = record;
-      return <span>{high}&#8451; - {low}&#8451;</span>;
+      return <span>{low}&#8451; - {high}&#8451;</span>;
     },
   }];
 
