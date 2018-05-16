@@ -50,6 +50,7 @@ import BarList from './components/advanced/bar-list';
 // antd
 import MiniArea from './components/mini-area';
 import MiniBar from './components/mini-bar';
+import MiniProgress from './components/mini-progress';
 
 export default {
   TimeSeries,
@@ -102,4 +103,5 @@ export default {
   // antd
   MiniArea,
   MiniBar,
+  MiniProgress,
 };

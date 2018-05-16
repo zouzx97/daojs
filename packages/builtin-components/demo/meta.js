@@ -236,5 +236,11 @@ export default [
     category: 'chart',
     description: '',
   },
+  {
+    name: '迷你进度条',
+    key: 'mini-progress',
+    category: 'chart',
+    description: '',
+  },
   // End antd
 ];
