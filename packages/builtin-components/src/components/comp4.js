@@ -3,7 +3,6 @@ import _ from 'lodash';
 import ContainerDimensions from 'react-container-dimensions';
 import { ThemeContext } from '@daojs/contexts';
 import { Icon } from 'antd';
-import MiniProgress from './mini-progress';
 
 const padding = 15; // px
 
@@ -11,12 +10,9 @@ export default function Comp4(props) {
   const {
     title,
     subTitle,
-    percent,
     icon,
     footer,
   } = props;
-
-  const backgroundColor = '#fff';
 
   return (
     <ThemeContext.Consumer>
@@ -25,10 +21,6 @@ export default function Comp4(props) {
           { ({ width, height }) => {
             const titleSize = _.round(width / 13);
             const subTitleSize = _.round(width / 20);
-            const radius = _.min([
-              (width / 2) - padding,
-              (height - (2 * padding)),
-            ]);
 
             return (
               <div style={{
@@ -64,7 +56,7 @@ export default function Comp4(props) {
                     { title }
                   </div>
                   <div style={{ position: 'absolute', right: `${padding}px`, top: `${padding}px` }} >
-                    <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 3)}px`, color: 'rgba(127, 127, 127, 0.6)' }} />
+                    <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 3)}px`, color: 'rgba(191, 191, 191, 0.4)' }} />
                   </div>
                 </div>
                 <div style={{
@@ -72,7 +64,7 @@ export default function Comp4(props) {
                   padding: `5px ${padding}px`,
                   textAlign: 'right',
                   backgroundColor: 'rgb(127,127,127,0.8)',
-                  color: 'rgba(255, 255, 255, 0.6)',
+                  color: 'rgba(255, 255, 255, 0.8)',
                 }}
                 >
                   { footer }
