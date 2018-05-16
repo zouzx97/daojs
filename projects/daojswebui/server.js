@@ -3,12 +3,14 @@ const serve = require('koa-static');
 const Router = require('koa-router');
 const koaBody = require('koa-body');
 const rp = require('request-promise');
+const cors = require('@koa/cors');
 
 const cacheManager = require('./cache-manager.js');
 
 const app = new Koa();
 const router = new Router();
 
+app.use(cors());
 
 router.post('/insight', koaBody(), async (ctx, next) => {
   const { body, query, headers } = ctx.request;
