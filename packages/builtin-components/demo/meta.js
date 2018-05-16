@@ -221,6 +221,14 @@ export default [
     category: 'chart',
     description: '',
   },
-
   // End advanced
+
+  // antd
+  {
+    name: '迷你区域图',
+    key: 'mini-area',
+    category: 'chart',
+    description: '',
+  },
+  // End antd
 ];
