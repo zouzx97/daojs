@@ -6,7 +6,7 @@ data:
   topDishes:
     $proc: getTopDishes
 layout:
-  type: GridLayout
+  type: GridLayoutContainer
   props:
     gutter: 24
     rows:

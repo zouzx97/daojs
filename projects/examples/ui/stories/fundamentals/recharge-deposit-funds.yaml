@@ -125,7 +125,7 @@ data:
       $ref: ui_deposit_total_trend
 # Dashboard Layout
 layout:
-  type: GridLayout
+  type: GridLayoutContainer
   props:
     gutter: 20
     rows:

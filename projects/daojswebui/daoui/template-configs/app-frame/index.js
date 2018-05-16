@@ -8,7 +8,7 @@ export default {
   routeName: 'appframe',
   id: 'a3bc8bfa-ae04-5e58-87f2-d771e05b2391',
   description: '多维度了解餐厅运营情况',
-  coverImage: '/img/sodexo.png',
+  coverImage: '/img/sodexo.cover.png',
   logoImage: '/img/sodexo.logo.png',
   frameType: 'AppFrame',
   categories: [{
