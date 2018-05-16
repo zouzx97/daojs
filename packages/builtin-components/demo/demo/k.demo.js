@@ -6,7 +6,7 @@ import daoTheme1 from '../assets/DaoTheme1.json';
 echarts.registerTheme('theme1', daoTheme1);
 
 const {
-  BoxPlot,
+  K,
 } = builtinComponents;
 
 const source = [
@@ -17,8 +17,8 @@ const source = [
   ['2017-10-27', 40, 40, 32, 42],
 ];
 
-export default function BoxPlotDemo() {
+export default function KDemo() {
   return (
-    <BoxPlot source={source} />
+    <K source={source} />
   );
 }

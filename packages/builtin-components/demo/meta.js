@@ -63,11 +63,11 @@ export default [
     description: 'Easily visualize your data using line chart with datazoom.',
   },
   {
-    name: '箱线图',
-    key: 'box-plot',
+    name: 'K线图',
+    key: 'k',
     // possible values: chart, slicer, utility, layout, container
     category: 'chart',
-    description: 'Easily visualize your data using box-plot chart.',
+    description: 'Easily visualize your data using k chart.',
   },
   {
     name: '子弹图',
