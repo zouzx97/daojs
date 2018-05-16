@@ -1,6 +1,7 @@
 import incomeCustomers from './income-customers.yaml';
 import oneForAll from './one-for-all.yaml';
 import customerContent from './customer-content.yaml';
+import analysis from './analysis.yaml';
 
 export default {
   name: '运营分析',
@@ -17,6 +18,7 @@ export default {
       incomeCustomers,
       oneForAll,
       customerContent,
+      analysis,
     ],
   }],
 };
