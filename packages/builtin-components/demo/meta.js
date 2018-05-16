@@ -236,5 +236,23 @@ export default [
     category: 'chart',
     description: '',
   },
+  {
+    name: '迷你进度条',
+    key: 'mini-progress',
+    category: 'chart',
+    description: '',
+  },
+  {
+    name: '仪表盘',
+    key: 'gauge',
+    category: 'chart',
+    description: '',
+  },
+  {
+    name: '水波图',
+    key: 'water-wave',
+    category: 'chart',
+    description: '',
+  },
   // End antd
 ];
