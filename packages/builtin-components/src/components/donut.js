@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import React from 'react';
 import ContainerDimensions from 'react-container-dimensions';
-import BaseChart from './base';
+import AtlasChart from './atlas-chart';
 
 const breakPoint = 500; // px
 const bigLayoutCenterLeft = 0.3;
@@ -14,29 +14,34 @@ function toPercentString(float) {
   return `${_.round(float * 100)}%`;
 }
 
-class Donut extends BaseChart {
-  getMetricDimensions() {
-    // Donut chart only supports 1 dimension
-    return _.slice(super.getMetricDimensions(), 0, 1);
-  }
 
-  getSourceAndAggregateRest() {
-    const rawSource = this.getSource();
-    const axisDim = this.getAxisDimension();
+function getSourceAndAggregateRest({
+  source: rawSource,
+  axisDimension: axisDim,
+  metricDimensions,
+}) {
+  const sortedSource = _.reverse(_.sortBy(rawSource, metricDimensions));
 
-    const sortedSource = _.reverse(_.sortBy(rawSource, this.getMetricDimensions()));
+  const metricKey = _.first(metricDimensions) || 'customerId';
 
-    const metricKey = _.first(this.getMetricDimensions()) || 'customerId';
+  return [..._.slice(sortedSource, 0, 4), {
+    [axisDim]: '其他',
+    [metricKey]: _.sum(_.map(_.slice(sortedSource, 4), metricKey)),
+  }];
+}
 
-    return [..._.slice(sortedSource, 0, 4), {
-      [axisDim]: '其他',
-      [metricKey]: _.sum(_.map(_.slice(sortedSource, 4), metricKey)),
-    }];
-  }
-
-  getSeriesOption() {
-    const source = this.getSourceAndAggregateRest();
-    const axisDim = this.getAxisDimension();
+class Donut extends React.Component {
+  getSeriesOption({
+    source: originalSource,
+    axisDimension,
+    metricDimensions,
+  }) {
+    const source = getSourceAndAggregateRest({
+      source: originalSource,
+      axisDimension,
+      metricDimensions,
+    });
+    const axisDim = axisDimension;
     const position = this.containerWidth > breakPoint ?
       {
         center: [toPercentString(bigLayoutCenterLeft), toPercentString(bigLayoutCenterTop)],
@@ -45,7 +50,7 @@ class Donut extends BaseChart {
         center: [toPercentString(smallLayoutCenterLeft), toPercentString(smallLayoutCenterTop)],
       };
 
-    return _.chain(this.getMetricDimensions())
+    return _.chain(metricDimensions)
       .map(metricDim => ({
         ...position,
         type: 'pie',
@@ -70,10 +75,18 @@ class Donut extends BaseChart {
       .value();
   }
 
-  getLegendOption() {
-    const source = this.getSourceAndAggregateRest();
-    const axisDim = this.getAxisDimension();
-    const metricDim = this.getMetricDimensions()[0];
+  getLegendOption({
+    source: originalSource,
+    axisDimension,
+    metricDimensions,
+  }) {
+    const source = getSourceAndAggregateRest({
+      source: originalSource,
+      axisDimension,
+      metricDimensions,
+    });
+    const axisDim = axisDimension;
+    const metricDim = metricDimensions[0];
     const position = this.containerWidth > breakPoint ?
       {
         top: 'middle',
@@ -156,23 +169,49 @@ class Donut extends BaseChart {
     };
   }
 
-  getStyle() {
-    return this.containerWidth > breakPoint ?
-      {
-        height: '300px',
-      } :
-      {
-        height: '500px',
-      };
-  }
-
   render() {
     return (
       <ContainerDimensions>
         { ({ width, height }) => {
           this.containerWidth = width;
           this.containerHeight = height;
-          return super.render();
+          return (
+            <AtlasChart
+              source={this.props.source}
+              axisDimensions={this.props.axisDimensions}
+              metricDimensions={this.props.metricDimensions}
+              title={this.props.title}
+              getOption={({
+                source,
+                axisDimension,
+                metricDimensions,
+              }) => {
+                const realMetricDimension = _.slice(metricDimensions, 0, 1);
+
+                return {
+                  legend: this.getLegendOption({
+                    source,
+                    axisDimension,
+                    metricDimensions: realMetricDimension,
+                  }),
+                  tooltip: {
+                    trigger: 'item',
+                    // {a} === seriesName, {b} === name, {c} === value, {d} === percent
+                    formatter: '{b}: {d}%',
+                  },
+                  title: this.getTitleOption(),
+                  series: this.getSeriesOption({
+                    source,
+                    axisDimension,
+                    metricDimensions,
+                  }),
+                };
+              }}
+              style={_.extend({
+                height: width > breakPoint ? '300px' : '500px',
+              }, this.props.style)}
+            />
+          );
         }}
       </ContainerDimensions>
     );
