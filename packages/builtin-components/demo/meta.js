@@ -13,6 +13,12 @@ export default [
     category: 'card',
     description: '',
   },
+  {
+    name: 'comp3',
+    key: 'comp3',
+    category: 'card',
+    description: '',
+  },
 
   // charts
   {
