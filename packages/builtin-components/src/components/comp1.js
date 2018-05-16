@@ -54,6 +54,7 @@ export default function Comp1(props) {
                       height: chartHeight,
                       backgroundColor,
                     }}
+                    restColors={[secondaryColor]}
                   />
                 </div>
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>

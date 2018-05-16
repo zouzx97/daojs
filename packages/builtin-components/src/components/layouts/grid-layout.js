@@ -5,10 +5,10 @@ import { ThemeContext } from '@daojs/contexts';
 const colorPanel = [
   "#4472c4",
   "#ed7d31",
-  "#a5a5a5",
   "#ffc000",
   "#5b9bd5",
   "#70ad47",
+  "#a5a5a5",
 ];
 
 export default function GridLayout(props) {
