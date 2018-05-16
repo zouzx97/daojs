@@ -764,6 +764,10 @@ aws4@^1.2.1, aws4@^1.6.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.7.0.tgz#d4d0e9b9dbfca77bf08eeb0a8a471550fe39e289"
 
+axios-jsonp@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/axios-jsonp/-/axios-jsonp-1.0.1.tgz#db79891be3ce64768037a84bf6c4dfdb68a60c8f"
+
 axios@^0.15.3:
   version "0.15.3"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.15.3.tgz#2c9d638b2e191a08ea1d6cc988eadd6ba5bdc053"
