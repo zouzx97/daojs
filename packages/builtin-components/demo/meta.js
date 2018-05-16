@@ -201,12 +201,12 @@ export default [
     category: 'container',
     description: '',
   },
-  {
-    name: 'Card Container',
-    key: 'card-container',
-    category: 'container',
-    description: '',
-  },
+  // {
+  //   name: 'Card Container',
+  //   key: 'card-container',
+  //   category: 'container',
+  //   description: '',
+  // },
   {
     name: 'Flexbox Container',
     key: 'flexbox-container',
