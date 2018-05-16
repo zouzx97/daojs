@@ -8,7 +8,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "axios-jsonp": "^1.0.1",
+    "bluebird": "^3.5.1",
     "eslint-config-daojs": "^0.0.1",
+    "jsonp": "^0.2.1",
     "koa-body": "^2.5.0",
     "lodash": "^4.17.5",
     "react-router-dom": "^4.2.2",
