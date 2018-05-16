@@ -242,7 +242,7 @@ data:
         ValueLimit: 10
 
 layout:
-  type: GridLayout
+  type: GridLayoutContainer
   props:
     gutter: 24
     rows:

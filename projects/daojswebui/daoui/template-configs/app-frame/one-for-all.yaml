@@ -192,7 +192,7 @@ data:
         $ref: insight
 # Dashboard Layout
 layout:
-  type: GridLayout
+  type: GridLayoutContainer
   props:
     gutter: 24
     rows:

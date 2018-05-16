@@ -221,7 +221,7 @@ data:
         ValueLimit: 10
 
 layout:
-  type: GridLayout
+  type: GridLayoutContainer
   props:
     gutter: 20
     rows:
@@ -261,7 +261,7 @@ layout:
               output: selectedGranularity
           - id: ed557de6-017a-4a87-bf87-a2ea6e34ea6e
             md: 24
-            lg: 
+            lg:
               span: 8
               offset: 8
             content:
