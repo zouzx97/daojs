@@ -15,19 +15,18 @@ export default class Card extends PureComponent {
       extras,
     } = this.props;
 
-    const extras = (
-      <span
-        role="presentation"
-        onMouseDown={(e) => { e.stopPropagation(); }}
-        onMouseUp={(e) => { e.stopPropagation(); }}
-      >
-        {extras}
-      </span>
-    );
     return (
       <AntdCard
         title={title}
-        extra={extras}
+        extra={(
+          <span
+            role="presentation"
+            onMouseDown={(e) => { e.stopPropagation(); }}
+            onMouseUp={(e) => { e.stopPropagation(); }}
+          >
+            {extras}
+          </span>
+        )}
         style={{
           height: 'min-content',
           display: 'flex',
