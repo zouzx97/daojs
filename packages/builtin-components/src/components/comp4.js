@@ -64,7 +64,7 @@ export default function Comp4(props) {
                     { title }
                   </div>
                   <div style={{ position: 'absolute', right: `${padding}px`, top: `${padding}px` }} >
-                    <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 3)}px`, color: 'rgba(127, 127, 127, 0.4)' }} />
+                    <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 3)}px`, color: 'rgba(127, 127, 127, 0.6)' }} />
                   </div>
                 </div>
                 <div style={{
