@@ -183,8 +183,8 @@ export default class WaterWave extends PureComponent {
           <canvas
             className={styles.waterWaveCanvasWrapper}
             ref={n => (this.node = n)}
-            width={height * 2}
-            height={height * 2}
+            width={height}
+            height={height}
           />
         </div>
         <div className={styles.text} style={{ width: height }}>
