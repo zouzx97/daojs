@@ -56,6 +56,7 @@ import WaterWave from './components/water-wave';
 
 import Comp1 from './components/comp1';
 import Comp2 from './components/comp2';
+import Comp3 from './components/comp3';
 import GridLayout from './components/layouts/grid-layout';
 
 export default {
@@ -115,5 +116,6 @@ export default {
 
   Comp1,
   Comp2,
+  Comp3,
   GridLayout,
 };
