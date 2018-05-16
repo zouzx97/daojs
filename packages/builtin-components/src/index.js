@@ -46,6 +46,10 @@ import WordCloud from './components/wordcloud';
 // advanced components
 import BarList from './components/advanced/bar-list';
 
+
+// antd
+import MiniArea from './components/mini-area';
+
 export default {
   TimeSeries,
   FormInput,
@@ -93,4 +97,7 @@ export default {
 
   // advanced
   BarList,
+
+  // antd
+  MiniArea,
 };

@@ -201,12 +201,12 @@ export default [
     category: 'container',
     description: '',
   },
-  {
-    name: 'Card Container',
-    key: 'card-container',
-    category: 'container',
-    description: '',
-  },
+  // {
+  //   name: 'Card Container',
+  //   key: 'card-container',
+  //   category: 'container',
+  //   description: '',
+  // },
   {
     name: 'Flexbox Container',
     key: 'flexbox-container',
@@ -221,6 +221,14 @@ export default [
     category: 'chart',
     description: '',
   },
-
   // End advanced
+
+  // antd
+  {
+    name: '迷你区域图',
+    key: 'mini-area',
+    category: 'chart',
+    description: '',
+  },
+  // End antd
 ];
