@@ -15,7 +15,7 @@ import SectionCard from './components/section-card';
 import LineBarChart from './components/line-bar';
 import Markdown from './components/markdown';
 import CellTest from './components/cell-test';
-// import CardContainer from './components/card-container';
+import Card from './components/card';
 import FlexBoxContainer from './components/flexbox-container';
 import AdjustableContainer from './components/adjustable-container';
 // import LayoutDefault from './components/layout-default';
@@ -69,7 +69,7 @@ export default {
   LineBarChart,
   Markdown,
   CellTest,
-  // CardContainer,
+  Card,
   FlexBoxContainer,
   AdjustableContainer,
   // LayoutDefault,
