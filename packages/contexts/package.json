@@ -2,7 +2,6 @@
   "name": "@daojs/contexts",
   "version": "0.0.1",
   "main": "src/index.js",
-  "author": "Yucong Jin",
   "license": "MIT",
   "private": false,
   "dependencies": {
@@ -26,7 +25,6 @@
     "jest": "^22.4.3"
   },
   "scripts": {
-    "lint": "eslint ./src/*.js",
-    "test": "jest"
+    "lint": "eslint ./src/*.js"
   }
 }
