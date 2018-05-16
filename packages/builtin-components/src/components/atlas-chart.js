@@ -64,6 +64,7 @@ export default class AtlasChart extends React.Component {
 
     const option = {
       titleOption,
+      backgroundColor: _.get(this.props, 'style.backgroundColor'),
       ...this.props.getOption({
         source,
         dimensions,
