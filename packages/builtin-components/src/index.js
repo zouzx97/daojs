@@ -54,11 +54,8 @@ import MiniProgress from './components/mini-progress';
 import Gauge from './components/gauge';
 import WaterWave from './components/water-wave';
 
-<<<<<<< HEAD
 import Comp1 from './components/comp1';
-=======
 import GridLayout from './components/layouts/grid-layout';
->>>>>>> origin/master
 
 export default {
   TimeSeries,
