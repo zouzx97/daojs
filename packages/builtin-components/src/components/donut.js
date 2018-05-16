@@ -42,20 +42,29 @@ class Donut extends React.Component {
       metricDimensions,
     });
     const axisDim = axisDimension;
-    const position = this.containerWidth > breakPoint ?
-      {
-        center: [toPercentString(bigLayoutCenterLeft), toPercentString(bigLayoutCenterTop)],
-      } :
-      {
-        center: [toPercentString(smallLayoutCenterLeft), toPercentString(smallLayoutCenterTop)],
+    const { hasLegend } = this.props;
+
+    let position;
+    if (hasLegend) {
+      position = this.containerWidth > breakPoint ?
+        {
+          center: [toPercentString(bigLayoutCenterLeft), toPercentString(bigLayoutCenterTop)],
+        } :
+        {
+          center: [toPercentString(smallLayoutCenterLeft), toPercentString(smallLayoutCenterTop)],
+        };
+    } else {
+      position = {
+        center: ['50%', '50%'],
       };
+    }
 
     return _.chain(metricDimensions)
       .map(metricDim => ({
         ...position,
         type: 'pie',
         name: metricDim,
-        radius: ['50%', '70%'],
+        radius: hasLegend ? ['50%', '70%'] : ['70%', '90%'],
         hoverOffset: 0,
         label: {
           normal: {
@@ -127,22 +136,34 @@ class Donut extends React.Component {
     const {
       title,
       subTitle,
+      titleStyle = {},
+      hasLegend,
     } = this.props;
     const {
       containerWidth: width,
       containerHeight: height,
     } = this;
-    const position = width > breakPoint ?
-      {
-        left: ((bigLayoutCenterLeft * width) -
+
+    let position;
+    if (hasLegend) {
+      position = width > breakPoint ?
+        {
+          left: ((bigLayoutCenterLeft * width) -
           (0.5 * _.min([bigLayoutCenterLeft * width, bigLayoutCenterTop * height])))
           + (0.02 * width),
-        top: 'middle',
-      } :
-      {
+          top: 'middle',
+        } :
+        {
+          left: 'center',
+          top: (smallLayoutCenterTop * height) - (0.02 * height),
+        };
+    } else {
+      position = {
         left: 'center',
-        top: (smallLayoutCenterTop * height) - (0.02 * height),
+        top: 'middle',
       };
+    }
+
 
     return {
       ...position,
@@ -150,6 +171,7 @@ class Donut extends React.Component {
       subtext: subTitle,
       textStyle: {
         fontSize: '18',
+        ...titleStyle,
       },
       subtextStyle: {
         fontSize: '14',

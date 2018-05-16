@@ -54,6 +54,7 @@ import MiniProgress from './components/mini-progress';
 import Gauge from './components/gauge';
 import WaterWave from './components/water-wave';
 
+import Comp1 from './components/comp1';
 import GridLayout from './components/layouts/grid-layout';
 
 export default {
@@ -111,5 +112,6 @@ export default {
   Gauge,
   WaterWave,
 
+  Comp1,
   GridLayout,
 };

@@ -1,5 +1,14 @@
 
 export default [
+  // cards
+  {
+    name: 'comp1',
+    key: 'comp1',
+    category: 'card',
+    description: '',
+  },
+
+  // charts
   {
     name: '堆栈柱状图',
     key: 'stack-bar',

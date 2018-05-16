@@ -61,7 +61,7 @@ export default class ComponentList extends React.Component {
           }}
         >
 
-          { renderCategory(Menu.SubMenu, { title: '布局', key: 'layout' }) }
+          { renderCategory(Menu.SubMenu, { title: '卡片', key: 'card' }) }
           { renderCategory(Menu.SubMenu, { title: '容器', key: 'container' }) }
           <Menu.SubMenu title="模块" key="component" >
             { renderCategory(Menu.ItemGroup, { title: '图表', key: 'chart' }) }
