@@ -42,7 +42,7 @@ export default class MiniArea extends React.Component {
       }),
     ];
 
-    const chartHeight = height + 43;
+    const chartHeight = height + 33;
 
     return (
       <div className={styles.miniChart} style={{ height }}>
