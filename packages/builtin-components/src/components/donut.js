@@ -199,10 +199,7 @@ class Donut extends React.Component {
           this.containerHeight = height;
           return (
             <AtlasChart
-              source={this.props.source}
-              axisDimensions={this.props.axisDimensions}
-              metricDimensions={this.props.metricDimensions}
-              title={this.props.title}
+              {...this.props}
               getOption={({
                 source,
                 axisDimension,

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactEcharts from 'echarts-for-react';
+import { ThemeContext } from '@daojs/contexts';
 
 export default class AtlasChart extends React.Component {
   static propTypes = {
@@ -26,6 +27,7 @@ export default class AtlasChart extends React.Component {
       axisDimensions,
       metricDimensions,
       title,
+      restColors,
     } = this.props;
     if (_.isNil(source)) {
       throw new Error('Chart source is nil');
@@ -77,13 +79,21 @@ export default class AtlasChart extends React.Component {
     };
 
     return (
-      <ReactEcharts
-        theme="theme1"
-        option={option}
-        notMerge={true} //eslint-disable-line
-        onEvents={this.props.onEvents}
-        {...this.props}
-      />
+      <ThemeContext.Consumer>
+        {
+          ({ primaryColor }) => (
+            <ReactEcharts
+              theme="theme1"
+              option={primaryColor ? _.defaults({
+                color: [primaryColor, ...restColors || []],
+              }, option) : option}
+              notMerge={true} //eslint-disable-line
+              onEvents={this.props.onEvents}
+              {...this.props}
+            />
+          )
+        }
+      </ThemeContext.Consumer>
     );
   }
 }
