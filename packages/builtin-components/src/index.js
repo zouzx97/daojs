@@ -54,6 +54,8 @@ import MiniProgress from './components/mini-progress';
 import Gauge from './components/gauge';
 import WaterWave from './components/water-wave';
 
+import Comp1 from './components/comp1';
+
 export default {
   TimeSeries,
   FormInput,
@@ -108,4 +110,6 @@ export default {
   MiniProgress,
   Gauge,
   WaterWave,
+
+  Comp1,
 };

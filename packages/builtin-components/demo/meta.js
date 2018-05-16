@@ -255,4 +255,11 @@ export default [
     description: '',
   },
   // End antd
+
+  {
+    name: 'comp1',
+    key: 'comp1',
+    category: 'layout',
+    description: '',
+  },
 ];

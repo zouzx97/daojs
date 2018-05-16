@@ -65,6 +65,7 @@ export default class BaseChart extends PureComponent {
     return {
       title: this.getTitleOption(),
       series: this.getSeriesOption(),
+      backgroundColor: _.get(this.props, 'style.backgroundColor'),
     };
   }
 
