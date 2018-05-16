@@ -248,5 +248,11 @@ export default [
     category: 'chart',
     description: '',
   },
+  {
+    name: '水波图',
+    key: 'water-wave',
+    category: 'chart',
+    description: '',
+  },
   // End antd
 ];
