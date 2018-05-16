@@ -57,7 +57,7 @@ export default function Comp3(props) {
                 <div style={{ flex: 1, color: 'rgba(255, 255, 255, 0.6)' }}>
                   { footer }
                 </div>
-                <div style={{ position: 'absolute', right: `-${titleSize}px`, bottom: `-${titleSize}px` }} >
+                <div style={{ position: 'absolute', right: `-${subTitleSize}px`, bottom: `-${subTitleSize}px` }} >
                   <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 5)}px`, color: 'rgba(255, 255, 255, 0.2)' }} />
                 </div>
               </div>
