@@ -242,5 +242,11 @@ export default [
     category: 'chart',
     description: '',
   },
+  {
+    name: '仪表盘',
+    key: 'gauge',
+    category: 'chart',
+    description: '',
+  },
   // End antd
 ];

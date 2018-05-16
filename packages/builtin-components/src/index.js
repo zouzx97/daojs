@@ -51,6 +51,7 @@ import BarList from './components/advanced/bar-list';
 import MiniArea from './components/mini-area';
 import MiniBar from './components/mini-bar';
 import MiniProgress from './components/mini-progress';
+import Gauge from './components/gauge';
 
 export default {
   TimeSeries,
@@ -104,4 +105,5 @@ export default {
   MiniArea,
   MiniBar,
   MiniProgress,
+  Gauge,
 };
