@@ -230,5 +230,11 @@ export default [
     category: 'chart',
     description: '',
   },
+  {
+    name: '迷你条形图',
+    key: 'mini-bar',
+    category: 'chart',
+    description: '',
+  },
   // End antd
 ];
