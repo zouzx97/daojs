@@ -51,7 +51,7 @@ export default class ComponentList extends React.Component {
         }
         <Menu
           mode="inline"
-          defaultOpenKeys={['layout', 'container', 'component']}
+          defaultOpenKeys={['card', 'container', 'component']}
           selectedKeys={[selectedCompName]}
           onClick={this.onClick}
           style={{

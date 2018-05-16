@@ -7,6 +7,12 @@ export default [
     category: 'card',
     description: '',
   },
+  {
+    name: 'comp2',
+    key: 'comp2',
+    category: 'card',
+    description: '',
+  },
 
   // charts
   {
