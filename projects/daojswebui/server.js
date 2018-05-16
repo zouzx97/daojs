@@ -37,6 +37,22 @@ router.post('/insight', koaBody(), async (ctx, next) => {
   await next();
 });
 
+router.post('/forward', koaBody(), async (ctx, next) => {
+  const { body } = ctx.request;
+
+  const method = body.method && body.method.toLowerCase();
+
+  if (method === 'get') {
+    const result = await rp.get({
+      uri: body.url,
+      json: true,
+    });
+    ctx.body = result;
+  }
+
+  await next();
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 app.use(serve('./'));

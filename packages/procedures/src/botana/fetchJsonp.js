@@ -1,13 +1,8 @@
-import jsonp from 'jsonp';
-import Promise from 'bluebird';
+import request from 'axios';
+import _ from 'lodash';
+import constants from './constants.yaml';
 
+const host = _.startsWith(location.host, 'localhost') ? constants.host : `${location.protocol}//${location.host}`;
 export default function fetchJsonp({ url }) {
-  return new Promise(resolve =>
-    jsonp(url, null, (err, data) => {
-      if (err) {
-        resolve({});
-      } else {
-        resolve(data);
-      }
-    }));
+  return request.post(`${host}/forward`, { method: 'get', url }).then(({ data }) => data).catch(() => []);
 }
