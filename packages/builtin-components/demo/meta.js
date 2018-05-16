@@ -214,6 +214,12 @@ export default [
     description: '',
   },
 
+  {
+    name: 'GridLayout',
+    key: 'grid-layout',
+    category: 'container',
+    description: '',
+  },
   // advanced
   {
     name: 'BarList',

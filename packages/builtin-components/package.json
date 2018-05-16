@@ -19,6 +19,7 @@
     "raw-loader": "^0.5.1"
   },
   "dependencies": {
+    "@daojs/contexts": "^0.0.1",
     "@daojs/registry": "^0.0.1",
     "antd": "^3.4.1",
     "bizcharts": "*",
