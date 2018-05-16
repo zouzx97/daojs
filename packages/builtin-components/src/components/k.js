@@ -4,7 +4,7 @@ import ReactEcharts from 'echarts-for-react';
 import _ from 'lodash';
 import { validate } from '../utils/validate';
 
-export default class BoxPlot extends PureComponent {
+export default class K extends PureComponent {
   static propTypes = {
     source: PropTypes.arrayOf(PropTypes.array).isRequired,
   }

@@ -21,7 +21,7 @@ import AdjustableContainer from './components/adjustable-container';
 // import LayoutDefault from './components/layout-default';
 
 import Bar from './components/bar';
-import BoxPlot from './components/box-plot';
+import K from './components/k';
 import Bullet from './components/bullet';
 import CircleTimeline from './components/circle-timeline';
 import Cumulative from './components/cumulative';
@@ -75,7 +75,7 @@ export default {
   // LayoutDefault,
 
   Bar,
-  BoxPlot,
+  K,
   Bullet,
   CircleTimeline,
   Compare,
