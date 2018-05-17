@@ -1,31 +1,5 @@
 
 export default [
-  // cards
-  {
-    name: 'comp1',
-    key: 'comp1',
-    category: 'card',
-    description: '',
-  },
-  {
-    name: 'comp2',
-    key: 'comp2',
-    category: 'card',
-    description: '',
-  },
-  {
-    name: 'comp3',
-    key: 'comp3',
-    category: 'card',
-    description: '',
-  },
-  {
-    name: 'comp4',
-    key: 'comp4',
-    category: 'card',
-    description: '',
-  },
-
   // charts
   {
     name: '堆栈柱状图',

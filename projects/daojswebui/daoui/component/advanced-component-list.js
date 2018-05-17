@@ -51,7 +51,7 @@ export default class ComponentList extends React.Component {
         }
         <Menu
           mode="inline"
-          defaultOpenKeys={['layout', 'container', 'component']}
+          defaultOpenKeys={['advanced', 'card']}
           selectedKeys={[selectedCompName]}
           onClick={this.onClick}
           style={{
@@ -61,6 +61,7 @@ export default class ComponentList extends React.Component {
           }}
         >
           { renderCategory(Menu.SubMenu, { title: '无代码进阶模块', key: 'advanced' }) }
+          { renderCategory(Menu.SubMenu, { title: '卡片', key: 'card' }) }
         </Menu>
       </React.Fragment>
     );

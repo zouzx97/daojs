@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@daojs/registry": "^0.0.1",
+    "@daojs/builtin-components": "*",
     "antd": "^3.4.1",
     "bluebird": "*",
     "echarts": "*",
