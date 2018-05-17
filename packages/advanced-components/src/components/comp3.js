@@ -27,10 +27,6 @@ export default function Comp3(props) {
           { ({ width, height }) => {
             const titleSize = _.round(width / 13);
             const subTitleSize = _.round(width / 20);
-            const radius = _.min([
-              (width / 2) - padding,
-              (height - (2 * padding)),
-            ]);
 
             return (
               <div style={{
@@ -40,7 +36,6 @@ export default function Comp3(props) {
                 display: 'flex',
                 flexDirection: 'column',
                 backgroundColor: primaryColor,
-                border: '2px solid #eee',
                 borderRadius: '5px',
                 position: 'relative',
               }}
