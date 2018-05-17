@@ -3,7 +3,7 @@ import _ from 'lodash';
 import ContainerDimensions from 'react-container-dimensions';
 import { ThemeContext } from '@daojs/contexts';
 import { Icon } from 'antd';
-import MiniProgress from './mini-progress';
+import MiniProgress from '@daojs/builtin-components';
 
 const padding = 15; // px
 
