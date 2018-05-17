@@ -19,6 +19,12 @@ export default [
     category: 'card',
     description: '',
   },
+  {
+    name: 'comp4',
+    key: 'comp4',
+    category: 'card',
+    description: '',
+  },
 
   // charts
   {
