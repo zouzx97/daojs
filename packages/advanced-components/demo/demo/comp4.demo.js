@@ -1,10 +1,8 @@
 import React from 'react';
-import { GridLayout } from '@daojs/builtin-components';
-import advancedComponents from '../../src/index';
+import builtinComponents from '@daojs/builtin-components';
+import { Comp4 } from '@daojs/advanced-components';
 
-const {
-  Comp4,
-} = advancedComponents;
+const { GridLayout } = builtinComponents;
 
 export default function Comp4Demo() {
   return (

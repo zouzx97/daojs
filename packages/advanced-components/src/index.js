@@ -4,7 +4,7 @@ import Comp2 from './components/comp2';
 import Comp3 from './components/comp3';
 import Comp4 from './components/comp4';
 
-export default {
+export {
   TextChartCard,
 
   Comp1,

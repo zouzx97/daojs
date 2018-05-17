@@ -2,7 +2,9 @@ import React from 'react';
 import _ from 'lodash';
 import ContainerDimensions from 'react-container-dimensions';
 import { ThemeContext } from '@daojs/contexts';
-import { Donut } from '@daojs/builtin-components';
+import buildinComponents from '@daojs/builtin-components';
+
+const { Donut } = buildinComponents;
 
 const padding = 15; // px
 
