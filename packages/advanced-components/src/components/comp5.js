@@ -6,7 +6,7 @@ import { Icon } from 'antd';
 
 const padding = 15; // px
 
-export default function Comp4(props) {
+export default function Comp5(props) {
   const {
     title,
     subTitle,
@@ -27,50 +27,51 @@ export default function Comp4(props) {
                 width: '100%',
                 height: '100%',
                 display: 'flex',
-                flexDirection: 'column',
+                flexDirection: 'row',
                 backgroundColor: primaryColor,
                 borderRadius: '5px',
+                padding: `${padding}px`,
               }}
               >
                 <div style={{
-                  flex: 3,
-                  padding: `${padding}px`,
-                  paddingBottom: 0,
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                >
+                  <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 3)}px`, color: 'rgba(255, 255, 255, 0.9)'  }} />
+                </div>
+                <div style={{
+                  flex: 2,
                   display: 'flex',
                   flexDirection: 'column',
                   position: 'relative',
+                  marginLeft: `${titleSize}px`,
                 }}
                 >
-                  <div style={{ flex: 1, color: 'rgba(255, 255, 255, 0.8)', fontSize: subTitleSize }}>
-                    { subTitle }
-                  </div>
                   <div style={{
-                    flex: 2,
+                    flex: 4,
                     display: 'flex',
-                    alignItems: 'center',
+                    alignItems: 'flex-end',
                     color: 'rgba(255, 255, 255, 1)',
                     fontSize: titleSize,
                   }}
                   >
                     { title }
                   </div>
-                  <div style={{ position: 'absolute', right: `${padding}px`, top: `${padding}px` }} >
-                    <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 3)}px`, color: 'rgba(191, 191, 191, 0.4)' }} />
+                  <div style={{
+                    flex: 3,
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    fontSize: subTitleSize,
+                    alignItems: 'flex-start',
+                  }}
+                  >
+                    { subTitle }
                   </div>
                 </div>
-                <div style={{
-                  flex: 1,
-                  padding: `5px ${padding}px`,
-                  textAlign: 'right',
-                  backgroundColor: 'rgb(127,127,127,0.8)',
-                  color: 'rgba(255, 255, 255, 0.8)',
-                  borderBottomLeftRadius: 'inherit',
-                  borderBottomRightRadius: 'inherit',
-                }}
-                >
-                  { footer }
-                </div>
               </div>
+
             );
           }}
         </ContainerDimensions>

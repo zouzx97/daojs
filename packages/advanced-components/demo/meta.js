@@ -32,4 +32,10 @@ export default [
     category: 'card',
     description: '',
   },
+  {
+    name: 'comp5',
+    key: 'comp5',
+    category: 'card',
+    description: '',
+  },
 ];

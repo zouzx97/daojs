@@ -3,6 +3,7 @@ import Comp1 from './components/comp1';
 import Comp2 from './components/comp2';
 import Comp3 from './components/comp3';
 import Comp4 from './components/comp4';
+import Comp5 from './components/comp5';
 
 export {
   TextChartCard,
@@ -11,4 +12,5 @@ export {
   Comp2,
   Comp3,
   Comp4,
+  Comp5,
 };
