@@ -24,12 +24,13 @@ export default function NColumnsLayout({
             style={{
               display: 'flex',
             }}
+            className={row === rowCount - 1 ? 'last-row' : null}
           >
             {children.slice(row * n, (row + 1) * n).map((child, index) => (
               <div
                 key={String(index)}
                 style={{
-                  flex: '1 1 auto',
+                  flexBasis: `${100 / n}%`,
                 }}
               >
                 <ThemeContext.Provider
