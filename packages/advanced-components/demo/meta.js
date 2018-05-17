@@ -1,7 +1,7 @@
 
 export default [
   {
-    name: '简易卡片1',
+    name: 'Mini线段图',
     key: 'text-chart-card',
     category: 'advanced',
     description: 'Show a text together with chart',
@@ -9,31 +9,31 @@ export default [
 
   // cards
   {
-    name: 'comp1',
+    name: '圆环图卡片',
     key: 'comp1',
     category: 'card',
     description: '',
   },
   {
-    name: 'comp2',
+    name: '静态图片卡片',
     key: 'comp2',
     category: 'card',
     description: '',
   },
   {
-    name: 'comp3',
+    name: '进度条卡片',
     key: 'comp3',
     category: 'card',
     description: '',
   },
   {
-    name: 'comp4',
+    name: '动态背景卡片',
     key: 'comp4',
     category: 'card',
     description: '',
   },
   {
-    name: 'comp5',
+    name: '静态图片动态背景卡片',
     key: 'comp5',
     category: 'card',
     description: '',

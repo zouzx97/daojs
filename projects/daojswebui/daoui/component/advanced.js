@@ -24,7 +24,7 @@ export default class Home extends Component {
     this.setState({
       comps,
       showResults: true,
-      selectedCompName: '简易卡片1',
+      selectedCompName: 'Mini线段图',
     });
   })
 
