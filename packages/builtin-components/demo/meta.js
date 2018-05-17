@@ -149,6 +149,14 @@ export default [
     description: 'Easily visualize your data using wordcloud chart.',
   },
   {
+    name: 'Mini Table',
+    key: 'mini-table',
+    category: 'chart',
+    description: 'Easily visualize your data using mini table.',
+  },
+
+  // slicer
+  {
     name: 'Form Field',
     key: 'form-field',
     category: 'slicer',

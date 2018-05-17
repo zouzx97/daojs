@@ -7,7 +7,7 @@ import styles from '../styles/antd.charts.less';
 export default class MiniBar extends React.Component {
   render() {
     const {
-      height, forceFit = true, color = '#1890FF', data = [],
+      height, forceFit = true, color = 'rgba(255,255,255,0.6)', data = [],
     } = this.props;
 
     const scale = {

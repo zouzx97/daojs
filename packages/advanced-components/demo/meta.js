@@ -38,4 +38,10 @@ export default [
     category: 'card',
     description: '',
   },
+  {
+    name: 'comp6',
+    key: 'comp6',
+    category: 'card',
+    description: '',
+  },
 ];

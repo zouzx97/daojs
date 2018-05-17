@@ -18,9 +18,11 @@ for (let i = 0; i < 20; i += 1) {
 
 export default function MiniAreaDemo() {
   return (
-    <MiniBar
-      height={100}
-      data={visitData}
-    />
+    <div style={{ background: '#15A9F4' }}>
+      <MiniBar
+        height={100}
+        data={visitData}
+      />
+    </div>
   );
 }
