@@ -4,8 +4,9 @@ import { ThemeContext } from '@daojs/contexts';
 import builtinComponents from '../../src/index';
 
 const {
-  GridLayout,
+  NColumnsLayout,
 } = builtinComponents;
+
 
 const data = _.range(20);
 
@@ -16,7 +17,7 @@ function Item(props) {
         <div
           style={{
             height: 100,
-            width: 100,
+            width: '100%',
             backgroundColor: primaryColor,
           }}
         />
@@ -25,12 +26,12 @@ function Item(props) {
   );
 }
 
-export default function GridLayoutDemo() {
+export default function NColumnsLayoutDemo() {
   return (
-    <GridLayout>
+    <NColumnsLayout n={3}>
       {data.map((item, index) => (
         <Item key={String(index)} item={item} />
       ))}
-    </GridLayout>
+    </NColumnsLayout>
   );
 }
