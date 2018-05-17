@@ -60,7 +60,8 @@ export default function Comp6(props) {
                   position: 'absolute',
                   top: '40%',
                   left: 0,
-                  width: '100%',
+                  width: `${width + 10}px`,
+                  marginLeft: '-5px',
                   height: '60%',
                 }}
                 >
