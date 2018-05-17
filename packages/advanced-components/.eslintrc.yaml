@@ -2,3 +2,9 @@
 # Refer to docs/javascript/README.md for detail
 extends:
   - daojs
+
+rules:
+  import/no-extraneous-dependencies:
+  - error
+  - devDependencies:
+    - "**/*.demo.js"

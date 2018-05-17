@@ -8,6 +8,8 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@daojs/advanced-components": "*",
+    "@daojs/ui": "*",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.4",
@@ -18,8 +20,9 @@
     "raw-loader": "^0.5.1"
   },
   "dependencies": {
-    "@daojs/registry": "^0.0.1",
     "@daojs/builtin-components": "*",
+    "@daojs/contexts": "*",
+    "@daojs/registry": "^0.0.1",
     "antd": "^3.4.1",
     "bluebird": "*",
     "echarts": "*",

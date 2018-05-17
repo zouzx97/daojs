@@ -1,10 +1,6 @@
 import React from 'react';
-import advancedComponents from '../../src/index';
 import composeAdvancedComponent from '@daojs/ui/src/compose-advanced-component';
-
-const {
-  TextChartCard,
-} = advancedComponents;
+import { TextChartCard } from '@daojs/advanced-components';
 
 
 export default function TextChartCardDemo() {
