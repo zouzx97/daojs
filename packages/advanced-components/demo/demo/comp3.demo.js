@@ -1,5 +1,5 @@
 import React from 'react';
-import builtinComponents from '../../src/index';
+import builtinComponents from '@daojs/builtin-components';
 
 const {
   Comp3,

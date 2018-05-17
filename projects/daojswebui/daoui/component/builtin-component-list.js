@@ -51,7 +51,7 @@ export default class ComponentList extends React.Component {
         }
         <Menu
           mode="inline"
-          defaultOpenKeys={['card', 'container', 'component']}
+          defaultOpenKeys={['container', 'component']}
           selectedKeys={[selectedCompName]}
           onClick={this.onClick}
           style={{
@@ -60,8 +60,6 @@ export default class ComponentList extends React.Component {
             overflowX: 'hidden',
           }}
         >
-
-          { renderCategory(Menu.SubMenu, { title: '卡片', key: 'card' }) }
           { renderCategory(Menu.SubMenu, { title: '容器', key: 'container' }) }
           <Menu.SubMenu title="模块" key="component" >
             { renderCategory(Menu.ItemGroup, { title: '图表', key: 'chart' }) }
