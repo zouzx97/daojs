@@ -55,6 +55,7 @@ import Gauge from './components/gauge';
 import WaterWave from './components/water-wave';
 
 import GridLayout from './components/layouts/grid-layout';
+import NColumnsLayout from './components/layouts/n-columns-layout';
 
 export default {
   TimeSeries,
@@ -112,4 +113,5 @@ export default {
   WaterWave,
 
   GridLayout,
+  NColumnsLayout,
 };

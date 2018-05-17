@@ -1,15 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '@daojs/contexts';
-
-const colorPanel = [
-  "#4472c4",
-  "#ed7d31",
-  "#ffc000",
-  "#5b9bd5",
-  "#70ad47",
-  "#a5a5a5",
-];
+import colorPanel from './color-panel';
 
 export default function GridLayout(props) {
   return (

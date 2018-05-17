@@ -216,8 +216,14 @@ export default [
   },
 
   {
-    name: 'GridLayout',
+    name: 'Grid Layout',
     key: 'grid-layout',
+    category: 'container',
+    description: '',
+  },
+  {
+    name: 'N Columns Layout',
+    key: 'n-columns-layout',
     category: 'container',
     description: '',
   },
