@@ -1,5 +1,6 @@
 import React from 'react';
 import { Chart, Axis, Tooltip, Geom } from 'bizcharts';
+import { ThemeContext } from '@daojs/contexts';
 import autoHeight from '../utils/auto-height';
 import styles from '../styles/antd.charts.less';
 
@@ -45,62 +46,67 @@ export default class MiniArea extends React.Component {
     const chartHeight = height + 30;
 
     return (
-      <div className={styles.miniChart} style={{ height }}>
-        <div className={styles.chartContent}>
-          {height > 0 && (
-            <Chart
-              animate={animate}
-              scale={scaleProps}
-              height={chartHeight}
-              forceFit={forceFit}
-              data={data}
-              padding={padding}
-            >
-              <Axis
-                key="axis-x"
-                name="x"
-                label={false}
-                line={false}
-                tickLine={false}
-                grid={false}
-                {...xAxis}
-              />
-              <Axis
-                key="axis-y"
-                name="y"
-                label={false}
-                line={false}
-                tickLine={false}
-                grid={false}
-                {...yAxis}
-              />
-              <Tooltip showTitle={false} crosshairs={false} />
-              <Geom
-                type="area"
-                position="x*y"
-                color={color}
-                tooltip={tooltip}
-                shape="smooth"
-                style={{
+      <ThemeContext.Consumer>
+        { ({ primaryColor }) => (
+          <div className={styles.miniChart} style={{ height }}>
+            <div className={styles.chartContent}>
+              {height > 0 && (
+              <Chart
+                animate={animate}
+                scale={scaleProps}
+                height={chartHeight}
+                forceFit={forceFit}
+                data={data}
+                padding={padding}
+                color={primaryColor}
+              >
+                <Axis
+                  key="axis-x"
+                  name="x"
+                  label={false}
+                  line={false}
+                  tickLine={false}
+                  grid={false}
+                  {...xAxis}
+                />
+                <Axis
+                  key="axis-y"
+                  name="y"
+                  label={false}
+                  line={false}
+                  tickLine={false}
+                  grid={false}
+                  {...yAxis}
+                />
+                <Tooltip showTitle={false} crosshairs={false} />
+                <Geom
+                  type="area"
+                  position="x*y"
+                  color={color}
+                  tooltip={tooltip}
+                  shape="smooth"
+                  style={{
                   fillOpacity: 1,
                 }}
-              />
-              {line ? (
-                <Geom
-                  type="line"
-                  position="x*y"
-                  shape="smooth"
-                  color={borderColor}
-                  size={borderWidth}
-                  tooltip={false}
                 />
+                {line ? (
+                  <Geom
+                    type="line"
+                    position="x*y"
+                    shape="smooth"
+                    color={borderColor}
+                    size={borderWidth}
+                    tooltip={false}
+                  />
               ) : (
                 <span style={{ display: 'none' }} />
               )}
-            </Chart>
+              </Chart>
           )}
-        </div>
-      </div>
+            </div>
+          </div>)
+        }
+      </ThemeContext.Consumer>
     );
   }
 }
