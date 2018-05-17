@@ -19,6 +19,31 @@ export default function Comp3Demo() {
       <div style={{ width: '300px', height: '130px', margin: '20px' }} >
         <Comp3 title="62" subTitle="Pending Orders" icon="star-o" percent={85} footer="Better than last week (85%)" />
       </div>
+      <div style={{ width: '300px', height: '130px', margin: '20px' }} >
+        <Comp3 title="12480" subTitle="Total Earning" icon="tag-o" percent={60} footer="Better than last week (60%)" />
+      </div>
+      <div style={{ width: '300px', height: '130px', margin: '20px' }} >
+        <Comp3 title="62" subTitle="Pending Orders" icon="star-o" percent={85} footer="Better than last week (85%)" />
+      </div>
+
+      <div style={{ width: '500px', height: '160px', margin: '20px' }} >
+        <Comp3 title="62" subTitle="Pending Orders" icon="star-o" percent={85} footer="Better than last week (85%)" />
+      </div>
+      <div style={{ width: '500px', height: '160px', margin: '20px' }} >
+        <Comp3 title="12480" subTitle="Total Earning" icon="tag-o" percent={60} footer="Better than last week (60%)" />
+      </div>
+      <div style={{ width: '500px', height: '160px', margin: '20px' }} >
+        <Comp3 title="62" subTitle="Pending Orders" icon="star-o" percent={85} footer="Better than last week (85%)" />
+      </div>
+      <div style={{ width: '500px', height: '160px', margin: '20px' }} >
+        <Comp3 title="12480" subTitle="Total Earning" icon="tag-o" percent={60} footer="Better than last week (60%)" />
+      </div>
+      <div style={{ width: '500px', height: '160px', margin: '20px' }} >
+        <Comp3 title="62" subTitle="Pending Orders" icon="star-o" percent={85} footer="Better than last week (85%)" />
+      </div>
+      <div style={{ width: '500px', height: '160px', margin: '20px' }} >
+        <Comp3 title="12480" subTitle="Total Earning" icon="tag-o" percent={60} footer="Better than last week (60%)" />
+      </div>
     </GridLayout>
   );
 }

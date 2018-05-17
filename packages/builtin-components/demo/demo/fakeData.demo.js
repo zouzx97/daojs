@@ -1,6 +1,21 @@
 
 const fakeData = {};
 
+fakeData.layout = [
+  {
+    i: '1', w: 3, h: 3, x: 0, y: 0,
+  },
+  {
+    i: '2', w: 3, h: 3, x: 3, y: 0,
+  },
+  {
+    i: '3', w: 3, h: 3, x: 6, y: 0,
+  },
+  {
+    i: '4', w: 4, h: 4, x: 0, y: 0,
+  },
+];
+
 fakeData.timeStampData = [{
   timestamp: '2018/1/1',
   value1: 10,

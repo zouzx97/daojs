@@ -29,7 +29,6 @@ export default function Comp1(props) {
       {({ primaryColor }) => (
         <ContainerDimensions>
           { ({ width, height }) => {
-            console.log(height);
             const chartHeight = height - (2 * padding);
             const titleSize = _.round(width / 13);
             const subTitleSize = _.round(width / 20);
@@ -90,8 +89,6 @@ export default function Comp1(props) {
         )
       }
     </ThemeContext.Consumer>
-
-
   );
 }
 
