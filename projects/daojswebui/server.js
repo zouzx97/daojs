@@ -48,6 +48,13 @@ router.post('/forward', koaBody(), async (ctx, next) => {
       json: true,
     });
     ctx.body = result;
+  } else if (method === 'post') {
+    const result = await rp.post({
+      uri: body.url,
+      json: true,
+      body: body.params,
+    });
+    ctx.body = result;
   }
 
   await next();
