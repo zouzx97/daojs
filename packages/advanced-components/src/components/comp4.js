@@ -15,68 +15,70 @@ export default function Comp4(props) {
   } = props;
 
   return (
-    <ThemeContext.Consumer>
-      {({ primaryColor }) => (
-        <ContainerDimensions>
-          { ({ width, height }) => {
-            const titleSize = _.round(width / 13);
-            const subTitleSize = _.round(width / 20);
+    <div className="card4">
+      <ThemeContext.Consumer>
+        {({ primaryColor }) => (
+          <ContainerDimensions>
+            { ({ width, height }) => {
+              const titleSize = _.round(width / 13);
+              const subTitleSize = _.round(width / 20);
 
-            return (
-              <div style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: primaryColor,
-                borderRadius: '5px',
-              }}
-              >
+              return (
                 <div style={{
-                  flex: 3,
-                  padding: `${padding}px`,
-                  paddingBottom: 0,
+                  width: '100%',
+                  height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  position: 'relative',
+                  backgroundColor: primaryColor,
+                  borderRadius: '5px',
                 }}
                 >
-                  <div style={{ flex: 1, color: 'rgba(255, 255, 255, 0.8)', fontSize: subTitleSize }}>
-                    { subTitle }
-                  </div>
                   <div style={{
-                    flex: 2,
+                    flex: 3,
+                    padding: `${padding}px`,
+                    paddingBottom: 0,
                     display: 'flex',
-                    alignItems: 'center',
-                    color: 'rgba(255, 255, 255, 1)',
-                    fontSize: titleSize,
+                    flexDirection: 'column',
+                    position: 'relative',
                   }}
                   >
-                    { title }
+                    <div style={{ flex: 1, color: 'rgba(255, 255, 255, 0.8)', fontSize: subTitleSize }}>
+                      { subTitle }
+                    </div>
+                    <div style={{
+                      flex: 2,
+                      display: 'flex',
+                      alignItems: 'center',
+                      color: 'rgba(255, 255, 255, 1)',
+                      fontSize: titleSize,
+                    }}
+                    >
+                      { title }
+                    </div>
+                    <div style={{ position: 'absolute', right: `${padding}px`, top: `${padding}px` }} >
+                      <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 3)}px`, color: 'rgba(191, 191, 191, 0.4)' }} />
+                    </div>
                   </div>
-                  <div style={{ position: 'absolute', right: `${padding}px`, top: `${padding}px` }} >
-                    <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 3)}px`, color: 'rgba(191, 191, 191, 0.4)' }} />
+                  <div style={{
+                    flex: 1,
+                    padding: `5px ${padding}px`,
+                    textAlign: 'right',
+                    backgroundColor: 'rgb(127,127,127,0.8)',
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    borderBottomLeftRadius: 'inherit',
+                    borderBottomRightRadius: 'inherit',
+                  }}
+                  >
+                    { footer }
                   </div>
                 </div>
-                <div style={{
-                  flex: 1,
-                  padding: `5px ${padding}px`,
-                  textAlign: 'right',
-                  backgroundColor: 'rgb(127,127,127,0.8)',
-                  color: 'rgba(255, 255, 255, 0.8)',
-                  borderBottomLeftRadius: 'inherit',
-                  borderBottomRightRadius: 'inherit',
-                }}
-                >
-                  { footer }
-                </div>
-              </div>
-            );
-          }}
-        </ContainerDimensions>
-        )
-      }
-    </ThemeContext.Consumer>
+              );
+            }}
+          </ContainerDimensions>
+          )
+        }
+      </ThemeContext.Consumer>
+    </div>
   );
 }
 

@@ -24,4 +24,119 @@ body > #container {
     display: flex;
     flex-direction: column;
   }
+  .card1 {
+    width: 250px !important;
+    height: 120px !important;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  .card1:nth-child(5),
+  .card1:nth-child(6),
+  .card1:nth-child(7) {
+    width: 300px !important;
+    height: 130px !important;
+  }
+  .card1:nth-child(8),
+  .card1:nth-child(9) {
+    width: 500px !important;
+    height: 160px !important;
+  }
+  .card1:nth-child(10) {
+    width: 800px !important;
+    height: 220px !important;
+  }
+  .card1:last-child {
+    margin-bottom: 20px;
+  }
+
+  .card2 {
+    width: 300px !important;
+    height: 130px !important;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  .card2:nth-child(7),
+  .card2:nth-child(8), {
+    width: 500px !important;
+    height: 160px !important;
+  }
+  .card2:last-child {
+    margin-bottom: 20px;
+  }
+
+  .card3 {
+    width: 300px !important;
+    height: 130px !important;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  .card3:nth-child(7),
+  .card3:nth-child(8),
+  .card3:nth-child(9),
+  .card3:nth-child(10),
+  .card3:nth-child(11),
+  .card3:nth-child(12) {
+    width: 500px !important;
+    height: 160px !important;
+  }
+  .card3:last-child {
+    margin-bottom: 20px;
+  }
+
+  .card4 {
+    width: 300px !important;
+    height: 130px !important;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  .card4:nth-child(7),
+  .card4:nth-child(8),
+  .card4:nth-child(9),
+  .card4:nth-child(10),
+  .card4:nth-child(11),
+  .card4:nth-child(12) {
+    width: 500px !important;
+    height: 160px !important;
+  }
+  .card4:last-child {
+    margin-bottom: 20px;
+  }
+
+  .card5 {
+    width: 300px !important;
+    height: 130px !important;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  .card5:nth-child(7),
+  .card5:nth-child(8),
+  .card5:nth-child(9),
+  .card5:nth-child(10),
+  .card5:nth-child(11),
+  .card5:nth-child(12) {
+    width: 500px !important;
+    height: 160px !important;
+  }
+  .card5:last-child {
+    margin-bottom: 20px;
+  }
+
+  .card6 {
+    width: 300px !important;
+    height: 200px !important;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  .card6:nth-child(7),
+  .card6:nth-child(8),
+  .card6:nth-child(9),
+  .card6:nth-child(10),
+  .card6:nth-child(11),
+  .card6:nth-child(12) {
+    width: 500px !important;
+    height: 333px !important;
+  }
+  .card6:last-child {
+    margin-bottom: 20px;
+  }
 }
