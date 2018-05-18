@@ -44,4 +44,10 @@ export default [
     category: 'card',
     description: '',
   },
+  {
+    name: '图表卡片',
+    key: 'comp7',
+    category: 'card',
+    description: '',
+  },
 ];
