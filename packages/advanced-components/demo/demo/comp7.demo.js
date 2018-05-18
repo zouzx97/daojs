@@ -19,7 +19,7 @@ for (let i = 0; i < 20; i += 1) {
 }
 
 const Yuan = ({ children }) => (
-  <span dangerouslySetInnerHTML={{ __html: `Y${children}` }} /> /* eslint-disable-line react/no-danger */
+  <span dangerouslySetInnerHTML={{ __html: `￥${children}` }} /> /* eslint-disable-line react/no-danger */
 );
 
 const Trend = ({ flag, children, ...rest }) => {
@@ -54,7 +54,7 @@ export default function Comp7Demo() {
               <Icon type="info-circle-o" />
             </Tooltip>
               }
-          total={() => <Yuan>126560</Yuan>}
+          total={() => <Yuan>126,560</Yuan>}
           footer={<Field label="日均销售额" value="￥12,435" />}
           contentHeight={46}
         >
