@@ -45,14 +45,8 @@ export default [
     description: '',
   },
   {
-    name: 'comp7',
+    name: '图表卡片',
     key: 'comp7',
-    category: 'card',
-    description: '',
-  },
-  {
-    name: 'comp8',
-    key: 'comp8',
     category: 'card',
     description: '',
   },
