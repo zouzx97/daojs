@@ -33,9 +33,16 @@ export default function Weather(props) {
   }];
 
   const data = _.get(props, 'results[0].daily');
-
+  const location = _.get(props, 'results[0].location.name');
+  const days = {
+    1: '一',
+    2: '两',
+    3: '三',
+  };
+  const day = days[_.size(data)] || _.size(data);
   return (
     <Table
+      title={() => `${location}未来${day}天天气预报`}
       pagination={false}
       bordered={true}
       columns={columns}
