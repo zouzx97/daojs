@@ -39,7 +39,7 @@ export default [
     description: '',
   },
   {
-    name: 'comp6',
+    name: '方形卡片',
     key: 'comp6',
     category: 'card',
     description: '',

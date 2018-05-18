@@ -15,10 +15,11 @@ export default function Comp6(props) {
   } = props;
 
   return (
-    <ThemeContext.Consumer>
-      {({ primaryColor }) => (
-        <ContainerDimensions>
-          { ({ width, height }) => {
+    <div className="card6">
+      <ThemeContext.Consumer>
+        {({ primaryColor }) => (
+          <ContainerDimensions>
+            { ({ width, height }) => {
             const baseSize = _.round(width / 20);
 
             return (
@@ -70,10 +71,11 @@ export default function Comp6(props) {
               </div>
             );
           }}
-        </ContainerDimensions>
+          </ContainerDimensions>
         )
       }
-    </ThemeContext.Consumer>
+      </ThemeContext.Consumer>
+    </div>
   );
 }
 
