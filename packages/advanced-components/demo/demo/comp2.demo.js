@@ -14,6 +14,7 @@ export default function Comp2Demo() {
         <Comp2 title="62" subTitle="Pending Orders" icon="star-o" />
         <Comp2 title="2562" subTitle="Total Sales today" icon="share-alt" />
         <Comp2 title="5685" subTitle="Daily visitors" icon="shopping-cart" />
+
         <Comp2 title="2562" subTitle="Total Sales today" icon="share-alt" />
         <Comp2 title="5685" subTitle="Daily visitors" icon="shopping-cart" />
       </GridLayout>

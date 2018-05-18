@@ -28,18 +28,10 @@ for (let i = 0; i < 20; i += 1) {
 export default function Comp6Demo() {
   return (
     <GridLayout>
-      <div style={{ width: '300px', height: '200px', margin: '20px' }} >
-        <Comp6 title="HDD Usage" icon="share-alt" body={table} chart={<MiniArea data={visitData} />} />
-      </div>
-      <div style={{ width: '300px', height: '200px', margin: '20px' }} >
-        <Comp6 title="Earning" body={table} chart={<MiniBar data={visitData} />} />
-      </div>
-      <div style={{ width: '300px', height: '200px', margin: '20px' }} >
-        <Comp6 title="Sales" icon="tag-o" body={table} chart={<MiniBar data={visitData} />} />
-      </div>
-      <div style={{ width: '300px', height: '200px', margin: '20px' }} >
-        <Comp6 title="Task progress" body={table} chart={<MiniArea data={visitData} />} />
-      </div>
+      <Comp6 title="HDD Usage" icon="share-alt" body={table} chart={<MiniArea data={visitData} />} />
+      <Comp6 title="Earning" body={table} chart={<MiniBar data={visitData} />} />
+      <Comp6 title="Sales" icon="tag-o" body={table} chart={<MiniBar data={visitData} />} />
+      <Comp6 title="Task progress" body={table} chart={<MiniArea data={visitData} />} />
     </GridLayout>
   );
 }

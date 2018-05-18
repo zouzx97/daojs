@@ -44,6 +44,8 @@ body > #container {
   .card1:nth-child(10) {
     width: 800px !important;
     height: 220px !important;
+  }
+  .card1:last-child {
     margin-bottom: 20px;
   }
 
@@ -58,7 +60,7 @@ body > #container {
     width: 500px !important;
     height: 160px !important;
   }
-  .card2:nth-child(8), {
+  .card2:last-child {
     margin-bottom: 20px;
   }
 
@@ -77,7 +79,7 @@ body > #container {
     width: 500px !important;
     height: 160px !important;
   }
-  .card3:nth-child(12) {
+  .card3:last-child {
     margin-bottom: 20px;
   }
 
@@ -96,7 +98,7 @@ body > #container {
     width: 500px !important;
     height: 160px !important;
   }
-  .card4:nth-child(12) {
+  .card4:last-child {
     margin-bottom: 20px;
   }
 
@@ -115,7 +117,17 @@ body > #container {
     width: 500px !important;
     height: 160px !important;
   }
-  .card5:nth-child(12) {
+  .card5:last-child {
+    margin-bottom: 20px;
+  }
+
+  .card6 {
+    width: 300px !important;
+    height: 200px !important;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  .card6:last-child {
     margin-bottom: 20px;
   }
 }
