@@ -15,10 +15,11 @@ export default function Comp5(props) {
   } = props;
 
   return (
-    <ThemeContext.Consumer>
-      {({ primaryColor }) => (
-        <ContainerDimensions>
-          { ({ width, height }) => {
+    <div className="card5">
+      <ThemeContext.Consumer>
+        {({ primaryColor }) => (
+          <ContainerDimensions>
+            { ({ width, height }) => {
             const titleSize = _.round(width / 13);
             const subTitleSize = _.round(width / 20);
 
@@ -40,7 +41,7 @@ export default function Comp5(props) {
                   justifyContent: 'center',
                 }}
                 >
-                  <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 3)}px`, color: 'rgba(255, 255, 255, 0.9)'  }} />
+                  <Icon type={icon} style={{ fontSize: `${_.round(titleSize * 3)}px`, color: 'rgba(255, 255, 255, 0.9)' }} />
                 </div>
                 <div style={{
                   flex: 2,
@@ -74,10 +75,11 @@ export default function Comp5(props) {
 
             );
           }}
-        </ContainerDimensions>
+          </ContainerDimensions>
         )
       }
-    </ThemeContext.Consumer>
+      </ThemeContext.Consumer>
+    </div>
   );
 }
 

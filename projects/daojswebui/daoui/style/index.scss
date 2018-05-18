@@ -80,4 +80,42 @@ body > #container {
   .card3:nth-child(12) {
     margin-bottom: 20px;
   }
+
+  .card4 {
+    width: 300px !important;
+    height: 130px !important;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  .card4:nth-child(7),
+  .card4:nth-child(8),
+  .card4:nth-child(9),
+  .card4:nth-child(10),
+  .card4:nth-child(11),
+  .card4:nth-child(12) {
+    width: 500px !important;
+    height: 160px !important;
+  }
+  .card4:nth-child(12) {
+    margin-bottom: 20px;
+  }
+
+  .card5 {
+    width: 300px !important;
+    height: 130px !important;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  .card5:nth-child(7),
+  .card5:nth-child(8),
+  .card5:nth-child(9),
+  .card5:nth-child(10),
+  .card5:nth-child(11),
+  .card5:nth-child(12) {
+    width: 500px !important;
+    height: 160px !important;
+  }
+  .card5:nth-child(12) {
+    margin-bottom: 20px;
+  }
 }

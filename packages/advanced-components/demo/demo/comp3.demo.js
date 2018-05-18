@@ -13,6 +13,7 @@ export default function Comp3Demo() {
       <Comp3 title="62" subTitle="Pending Orders" icon="star-o" percent={85} footer="Better than last week (85%)" />
       <Comp3 title="12480" subTitle="Total Earning" icon="tag-o" percent={60} footer="Better than last week (60%)" />
       <Comp3 title="62" subTitle="Pending Orders" icon="star-o" percent={85} footer="Better than last week (85%)" />
+
       <Comp3 title="62" subTitle="Pending Orders" icon="star-o" percent={85} footer="Better than last week (85%)" />
       <Comp3 title="12480" subTitle="Total Earning" icon="tag-o" percent={60} footer="Better than last week (60%)" />
       <Comp3 title="62" subTitle="Pending Orders" icon="star-o" percent={85} footer="Better than last week (85%)" />
