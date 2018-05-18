@@ -32,6 +32,15 @@ export default function Comp6Demo() {
       <Comp6 title="Earning" body={table} chart={<MiniBar data={visitData} />} />
       <Comp6 title="Sales" icon="tag-o" body={table} chart={<MiniBar data={visitData} />} />
       <Comp6 title="Task progress" body={table} chart={<MiniArea data={visitData} />} />
+      <Comp6 title="Offers" body={table} chart={<MiniBar data={visitData} />} />
+      <Comp6 title="Clicks" body={table} chart={<MiniArea data={visitData} />} />
+
+      <Comp6 title="HDD Usage" icon="share-alt" body={table} chart={<MiniArea data={visitData} />} />
+      <Comp6 title="Earning" body={table} chart={<MiniBar data={visitData} />} />
+      <Comp6 title="Sales" icon="tag-o" body={table} chart={<MiniBar data={visitData} />} />
+      <Comp6 title="Task progress" body={table} chart={<MiniArea data={visitData} />} />
+      <Comp6 title="Offers" body={table} chart={<MiniBar data={visitData} />} />
+      <Comp6 title="Clicks" body={table} chart={<MiniArea data={visitData} />} />
     </GridLayout>
   );
 }
