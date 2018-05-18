@@ -5,7 +5,7 @@ import { Icon, Menu } from 'antd';
 
 function renderCategoryFactory(comps) {
   return function renderCategory(Component, options) {
-    const compsToRender = _.filter(comps, comp => _.includes(comp.category, options.key));
+    const compsToRender = _.filter(comps, comp => comp.category === options.key);
 
     return (
       <Component title={options.title} key={options.key}>
@@ -41,7 +41,11 @@ export default class ComponentList extends React.Component {
       selectedCompName,
       showResults,
     } = this.props;
-    const total = comps.length;
+
+    const supportedKeys = ['advanced', 'card'];
+    const compsToRender = _.filter(comps, comp => _.includes(supportedKeys, comp.category));
+
+    const total = compsToRender.length;
     const renderCategory = renderCategoryFactory(comps);
 
     return (
