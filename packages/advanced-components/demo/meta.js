@@ -44,4 +44,16 @@ export default [
     category: 'card',
     description: '',
   },
+  {
+    name: 'comp7',
+    key: 'comp7',
+    category: 'card',
+    description: '',
+  },
+  {
+    name: 'comp8',
+    key: 'comp8',
+    category: 'card',
+    description: '',
+  },
 ];
