@@ -1,34 +1,26 @@
 import _ from 'lodash';
-import BaseChart from './base';
+import { withProps } from 'recompose';
 
-export default class StackBar extends BaseChart {
-  getAxisOption() {
-    return {
-      data: this.getAxisData(),
+import AtlasChart from './atlas-chart';
+
+const enhance = withProps({
+  getOption: ({ source, axisData, metricDimensions }) => ({
+    legend: {},
+    tooltip: {},
+    yAxis: {},
+    xAxis: {
+      data: axisData,
       type: 'category',
-    };
-  }
-
-  getSeriesOption() {
-    const source = this.getSource();
-    return _.chain(this.getMetricDimensions())
+    },
+    series: _.chain(metricDimensions)
       .map(dim => ({
         type: 'bar',
         name: dim,
         data: _.map(source, row => row[dim]),
         stack: 'total',
       }))
-      .value();
-  }
+      .value(),
+  }),
+});
 
-  getOption() {
-    return {
-      legend: {},
-      tooltip: {},
-      yAxis: {},
-      xAxis: this.getAxisOption(),
-      ...super.getOption(),
-    };
-  }
-}
-
+export default enhance(AtlasChart);
