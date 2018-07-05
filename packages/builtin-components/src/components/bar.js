@@ -1,35 +1,48 @@
 import _ from 'lodash';
-import React from 'react';
+import { compose, withProps, setPropTypes, defaultProps } from 'recompose';
+import PropTypes from 'prop-types';
+
 import AtlasChart from './atlas-chart';
 
-export default function Bar(props) {
-  return (
-    <AtlasChart
-      {...props}
-      getOption={({
-        source,
-        metricDimensions,
-        axisOption,
-      }) => {
-        const argumentAxis = {
-          boundaryGap: true,
-          ...axisOption,
-        };
+const getOptionDecorator = props => ({
+  source,
+  metricDimensions,
+  axisOption,
+}) => {
+  const argumentAxis = {
+    boundaryGap: true,
+    ...axisOption,
+  };
 
-        const dependentAxis = {};
+  const dependentAxis = {};
 
-        return {
-          legend: {},
-          tooltip: {},
-          yAxis: props.isHorizontal ? argumentAxis : dependentAxis,
-          series: _.map(metricDimensions, dim => ({
-            type: 'bar',
-            name: _.get(props.key2name, dim, dim),
-            data: _.map(source, row => row[dim]),
-          })),
-          xAxis: props.isHorizontal ? dependentAxis : argumentAxis,
-        };
-      }}
-    />
-  );
-}
+  return {
+    legend: {},
+    tooltip: {},
+    yAxis: props.isHorizontal ? argumentAxis : dependentAxis,
+    series: _.map(metricDimensions, dim => ({
+      type: 'bar',
+      name: _.get(props.key2name, dim, dim),
+      data: _.map(source, row => row[dim]),
+    })),
+    xAxis: props.isHorizontal ? dependentAxis : argumentAxis,
+  };
+};
+
+const propsTransformer = props => ({
+  getOption: getOptionDecorator(props),
+});
+
+const enhance = compose(
+  withProps(propsTransformer),
+  setPropTypes({
+    key2name: PropTypes.func,
+    isHorizontal: PropTypes.bool,
+  }),
+  defaultProps({
+    key2name: _.identity,
+    isHorizontal: true,
+  }),
+);
+
+export default enhance(AtlasChart);
