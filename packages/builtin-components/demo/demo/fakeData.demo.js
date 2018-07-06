@@ -17,18 +17,51 @@ fakeData.layout = [
 ];
 
 fakeData.waterFall = [
-  ['time', 'value'],
-  ['1', 600],
-  ['2', 305],
-  ['3', 330],
-  ['4', -108],
-  ['5', -154],
-  ['6', 135],
-  ['7', 178],
-  ['8', 286],
-  ['9', -119],
-  ['10', -361],
-  ['11', -463],
+  {
+    time: '1',
+    value: 600,
+  },
+  {
+    time: '2',
+    value: 305,
+  },
+  {
+    time: '3',
+    value: 330,
+  },
+  {
+    time: '4',
+    value: -108,
+  },
+  {
+    time: '5',
+    value: -154,
+  },
+  {
+    time: '6',
+    value: 135,
+  },
+  {
+    time: '7',
+    value: 178,
+  },
+  {
+    time: '8',
+    value: 286,
+  },
+  {
+    time: '9',
+    value: -119,
+  },
+  {
+    time: '10',
+    value: -361,
+  },
+  {
+    time: '11',
+    value: -463,
+  },
+
 ];
 
 fakeData.spineData = [
