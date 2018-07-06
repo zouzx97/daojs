@@ -6,14 +6,16 @@ import { validate } from '../utils';
 
 export default class Waterfall extends PureComponent {
   static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array).isRequired,
+    source: PropTypes.arrayOf(PropTypes.shape({
+      time: PropTypes.string,
+      value: PropTypes.number,
+    })).isRequired,
   }
 
   render() {
     const { source } = this.props;
     validate(source);
 
-    const columns = _.zip(...source);
     const option = {
       tooltip: {
         trigger: 'axis',
@@ -34,7 +36,7 @@ export default class Waterfall extends PureComponent {
         {
           type: 'category',
           splitLine: { show: false },
-          data: _.chain(columns).first().slice(1).value(),
+          data: _.chain(source).map('time').value,
         },
       ],
       yAxis: [
@@ -43,28 +45,24 @@ export default class Waterfall extends PureComponent {
         },
       ],
       series: (() => {
-        const assistant = [];
-        const positive = [];
-        const negtive = [];
-        //               = tot[i-1]        (num >= 0)
-        // assistant[i]
-        //               = tot[i-1] + num  (num < 0)
-        _.chain(columns)
-          .get(1)
-          .slice(1)
-          .reduce((tot, num) => {
-            if (num >= 0) {
-              positive.push(num);
-              negtive.push('-');
-              assistant.push(tot);
-            } else {
-              positive.push('-');
-              negtive.push(0 - num);
-              assistant.push(tot + num);
-            }
-            return tot + num;
-          }, 0)
-          .value();
+        const data = _.reduce(source, (memo, cur) => (cur.value >= 0 ? {
+          positive: [...memo.positive, cur.value],
+          negative: [...memo.negative, '-'],
+          assistant: [...memo.assistant, memo.sum],
+          sum: memo.sum + cur.value,
+        } : {
+          positive: [...memo.positive, '-'],
+          negative: [...memo.negative, -cur.value],
+          assistant: [...memo.assistant, memo.sum + cur.value],
+          sum: memo.sum + cur.value,
+        }), {
+          assistant: [],
+          positive: [],
+          negative: [],
+          sum: 0,
+        });
+
+        console.log(data);
 
         return [
           {
@@ -81,7 +79,7 @@ export default class Waterfall extends PureComponent {
                 color: 'rgba(0,0,0,0)',
               },
             },
-            data: assistant,
+            data: data.assistant,
           },
           {
             name: 'positive',
@@ -95,7 +93,7 @@ export default class Waterfall extends PureComponent {
                 },
               },
             },
-            data: positive,
+            data: data.positive,
           },
           {
             name: 'negtive',
@@ -109,12 +107,11 @@ export default class Waterfall extends PureComponent {
                 },
               },
             },
-            data: negtive,
+            data: data.negative,
           },
         ];
       })(),
     };
-
 
     return (
       <ReactEcharts option={option} {...this.props} />
