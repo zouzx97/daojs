@@ -116,4 +116,6 @@ const enhance = compose(
   withProps(propsTranformer),
 );
 
-export default enhance(ReactEcharts);
+const Waterfall = enhance(ReactEcharts);
+
+export default Waterfall;
