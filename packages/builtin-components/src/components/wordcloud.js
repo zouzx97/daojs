@@ -1,19 +1,26 @@
-import _ from 'lodash';
-import React, { PureComponent } from 'react';
+
 import PropTypes from 'prop-types';
 import ReactEcharts from 'echarts-for-react';
 import 'echarts-wordcloud';
-import { validate } from '../utils';
+import {
+  compose,
+  withProps,
+  setPropTypes,
+  defaultProps,
+} from 'recompose';
 
-export default class WordCloud extends PureComponent {
-  static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array).isRequired,
-  }
+const propTypes = {
+  source: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    value: PropTypes.number,
+  })).isRequired,
+};
 
-  render() {
-    const { source } = this.props;
-    validate(source);
-    const option = {
+const enhance = compose(
+  setPropTypes(propTypes),
+  defaultProps({ source: [] }),
+  withProps(({ source }) => ({
+    option: {
       tooltip: {
         show: false,
       },
@@ -23,10 +30,7 @@ export default class WordCloud extends PureComponent {
           type: 'wordCloud',
           shape: 'circle',
           // word cloud chart does not support dataset
-          data: _.chain(source).slice(1).map(row => ({
-            name: row[0],
-            value: row[1],
-          })).value(),
+          data: source,
           left: 'center',
           top: 'top',
           width: '100%',
@@ -55,10 +59,8 @@ export default class WordCloud extends PureComponent {
           },
         },
       ],
-    };
+    },
+  })),
+);
 
-    return (
-      <ReactEcharts option={option} />
-    );
-  }
-}
+export default enhance(ReactEcharts);

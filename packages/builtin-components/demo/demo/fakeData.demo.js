@@ -76,104 +76,394 @@ fakeData.spineData = [
 ];
 
 fakeData.wordCloud = [
-  ['name', 'value'],
-  ['life', 115835],
-  ['photography', 78562],
-  ['steemit', 62453],
-  ['blog', 45831],
-  ['art', 38690],
-  ['bitcoin', 32495],
-  ['nature', 29032],
-  ['cryptocurrency', 27722],
-  ['story', 27675],
-  ['travel', 25752],
-  ['busy', 24354],
-  ['news', 23617],
-  ['steem', 22315],
-  ['funny', 21568],
-  ['writing', 20074],
-  ['introduceyourself', 19844],
-  ['indonesia', 18490],
-  ['food', 17766],
-  ['photo', 16985],
-  ['spanish', 16761],
-  ['crypto', 16632],
-  ['aceh', 16433],
-  ['money', 16345],
-  ['love', 14900],
-  ['dtube', 14315],
-  ['kr', 13415],
-  ['new', 12226],
-  ['meme', 11889],
-  ['video', 11603],
-  ['music', 11310],
-  ['blockchain', 10737],
-  ['cervantes', 9595],
-  ['health', 9575],
-  ['fun', 8545],
-  ['entertainment', 8464],
-  ['poetry', 7916],
-  ['steepshot', 7629],
-  ['cn', 7616],
-  ['nigeria', 7558],
-  ['technology', 7499],
-  ['dmania', 7459],
-  ['science', 7434],
-  ['philippines', 7191],
-  ['contest', 6367],
-  ['politics', 6231],
-  ['colorchallenge', 6112],
-  ['kr-newbie', 5960],
-  ['drawing', 5716],
-  ['history', 5567],
-  ['motivation', 4845],
-  ['utopian-io', 4722],
-  ['animals', 4627],
-  ['venezuela', 4606],
-  ['esteem', 4542],
-  ['gaming', 4462],
-  ['ethereum', 4392],
-  ['education', 4267],
-  ['beauty', 4147],
-  ['tr', 4146],
-  ['animal', 4051],
-  ['stach', 3909],
-  ['deutsch', 3884],
-  ['philosophy', 3859],
-  ['sport', 3837],
-  ['whalepower', 3824],
-  ['creativity', 3699],
-  ['community', 3672],
-  ['dlive', 3647],
-  ['sports', 3614],
-  ['promo-steem', 3500],
-  ['trading', 3482],
-  ['world', 3414],
-  ['untalented', 3368],
-  ['introducemyself', 3346],
-  ['ico', 3345],
-  ['youtube', 3307],
-  ['sevendaybnwchallenge', 3198],
-  ['family', 3176],
-  ['natural', 3163],
-  ['flower', 3097],
-  ['ksi', 3091],
-  ['india', 2985],
-  ['photofeed', 2964],
-  ['btc', 2959],
-  ['poem', 2925],
-  ['adventure', 2911],
-  ['steemph', 2892],
-  ['smartphonephotography', 2843],
-  ['vincentb', 2843],
-  ['inspiration', 2783],
-  ['painting', 2776],
-  ['castellano', 2760],
-  ['fiction', 2731],
-  ['business', 2643],
-  ['religion', 2634],
-  ['freedom', 2548],
-  ['humor', 2492],
+  {
+    "name": "life",
+    "value": 115835
+  },
+  {
+    "name": "photography",
+    "value": 78562
+  },
+  {
+    "name": "steemit",
+    "value": 62453
+  },
+  {
+    "name": "blog",
+    "value": 45831
+  },
+  {
+    "name": "art",
+    "value": 38690
+  },
+  {
+    "name": "bitcoin",
+    "value": 32495
+  },
+  {
+    "name": "nature",
+    "value": 29032
+  },
+  {
+    "name": "cryptocurrency",
+    "value": 27722
+  },
+  {
+    "name": "story",
+    "value": 27675
+  },
+  {
+    "name": "travel",
+    "value": 25752
+  },
+  {
+    "name": "busy",
+    "value": 24354
+  },
+  {
+    "name": "news",
+    "value": 23617
+  },
+  {
+    "name": "steem",
+    "value": 22315
+  },
+  {
+    "name": "funny",
+    "value": 21568
+  },
+  {
+    "name": "writing",
+    "value": 20074
+  },
+  {
+    "name": "introduceyourself",
+    "value": 19844
+  },
+  {
+    "name": "indonesia",
+    "value": 18490
+  },
+  {
+    "name": "food",
+    "value": 17766
+  },
+  {
+    "name": "photo",
+    "value": 16985
+  },
+  {
+    "name": "spanish",
+    "value": 16761
+  },
+  {
+    "name": "crypto",
+    "value": 16632
+  },
+  {
+    "name": "aceh",
+    "value": 16433
+  },
+  {
+    "name": "money",
+    "value": 16345
+  },
+  {
+    "name": "love",
+    "value": 14900
+  },
+  {
+    "name": "dtube",
+    "value": 14315
+  },
+  {
+    "name": "kr",
+    "value": 13415
+  },
+  {
+    "name": "new",
+    "value": 12226
+  },
+  {
+    "name": "meme",
+    "value": 11889
+  },
+  {
+    "name": "video",
+    "value": 11603
+  },
+  {
+    "name": "music",
+    "value": 11310
+  },
+  {
+    "name": "blockchain",
+    "value": 10737
+  },
+  {
+    "name": "cervantes",
+    "value": 9595
+  },
+  {
+    "name": "health",
+    "value": 9575
+  },
+  {
+    "name": "fun",
+    "value": 8545
+  },
+  {
+    "name": "entertainment",
+    "value": 8464
+  },
+  {
+    "name": "poetry",
+    "value": 7916
+  },
+  {
+    "name": "steepshot",
+    "value": 7629
+  },
+  {
+    "name": "cn",
+    "value": 7616
+  },
+  {
+    "name": "nigeria",
+    "value": 7558
+  },
+  {
+    "name": "technology",
+    "value": 7499
+  },
+  {
+    "name": "dmania",
+    "value": 7459
+  },
+  {
+    "name": "science",
+    "value": 7434
+  },
+  {
+    "name": "philippines",
+    "value": 7191
+  },
+  {
+    "name": "contest",
+    "value": 6367
+  },
+  {
+    "name": "politics",
+    "value": 6231
+  },
+  {
+    "name": "colorchallenge",
+    "value": 6112
+  },
+  {
+    "name": "kr-newbie",
+    "value": 5960
+  },
+  {
+    "name": "drawing",
+    "value": 5716
+  },
+  {
+    "name": "history",
+    "value": 5567
+  },
+  {
+    "name": "motivation",
+    "value": 4845
+  },
+  {
+    "name": "utopian-io",
+    "value": 4722
+  },
+  {
+    "name": "animals",
+    "value": 4627
+  },
+  {
+    "name": "venezuela",
+    "value": 4606
+  },
+  {
+    "name": "esteem",
+    "value": 4542
+  },
+  {
+    "name": "gaming",
+    "value": 4462
+  },
+  {
+    "name": "ethereum",
+    "value": 4392
+  },
+  {
+    "name": "education",
+    "value": 4267
+  },
+  {
+    "name": "beauty",
+    "value": 4147
+  },
+  {
+    "name": "tr",
+    "value": 4146
+  },
+  {
+    "name": "animal",
+    "value": 4051
+  },
+  {
+    "name": "stach",
+    "value": 3909
+  },
+  {
+    "name": "deutsch",
+    "value": 3884
+  },
+  {
+    "name": "philosophy",
+    "value": 3859
+  },
+  {
+    "name": "sport",
+    "value": 3837
+  },
+  {
+    "name": "whalepower",
+    "value": 3824
+  },
+  {
+    "name": "creativity",
+    "value": 3699
+  },
+  {
+    "name": "community",
+    "value": 3672
+  },
+  {
+    "name": "dlive",
+    "value": 3647
+  },
+  {
+    "name": "sports",
+    "value": 3614
+  },
+  {
+    "name": "promo-steem",
+    "value": 3500
+  },
+  {
+    "name": "trading",
+    "value": 3482
+  },
+  {
+    "name": "world",
+    "value": 3414
+  },
+  {
+    "name": "untalented",
+    "value": 3368
+  },
+  {
+    "name": "introducemyself",
+    "value": 3346
+  },
+  {
+    "name": "ico",
+    "value": 3345
+  },
+  {
+    "name": "youtube",
+    "value": 3307
+  },
+  {
+    "name": "sevendaybnwchallenge",
+    "value": 3198
+  },
+  {
+    "name": "family",
+    "value": 3176
+  },
+  {
+    "name": "natural",
+    "value": 3163
+  },
+  {
+    "name": "flower",
+    "value": 3097
+  },
+  {
+    "name": "ksi",
+    "value": 3091
+  },
+  {
+    "name": "india",
+    "value": 2985
+  },
+  {
+    "name": "photofeed",
+    "value": 2964
+  },
+  {
+    "name": "btc",
+    "value": 2959
+  },
+  {
+    "name": "poem",
+    "value": 2925
+  },
+  {
+    "name": "adventure",
+    "value": 2911
+  },
+  {
+    "name": "steemph",
+    "value": 2892
+  },
+  {
+    "name": "smartphonephotography",
+    "value": 2843
+  },
+  {
+    "name": "vincentb",
+    "value": 2843
+  },
+  {
+    "name": "inspiration",
+    "value": 2783
+  },
+  {
+    "name": "painting",
+    "value": 2776
+  },
+  {
+    "name": "castellano",
+    "value": 2760
+  },
+  {
+    "name": "fiction",
+    "value": 2731
+  },
+  {
+    "name": "business",
+    "value": 2643
+  },
+  {
+    "name": "religion",
+    "value": 2634
+  },
+  {
+    "name": "freedom",
+    "value": 2548
+  },
+  {
+    "name": "humor",
+    "value": 2492
+  }
 ];
 
 fakeData.timeStampData = [{
