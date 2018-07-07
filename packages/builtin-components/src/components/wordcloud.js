@@ -1,20 +1,26 @@
-import _ from 'lodash';
-import React, { PureComponent } from 'react';
+
 import PropTypes from 'prop-types';
 import ReactEcharts from 'echarts-for-react';
 import 'echarts-wordcloud';
+import {
+  compose,
+  withProps,
+  setPropTypes,
+  defaultProps,
+} from 'recompose';
 
-export default class WordCloud extends PureComponent {
-  static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-      value: PropTypes.number,
-    })).isRequired,
-  }
+const propTypes = {
+  source: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    value: PropTypes.number,
+  })).isRequired,
+};
 
-  render() {
-    const { source } = this.props;
-    const option = {
+const enhance = compose(
+  setPropTypes(propTypes),
+  defaultProps({ source: [] }),
+  withProps(({ source }) => ({
+    option: {
       tooltip: {
         show: false,
       },
@@ -53,10 +59,8 @@ export default class WordCloud extends PureComponent {
           },
         },
       ],
-    };
+    },
+  })),
+);
 
-    return (
-      <ReactEcharts option={option} />
-    );
-  }
-}
+export default enhance(ReactEcharts);
