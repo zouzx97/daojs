@@ -1,41 +1,40 @@
-import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ReactEcharts from 'echarts-for-react';
 import _ from 'lodash';
-import { validate } from '../utils';
+import {
+  compose,
+  setPropTypes,
+  defaultProps,
+  withProps,
+} from 'recompose';
 
-export default class Spine extends PureComponent {
-  static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
-    title: PropTypes.objectOf(PropTypes.any),
-    onSlicerChange: PropTypes.func,
-  }
+const propTypes = {
+  source: PropTypes.arrayOf(PropTypes.any.isRequired).isRequired,
+  title: PropTypes.objectOf(PropTypes.any),
+  keys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onSlicerChange: PropTypes.func,
+};
 
-  static defaultProps = {
-    onSlicerChange: _.noop,
-    title: {},
-  }
+const spineDefaultProps = {
+  onSlicerChange: _.noop,
+  title: {},
+};
 
-  render() {
-    const { source } = this.props;
-    validate(source);
-
-    /**
-     * Transpose the 2D-array
-     * e.g.
-     *  ['Date', 'Income', 'Outcome','Profit'],
-     *  ['Monday', 200, -100, 100],
-     *
-     *  =>
-     *
-     *  ['Date', 'Monday'],
-     *  ['Income', 200],
-     *  ['Outcome', -100],
-     *  ['Profit', 100]
-     */
-    const newSource = _.zip(...source);
-    const option = {
-      title: this.props.title,
+const enhance = compose(
+  setPropTypes(propTypes),
+  defaultProps(spineDefaultProps),
+  withProps(props => ({
+    onEvents: {
+      click: args =>
+        this.props.onSlicerChange(_.defaults({}, {
+          dataObj: {
+            [_.first(this.props.source)[0]]: args.name,
+            [args.seriesName]: args.value,
+          },
+        }, args)),
+    },
+    option: {
+      title: props.title,
       legend: {},
       tooltip: {
         trigger: 'axis',
@@ -48,7 +47,7 @@ export default class Spine extends PureComponent {
           type: 'category',
           axisTick: { show: false },
           // Assume that the first row is X
-          data: _.first(newSource).slice(1),
+          data: _.map(props.source, _.first(props.keys)),
         },
       ],
       xAxis: [
@@ -56,8 +55,8 @@ export default class Spine extends PureComponent {
           type: 'value',
         },
       ],
-      series: _.map(newSource.slice(1), (series, index) => ({
-        name: series[0],
+      series: _.map(props.keys.slice(1), (key, index) => ({
+        name: key,
         type: 'bar',
         // Assume that 2nd and 3rd rows are for comparison.
         // If newSource has more than 3 rows, the rest rows are shown as horizontal bar
@@ -68,22 +67,10 @@ export default class Spine extends PureComponent {
             position: 'inside',
           },
         },
-        data: series.slice(1),
+        data: _.map(props.source, key),
       })),
-    };
+    },
+  })),
+);
 
-    const onEvents = {
-      click: args =>
-        this.props.onSlicerChange(_.defaults({}, {
-          dataObj: {
-            [_.first(this.props.source)[0]]: args.name,
-            [args.seriesName]: args.value,
-          },
-        }, args)),
-    };
-
-    return (
-      <ReactEcharts option={option} onEvents={onEvents} {...this.props} />
-    );
-  }
-}
+export default enhance(ReactEcharts);
