@@ -28,14 +28,19 @@ const axisMiddle = (index, total) => {
 
 export default class CircleTimeline extends PureComponent {
   static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
+    source: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    sliceKey: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }
 
   render() {
-    const { source } = this.props;
-    validate(source);
+    const { source, sliceKey } = this.props;
 
-    const columns = _.zip(...source);
+    validate(source);
+    validate(sliceKey);
+
+    const columns = _.map(sliceKey, function work(x){
+      return [x].concat(_.map(source, x));
+    });
 
     const seriesColumns = _.slice(columns, 1);
     const seriesLength = _.size(seriesColumns);
