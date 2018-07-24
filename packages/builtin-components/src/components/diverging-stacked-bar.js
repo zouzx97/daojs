@@ -6,7 +6,8 @@ import { validate } from '../utils';
 
 export default class DivergingStacked extends PureComponent {
   static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
+    initSource: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    sliceKey: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }
 
   render() {
@@ -15,11 +16,15 @@ export default class DivergingStacked extends PureComponent {
      * or
      * ['Date', 'Strong negative', 'Negative', 'Neutral', 'Positive', 'Strong positive']
      */
-    const { source } = this.props;
-    validate(source);
+    const { initSource, sliceKey } = this.props;
+    validate(initSource);
+    validate(sliceKey);
 
-    const dimensions = _.first(source);
-
+    const dimensions = Object.getOwnPropertyNames(initSource[0]);
+    const source = [sliceKey].concat(_.zip(...(_.map(sliceKey, function work(x){
+      return _.map(initSource, x);
+    }))));
+    
     if (dimensions.length % 2 !== 0) {
       throw new Error('The attitude columns should be 2x + 1, where 1 refers to neutral column');
     }
@@ -44,7 +49,7 @@ export default class DivergingStacked extends PureComponent {
 
     // transpose 2d-array, so the first row is Y, the other rows are series
     const transposedData = _.zip(...newSource);
-
+    
     const option = {
       legend: {
         data: dimensions.slice(1),

@@ -6,15 +6,17 @@ const {
 } = builtinComponents;
 
 const source = [
-  ['Date', 'Negative', 'Neutral', 'Positive'],
-  ['2017-10-24', 20, 30, 10],
-  ['2017-10-25', 40, 35, 30],
-  ['2017-10-26', 33, 38, 30],
-  ['2017-10-27', 40, 40, 32],
+  {Date: '2017-10-24', Negative: 20, Neutral: 30, Positive: 10},
+  {Date: '2017-10-25', Negative: 40, Neutral: 35, Positive: 30},
+  {Date: '2017-10-26', Negative: 33, Neutral: 38, Positive: 30},
+  {Date: '2017-10-27', Negative: 40, Neutral: 40, Positive: 32},
+];
+const sliceKey = [
+  'Date', 'Negative', 'Neutral', 'Positive',
 ];
 
 export default function DivergingStackedBarDemo() {
   return (
-    <DivergingStackedBar source={source} />
+    <DivergingStackedBar initSource={source} sliceKey={sliceKey} />
   );
 }
