@@ -14,7 +14,7 @@ export default class Radar extends PureComponent {
 
 
   render() {
-    const { source, sliceKey} = this.props;
+    const { source, sliceKey } = this.props;
   
     const option = {
       legend: {},
