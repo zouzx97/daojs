@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ReactEcharts from 'echarts-for-react';
 import _ from 'lodash';
 import { validate } from '../utils';
-import { timeInterval } from 'rxjs/operator/timeInterval';
 
 export default class Radar extends PureComponent {
   static propTypes = {
@@ -15,7 +14,7 @@ export default class Radar extends PureComponent {
 
   render() {
     const { source, sliceKey } = this.props;
-  
+    
     const option = {
       legend: {},
       tooltip: {},
