@@ -11,11 +11,13 @@ const source = [
   {product: 'Cheese Cocoa', 2015: 86.4, 2016: 65.2, 2017: 82.5},
   {product: 'Walnut Brownie', 2015: 72.4, 2016: 53.9, 2017: 39.1},
 ];
-
+const sliceKey = [
+  '2015', '2016', '2017',
+];
 
 
 export default function RadarDemo() {
   return (
-    <Radar source={source}/>
+    <Radar source={source} sliceKey={sliceKey} />
   );
 }
