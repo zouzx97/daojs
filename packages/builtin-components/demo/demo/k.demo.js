@@ -15,12 +15,9 @@ const source = [
   { Date: '2017-10-26', open: 33, close: 38, lowest: 30, highest: 40 },
   { Date: '2017-10-27', open: 40, close: 40, lowest: 32, highest: 42 },
 ];
-const sliceKey = [
-  'Date', 'open', 'close', 'lowest', 'highest',
-];
 
 export default function KDemo() {
   return (
-    <K source={source} sliceKey={sliceKey} />
+    <K source={source} />
   );
 }
