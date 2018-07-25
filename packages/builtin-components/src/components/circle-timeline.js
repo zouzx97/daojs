@@ -38,10 +38,7 @@ export default class CircleTimeline extends PureComponent {
     validate(source);
     validate(sliceKey);
 
-    const columns = _.map(sliceKey, function work(x){
-      return [x].concat(_.map(source, x));
-    });
-
+    const columns = _.map(sliceKey, key => [key, ..._.map(source, key)]);
     const seriesColumns = _.slice(columns, 1);
     const seriesLength = _.size(seriesColumns);
     const seriesData = _.map(seriesColumns, column => _.slice(column, 1));

@@ -17,6 +17,6 @@ const sliceKey = [
 
 export default function DivergingStackedBarDemo() {
   return (
-    <DivergingStackedBar initSource={source} sliceKey={sliceKey} />
+    <DivergingStackedBar source={source} sliceKey={sliceKey} />
   );
 }
