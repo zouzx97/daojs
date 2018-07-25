@@ -10,10 +10,10 @@ const {
 } = builtinComponents;
 
 const source = [
-  {Date: '2017-10-24', open: 20, close: 30, lowest: 10, highest: 35},
-  {Date: '2017-10-25', open: 40, close: 35, lowest: 30, highest: 55},
-  {Date: '2017-10-26', open: 33, close: 38, lowest: 30, highest: 40},
-  {Date: '2017-10-27', open: 40, close: 40, lowest: 32, highest: 42},
+  { Date: '2017-10-24', open: 20, close: 30, lowest: 10, highest: 35 },
+  { Date: '2017-10-25', open: 40, close: 35, lowest: 30, highest: 55 },
+  { Date: '2017-10-26', open: 33, close: 38, lowest: 30, highest: 40 },
+  { Date: '2017-10-27', open: 40, close: 40, lowest: 32, highest: 42 },
 ];
 const sliceKey = [
   'Date', 'open', 'close', 'lowest', 'highest',
