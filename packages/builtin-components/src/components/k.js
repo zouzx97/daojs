@@ -6,20 +6,25 @@ import { validate } from '../utils/validate';
 
 export default class K extends PureComponent {
   static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array).isRequired,
+    source: PropTypes.arrayOf(PropTypes.object).isRequired,
+    sliceKey: PropTypes.arrayOf(PropTypes.string).isRequired,
   }
 
   render() {
-    validate(this.props.source);
+    const { source, sliceKey } = this.props;
+    validate(source);
+    validate(sliceKey);
 
-    const dimensions = _.first(this.props.source);
+    const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
+
+    const dimensions = _.first(newSource);
     const option = {
       legend: {},
       tooltip: {
         trigger: 'axis',
       },
       dataset: {
-        source: this.props.source.slice(1),
+        source: newSource.slice(1),
       },
       yAxis: {},
       xAxis: { type: 'category' },
