@@ -6,7 +6,8 @@ import { validate } from '../utils';
 
 export default class DivergingStacked extends PureComponent {
   static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
+    source: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    sliceKey: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }
 
   render() {
@@ -15,18 +16,20 @@ export default class DivergingStacked extends PureComponent {
      * or
      * ['Date', 'Strong negative', 'Negative', 'Neutral', 'Positive', 'Strong positive']
      */
-    const { source } = this.props;
+    const { source, sliceKey } = this.props;
     validate(source);
+    validate(sliceKey);
 
-    const dimensions = _.first(source);
-
+    const dimensions = Object.getOwnPropertyNames(source[0]);
+    const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
+    
     if (dimensions.length % 2 !== 0) {
       throw new Error('The attitude columns should be 2x + 1, where 1 refers to neutral column');
     }
 
     // Add a transparent series so that the center points of neutral could be at same x value
     const neutralIndex = dimensions.length / 2;
-    const dummySeries = _.map(source.slice(1), row =>
+    const dummySeries = _.map(newSource.slice(1), row =>
       _.reduce(row, (memo, item, index) => {
         if (index === 0 || index > neutralIndex) {
           return memo;
@@ -37,14 +40,14 @@ export default class DivergingStacked extends PureComponent {
     const maxDummy = _.max(dummySeries) + 5; // 5 is the minimum transparent bar value
     const transparentColumn = _.map(dummySeries, value => (maxDummy - value));
 
-    // Insert transparent series at 2nd column of source,
+    // Insert transparent series at 2nd column of newSource,
     // so the stack bar starts from transparent series
-    const newSource = _.map(source, (item, index) =>
+    const newNewSource = _.map(newSource, (item, index) =>
       [_.first(item), index === 0 ? 'dummy' : _.nth(transparentColumn, index - 1), ...item.slice(1)]);
 
     // transpose 2d-array, so the first row is Y, the other rows are series
-    const transposedData = _.zip(...newSource);
-
+    const transposedData = _.zip(...newNewSource);
+    
     const option = {
       legend: {
         data: dimensions.slice(1),
