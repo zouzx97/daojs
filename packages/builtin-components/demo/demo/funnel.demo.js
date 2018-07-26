@@ -16,12 +16,9 @@ const data = [
   { name: '点击', value: 80 },
   { name: '展现', value: 110 },
 ];
-const sliceKey = [
-  'name', 'value',
-];
 
 export default function FunnelDemo() {
   return (
-    <Funnel source={data} sliceKey={sliceKey} />
+    <Funnel source={data} />
   );
 }

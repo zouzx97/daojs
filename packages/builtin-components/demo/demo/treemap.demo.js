@@ -5,17 +5,31 @@ const {
   Treemap,
 } = builtinComponents;
 
-
 const source = [
-  ['name', 'value', 'id', 'parentId'],
-  ['nodeA', 10, 1, 0],
-  ['nodeB', 20, 2, 0],
-  ['nodeA1', 10, 3, 1],
-  ['nodeA2', 10, 4, 1],
-  ['nodeA3', 10, 5, 1],
-  ['nodeB1', 10, 6, 2],
-  ['nodeB2', 10, 7, 2],
-  ['nodeB3', 10, 8, 2],
+  {
+    name: 'nodeA', value: 10, id: 1, parentId: 0,
+  },
+  {
+    name: 'nodeB', value: 20, id: 2, parentId: 0,
+  },
+  {
+    name: 'nodeA1', value: 10, id: 3, parentId: 1,
+  },
+  {
+    name: 'nodeA2', value: 10, id: 4, parentId: 1,
+  },
+  {
+    name: 'nodeA3', value: 10, id: 5, parentId: 1,
+  },
+  {
+    name: 'nodeB1', value: 10, id: 6, parentId: 2,
+  },
+  {
+    name: 'nodeB2', value: 10, id: 7, parentId: 2,
+  },
+  {
+    name: 'nodeB3', value: 10, id: 8, parentId: 2,
+  },
 ];
 
 export default function TreemapDemo() {

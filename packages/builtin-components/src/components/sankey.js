@@ -7,14 +7,13 @@ import { validate } from '../utils';
 export default class Sankey extends PureComponent {
   static propTypes = {
     source: PropTypes.arrayOf(PropTypes.object).isRequired,
-    sliceKey: PropTypes.arrayOf(PropTypes.string).isRequired,
   }
 
   render() {
-    const { source, sliceKey } = this.props;
+    const { source } = this.props;
     validate(source);
-    validate(sliceKey);
 
+    const sliceKey = Object.getOwnPropertyNames(source[0]);
     const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
 
     const option = {

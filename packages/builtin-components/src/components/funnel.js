@@ -7,13 +7,13 @@ import { validate } from '../utils';
 export default class Funnel extends PureComponent {
   static propTypes = {
     source: PropTypes.arrayOf(PropTypes.object).isRequired,
-    sliceKey: PropTypes.arrayOf(PropTypes.string).isRequired,
   }
 
   render() {
-    const { source, sliceKey } = this.props;
+    const { source } = this.props;
     validate(source);
 
+    const sliceKey = Object.getOwnPropertyNames(source[0]);
     const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
 
     const [name, value] = _.first(newSource);

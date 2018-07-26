@@ -5,13 +5,11 @@ const {
   Scatter,
 } = builtinComponents;
 
-
 const scatterSource = [
-  ['Price', 'Meat', 'Vegetable'],
-  [23, 167, 8.3],
-  [81, 284, 12],
-  [91, 413, 4.1],
-  [13, 287, 13.5],
+  { Price: 23, Meat: 167, Vegetable: 8.3 },
+  { Price: 81, Meat: 284, Vegetable: 12 },
+  { Price: 91, Meat: 413, Vegetable: 4.1 },
+  { Price: 13, Meat: 287, Vegetable: 13.5 },
 ];
 
 export default function ScatterDemo() {

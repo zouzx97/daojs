@@ -6,14 +6,16 @@ import { validate } from '../utils';
 
 export default class VerticalTimeline extends PureComponent {
   static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array).isRequired,
+    source: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
 
   render() {
     const { source } = this.props;
     validate(source);
 
-    const columns = _.zip(...source);
+    const sliceKey = Object.getOwnPropertyNames(source[0]);
+    const columns = _.map(sliceKey, key => [key, ..._.map(source, key)]);
+    
     const option = {
       legend: {
       },
