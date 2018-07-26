@@ -15,7 +15,7 @@ export default class VerticalTimeline extends PureComponent {
 
     const sliceKey = Object.getOwnPropertyNames(source[0]);
     const columns = _.map(sliceKey, key => [key, ..._.map(source, key)]);
-    
+
     const option = {
       legend: {
       },
