@@ -4,3 +4,4 @@ export const lineScale = (resultMin, resultMax, dataMin, dataMax, data) => {
 
   return (a * data) + b;
 };
+export { lineScale as default };

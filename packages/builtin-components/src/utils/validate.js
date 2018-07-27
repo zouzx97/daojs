@@ -10,3 +10,4 @@ export function validate(source) {
   }
   return true;
 }
+export { validate as default };

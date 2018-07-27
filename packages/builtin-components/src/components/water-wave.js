@@ -20,7 +20,7 @@ export default class WaterWave extends PureComponent {
   }
 
   componentWillUnmount() {
-    cancelAnimationFrame(this.timer);
+    window.cancelAnimationFrame(this.timer);
     if (this.node) {
       this.node.innerHTML = '';
     }
@@ -28,7 +28,7 @@ export default class WaterWave extends PureComponent {
   }
 
   resize = () => {
-    const { height } = this.props;
+    const { height } = this.props; // eslint-disable-line react/prop-types
     const { offsetWidth } = this.root.parentNode;
     this.setState({
       radio: offsetWidth < height ? offsetWidth / height : 1,
@@ -36,7 +36,7 @@ export default class WaterWave extends PureComponent {
   };
 
   renderChart() {
-    const { percent, color = '#1890FF' } = this.props;
+    const { percent, color = '#1890FF' } = this.props; // eslint-disable-line react/prop-types
     const data = percent / 100;
     const self = this;
 
@@ -164,7 +164,7 @@ export default class WaterWave extends PureComponent {
         sp += 0.07;
         drawSin();
       }
-      self.timer = requestAnimationFrame(render);
+      self.timer = window.requestAnimationFrame(render);
     }
 
     render();
@@ -172,7 +172,7 @@ export default class WaterWave extends PureComponent {
 
   render() {
     const { radio } = this.state;
-    const { percent, title, height } = this.props;
+    const { percent, title, height } = this.props; // eslint-disable-line react/prop-types
     return (
       <div
         className={styles.waterWave}

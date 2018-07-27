@@ -136,7 +136,7 @@ class Donut extends React.Component {
     const {
       title,
       subTitle,
-      titleStyle = {},
+      titleStyle = {}, // eslint-disable-line react/prop-types
       hasLegend,
     } = this.props;
     const {
@@ -228,7 +228,7 @@ class Donut extends React.Component {
               }}
               style={_.extend({
                 height: width > breakPoint ? '300px' : '500px',
-              }, this.props.style)}
+              }, this.props.style)} // eslint-disable-line react/prop-types
             />
           );
         }}

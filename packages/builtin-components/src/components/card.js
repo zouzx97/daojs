@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import { Card as AntdCard } from 'antd';
 
 export default class Card extends PureComponent {
@@ -70,10 +69,12 @@ Card.propTypes = {
   title: PropTypes.string,
   children: PropTypes.element,
   extras: PropTypes.element,
+  footer: PropTypes.element,
 };
 
 Card.defaultProps = {
   title: '',
   children: null,
   extras: null,
+  footer: null,
 };

@@ -22,7 +22,7 @@ export default class DivergingStacked extends PureComponent {
 
     const dimensions = Object.getOwnPropertyNames(source[0]);
     const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
-    
+
     if (dimensions.length % 2 !== 0) {
       throw new Error('The attitude columns should be 2x + 1, where 1 refers to neutral column');
     }
@@ -47,7 +47,7 @@ export default class DivergingStacked extends PureComponent {
 
     // transpose 2d-array, so the first row is Y, the other rows are series
     const transposedData = _.zip(...newNewSource);
-    
+
     const option = {
       legend: {
         data: dimensions.slice(1),

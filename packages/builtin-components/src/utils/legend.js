@@ -8,3 +8,4 @@ export function getLegend({
     data: dimensions.slice(1),
   });
 }
+export { getLegend as default };

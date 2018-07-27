@@ -55,13 +55,13 @@ Shape.registerShape('point', 'pointer', {
 export default class Gauge extends React.Component {
   render() {
     const {
-      title,
-      height,
-      percent,
-      forceFit = true,
-      formatter = defaultFormatter,
-      color = '#2F9CFF',
-      bgColor = '#F0F2F5',
+      title, // eslint-disable-line react/prop-types
+      height, // eslint-disable-line react/prop-types
+      percent, // eslint-disable-line react/prop-types
+      forceFit = true, // eslint-disable-line react/prop-types
+      formatter = defaultFormatter, // eslint-disable-line react/prop-types
+      color = '#2F9CFF', // eslint-disable-line react/prop-types
+      bgColor = '#F0F2F5', // eslint-disable-line react/prop-types
     } = this.props;
     const cols = {
       value: {

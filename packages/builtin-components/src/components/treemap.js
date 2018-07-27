@@ -44,7 +44,7 @@ export default class Treemap extends PureComponent {
 
     const dimensions = _.first(newSource);
 
-    
+
     if (_.isEmpty(newSource.slice(1))) {
       return null;
     }
