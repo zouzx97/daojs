@@ -27,12 +27,14 @@ import Promise from 'bluebird';
 //   storyId,
 //   storyLayout,
 // }) {
-//   return client.request(`query setLayout($storyId: String, $storyLayout: [sectionLayoutInputType]) {
-//     setLayout(storyId: $storyId, storyLayout: $storyLayout)
+//   return
+//     client.request(`query setLayout($storyId: String, $storyLayout: [sectionLayoutInputType]) {
+//       setLayout(storyId: $storyId, storyLayout: $storyLayout)
 //   }
 //   `, {
 //     storyId,
-//     storyLayout: _.map(storyLayout, sectionLayout => _.pick(sectionLayout, ['x', 'y', 'w', 'h', 'i'])),
+//     storyLayout: _.map(storyLayout, sectionLayout =>
+//       _.pick(sectionLayout, ['x', 'y', 'w', 'h', 'i'])),
 //   });
 // }
 
@@ -41,7 +43,7 @@ const storageKey = 'dao-layout';
 const layoutStore = (() => {
   let storage;
   try {
-    storage = JSON.parse(localStorage.getItem(storageKey));
+    storage = JSON.parse(window.localStorage.getItem(storageKey));
   } catch (err) {
     storage = {};
   }
@@ -53,7 +55,8 @@ export function getLayout({
   sectionIds,
 }) {
   const sectionLayouts = layoutStore[storyId];
-  return Promise.resolve(_.filter(sectionLayouts, sectionLayout => _.includes(sectionIds, sectionLayout.i)));
+  return Promise.resolve(_.filter(sectionLayouts, sectionLayout =>
+    _.includes(sectionIds, sectionLayout.i)));
 }
 
 export function setLayout({
@@ -61,6 +64,6 @@ export function setLayout({
   storyLayout,
 }) {
   layoutStore[storyId] = storyLayout;
-  localStorage.setItem(storageKey, JSON.stringify(layoutStore));
+  window.localStorage.setItem(storageKey, JSON.stringify(layoutStore));
   return Promise.resolve();
 }

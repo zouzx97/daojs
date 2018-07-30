@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { DatePicker } from 'antd';
 import moment from 'moment';
-import _ from 'lodash';
 
 const { RangePicker } = DatePicker;
 

@@ -7,5 +7,10 @@
     "packages/*",
     "projects/*",
     "tools/*"
-  ]
+  ],
+  "eslintConfig": {
+    "globals":{
+      "window": true
+    }
+  }
 }

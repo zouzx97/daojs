@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 export default function MiniTable(props) {
-  const { data } = props;
+  const { data } = props; // eslint-disable-line react/prop-types
 
   return (
     <div>

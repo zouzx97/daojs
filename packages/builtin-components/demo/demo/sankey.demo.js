@@ -5,15 +5,13 @@ const {
   Sankey,
 } = builtinComponents;
 
-
 const source = [
-  ['Source', 'Target', 'Value'],
-  ['a', 'c', 5],
-  ['a', 'd', 3],
-  ['a', 'e', 3],
-  ['b', 'e', 8],
-  ['e', 'c', 1],
-  ['e', 'f', 2],
+  { Source: 'a', Target: 'c', Value: 5 },
+  { Source: 'a', Target: 'd', Value: 3 },
+  { Source: 'a', Target: 'e', Value: 3 },
+  { Source: 'b', Target: 'e', Value: 8 },
+  { Source: 'e', Target: 'c', Value: 1 },
+  { Source: 'e', Target: 'f', Value: 2 },
 ];
 
 export default function SankeyDemo() {

@@ -6,24 +6,27 @@ import { validate } from '../utils';
 
 export default class Funnel extends PureComponent {
   static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array).isRequired,
+    source: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
 
   render() {
     const { source } = this.props;
-    validate(this.props.source);
+    validate(source);
 
-    const [name, value] = _.first(source);
-    const keyValueSource = _.map(source.slice(1), item => _.zipObject([name, value], item));
+    const sliceKey = Object.getOwnPropertyNames(source[0]);
+    const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
+
+    const [name, value] = _.first(newSource);
+    const keyValueSource = _.map(newSource.slice(1), item => _.zipObject([name, value], item));
     // sort the data descending first so that legends could start from highest to lowest
     const sortedSource = _.reverse(_.sortBy(keyValueSource, value));
-    const newSource = [[name, value], ..._.map(sortedSource, items => _.values(items))];
+    const newNewSource = [[name, value], ..._.map(sortedSource, items => _.values(items))];
 
     const option = {
       legend: {},
       tooltip: {},
       dataset: {
-        source: newSource,
+        source: newNewSource,
       },
       calculable: true,
       series: {

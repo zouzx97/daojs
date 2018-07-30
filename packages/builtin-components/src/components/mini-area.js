@@ -9,19 +9,19 @@ export default class MiniArea extends React.Component {
   render() {
     return (
       <ThemeContext.Consumer>
-        { ({ primaryColor }) => {
+        { () => {
           const {
-            height,
-            data = [],
-            forceFit = true,
-            color = 'rgba(255, 255, 255, 0.6)',
-            borderColor = 'rgba(255,255,255,1)',
-            scale = {},
-            borderWidth = 2,
-            line,
-            xAxis,
-            yAxis,
-            animate = true,
+            height, // eslint-disable-line react/prop-types
+            data = [], // eslint-disable-line react/prop-types
+            forceFit = true, // eslint-disable-line react/prop-types
+            color = 'rgba(255, 255, 255, 0.6)', // eslint-disable-line react/prop-types
+            borderColor = 'rgba(255,255,255,1)', // eslint-disable-line react/prop-types
+            scale = {}, // eslint-disable-line react/prop-types
+            borderWidth = 2, // eslint-disable-line react/prop-types
+            line, // eslint-disable-line react/prop-types
+            xAxis, // eslint-disable-line react/prop-types
+            yAxis, // eslint-disable-line react/prop-types
+            animate = true, // eslint-disable-line react/prop-types
           } = this.props;
 
           const padding = [36, 5, 30, 5];

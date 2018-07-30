@@ -1,11 +1,7 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 
-export default function TimeSeries({
-  start,
-  end,
-  data,
-}) {
+export default function TimeSeries() {
   return (
     <ReactEcharts
       theme="theme1"

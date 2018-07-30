@@ -6,12 +6,46 @@ const {
 } = builtinComponents;
 
 const source = [
-  ['team', 'actual', 'target', 'normal', 'good', 'excellent'],
-  ['team1', 110, 95, 70, 15, 15],
-  ['team2', 94, 90, 70, 15, 15],
-  ['team3', 97, 90, 70, 15, 15],
-  ['team4', 78, 90, 70, 15, 15],
-  ['team5', 68, 85, 70, 15, 15],
+  {
+    team: 'team1',
+    actual: 110,
+    target: 95,
+    normal: 70,
+    good: 15,
+    excellent: 15,
+  },
+  {
+    team: 'team2',
+    actual: 94,
+    target: 90,
+    normal: 70,
+    good: 15,
+    excellent: 15,
+  },
+  {
+    team: 'team3',
+    actual: 97,
+    target: 90,
+    normal: 70,
+    good: 15,
+    excellent: 15,
+  },
+  {
+    team: 'team4',
+    actual: 78,
+    target: 90,
+    normal: 70,
+    good: 15,
+    excellent: 15,
+  },
+  {
+    team: 'team5',
+    actual: 68,
+    target: 85,
+    normal: 70,
+    good: 15,
+    excellent: 15,
+  },
 ];
 
 export default function BulletDemo() {

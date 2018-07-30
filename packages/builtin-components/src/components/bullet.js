@@ -6,14 +6,16 @@ import { validate, getDataOption } from '../utils';
 
 export default class Bullet extends PureComponent {
   static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array).isRequired,
+    source: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
 
   render() {
     const { source } = this.props;
-    validate(this.props.source);
+    validate(source);
+    const sliceKey = Object.getOwnPropertyNames(source[0]);
+    const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
     const dataOption = getDataOption({
-      source,
+      source: newSource,
       defaultSeriesOpt: (() => {
         const map = {
           0: {

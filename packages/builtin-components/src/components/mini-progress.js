@@ -4,7 +4,7 @@ import { Tooltip } from 'antd';
 import styles from '../styles/mini-progress.less';
 
 const MiniProgress = ({
-  target, color = 'rgb(19, 194, 194)', strokeWidth, percent,
+  target, color = 'rgb(19, 194, 194)', strokeWidth, percent, // eslint-disable-line react/prop-types
 }) => (
   <div className={styles.miniProgress}>
     <Tooltip title={`目标值: ${target}%`}>

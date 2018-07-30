@@ -2,3 +2,6 @@
 # Refer to docs/javascript/README.md for detail
 extends:
   - daojs
+
+rules:
+  import/export: off

@@ -2,10 +2,10 @@
 import React from 'react';
 
 function computeHeight(node) {
-  const totalHeight = parseInt(getComputedStyle(node).height, 10);
+  const totalHeight = parseInt(window.getComputedStyle(node).height, 10);
   const padding =
-    parseInt(getComputedStyle(node).paddingTop, 10) +
-    parseInt(getComputedStyle(node).paddingBottom, 10);
+    parseInt(window.getComputedStyle(node).paddingTop, 10) +
+    parseInt(window.getComputedStyle(node).paddingBottom, 10);
   return totalHeight - padding;
 }
 
@@ -30,13 +30,13 @@ function getAutoHeight(n) {
   return height;
 }
 
-const autoHeight = () => (WrappedComponent) => class extends React.Component {
+const autoHeight = () => WrappedComponent => class componentWithAutoheight extends React.Component {
     state = {
       computedHeight: 0,
     };
 
     componentDidMount() {
-      const { height } = this.props;
+      const { height } = this.props; // eslint-disable-line react/prop-types
       if (!height) {
         const h = getAutoHeight(this.root);
         // eslint-disable-next-line
@@ -44,7 +44,7 @@ const autoHeight = () => (WrappedComponent) => class extends React.Component {
       }
     }
 
-    handleRoot = node => {
+    handleRoot = (node) => {
       this.root = node;
     };
 
@@ -56,6 +56,6 @@ const autoHeight = () => (WrappedComponent) => class extends React.Component {
         <div ref={this.handleRoot}>{h > 0 && <WrappedComponent {...this.props} height={h} />}</div>
       );
     }
-  };
+};
 
 export default autoHeight;

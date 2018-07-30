@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ReactEcharts from 'echarts-for-react';
 import _ from 'lodash';
-import { validate } from '../utils';
+// import { validate } from '../utils';
 
 export default class Radar extends PureComponent {
   static propTypes = {
@@ -11,19 +11,16 @@ export default class Radar extends PureComponent {
   }
 
 
-
   render() {
     const { source, sliceKey } = this.props;
-    
+
     const option = {
       legend: {},
       tooltip: {},
       radar: {
         indicator: _.map(source, item => ({
           name: item.product,
-          max: _.max(_.map(sliceKey, function work(x){
-            return item[x];
-          })) + 10,
+          max: _.max(_.map(sliceKey, key => item[key])) + 10,
         })),
       },
       series: {
@@ -36,7 +33,6 @@ export default class Radar extends PureComponent {
     };
 
 
- 
     return (
       <ReactEcharts option={option} {...this.props} />
     );

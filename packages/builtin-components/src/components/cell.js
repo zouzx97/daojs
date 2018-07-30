@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import _ from 'lodash';
 import { Map } from 'immutable';
 import PropTypes from 'prop-types';
 import { Spin } from 'antd';

@@ -10,7 +10,7 @@ export default class SectionCard extends PureComponent {
       >
         <Card
           title={this.props.title}
-          extra={this.props.extra || this.props.extras}
+          extra={this.props.extra || this.props.extra}
           style={{
             height: '100%',
             display: 'flex',

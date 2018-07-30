@@ -26,7 +26,7 @@ const array2Tree = (items, primaryKey, parentKey) =>
 
 export default class Treemap extends PureComponent {
   static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
+    source: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     primaryKey: PropTypes.string,
     parentKey: PropTypes.string,
   }
@@ -38,21 +38,26 @@ export default class Treemap extends PureComponent {
 
   render() {
     const { source, primaryKey, parentKey } = this.props;
-    const dimensions = _.first(source);
 
-    if (_.isEmpty(source.slice(1))) {
+    const sliceKey = Object.getOwnPropertyNames(source[0]);
+    const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
+
+    const dimensions = _.first(newSource);
+
+
+    if (_.isEmpty(newSource.slice(1))) {
       return null;
     }
 
-    const newSource = _.reduce(source.slice(1), (memo, row) => [
+    const newNewSource = _.reduce(newSource.slice(1), (memo, row) => [
       ...memo,
       _.zipObject(dimensions, row),
     ], []);
 
-    const tree = array2Tree(newSource, primaryKey, parentKey);
+    const tree = array2Tree(newNewSource, primaryKey, parentKey);
     const rootItems = _.uniqBy(_.filter(
-      newSource,
-      data => !_.some(newSource, { [primaryKey]: data[parentKey] }),
+      newNewSource,
+      data => !_.some(newNewSource, { [primaryKey]: data[parentKey] }),
     ), parentKey);
 
     if (_.size(rootItems) !== 1) {

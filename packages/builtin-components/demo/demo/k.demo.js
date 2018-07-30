@@ -10,11 +10,10 @@ const {
 } = builtinComponents;
 
 const source = [
-  ['Date', 'open', 'close', 'lowest', 'highest'],
-  ['2017-10-24', 20, 30, 10, 35],
-  ['2017-10-25', 40, 35, 30, 55],
-  ['2017-10-26', 33, 38, 30, 40],
-  ['2017-10-27', 40, 40, 32, 42],
+  { Date: '2017-10-24', open: 20, close: 30, lowest: 10, highest: 35 },
+  { Date: '2017-10-25', open: 40, close: 35, lowest: 30, highest: 55 },
+  { Date: '2017-10-26', open: 33, close: 38, lowest: 30, highest: 40 },
+  { Date: '2017-10-27', open: 40, close: 40, lowest: 32, highest: 42 },
 ];
 
 export default function KDemo() {

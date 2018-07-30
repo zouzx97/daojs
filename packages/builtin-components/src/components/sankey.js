@@ -6,12 +6,15 @@ import { validate } from '../utils';
 
 export default class Sankey extends PureComponent {
   static propTypes = {
-    source: PropTypes.arrayOf(PropTypes.array).isRequired,
+    source: PropTypes.arrayOf(PropTypes.object).isRequired,
   }
 
   render() {
     const { source } = this.props;
     validate(source);
+
+    const sliceKey = Object.getOwnPropertyNames(source[0]);
+    const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
 
     const option = {
       tooltip: {
@@ -21,14 +24,14 @@ export default class Sankey extends PureComponent {
       series: {
         type: 'sankey',
         layout: 'none',
-        data: _.chain(_.zip(...source))
+        data: _.chain(_.zip(...newSource))
           .slice(0, 2)
           .map(column => column.slice(1))
           .flatten()
           .uniq()
           .map(name => ({ name }))
           .value(),
-        links: _.chain(source)
+        links: _.chain(newSource)
           .slice(1)
           .map(row => ({
             source: row[0],
