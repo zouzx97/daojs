@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import ContainerDimensions from 'react-container-dimensions';
 import { ThemeContext } from '@daojs/contexts';
@@ -8,7 +9,7 @@ const { Donut } = buildinComponents;
 
 const padding = 15; // px
 
-export default function Comp1(props) {
+function Comp1(props) {
   const {
     title,
     subTitle,
@@ -95,3 +96,16 @@ export default function Comp1(props) {
   );
 }
 
+Comp1.propTypes = {
+  title: PropTypes.string,
+  subTitle: PropTypes.string,
+  percent: PropTypes.number,
+};
+
+Comp1.defaultProps = {
+  title: '',
+  subTitle: '',
+  percent: 0,
+};
+
+export default Comp1;

@@ -1,13 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import ContainerDimensions from 'react-container-dimensions';
 import { ThemeContext } from '@daojs/contexts';
 import { Icon } from 'antd';
-import { createDecipheriv } from 'crypto';
 
 const padding = 15; // px
 
-export default function Comp2(props) {
+function Comp2(props) {
   const {
     title,
     subTitle,
@@ -109,3 +109,16 @@ export default function Comp2(props) {
   );
 }
 
+Comp2.propTypes = {
+  title: PropTypes.string,
+  subTitle: PropTypes.string,
+  icon: PropTypes.string,
+};
+
+Comp2.defaultProps = {
+  title: '',
+  subTitle: '',
+  icon: '',
+};
+
+export default Comp2;

@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import ContainerDimensions from 'react-container-dimensions';
 import { ThemeContext } from '@daojs/contexts';
 import { Icon } from 'antd';
@@ -9,7 +10,7 @@ const { MiniProgress } = buildinComponents;
 
 const padding = 15; // px
 
-export default function Comp3(props) {
+function Comp3(props) {
   const {
     title,
     subTitle,
@@ -18,14 +19,12 @@ export default function Comp3(props) {
     footer,
   } = props;
 
-  const backgroundColor = '#fff';
-
   return (
     <div className="card3">
       <ThemeContext.Consumer>
         {({ primaryColor }) => (
           <ContainerDimensions>
-            { ({ width, height }) => {
+            { ({ width }) => {
               const titleSize = _.round(width / 13);
               const subTitleSize = _.round(width / 20);
 
@@ -69,3 +68,20 @@ export default function Comp3(props) {
   );
 }
 
+Comp3.propTypes = {
+  title: PropTypes.string,
+  subTitle: PropTypes.string,
+  icon: PropTypes.string,
+  percent: PropTypes.number,
+  footer: PropTypes.element,
+};
+
+Comp3.defaultProps = {
+  title: '',
+  subTitle: '',
+  icon: '',
+  percent: 0,
+  footer: null,
+};
+
+export default Comp3;
