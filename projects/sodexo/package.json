@@ -40,6 +40,7 @@
     "antd": "^3.4.3",
     "eslint-config-daojs": "^0.0.1",
     "eslint-plugin-lodash": "^2.7.0",
+    "eslint-plugin-no-loops": "^0.3.0",
     "koa": "^2.5.0",
     "koa-body": "^2.5.0",
     "koa-router": "^7.4.0",

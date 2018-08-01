@@ -38,6 +38,7 @@
     "@daojs/ui": "^0.0.2",
     "antd": "^3.4.3",
     "eslint-plugin-lodash": "^2.7.0",
+    "eslint-plugin-no-loops": "^0.3.0",
     "koa": "^2.5.1",
     "koa-body": "^2.5.0",
     "koa-router": "^7.4.0",

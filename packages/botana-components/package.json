@@ -19,6 +19,7 @@
   "dependencies": {
     "@daojs/builtin-components": "^0.0.1",
     "eslint-plugin-lodash": "^2.7.0",
+    "eslint-plugin-no-loops": "^0.3.0",
     "koa-body": "^2.5.0",
     "lodash": "^4.17.5",
     "prop-types": "^15.6.1",

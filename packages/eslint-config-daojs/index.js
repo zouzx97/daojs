@@ -8,7 +8,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018
   },
-
+  plugins: ['no-loops'],
   rules: {
     'linebreak-style': 'off',
     'lodash/import-scope': 'warn',
@@ -18,6 +18,7 @@ module.exports = {
       {
         extensions: ['.js']
       }
-    ]
+    ],
+    'no-loops/no-loops': 'error',
   }
 };

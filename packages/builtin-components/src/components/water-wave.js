@@ -71,6 +71,7 @@ export default class WaterWave extends PureComponent {
     const circleOffset = -(Math.PI / 2);
     let circleLock = true;
 
+    // eslint-disable-next-line no-loops/no-loops
     for (let i = circleOffset; i < circleOffset + 2 * Math.PI; i += 1 / (8 * Math.PI)) {
       arcStack.push([radius + bR * Math.cos(i), radius + bR * Math.sin(i)]);
     }
@@ -84,6 +85,8 @@ export default class WaterWave extends PureComponent {
       ctx.save();
 
       const sinStack = [];
+
+      // eslint-disable-next-line no-loops/no-loops
       for (let i = xOffset; i <= xOffset + axisLength; i += 20 / axisLength) {
         const x = sp + (xOffset + i) / unit;
         const y = Math.sin(x) * currRange;
