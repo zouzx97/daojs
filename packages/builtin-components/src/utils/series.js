@@ -27,11 +27,11 @@ export function getDataOption({
   return {
     axis: {
       data: _.chain(columns)
-        .first()
+        .head()
         .slice(1)
         .value(),
     },
-    series: _.chain(columns)
+    series: _(columns)
       .slice(1)
       .map((column, seriesIndex) => _.defaults(
         {},
@@ -40,7 +40,7 @@ export function getDataOption({
           : defaultSeriesOpt,
         {
           name: _.isObject(column[0]) ? column[0].name : column[0],
-          data: _.chain(column)
+          data: _(column)
             .slice(1)
             .map(value => _.defaults(
               { value },

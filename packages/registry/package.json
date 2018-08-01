@@ -4,7 +4,6 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "lint": "eslint ./src/*.js"
   },
   "author": "suro1995",
   "license": "MIT",
@@ -20,6 +19,7 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "eslint-config-daojs": "^0.0.1",
+    "eslint-plugin-lodash": "^2.7.0",
     "immutable": "^3.8.2",
     "koa-body": "^2.5.0",
     "lodash": "^4.17.5",

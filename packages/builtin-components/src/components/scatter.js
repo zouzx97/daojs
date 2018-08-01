@@ -14,7 +14,7 @@ export default class Scatter extends PureComponent {
     validate(source);
     const sliceKey = Object.getOwnPropertyNames(source[0]);
     const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
-    const dimensions = _.first(newSource);
+    const dimensions = _.head(newSource);
     const option = {
       legend: {},
       tooltip: {

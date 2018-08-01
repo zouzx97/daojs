@@ -5,8 +5,8 @@ export default class Cumulative extends Line {
   getSource() {
     const rawSource = super.getSource();
     const paddingZero = _.chain(rawSource)
-      .first()
-      .mapValues(() => 0)
+      .head()
+      .mapValues(_.constant(0))
       .value();
     return [
       paddingZero,

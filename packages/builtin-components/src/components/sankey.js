@@ -24,14 +24,15 @@ export default class Sankey extends PureComponent {
       series: {
         type: 'sankey',
         layout: 'none',
-        data: _.chain(_.zip(...newSource))
+        data: _(...newSource)
+          .zip()
           .slice(0, 2)
-          .map(column => column.slice(1))
+          .invokeMap('slice', 1)
           .flatten()
           .uniq()
           .map(name => ({ name }))
           .value(),
-        links: _.chain(newSource)
+        links: _(newSource)
           .slice(1)
           .map(row => ({
             source: row[0],

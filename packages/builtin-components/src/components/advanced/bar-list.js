@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import get from 'lodash/get';
+import map from 'lodash/map';
 import { List } from 'antd';
 import AtlasChart from '../atlas-chart';
 
@@ -35,10 +36,10 @@ export default class BarList extends PureComponent { //eslint-disable-line
                 legend: {},
                 tooltip: {},
                 yAxis: bar.isHorizontal ? argumentAxis : dependentAxis,
-                series: _.map(metricDimensions, dim => ({
+                series: map(metricDimensions, dim => ({
                   type: 'bar',
-                  name: _.get(bar.key2name, dim, dim),
-                  data: _.map(source, row => row[dim]),
+                  name: get(bar.key2name, dim, dim),
+                  data: map(source, row => row[dim]),
                 })),
                 xAxis: bar.isHorizontal ? dependentAxis : argumentAxis,
               };

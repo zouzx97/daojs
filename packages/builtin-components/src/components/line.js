@@ -23,7 +23,7 @@ import BaseChart from './base';
 export default class Line extends BaseChart {
   getSeriesOption() {
     const source = this.getSource();
-    const ret = _.chain(this.getMetricDimensions())
+    const ret = _(this.getMetricDimensions())
       .map(dim => ({
         type: 'line',
         name: _.get(this.props.key2name, dim, dim),

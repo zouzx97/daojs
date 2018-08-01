@@ -1,7 +1,8 @@
 module.exports = {
   extends: [
     'airbnb',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'plugin:lodash/recommended',
   ],
   parser: 'babel-eslint',
   parserOptions: {
@@ -10,6 +11,8 @@ module.exports = {
 
   rules: {
     'linebreak-style': 'off',
+    'lodash/import-scope': 'warn',
+    'lodash/chaining': 'off',
     'react/jsx-filename-extension': [
       'error',
       {

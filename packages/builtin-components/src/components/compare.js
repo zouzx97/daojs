@@ -16,7 +16,7 @@ export default class Compare extends PureComponent {
     validate(source);
 
     const sereisTypes = _.chain(source)
-      .first()
+      .head()
       .slice(1)
       .map(item => (item.type || 'line'))
       .value();

@@ -32,7 +32,7 @@ export default class VerticalTimeline extends PureComponent {
         // align label and axis tick
         boundaryGap: false,
         data: _.chain(columns)
-          .first()
+          .head()
           .slice(1)
           .reverse()
           .value(),

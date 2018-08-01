@@ -1,3 +1,4 @@
+import fill from 'lodash/fill';
 import React, { PureComponent } from 'react';
 import autoHeight from '../utils/auto-height';
 import styles from '../styles/water-wave.less';
@@ -103,7 +104,7 @@ export default class WaterWave extends PureComponent {
       gradient.addColorStop(0, '#ffffff');
       gradient.addColorStop(1, '#1890FF');
       ctx.fillStyle = gradient;
-      ctx.fill();
+      fill(ctx);
       ctx.restore();
     }
 

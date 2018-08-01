@@ -55,7 +55,7 @@ const propsMapper = (props) => {
     title,
   } = props;
 
-  const dimensions = _.keys(_.head(source));
+  const dimensions = _(source).head().keys().value();
 
   const axisDimension = _.head(axisDimensions)
     || _.head(dimensions);
@@ -63,7 +63,7 @@ const propsMapper = (props) => {
   const axisData = _.map(source, (row) => {
     const rawData = row[axisDimension];
     if (axisDimension === 'timestamp' && _.isString(rawData)) {
-      return rawData.replace('T00:00:00Z', '').replace('T00:00:00.000Z', '');
+      return _(rawData).replace('T00:00:00Z', '').replace('T00:00:00.000Z', '');
     }
     return rawData;
   });
