@@ -13,9 +13,6 @@ export default class Sankey extends PureComponent {
     const { source } = this.props;
     validate(source);
 
-    const sliceKey = Object.getOwnPropertyNames(source[0]);
-    const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
-
     const option = {
       tooltip: {
         trigger: 'item',
@@ -24,22 +21,12 @@ export default class Sankey extends PureComponent {
       series: {
         type: 'sankey',
         layout: 'none',
-        data: _(...newSource)
-          .zip()
-          .slice(0, 2)
-          .invokeMap('slice', 1)
-          .flatten()
-          .uniq()
-          .map(name => ({ name }))
-          .value(),
-        links: _(newSource)
-          .slice(1)
-          .map(row => ({
-            source: row[0],
-            target: row[1],
-            value: row[2],
-          }))
-          .value(),
+        data: _([..._.map(source, 'Source'), ..._.map(source, 'Target')]).uniq().map(name => ({ name })).value(),
+        links: _.map(source, link => ({
+          source: link.Source,
+          target: link.Target,
+          value: link.Value,
+        })),
       },
     };
 

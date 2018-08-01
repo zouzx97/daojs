@@ -1,4 +1,5 @@
 import React from 'react';
+import constant from 'lodash/constant';
 import PropTypes from 'prop-types';
 import { Card, Spin } from 'antd';
 import 'antd/lib/style/themes/default.less';
@@ -129,9 +130,9 @@ ChartCard.propTypes = {
   title: PropTypes.string,
   avatar: PropTypes.element,
   action: PropTypes.element,
-  total: PropTypes.element,
-  footer: PropTypes.element,
-  children: PropTypes.element,
+  total: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  footer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
 };
 
 ChartCard.defaultProps = {
@@ -140,7 +141,7 @@ ChartCard.defaultProps = {
   title: '',
   avatar: null,
   action: null,
-  total: null,
+  total: constant(null),
   footer: null,
   children: null,
 };

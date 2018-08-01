@@ -55,7 +55,7 @@ const propsMapper = (props) => {
     title,
   } = props;
 
-  const dimensions = _(source).head().keys().value();
+  const dimensions = _.chain(source).head().keys().value();
 
   const axisDimension = _.head(axisDimensions)
     || _.head(dimensions);

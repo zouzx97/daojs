@@ -73,7 +73,7 @@ Comp3.propTypes = {
   subTitle: PropTypes.string,
   icon: PropTypes.string,
   percent: PropTypes.number,
-  footer: PropTypes.element,
+  footer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 
 Comp3.defaultProps = {

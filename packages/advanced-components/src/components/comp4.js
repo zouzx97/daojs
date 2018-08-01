@@ -87,7 +87,7 @@ Comp4.propTypes = {
   title: PropTypes.string,
   subTitle: PropTypes.string,
   icon: PropTypes.string,
-  footer: PropTypes.element,
+  footer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 
 Comp4.defaultProps = {
