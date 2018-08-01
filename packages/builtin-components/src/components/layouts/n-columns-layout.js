@@ -18,7 +18,7 @@ export default function NColumnsLayout({
       }}
     >
       {
-        _.range(rowCount).map(row => (
+        _(rowCount).range().map(row => (
           <div
             key={String(row)}
             style={{
@@ -26,7 +26,7 @@ export default function NColumnsLayout({
             }}
             className={row === rowCount - 1 ? 'last-row' : null}
           >
-            {children.slice(row * n, (row + 1) * n).map((child, index) => (
+            {_.map(children.slice(row * n, (row + 1) * n), (child, index) => (
               <div
                 key={String(index)}
                 style={{
@@ -43,7 +43,7 @@ export default function NColumnsLayout({
               </div>
             ))}
           </div>
-        ))
+        )).value()
       }
     </div>
   );

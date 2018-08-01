@@ -1,12 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import ContainerDimensions from 'react-container-dimensions';
 import { ThemeContext } from '@daojs/contexts';
 import { Icon } from 'antd';
 
-const padding = 15; // px
-
-export default function Comp6(props) {
+function Comp6(props) {
   const {
     icon,
     title,
@@ -19,7 +18,7 @@ export default function Comp6(props) {
       <ThemeContext.Consumer>
         {({ primaryColor }) => (
           <ContainerDimensions>
-            { ({ width, height }) => {
+            { ({ width }) => {
             const baseSize = _.round(width / 20);
 
             return (
@@ -79,3 +78,18 @@ export default function Comp6(props) {
   );
 }
 
+Comp6.propTypes = {
+  title: PropTypes.string,
+  icon: PropTypes.string,
+  body: PropTypes.element,
+  chart: PropTypes.element,
+};
+
+Comp6.defaultProps = {
+  title: '',
+  icon: '',
+  body: null,
+  chart: null,
+};
+
+export default Comp6;

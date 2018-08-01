@@ -26,6 +26,8 @@
   },
   "dependencies": {
     "chalk": "^2.1.0",
+    "eslint-plugin-lodash": "^2.7.0",
+    "eslint-plugin-no-loops": "^0.3.0",
     "inquirer-npm-name": "^3.0.0",
     "koa-body": "^2.5.0",
     "lodash": "^4.17.5",

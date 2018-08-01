@@ -18,6 +18,7 @@ function getAutoHeight(n) {
 
   let height = computeHeight(node);
 
+  // eslint-disable-next-line no-loops/no-loops
   while (!height) {
     node = node.parentNode;
     if (node) {

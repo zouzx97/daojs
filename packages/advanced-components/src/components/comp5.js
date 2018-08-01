@@ -1,17 +1,17 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import ContainerDimensions from 'react-container-dimensions';
 import { ThemeContext } from '@daojs/contexts';
 import { Icon } from 'antd';
 
 const padding = 15; // px
 
-export default function Comp5(props) {
+function Comp5(props) {
   const {
     title,
     subTitle,
     icon,
-    footer,
   } = props;
 
   return (
@@ -19,7 +19,7 @@ export default function Comp5(props) {
       <ThemeContext.Consumer>
         {({ primaryColor }) => (
           <ContainerDimensions>
-            { ({ width, height }) => {
+            { ({ width }) => {
             const titleSize = _.round(width / 13);
             const subTitleSize = _.round(width / 20);
 
@@ -83,3 +83,16 @@ export default function Comp5(props) {
   );
 }
 
+Comp5.propTypes = {
+  title: PropTypes.string,
+  subTitle: PropTypes.string,
+  icon: PropTypes.string,
+};
+
+Comp5.defaultProps = {
+  title: '',
+  subTitle: '',
+  icon: '',
+};
+
+export default Comp5;

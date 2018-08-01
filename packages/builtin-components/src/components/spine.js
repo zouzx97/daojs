@@ -28,7 +28,7 @@ const enhance = compose(
       click: args =>
         this.props.onSlicerChange(_.defaults({}, {
           dataObj: {
-            [_.first(this.props.source)[0]]: args.name,
+            [_.head(this.props.source)[0]]: args.name,
             [args.seriesName]: args.value,
           },
         }, args)),
@@ -47,7 +47,7 @@ const enhance = compose(
           type: 'category',
           axisTick: { show: false },
           // Assume that the first row is X
-          data: _.map(props.source, _.first(props.keys)),
+          data: _.map(props.source, _.head(props.keys)),
         },
       ],
       xAxis: [
