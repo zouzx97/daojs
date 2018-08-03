@@ -20,21 +20,19 @@ export default class BaseChart extends PureComponent {
 
   getDimensions() {
     return _.chain(this.getSource())
-      .first()
+      .head()
       .keys()
       .value();
   }
 
   getAxisDimension() {
-    return _.first(this.props.axisDimensions) ||
-      _.first(this.getDimensions());
+    return _.head(this.props.axisDimensions) ||
+      _.head(this.getDimensions());
   }
 
   getAxisData() {
     const axisDim = this.getAxisDimension();
-    return _.chain(this.getSource())
-      .map(row => this.axisValueConverter(row[axisDim], axisDim))
-      .value();
+    return _.map(this.getSource(), row => this.axisValueConverter(row[axisDim], axisDim));
   }
 
   getAxisOption() {
@@ -79,7 +77,7 @@ export default class BaseChart extends PureComponent {
 
   axisValueConverter(value, key) {
     if (_.isString(key) && _.toLower(key) === 'timestamp' && _.isString(value)) {
-      return value.replace('T00:00:00Z', '').replace('T00:00:00.000Z', '');
+      return _(value).replace('T00:00:00Z', '').replace('T00:00:00.000Z', '');
     }
     return value;
   }

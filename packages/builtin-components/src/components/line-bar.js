@@ -6,7 +6,7 @@ import ReactEcharts from 'echarts-for-react';
 import _ from 'lodash';
 
 const getMetric2TypeMap = AxisMetrics => _.reduce(AxisMetrics, (memo, axis, index) => {
-  _.each(axis.metrics, (metric) => {
+  _.forEach(axis.metrics, (metric) => {
     memo[metric] = { //eslint-disable-line
       index,
       type: axis.type,
@@ -26,7 +26,7 @@ export default class LineBarChart extends PureComponent { //eslint-disable-line
 
     return _.map(source, s => _.defaults(
       {},
-      _.isString(s.timestamp) ? { timestamp: s.timestamp.replace('T00:00:00Z', '').replace('T00:00:00.000Z', '') } : {},
+      _.isString(s.timestamp) ? { timestamp: _(s.timestamp).replace('T00:00:00Z', '').replace('T00:00:00.000Z', '') } : {},
       s,
     ));
   }
@@ -44,8 +44,8 @@ export default class LineBarChart extends PureComponent { //eslint-disable-line
    */
 
   getDimensions() {
-    return _.chain(this.getSource())
-      .first()
+    return _(this.getSource())
+      .head()
       .keys()
       .value();
   }

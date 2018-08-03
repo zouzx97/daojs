@@ -47,6 +47,7 @@
     "eslint-config-daojs": "^0.0.1",
     "eslint-plugin-lodash": "^2.7.0",
     "eslint-plugin-lodash-fp": "^2.1.3",
+    "eslint-plugin-no-loops": "^0.3.0",
     "graphql-request": "^1.5.1",
     "immutable": "^3.8.2",
     "json-loader": "^0.5.7",

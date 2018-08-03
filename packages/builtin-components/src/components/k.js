@@ -16,7 +16,7 @@ export default class K extends PureComponent {
     const sliceKey = Object.getOwnPropertyNames(source[0]);
     const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
 
-    const dimensions = _.first(newSource);
+    const dimensions = _.head(newSource);
     const option = {
       legend: {},
       tooltip: {
@@ -31,7 +31,7 @@ export default class K extends PureComponent {
         type: 'candlestick',
         dimensions,
         encode: {
-          x: _.first(dimensions),
+          x: _.head(dimensions),
           y: _.slice(dimensions, 1),
         },
       }],

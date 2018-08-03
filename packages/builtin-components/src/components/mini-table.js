@@ -6,7 +6,7 @@ export default function MiniTable(props) {
 
   return (
     <div>
-      { data.map(row => (
+      { _.map(data, row => (
         <div
           key={_.uniqueId('mini-table-row-')}
           style={{ display: 'flex', flexDirection: 'row' }}

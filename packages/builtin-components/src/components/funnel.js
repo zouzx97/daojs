@@ -16,7 +16,7 @@ export default class Funnel extends PureComponent {
     const sliceKey = Object.getOwnPropertyNames(source[0]);
     const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
 
-    const [name, value] = _.first(newSource);
+    const [name, value] = _.head(newSource);
     const keyValueSource = _.map(newSource.slice(1), item => _.zipObject([name, value], item));
     // sort the data descending first so that legends could start from highest to lowest
     const sortedSource = _.reverse(_.sortBy(keyValueSource, value));

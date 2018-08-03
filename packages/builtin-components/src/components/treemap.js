@@ -10,13 +10,13 @@ const array2Tree = (items, primaryKey, parentKey) =>
 
     if (_.isEmpty(memo[itemId])) {
       // Add a preliminary item, its data will be added later
-      _.extend(memo, { [itemId]: { children: [] } });
+      _.assignIn(memo, { [itemId]: { children: [] } });
     }
 
-    _.extend(memo[itemId], item);
+    _.assignIn(memo[itemId], item);
 
     if (_.isEmpty(memo[parentId])) {
-      _.extend(memo, { [parentId]: { children: [] } });
+      _.assignIn(memo, { [parentId]: { children: [] } });
     }
 
     memo[parentId].children.push(memo[item[primaryKey]]);
@@ -42,7 +42,7 @@ export default class Treemap extends PureComponent {
     const sliceKey = Object.getOwnPropertyNames(source[0]);
     const newSource = _.zip(...(_.map(sliceKey, key => [key, ..._.map(source, key)])));
 
-    const dimensions = _.first(newSource);
+    const dimensions = _.head(newSource);
 
 
     if (_.isEmpty(newSource.slice(1))) {
@@ -55,10 +55,11 @@ export default class Treemap extends PureComponent {
     ], []);
 
     const tree = array2Tree(newNewSource, primaryKey, parentKey);
-    const rootItems = _.uniqBy(_.filter(
-      newNewSource,
-      data => !_.some(newNewSource, { [primaryKey]: data[parentKey] }),
-    ), parentKey);
+
+    const rootItems = _(newNewSource)
+      .filter(data => !_.some(newNewSource, { [primaryKey]: data[parentKey] }))
+      .uniqBy(parentKey)
+      .value();
 
     if (_.size(rootItems) !== 1) {
       throw new Error('Data should have one and only one dummy parent id');

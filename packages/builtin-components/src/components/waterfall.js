@@ -35,7 +35,7 @@ const propsTranformer = ({ source }) => ({
       {
         type: 'category',
         splitLine: { show: false },
-        data: _.chain(source).map('time').value,
+        data: _.map(source, 'time'),
       },
     ],
     yAxis: [

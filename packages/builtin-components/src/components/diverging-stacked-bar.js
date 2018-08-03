@@ -43,7 +43,7 @@ export default class DivergingStacked extends PureComponent {
     // Insert transparent series at 2nd column of newSource,
     // so the stack bar starts from transparent series
     const newNewSource = _.map(newSource, (item, index) =>
-      [_.first(item), index === 0 ? 'dummy' : _.nth(transparentColumn, index - 1), ...item.slice(1)]);
+      [_.head(item), index === 0 ? 'dummy' : _.nth(transparentColumn, index - 1), ...item.slice(1)]);
 
     // transpose 2d-array, so the first row is Y, the other rows are series
     const transposedData = _.zip(...newNewSource);
@@ -57,14 +57,14 @@ export default class DivergingStacked extends PureComponent {
         axisPointer: {
           type: 'shadow',
         },
-        formatter: () => '',
+        formatter: _.constant(''),
       },
       xAxis: {
         show: false,
       },
       yAxis: {
         type: 'category',
-        data: _.first(transposedData).slice(1),
+        data: _.head(transposedData).slice(1),
         axisTick: {
           alignWithLabel: true,
         },

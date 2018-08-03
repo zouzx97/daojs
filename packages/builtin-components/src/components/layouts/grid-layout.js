@@ -1,3 +1,4 @@
+import map from 'lodash/map';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '@daojs/contexts';
@@ -11,7 +12,7 @@ export default function GridLayout(props) {
         flexWrap: 'wrap',
       }}
     >
-      {props.children.map((child, index) => (
+      {map(props.children, (child, index) => (
         <ThemeContext.Provider
           key={String(index)}
           value={{

@@ -1,5 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
+import constant from 'lodash/constant';
+import PropTypes from 'prop-types';
 import { Card, Spin } from 'antd';
 import 'antd/lib/style/themes/default.less';
 
@@ -18,7 +19,7 @@ const totalStyle = {
   height: '38px',
 };
 
-const renderTotal = total => {
+const renderTotal = (total) => {
   let totalDom;
   switch (typeof total) {
     case 'undefined':
@@ -51,40 +52,50 @@ const ChartCard = ({
         style={{
           position: 'relative',
           overflow: 'hidden',
-          width: '100%'
+          width: '100%',
         }}
       >
         <div className={styles.avatar}>{avatar}</div>
         <div className={styles.metaWrap}>
           <div className={styles.meta}>
             <span className={styles.title}>{title}</span>
-            <span className={styles.action} style={{
-
-    cursor: 'pointer',
-    position: 'absolute',
-    top: 0,
-    right: 0
-            }}>{action}</span>
+            <span
+              className={styles.action}
+              style={{
+                cursor: 'pointer',
+                position: 'absolute',
+                top: 0,
+                right: 0,
+            }}
+            >
+              {action}
+            </span>
           </div>
           {renderTotal(total)}
         </div>
       </div>
       {children && (
-        <div className={styles.content} style={{
-          height: contentHeight || 'auto',
-          marginBottom: '12px',
-          position: 'relative',
-          width: '100%',
+        <div
+          className={styles.content}
+          style={{
+            height: contentHeight || 'auto',
+            marginBottom: '12px',
+            position: 'relative',
+            width: '100%',
 
-          }}
+            }}
         >
-          <div className={contentHeight && styles.contentFixed} style={{
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    width: '100%'
-  }}
-          >{children}</div>
+          <div
+            className={contentHeight && styles.contentFixed}
+            style={{
+              position: 'absolute',
+              left: 0,
+              bottom: 0,
+              width: '100%',
+            }}
+          >
+            {children}
+          </div>
         </div>
       )}
       {footer && (
@@ -111,6 +122,28 @@ const ChartCard = ({
       }
     </Card>
   );
+};
+
+ChartCard.propTypes = {
+  loading: PropTypes.bool,
+  contentHeight: PropTypes.number,
+  title: PropTypes.string,
+  avatar: PropTypes.element,
+  action: PropTypes.element,
+  total: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]),
+  footer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
+};
+
+ChartCard.defaultProps = {
+  loading: false,
+  contentHeight: 'auto',
+  title: '',
+  avatar: null,
+  action: null,
+  total: constant(null),
+  footer: null,
+  children: null,
 };
 
 export default ChartCard;

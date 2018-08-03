@@ -22,7 +22,7 @@ function getSourceAndAggregateRest({
 }) {
   const sortedSource = _.reverse(_.sortBy(rawSource, metricDimensions));
 
-  const metricKey = _.first(metricDimensions) || 'customerId';
+  const metricKey = _.head(metricDimensions) || 'customerId';
 
   return [..._.slice(sortedSource, 0, 4), {
     [axisDim]: '其他',
@@ -59,7 +59,7 @@ class Donut extends React.Component {
       };
     }
 
-    return _.chain(metricDimensions)
+    return _(metricDimensions)
       .map(metricDim => ({
         ...position,
         type: 'pie',
@@ -115,17 +115,14 @@ class Donut extends React.Component {
           name: row[axisDim],
           icon: 'circle',
         })),
-        formatter: name => _.chain(source)
+        formatter: name => _(source)
           .filter(row => row[axisDim] === name)
           .map((() => {
-            const total = _.chain(source)
-              .reduce((tot, row) => tot + row[metricDim], 0)
-              .value();
+            const total = _.reduce(source, (tot, row) => tot + row[metricDim], 0);
 
             return row => `${row[axisDim]} | ${_.round((row[metricDim] / total) * 100, 2)}%    ${row[metricDim]}`;
           })())
-          .first()
-          .value(),
+          .head(),
       } :
       {
         show: false,
@@ -226,7 +223,7 @@ class Donut extends React.Component {
                   }),
                 };
               }}
-              style={_.extend({
+              style={_.assignIn({
                 height: width > breakPoint ? '300px' : '500px',
               }, this.props.style)} // eslint-disable-line react/prop-types
             />
