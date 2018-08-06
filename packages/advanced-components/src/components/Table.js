@@ -15,19 +15,19 @@ export default class Table extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      chartState: _.times(this.props.cells.length, _.constant(false)),
+      isExpanded: _.times(this.props.cells.length, _.constant(false)),
       allState: true,
       width: 24 / this.props.col,
     };
-    this.chartClick = this.chartClick.bind(this);
+    this.toggleExpanded = this.toggleExpanded.bind(this);
   }
-  chartClick(e) {
+  toggleExpanded(e) {
     const { id } = e.currentTarget.dataset;
     this.setState(prevState => ({
       allState: !prevState.allState,
       width: prevState.allState ?
         prevState.width * this.props.col : prevState.width / this.props.col,
-      chartState: _.map(prevState.chartState, (item, key) => (
+      isExpanded: _.map(prevState.isExpanded, (item, key) => (
         key.toString() === id.toString() ? !item : item
       )),
     }));
@@ -37,11 +37,11 @@ export default class Table extends PureComponent {
     const newCells = _.map(cells, (item, key) => (
       <Col span={this.state.width}>
         <div
-          onClick={this.chartClick}
+          onClick={this.toggleExpanded}
           data-id={key}
           onKeyPress={(e) => {
             if (e.keyCode === 13) {
-              this.chartClick();
+              this.toggleExpanded();
             }
           }}
           tabIndex="0"
@@ -51,13 +51,13 @@ export default class Table extends PureComponent {
         </div>
       </Col>
     ));
-    const newNewCells = _.map(newCells, (item, key) => (
-      <ShowChart flag={this.state.chartState[key] || this.state.allState} chart={item} />
+    const finalCells = _.map(newCells, (item, key) => (
+      <ShowChart flag={this.state.isExpanded[key] || this.state.allState} chart={item} />
     ));
     return (
       <div>
         <Row>
-          {newNewCells}
+          {finalCells}
         </Row>
       </div>
     );
