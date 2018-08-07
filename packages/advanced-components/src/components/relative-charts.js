@@ -9,31 +9,31 @@ const {
 } = builtinComponents;
 
 const dict = {
-  line: (source, dimension, metric, onClick) => (
-    <Line
+  line: function buildChart(source, dimension, metric, onClick) {
+    return (<Line
       source={source}
       axisDimensions={dimension}
       metricDimensions={metric}
-      onEvents={{click: onClick}}
-    />
-  ),
-  bar: (source, dimension, metric, onClick) => (
-    <Bar
+      onEvents={{ click: onClick }}
+    />);
+  },
+  bar: function buildChart(source, dimension, metric, onClick) {
+    return (<Bar
       source={source}
       isHorizontal={false}
       axisDimensions={dimension}
       metricDimensions={metric}
-      onEvents={{click: onClick}}
-    />
-  ),
-  donut: (source, dimension, metric, onClick) => 
-    <Donut
-      title=""
+      onEvents={{ click: onClick }}
+    />);
+  },
+  donut: function buildChart(source, dimension, metric, onClick) {
+    return (<Donut
+      title={metric}
       subTitle=""
       source={source}
-      onEvents={{click: onClick}}
-    />
-  ,
+      onEvents={{ click: onClick }}
+    />);
+  },
 };
 export default class relativeCharts extends PureComponent {
   static propTypes = {
