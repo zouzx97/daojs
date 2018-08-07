@@ -12,6 +12,12 @@ export default [
     category: 'advanced',
     description: '',
   },
+  {
+    name: 'relative-charts',
+    key: 'relative-charts',
+    category: 'advanced',
+    description: '',
+  },
   // cards
   {
     name: '圆环图卡片',
