@@ -1,5 +1,5 @@
 import React from 'react';
-import { RelativeCharts } from '@daojs/advanced-components/src/index';
+import { LinkedChartPair } from '@daojs/advanced-components/src/index';
 import data from './data.demo';
 
 const charts = [
@@ -10,7 +10,7 @@ const source = data;
 export default function relativeChartsDemo() {
   return (
     <div>
-      <RelativeCharts charts={charts} source={source} />
+      <LinkedChartPair charts={charts} source={source} />
     </div>
   );
 }

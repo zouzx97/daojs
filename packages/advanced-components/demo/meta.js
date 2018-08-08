@@ -13,8 +13,8 @@ export default [
     description: '',
   },
   {
-    name: 'relative-charts',
-    key: 'relative-charts',
+    name: 'LinkedChartPair',
+    key: 'LinkedChartPair',
     category: 'advanced',
     description: '',
   },
