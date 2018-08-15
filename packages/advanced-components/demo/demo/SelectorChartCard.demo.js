@@ -88,7 +88,7 @@ const buildDemo2 = (selectedEnums) => {
     metricDimensions={selectedEnums}
   />);
 };
-export default function RadioGroupChartsDemo() {
+export default function SelectorChartCardDemo() {
   return (
     <div>
       <SelectorChartCard buildChart={buildDemo0} {...selector0} />
