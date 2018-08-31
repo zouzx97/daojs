@@ -1,0 +1,10 @@
+---
+# Refer to docs/javascript/README.md for detail
+env:
+  jest: true
+
+rules:
+  lodash/prefer-lodash-method:
+  - off
+  - devDependencies:
+    - "**/**/*.test.js"

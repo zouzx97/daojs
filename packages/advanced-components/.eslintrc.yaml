@@ -3,14 +3,7 @@
 extends:
   - daojs
 
-env:
-  jest: true
-
 rules:
-  lodash/prefer-lodash-method:
-  - off
-  - devDependencies:
-    - "**/*.test.js"
   import/no-extraneous-dependencies:
   - error
   - devDependencies:
