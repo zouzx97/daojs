@@ -6,3 +6,4 @@ env:
 rules:
   lodash/prefer-lodash-method:
   - off
+  
