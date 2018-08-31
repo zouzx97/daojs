@@ -6,5 +6,3 @@ env:
 rules:
   lodash/prefer-lodash-method:
   - off
-  - devDependencies:
-    - "**/**/*.test.js"
