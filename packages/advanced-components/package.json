@@ -9,6 +9,8 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
+    "setupTestFrameworkScriptFile": "<rootDir>/src/Testsetup",
+    "setupFiles": ["<rootDir>/src/Testsetup"],
     "verbose": true,
     "collectCoverage": true,
     "transform": {

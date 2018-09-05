@@ -1,22 +1,18 @@
-import { configure, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
 import _ from 'lodash';
-import jsdom from 'jsdom';
 import Table from '../components/Table';
-
-const doc = new jsdom.JSDOM('<!doctype html><html><body></body></html>');
-global.document = doc;
-global.window = doc.defaultView;
-configure({ adapter: new Adapter() });
 
 let table;
 let initialWrapper;
+const cells = _.times(9, _.constant(jest.fn()));
 describe('test Table', () => {
   beforeAll(() => {
-    const cells = _.times(9, _.constant(jest.fn()));
     table = mount(<Table col={3} cells={cells} />);
     initialWrapper = table;
+  });
+  it('test throw', () => {
+    expect(() => { mount(<Table col={3} cells={cells} />); }).not.toThrow();
   });
   describe('test initially', () => {
     it('length of cells should be correct', () => {
