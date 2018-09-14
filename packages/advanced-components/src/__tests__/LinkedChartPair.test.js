@@ -17,17 +17,17 @@ const charts2 = [
   { type: 'line', metric: '销量', dimension: 'skuType' },
 ];
 let wrapper;
-describe('test LinkedChartPair', () => {
-  describe('test bar with donut', () => {
+describe('LinkedChartPair', () => {
+  describe('in case of bar with donut', () => {
     beforeAll(() => {
       wrapper = mount(<LinkedChartPair charts={charts0} source={source} />);
     });
-    it('test throw', () => {
+    it('should be no throwerror', () => {
       expect(() => {
         mount(<LinkedChartPair charts={charts0} source={source} />);
       }).not.toThrow();
     });
-    describe('test initially', () => {
+    describe('when initially', () => {
       it('props should be correct', () => {
         expect(wrapper.instance().props.charts).toEqual(charts0);
         expect(wrapper.instance().props.source).toEqual(source);
@@ -36,23 +36,23 @@ describe('test LinkedChartPair', () => {
         expect(wrapper.state('dimension')).toBeNull();
       });
     });
-    describe('test render', () => {
-      it('should have one bar and one donut', () => {
+    describe('when render', () => {
+      it('component should have one bar and one donut', () => {
         expect(wrapper.find('Bar').length).toBe(1);
         expect(wrapper.find('Donut').length).toBe(1);
       });
     });
   });
-  describe('test line with bar', () => {
+  describe('in case of line with bar', () => {
     beforeAll(() => {
       wrapper = mount(<LinkedChartPair charts={charts1} source={source} />);
     });
-    it('test throw', () => {
+    it('should be no throwerror', () => {
       expect(() => {
         mount(<LinkedChartPair charts={charts1} source={source} />);
       }).not.toThrow();
     });
-    describe('test state initially', () => {
+    describe('when initially', () => {
       it('props should be correct', () => {
         expect(wrapper.instance().props.charts).toEqual(charts1);
         expect(wrapper.instance().props.source).toEqual(source);
@@ -61,23 +61,23 @@ describe('test LinkedChartPair', () => {
         expect(wrapper.state('dimension')).toBeNull();
       });
     });
-    describe('test render', () => {
-      it('should have one line and one bar', () => {
+    describe('when render', () => {
+      it('component should have one line and one bar', () => {
         expect(wrapper.find('Bar').length).toBe(1);
         expect(wrapper.find('Line').length).toBe(1);
       });
     });
   });
-  describe('test donut with line', () => {
+  describe('in case of donut with line', () => {
     beforeAll(() => {
       wrapper = mount(<LinkedChartPair charts={charts2} source={source} />);
     });
-    it('test throw', () => {
+    it('should be no throwerror', () => {
       expect(() => {
         mount(<LinkedChartPair charts={charts2} source={source} />);
       }).not.toThrow();
     });
-    describe('test state initially', () => {
+    describe('when initially', () => {
       it('props should be correct', () => {
         expect(wrapper.instance().props.charts).toEqual(charts2);
         expect(wrapper.instance().props.source).toEqual(source);
@@ -86,15 +86,15 @@ describe('test LinkedChartPair', () => {
         expect(wrapper.state('dimension')).toBeNull();
       });
     });
-    describe('test render', () => {
-      it('should have one donut and one line', () => {
+    describe('when render', () => {
+      it('component should have one donut and one line', () => {
         expect(wrapper.find('Donut').length).toBe(1);
         expect(wrapper.find('Line').length).toBe(1);
       });
     });
   });
 
-  describe('test click', () => {
+  describe('when click', () => {
     it('setState should be called', () => {
       // console.log(wrapper);
       const spy = jest.spyOn(LinkedChartPair.prototype, 'setState');
@@ -105,7 +105,7 @@ describe('test LinkedChartPair', () => {
     });
   });
 
-  describe('test data aggregate', () => {
+  describe('when data aggregate', () => {
     it('should aggregate correctly', () => {
       wrapper = mount(<LinkedChartPair charts={charts0} source={source} />);
       const dimension = '24';
