@@ -57,7 +57,7 @@ class Header extends React.PureComponent {
     if (mobile) {
       style.flexDirection = 'column';
       if (this.state.hasClickWithMobile) {
-        style.height = '236px';
+        style.height = '244px';
       } else {
         style.height = '100px';
       }
@@ -69,7 +69,7 @@ class Header extends React.PureComponent {
         <div style={{
               backgroundImage: 'url(http://daojs.koreasouth.cloudapp.azure.com/img/logo.png)',
               width: '50px',
-              height: '90%',
+              height: mobile ? '100' : '90%',
               backgroundSize: 'contain',
               backgroundRepeat: 'no-repeat',
             }}
